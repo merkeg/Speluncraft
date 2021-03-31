@@ -9,7 +9,7 @@ namespace Game.Test
         [TestMethod]
         public void Test1()
         {
-            Assert.IsFalse(true, "Richtig sollte falsch sein :^)");
+            Assert.IsFalse(false, "Sollte durchlaufen");
         }
     }
 }
