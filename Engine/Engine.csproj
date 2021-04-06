@@ -5,6 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Component\NewFile1.txt" />
+    <None Remove="GameObject\NewFile1.txt" />
+    <None Remove="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="stylecop.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.CodeCoverage" Version="16.9.1" />
     <PackageReference Include="OpenTK" Version="4.5.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
