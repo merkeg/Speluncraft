@@ -57,7 +57,7 @@ namespace Engine.GameObject
         public float MinY { get; protected set; }
 
         /// <summary>
-        /// Gets or sets Components
+        /// Gets or sets Components.
         /// </summary>
         public List<Component.Component> Components { get; protected set; }
 
@@ -101,7 +101,7 @@ namespace Engine.GameObject
         /// <typeparam name="T">Component.</typeparam>
         /// <returns>The component or null if not existant.</returns>
         public T GetComponent<T>()
-            where T: Component.Component
+            where T : Component.Component
         {
             foreach (Component.Component component in this.Components)
             {
