@@ -17,7 +17,7 @@ namespace Engine.Component
         /// <summary>
         /// Called if the GameObject is created.
         /// </summary>
-        internal void OnCreated()
+        internal virtual void OnCreated()
         {
             return;
         }
@@ -31,7 +31,7 @@ namespace Engine.Component
         /// <summary>
         /// Called if the GameObject is destroyed.
         /// </summary>
-        internal void OnDestroy()
+        internal virtual void OnDestroy()
         {
             return;
         }
@@ -43,6 +43,15 @@ namespace Engine.Component
         internal void SetGameObject(GameObject.GameObject gameObject)
         {
             this.gameObject = gameObject;
+        }
+
+        /// <summary>
+        /// Gets the GameObject.
+        /// </summary>
+        /// <returns>the parent GameObject.</returns>
+        internal GameObject.GameObject GetGameObject()
+        {
+            return this.gameObject;
         }
     }
 }

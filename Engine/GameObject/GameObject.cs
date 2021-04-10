@@ -47,14 +47,14 @@ namespace Engine.GameObject
         public float MaxY => this.MinY + this.SizeY;
 
         /// <summary>
-        /// Gets or sets the X-Coordinate of bottom left point, of the GameObject.
+        /// Gets the X-Coordinate of bottom left point, of the GameObject.
         /// </summary>
-        public float MinX { get; protected set; }
+        public float MinX { get; internal set; }
 
         /// <summary>
-        /// Gets or sets the Y-Coordinate of bottom left point, of the GameObject.
+        /// Gets the Y-Coordinate of bottom left point, of the GameObject.
         /// </summary>
-        public float MinY { get; protected set; }
+        public float MinY { get; internal set; }
 
         /// <summary>
         /// Gets or sets Components.
@@ -112,6 +112,31 @@ namespace Engine.GameObject
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Called if the GameObject is created.
+        /// </summary>
+        public virtual void OnCreated()
+        {
+            this.Components.ForEach(component => component.OnCreated());
+        }
+
+        /// <summary>
+        /// Called every gametick.
+        /// </summary>
+        /// <param name="frameTime">Time between the frame.</param>
+        public virtual void OnUpdate(float frameTime)
+        {
+            this.Components.ForEach(component => component.OnUpdate(frameTime));
+        }
+
+        /// <summary>
+        /// Called if the GameObject is destroyed.
+        /// </summary>
+        public virtual void OnDestroy()
+        {
+            this.Components.ForEach(component => component.OnDestroy());
         }
     }
 }

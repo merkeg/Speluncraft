@@ -14,6 +14,13 @@ namespace Game.Player
     /// </summary>
     public class Player : GameObject
     {
+        private int jumpCounterMax = 1;
+        private int jumpcounter;
+
+        private float accelaration = 0.3f;
+        private float idealBreacking = 0.1f;
+        private float activeBreacking = 0.2f;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Player"/> class.
         /// </summary>
@@ -24,6 +31,17 @@ namespace Game.Player
         public Player(float minX, float minY, float sizeX, float sizeY)
             : base(minX, minY, sizeX, sizeY)
         {
+            this.AddComponent(new Engine.Component.Physics());
         }
+
+        /// <inheritdoc/>
+        public override void OnUpdate(float frameTime)
+        {
+            OpenTK.Windowing.GraphicsLibraryFramework.KeyboardState keyboardState = Engine.Engine.Instance().GameWindow.KeyboardState;
+
+
+            base.OnUpdate(frameTime);
+        }
+
     }
 }

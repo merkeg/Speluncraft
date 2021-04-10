@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Component\NewFile1.txt" />
     <None Remove="GameObject\NewFile1.txt" />
     <None Remove="stylecop.json" />
   </ItemGroup>

@@ -1,8 +1,4 @@
-﻿// <copyright file="GameObjectTest.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-namespace Engine.Test
+﻿namespace Engine.Test
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,7 +6,7 @@ namespace Engine.Test
     public class GameObjectTest
     {
         [TestMethod]
-        public void TestGameObjectIntersect()
+        public void TestGameObjectIntersects()
         {
             GameObject.GameObject go1 = new GameObject.GameObject(0, 0, 5, 5);
             GameObject.GameObject go2 = new GameObject.GameObject(1, 1, 5, 5);
