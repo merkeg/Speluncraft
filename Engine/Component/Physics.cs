@@ -40,6 +40,24 @@ namespace Engine.Component
         private float gravityMultiplier;
 
         /// <summary>
+        /// Add to the x Velocity.
+        /// </summary>
+        /// <param name="x">How much to add.</param>
+        public void AddVelocityX(float x)
+        {
+            this.velocity.X += x;
+        }
+
+        /// <summary>
+        /// Add to the y Velocity.
+        /// </summary>
+        /// <param name="y">How much to add.</param>
+        public void AddVelocitY(float y)
+        {
+            this.velocity.Y += y;
+        }
+
+        /// <summary>
         /// Set the Gravity
         /// </summary>
         /// <param name="gravity">The paramref name="gravity". Normally a value < 0</param>
