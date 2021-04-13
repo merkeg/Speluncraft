@@ -4,6 +4,7 @@
 
 namespace Engine
 {
+    using OpenTK.Windowing.Common;
     using System;
     using System.Collections.Generic;
     using System.Text;
@@ -27,6 +28,11 @@ namespace Engine
         /// Gets a list of GameObjects in the game.
         /// </summary>
         public List<GameObject.GameObject> GameObjects { get; private set; }
+
+        /// <summary>
+        /// Gets a list of Renderers in the game.
+        /// </summary>
+        public List<Renderer.IRenderer> Renderers { get; private set; }
 
         /// <summary>
         /// Gets the GameWindow the Engine runs on.
@@ -58,6 +64,20 @@ namespace Engine
         }
 
         /// <summary>
+        /// Adds an renderer to the list.
+        /// </summary>
+        /// <param name="renderer">The renderer to add.</param>
+        public void AddRenderer(Renderer.IRenderer renderer)
+        {
+            this.Renderers.Add(renderer);
+
+            // Set the SwapBuffer to the last position.
+            this.GameWindow.RenderFrame -= this.SwapBuffers;
+            this.GameWindow.RenderFrame += renderer.Render;
+            this.GameWindow.RenderFrame += this.SwapBuffers;
+        }
+
+        /// <summary>
         /// Start the engine ticks.
         /// </summary>
         /// <param name="window">The GameWindow the engine will be run on.</param>
@@ -70,6 +90,11 @@ namespace Engine
         private void Update(OpenTK.Windowing.Common.FrameEventArgs args)
         {
             this.GameObjects.ForEach(gameObject => gameObject.OnUpdate((float)args.Time));
+        }
+
+        private void SwapBuffers(FrameEventArgs args)
+        {
+            this.GameWindow.SwapBuffers();
         }
 
     }

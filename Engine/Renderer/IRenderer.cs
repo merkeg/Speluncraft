@@ -4,9 +4,7 @@
 
 namespace Engine.Renderer
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
+    using OpenTK.Windowing.Common;
 
     /// <summary>
     /// Renderer base class.
@@ -16,6 +14,7 @@ namespace Engine.Renderer
         /// <summary>
         /// The render function.
         /// </summary>
-        public void Render();
+        /// <param name="args">Render update arguments.</param>
+        public void Render(FrameEventArgs args);
     }
 }
