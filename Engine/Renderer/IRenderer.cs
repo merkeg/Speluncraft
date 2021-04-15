@@ -1,4 +1,4 @@
-﻿// <copyright file="Renderer.cs" company="RWUwU">
+﻿// <copyright file="IRenderer.cs" company="RWUwU">
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 

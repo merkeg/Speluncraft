@@ -5,6 +5,7 @@
 namespace Engine
 {
     using System.Collections.Generic;
+    using global::Engine.GameObject;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
 
@@ -21,7 +22,7 @@ namespace Engine
         public Engine()
         {
             this.GameObjects = new List<GameObject.GameObject>();
-            this.Colliders = new List<Vector4d>();
+            this.Colliders = new List<Rectangle>();
             this.Renderers = new List<Renderer.IRenderer>();
         }
 
@@ -38,7 +39,7 @@ namespace Engine
         /// <summary>
         /// Gets a list of the colliders in the game.
         /// </summary>
-        public List<Vector4d> Colliders { get; private set; }
+        public List<Rectangle> Colliders { get; private set; }
 
         /// <summary>
         /// Gets the GameWindow the Engine runs on.

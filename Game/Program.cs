@@ -1,5 +1,11 @@
-﻿namespace Example
+﻿// <copyright file="Program.cs" company="RWUwU">
+// Copyright (c) RWUwU. All rights reserved.
+// </copyright>
+
+namespace Example
 {
+    using System.IO;
+    using System.Reflection;
     using Engine.Camera;
     using Engine.Renderer;
     using Engine.Renderer.Tile;
@@ -9,10 +15,10 @@
     using OpenTK.Windowing.Common;
     using OpenTK.Windowing.Desktop;
     using OpenTK.Windowing.GraphicsLibraryFramework;
-    using System;
-    using System.IO;
-    using System.Reflection;
 
+    /// <summary>
+    /// The Main class of the game.
+    /// </summary>
     internal class Program
     {
         private static void Main()

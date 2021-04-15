@@ -7,6 +7,7 @@ namespace Engine.Renderer.Tile.Parser
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using global::Engine.GameObject;
     using Newtonsoft.Json;
     using OpenTK.Mathematics;
 
@@ -38,9 +39,9 @@ namespace Engine.Renderer.Tile.Parser
         /// </summary>
         /// <param name="layer">The layer the list will be chosen from.</param>
         /// <returns>a list of collisions.</returns>
-        public static List<Vector4d> GenerateCollisionMap(TilemapLayerModel layer)
+        public static List<Rectangle> GenerateCollisionMap(TilemapLayerModel layer)
         {
-            List<Vector4d> collisions = new List<Vector4d>();
+            List<Rectangle> collisions = new List<Rectangle>();
 
             for (int i = 0; i < layer.data.Length; i++)
             {
@@ -84,7 +85,7 @@ namespace Engine.Renderer.Tile.Parser
 
                 if (openEnd)
                 {
-                    collisions.Add(new Vector4d(i % layer.width, i / layer.width, 1, 1));
+                    collisions.Add(new Rectangle(i % layer.width, i / layer.width, 1, 1));
                 }
             }
 

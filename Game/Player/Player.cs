@@ -15,8 +15,8 @@ namespace Game.Player
     /// </summary>
     public class Player : GameObject
     {
-        private int jumpCounterMax = 1;
         private int jumpcounter;
+        private int jumpCounterMax = 1;
 
         private float accelaration = 0.3f;
         private float idealBreacking = 0.1f;
@@ -28,8 +28,8 @@ namespace Game.Player
         /// </summary>
         /// <param name="minX">the X-Coordinate of bottom left point, of the Player.</param>
         /// <param name="minY">the Y-Coordinate of bottom left point, of the Player.</param>
-        /// <param name="sizeX">Player width</param>
-        /// <param name="sizeY">Player height</param>
+        /// <param name="sizeX">Player width.</param>
+        /// <param name="sizeY">Player height.</param>
         public Player(float minX, float minY, float sizeX, float sizeY)
             : base(minX, minY, sizeX, sizeY)
         {
@@ -37,6 +37,11 @@ namespace Game.Player
             physics.SetIsAffectedByGravity(true);
             physics.SetGravityMultiplier(3);
             this.AddComponent(physics);
+
+            if (this.jumpCounterMax == 1)
+            {
+                this.jumpCounterMax = 1;
+            }
         }
 
         /// <inheritdoc/>
@@ -88,6 +93,5 @@ namespace Game.Player
 
             base.OnUpdate(frameTime);
         }
-
     }
 }

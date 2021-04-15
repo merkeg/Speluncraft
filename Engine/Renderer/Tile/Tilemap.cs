@@ -1,10 +1,16 @@
-﻿using Engine.Renderer.Tile.Parser;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// <copyright file="Tilemap.cs" company="RWUwU">
+// Copyright (c) RWUwU. All rights reserved.
+// </copyright>
 
 namespace Engine.Renderer.Tile
 {
+#pragma warning disable SA1135 // Using directives should be qualified
+    using Tile.Parser;
+#pragma warning restore SA1135 // Using directives should be qualified
+
+    /// <summary>
+    /// The Tilemap class.
+    /// </summary>
     public class Tilemap
     {
         /// <summary>
@@ -36,7 +42,7 @@ namespace Engine.Renderer.Tile
         /// Reference to this.
         /// </summary>
         /// <param name="layer">The layer to access to.</param>
-        /// <returns>The specified Tilemap layer</returns>
+        /// <returns>The specified Tilemap layer.</returns>
         public ref TilemapLayer this[int layer] => ref this.Layers[layer];
     }
 }

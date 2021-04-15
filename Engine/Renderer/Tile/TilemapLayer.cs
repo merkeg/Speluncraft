@@ -1,4 +1,4 @@
-﻿// <copyright file="Tilemap.cs" company="RWUwU">
+﻿// <copyright file="TilemapLayer.cs" company="RWUwU">
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
@@ -11,7 +11,6 @@ namespace Engine.Renderer.Tile
     /// </summary>
     public class TilemapLayer
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="TilemapLayer"/> class.
         /// </summary>

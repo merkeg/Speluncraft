@@ -6,9 +6,7 @@ namespace Engine.Renderer
 {
     using global::Engine.Renderer.Tile;
     using OpenTK.Graphics.OpenGL;
-    using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
-    using System;
 
     /// <summary>
     /// The Tilemap renderer.
@@ -113,6 +111,7 @@ namespace Engine.Renderer
                             GL.TexCoord2(tileTexCoordX1, tileTexCoordY1);
                             GL.Vertex2(x + 1, y + 1);
                         }
+
                         GL.End();
                     }
                 }
