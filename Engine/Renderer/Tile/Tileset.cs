@@ -5,13 +5,11 @@
 namespace Engine.Renderer.Tile
 {
     using System.IO;
-    using System.Reflection;
     using OpenTK.Graphics.OpenGL;
-    using OpenTK.Windowing.Common.Input;
     using SixLabors.ImageSharp;
     using SixLabors.ImageSharp.PixelFormats;
     using Image = SixLabors.ImageSharp.Image;
-    using System;
+
     /// <summary>
     /// The Tileset class.
     /// </summary>
@@ -21,12 +19,17 @@ namespace Engine.Renderer.Tile
         /// Initializes a new instance of the <see cref="Tileset"/> class.
         /// </summary>
         /// <param name="resource">The resource location.</param>
-        public Tileset(Stream resource)
+        /// <param name="tileSize">The size of tiles in pixels.</param>
+        public Tileset(Stream resource, int tileSize)
         {
             // Source: https://github.com/davudk/OpenGL-TileMap-Demos
             using Image<Rgba32> image = Image.Load<Rgba32>(resource);
-
             byte[] data = new byte[image.Width * image.Height * 4];
+
+            this.AmountTileWidth = image.Width / tileSize;
+            this.AmountTileHeight = image.Height / tileSize;
+            this.TileSize = tileSize;
+
             var i = 0;
             for (var y = 0; y < image.Height; y++)
             {
@@ -43,8 +46,8 @@ namespace Engine.Renderer.Tile
             GL.BindTexture(TextureTarget.Texture2D, handle);
             GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, image.Width, image.Height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, data);
 
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToEdge);
-            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToEdge);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)TextureWrapMode.ClampToBorder);
+            GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)TextureWrapMode.ClampToBorder);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
 
@@ -55,5 +58,20 @@ namespace Engine.Renderer.Tile
         /// Gets the handle id for the specifit Tileset.
         /// </summary>
         public int Handle { get; private set; }
+
+        /// <summary>
+        /// Gets the amount in height.
+        /// </summary>
+        public int AmountTileHeight { get; private set; }
+
+        /// <summary>
+        /// Gets the amount in width.
+        /// </summary>
+        public int AmountTileWidth { get; private set; }
+
+        /// <summary>
+        /// Gets the size of the tile in pixels.
+        /// </summary>
+        public int TileSize { get; private set; }
     }
 }

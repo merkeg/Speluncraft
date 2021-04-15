@@ -1,77 +1,106 @@
-﻿namespace Engine.Camera
+﻿// <copyright file="Camera.cs" company="RWUwU">
+// Copyright (c) RWUwU. All rights reserved.
+// </copyright>
+
+namespace Engine.Camera
 {
+    using System;
+    using global::Engine.Renderer;
     using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
-    using System;
+    using OpenTK.Windowing.Common;
 
-    public class Camera
+    /// <summary>
+    /// Camera class.
+    /// </summary>
+    public class Camera : IRenderer
     {
-        public Matrix4 CameraMatrix => cameraMatrix;
+        /// <summary>
+        /// Gets the camera matrix.
+        /// </summary>
+        public Matrix4 CameraMatrix => this.cameraMatrix;
 
+        /// <summary>
+        /// Gets the viewport matrix.
+        /// </summary>
         public Matrix4 InvViewportMatrix { get; private set; }
 
-        public void Draw()
+        /// <inheritdoc/>
+        public void Resize(ResizeEventArgs args)
         {
-            GL.LoadMatrix(ref cameraMatrix);
+            GL.Viewport(0, 0, args.Width, args.Height);
+
+            this.windowAspectRatio = args.Height / (float)args.Width;
+
+            var viewport = Transformation2d.Combine(Transformation2d.Translate(Vector2.One), Transformation2d.Scale(args.Width / 2f, args.Height / 2f));
+            this.InvViewportMatrix = viewport.Inverted();
+            this.UpdateMatrix();
+        }
+
+        /// <inheritdoc/>
+        public void Render(FrameEventArgs args)
+        {
+            GL.LoadMatrix(ref this.cameraMatrix);
             GL.Scale(new Vector3(1, -1, 1));
         }
 
-        public void Resize(int width, int height)
-        {
-            GL.Viewport(0, 0, width, height); // tell OpenGL to use the whole window for drawing
-
-            _windowAspectRatio = height / (float)width;
-
-            var viewport = Transformation2d.Combine(Transformation2d.Translate(Vector2.One), Transformation2d.Scale(width / 2f, height / 2f));
-            InvViewportMatrix = viewport.Inverted();
-            UpdateMatrix();
-        }
-
+        /// <summary>
+        /// Gets or sets the camera center.
+        /// </summary>
+#pragma warning disable SA1201 // Elements should appear in the correct order
         public Vector2 Center
+#pragma warning restore SA1201 // Elements should appear in the correct order
         {
-            get => _center;
+            get => this.center;
             set
             {
-                _center = value;
-                UpdateMatrix();
+                this.center = value;
+                this.UpdateMatrix();
             }
         }
 
+        /// <summary>
+        /// Gets or sets the camera rotation.
+        /// </summary>
         public float Rotation
         {
-            get => _rotation;
+            get => this.rotation;
             set
             {
-                _rotation = value;
-                UpdateMatrix();
+                this.rotation = value;
+                this.UpdateMatrix();
             }
         }
 
+        /// <summary>
+        /// Gets or sets the camera scale.
+        /// </summary>
         public float Scale
         {
-            get => _scale;
+            get => this.scale;
             set
             {
-                _scale = MathF.Max(0.001f, value); // avoid division by 0 and negative
-                UpdateMatrix();
+                this.scale = MathF.Max(0.001f, value); // avoid division by 0 and negative
+                this.UpdateMatrix();
             }
         }
 
+#pragma warning disable SA1201 // Elements should appear in the correct order
         private Matrix4 cameraMatrix = Matrix4.Identity;
-        private float _scale = 1f;
-        private float _windowAspectRatio = 1f;
+#pragma warning restore SA1201 // Elements should appear in the correct order
+        private float scale = 1f;
+        private float windowAspectRatio = 1f;
 
-        private Vector2 _center;
-        private float _rotation;
+        private Vector2 center;
+        private float rotation;
 
         private void UpdateMatrix()
         {
-            var translate = Transformation2d.Translate(-Center);
-            var rotate = Transformation2d.Rotation(MathHelper.DegreesToRadians(Rotation));
-            var scale = Transformation2d.Scale(1f / Scale);
-            var aspect = Transformation2d.Scale(_windowAspectRatio, 1f);
-            cameraMatrix = Transformation2d.Combine(translate, rotate, scale, aspect);
-
+            var translate = Transformation2d.Translate(-this.Center);
+            var rotate = Transformation2d.Rotation(MathHelper.DegreesToRadians(this.Rotation));
+            var scale = Transformation2d.Scale(1f / this.Scale);
+            var aspect = Transformation2d.Scale(this.windowAspectRatio, 1f);
+            this.cameraMatrix = Transformation2d.Combine(translate, rotate, scale, aspect);
         }
     }
 }

@@ -7,6 +7,8 @@
 
   <ItemGroup>
     <None Remove="Resources\all.json" />
+    <None Remove="Resources\jumpy.json" />
+    <None Remove="Resources\rotation.json" />
     <None Remove="Resources\testmap.json" />
     <None Remove="Resources\tilesheet.png" />
     <None Remove="stylecop.json" />
@@ -19,6 +21,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\all.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\jumpy.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\rotation.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\testmap.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

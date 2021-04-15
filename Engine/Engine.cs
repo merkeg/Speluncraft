@@ -4,10 +4,9 @@
 
 namespace Engine
 {
-    using OpenTK.Windowing.Common;
-    using System;
     using System.Collections.Generic;
-    using System.Text;
+    using OpenTK.Mathematics;
+    using OpenTK.Windowing.Common;
 
     /// <summary>
     /// The Engine instance to bind with OpenGL.
@@ -22,6 +21,8 @@ namespace Engine
         public Engine()
         {
             this.GameObjects = new List<GameObject.GameObject>();
+            this.Colliders = new List<Vector4d>();
+            this.Renderers = new List<Renderer.IRenderer>();
         }
 
         /// <summary>
@@ -33,6 +34,11 @@ namespace Engine
         /// Gets a list of Renderers in the game.
         /// </summary>
         public List<Renderer.IRenderer> Renderers { get; private set; }
+
+        /// <summary>
+        /// Gets a list of the colliders in the game.
+        /// </summary>
+        public List<Vector4d> Colliders { get; private set; }
 
         /// <summary>
         /// Gets the GameWindow the Engine runs on.
@@ -96,7 +102,5 @@ namespace Engine
         {
             this.GameWindow.SwapBuffers();
         }
-
     }
-
 }

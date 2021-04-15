@@ -16,5 +16,11 @@ namespace Engine.Renderer
         /// </summary>
         /// <param name="args">Render update arguments.</param>
         public void Render(FrameEventArgs args);
+
+        /// <summary>
+        /// The resize function.
+        /// </summary>
+        /// <param name="args">resize arguments.</param>
+        public void Resize(ResizeEventArgs args);
     }
 }
