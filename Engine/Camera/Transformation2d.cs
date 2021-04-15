@@ -1,4 +1,8 @@
-﻿namespace Engine.Camera
+﻿// <copyright file="Transformation2d.cs" company="RWUwU">
+// Copyright (c) RWUwU. All rights reserved.
+// </copyright>
+
+namespace Engine.Camera
 {
     using OpenTK.Mathematics;
 

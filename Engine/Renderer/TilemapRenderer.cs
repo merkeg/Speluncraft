@@ -6,6 +6,7 @@ namespace Engine.Renderer
 {
     using global::Engine.Renderer.Tile;
     using OpenTK.Graphics.OpenGL;
+    using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
     using System;
 
@@ -31,6 +32,7 @@ namespace Engine.Renderer
         /// <inheritdoc/>
         public void Render(FrameEventArgs args)
         {
+            GL.Clear(ClearBufferMask.ColorBufferBit);
             GL.BindTexture(TextureTarget.Texture2D, this.Tilemap.Tileset.Handle);
 
             foreach (TilemapLayer tilemap in this.Tilemap.Layers)

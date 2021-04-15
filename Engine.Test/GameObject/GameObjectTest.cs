@@ -20,7 +20,7 @@
         }
 
         [TestMethod]
-        public void TestGameObjectComponents()
+        public void TestGameObjectComponent()
         {
             GameObject.GameObject go1 = new GameObject.GameObject(0, 0, 5, 5);
             GameObject.GameObject go2 = new GameObject.GameObject(1, 1, 5, 5);
