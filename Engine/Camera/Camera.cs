@@ -41,7 +41,12 @@ namespace Engine.Camera
         public void Render(FrameEventArgs args)
         {
             GL.LoadMatrix(ref this.cameraMatrix);
-            GL.Scale(new Vector3(1, -1, 1));
+        }
+
+        /// <inheritdoc/>
+        public void OnCreate()
+        {
+            return;
         }
 
         /// <summary>

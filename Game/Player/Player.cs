@@ -8,6 +8,7 @@ namespace Game.Player
     using System.Collections.Generic;
     using System.Text;
     using Engine.GameObject;
+    using Engine.Renderer.Sprite;
     using OpenTK.Windowing.GraphicsLibraryFramework;
 
     /// <summary>
@@ -30,8 +31,9 @@ namespace Game.Player
         /// <param name="minY">the Y-Coordinate of bottom left point, of the Player.</param>
         /// <param name="sizeX">Player width.</param>
         /// <param name="sizeY">Player height.</param>
-        public Player(float minX, float minY, float sizeX, float sizeY)
-            : base(minX, minY, sizeX, sizeY)
+        /// <param name="sprite">Player sprite.</param>
+        public Player(float minX, float minY, float sizeX, float sizeY, Sprite sprite)
+            : base(minX, minY, sizeX, sizeY, sprite)
         {
             Engine.Component.Physics physics = new Engine.Component.Physics();
             physics.SetIsAffectedByGravity(true);

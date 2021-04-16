@@ -2,9 +2,11 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
-namespace Engine.Renderer
+namespace Engine.Renderer.Tile
 {
+    using System.Drawing;
     using global::Engine.Renderer.Tile;
+    using global::Engine.Renderer.Tile.Parser;
     using OpenTK.Graphics.OpenGL;
     using OpenTK.Windowing.Common;
 
@@ -13,6 +15,10 @@ namespace Engine.Renderer
     /// </summary>
     public class TilemapRenderer : IRenderer
     {
+        private const uint BitFlippedHorizontal = 0x80000000;
+        private const uint BitFlippedVertical = 0x40000000;
+        private const uint BitFlippedDiagonal = 0x20000000;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TilemapRenderer"/> class.
         /// </summary>
@@ -28,11 +34,35 @@ namespace Engine.Renderer
         public Tilemap Tilemap { get; private set; }
 
         /// <inheritdoc/>
+        public void OnCreate()
+        {
+            foreach (TilemapLayer layer in this.Tilemap.Layers)
+            {
+                if (layer.TilemapModel.properties == null)
+                {
+                    continue;
+                }
+
+                foreach (TilemapLayerPropertiesModel prop in layer.TilemapModel.properties)
+                {
+                    if (prop.name.Contains("collision"))
+                    {
+                        if (((bool)prop.value) == true)
+                        {
+                            Engine.Instance().Colliders.AddRange(TilemapParser.GenerateCollisionMap(layer.TilemapModel));
+                        }
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        /// <inheritdoc/>
         public void Render(FrameEventArgs args)
         {
-            GL.Clear(ClearBufferMask.ColorBufferBit);
             GL.BindTexture(TextureTarget.Texture2D, this.Tilemap.Tileset.Handle);
-
+            GL.Color3(Color.White);
             foreach (TilemapLayer tilemap in this.Tilemap.Layers)
             {
                 for (int x = 0; x < tilemap.Width; x++)
@@ -46,15 +76,15 @@ namespace Engine.Renderer
                         }
 
                         // https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#tile-flipping
-                        bool flipped_horizontal = (tile & 0x80000000) > 0;
-                        bool flipped_vertical = (tile & 0x40000000) > 0;
-                        bool flipped_diagonal = (tile & 0x20000000) > 0;
+                        bool flipped_horizontal = (tile & BitFlippedHorizontal) > 0;
+                        bool flipped_vertical = (tile & BitFlippedVertical) > 0;
+                        bool flipped_diagonal = (tile & BitFlippedDiagonal) > 0;
 
-                        tile &= ~(0x80000000 | 0x40000000 | 0x20000000);
+                        tile &= ~(BitFlippedHorizontal | BitFlippedVertical | BitFlippedDiagonal);
                         tile--;
 
                         float tileTexCoordX0 = (tile % this.Tilemap.Tileset.AmountTileWidth) * tilemap.TileTexSizeX;
-                        float tileTexCoordY0 = (tile / this.Tilemap.Tileset.AmountTileWidth) * tilemap.TileTexSizeY;
+                        float tileTexCoordY0 = tile / this.Tilemap.Tileset.AmountTileWidth * tilemap.TileTexSizeY;
                         float tileTexCoordX1 = tileTexCoordX0 + tilemap.TileTexSizeX;
                         float tileTexCoordY1 = tileTexCoordY0 + tilemap.TileTexSizeY;
 

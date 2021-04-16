@@ -22,5 +22,10 @@ namespace Engine.Renderer
         /// </summary>
         /// <param name="args">resize arguments.</param>
         public void Resize(ResizeEventArgs args);
+
+        /// <summary>
+        /// Run when the renderer is added.
+        /// </summary>
+        public void OnCreate();
     }
 }

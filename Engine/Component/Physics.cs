@@ -25,7 +25,7 @@ namespace Engine.Component
         private Vector2 maxVelocity;
 
         /// <summary>
-        /// The Gravity ( How much an Object gets pulled down )
+        /// The Gravity ( How much an Object gets pulled down ).
         /// </summary>
         private float gravity;
 
@@ -35,7 +35,7 @@ namespace Engine.Component
         private bool isAffectedByGravity;
 
         /// <summary>
-        /// How often should Gravity be added to accelerate teh Drop. When Velocity.Y < 0.
+        /// How often should Gravity be added to accelerate teh Drop. When Velocity Y. < 0.
         /// </summary>
         private float gravityMultiplier;
 
@@ -58,27 +58,27 @@ namespace Engine.Component
         }
 
         /// <summary>
-        /// Set the Gravity
+        /// Set the Gravity.
         /// </summary>
-        /// <param name="gravity">The paramref name="gravity". Normally a value < 0</param>
+        /// <param name="gravity">The paramref name="gravity". Normally a value. < 0</param>
         public void SetGravity(float gravity)
         {
             this.gravity = gravity;
         }
 
         /// <summary>
-        /// Set if the Object should get Gravity
+        /// Set if the Object should get Gravity.
         /// </summary>
-        /// <param name="isAffectedByGravity">Yes or no</param>
+        /// <param name="isAffectedByGravity">Yes or no.</param>
         public void SetIsAffectedByGravity(bool isAffectedByGravity)
         {
             this.isAffectedByGravity = isAffectedByGravity;
         }
 
         /// <summary>
-        /// Set how much gravity should be added when Y < 0 to accelert the drop.
+        /// Set how much gravity should be added when Y. < 0 to accelert the drop.
         /// </summary>
-        /// <param name="multi"> how much gravity should be added when Y < 0 to accelert the drop.</param>
+        /// <param name="multi"> how much gravity should be added when Y. < 0 to accelert the drop.</param>
         public void SetGravityMultiplier(float multi)
         {
             this.gravityMultiplier = multi;
@@ -87,8 +87,8 @@ namespace Engine.Component
         /// <summary>
         /// Set the curretn Velocity.
         /// </summary>
-        /// <param name="x">X Part of the Velocity Vector</param>
-        /// <param name="y">Y Part of the Velocity Vector</param>
+        /// <param name="x">X Part of the Velocity Vector.</param>
+        /// <param name="y">Y Part of the Velocity Vector.</param>
         public void SetVelocity(float x, float y)
         {
             this.velocity.X = x;
@@ -96,19 +96,19 @@ namespace Engine.Component
         }
 
         /// <summary>
-        /// Get the Current Velocity
+        /// Get the Current Velocity.
         /// </summary>
-        /// <returns>The Current Velocity</returns>
+        /// <returns>The Current Velocity.</returns>
         public Vector2 GetVelocity()
         {
             return this.velocity;
         }
 
         /// <summary>
-        /// Set the MaxVelocity
+        /// Set the MaxVelocity.
         /// </summary>
-        /// <param name="x">X Part of the MaxVelocity Vector</param>
-        /// <param name="y">Y Part of the MaxVelocity Vector</param>
+        /// <param name="x">X Part of the MaxVelocity Vector.</param>
+        /// <param name="y">Y Part of the MaxVelocity Vector.</param>
         public void SetMaxVelocity(float x, float y)
         {
             this.maxVelocity.X = x;
@@ -118,7 +118,7 @@ namespace Engine.Component
         /// <summary>
         /// Sets some Default values.
         /// </summary>
-        internal override void OnCreated()
+        public override void OnCreated()
         {
             this.velocity = new Vector2(0, 0);
             this.maxVelocity = new Vector2(10, 20);
@@ -129,7 +129,7 @@ namespace Engine.Component
         }
 
         /// <inheritdoc/>
-        internal override void OnUpdate(float frameTime)
+        public override void OnUpdate(float frameTime)
         {
             this.AddGravity();
 

@@ -10,14 +10,14 @@ namespace Engine.Component
     public abstract class Component
     {
         /// <summary>
-        /// The GameObject the component is in.
+        /// Gets the GameObject the component is in.
         /// </summary>
-        private GameObject.GameObject gameObject;
+        public GameObject.GameObject GameObject { get; private set; }
 
         /// <summary>
         /// Called if the GameObject is created.
         /// </summary>
-        internal virtual void OnCreated()
+        public virtual void OnCreated()
         {
             return;
         }
@@ -26,12 +26,12 @@ namespace Engine.Component
         /// Called every gametick.
         /// </summary>
         /// <param name="frameTime">Time between the frame.</param>
-        internal abstract void OnUpdate(float frameTime);
+        public abstract void OnUpdate(float frameTime);
 
         /// <summary>
         /// Called if the GameObject is destroyed.
         /// </summary>
-        internal virtual void OnDestroy()
+        public virtual void OnDestroy()
         {
             return;
         }
@@ -40,18 +40,18 @@ namespace Engine.Component
         /// The internal function to set the parent.
         /// </summary>
         /// <param name="gameObject">The parent GameObject.</param>
-        internal void SetGameObject(GameObject.GameObject gameObject)
+        public void SetGameObject(GameObject.GameObject gameObject)
         {
-            this.gameObject = gameObject;
+            this.GameObject = gameObject;
         }
 
         /// <summary>
         /// Gets the GameObject.
         /// </summary>
         /// <returns>the parent GameObject.</returns>
-        internal GameObject.GameObject GetGameObject()
+        public GameObject.GameObject GetGameObject()
         {
-            return this.gameObject;
+            return this.GameObject;
         }
     }
 }

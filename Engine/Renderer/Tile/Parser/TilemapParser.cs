@@ -47,6 +47,11 @@ namespace Engine.Renderer.Tile.Parser
             {
                 bool openEnd = false;
 
+                if (layer.data[i] == 0)
+                {
+                    continue;
+                }
+
                 // Check up
                 if ((i - layer.width) >= 0)
                 {
@@ -89,6 +94,7 @@ namespace Engine.Renderer.Tile.Parser
                 }
             }
 
+            Console.WriteLine(collisions.Count);
             return collisions;
         }
     }

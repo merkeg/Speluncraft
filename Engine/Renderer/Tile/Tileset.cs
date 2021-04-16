@@ -9,6 +9,7 @@ namespace Engine.Renderer.Tile
     using SixLabors.ImageSharp;
     using SixLabors.ImageSharp.PixelFormats;
     using Image = SixLabors.ImageSharp.Image;
+    using SixLabors.ImageSharp.Processing;
 
     /// <summary>
     /// The Tileset class.
@@ -24,6 +25,8 @@ namespace Engine.Renderer.Tile
         {
             // Source: https://github.com/davudk/OpenGL-TileMap-Demos
             using Image<Rgba32> image = Image.Load<Rgba32>(resource);
+            image.Mutate(x => x.Flip(FlipMode.Vertical));
+
             byte[] data = new byte[image.Width * image.Height * 4];
 
             this.AmountTileWidth = image.Width / tileSize;
@@ -31,14 +34,17 @@ namespace Engine.Renderer.Tile
             this.TileSize = tileSize;
 
             var i = 0;
-            for (var y = 0; y < image.Height; y++)
+            for (int yD = this.AmountTileHeight - 1; yD >= 0; yD--)
             {
-                foreach (var p in image.GetPixelRowSpan(y))
+                for (int y = yD * tileSize; y < (yD * tileSize) + tileSize; y++)
                 {
-                    data[i++] = p.R;
-                    data[i++] = p.G;
-                    data[i++] = p.B;
-                    data[i++] = p.A;
+                    foreach (var p in image.GetPixelRowSpan(y))
+                    {
+                        data[i++] = p.R;
+                        data[i++] = p.G;
+                        data[i++] = p.B;
+                        data[i++] = p.A;
+                    }
                 }
             }
 

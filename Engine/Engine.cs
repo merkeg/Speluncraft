@@ -4,8 +4,11 @@
 
 namespace Engine
 {
+    using System;
     using System.Collections.Generic;
     using global::Engine.GameObject;
+    using global::Engine.Renderer.Sprite;
+    using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
 
@@ -47,6 +50,11 @@ namespace Engine
         public OpenTK.Windowing.Desktop.GameWindow GameWindow { get; private set; }
 
         /// <summary>
+        /// Gets the game Camera.
+        /// </summary>
+        public Camera.Camera Camera { get; private set; }
+
+        /// <summary>
         /// Method to get the engine instance.
         /// </summary>
         /// <returns>Engine instance.</returns>
@@ -67,6 +75,14 @@ namespace Engine
         public void AddGameObject(GameObject.GameObject gameObject)
         {
             this.GameObjects.Add(gameObject);
+
+            if (gameObject.Sprite != null)
+            {
+                SpriteRenderer renderer = new SpriteRenderer(gameObject.Sprite, gameObject);
+                gameObject.SpriteRenderer = renderer;
+                this.AddRenderer(renderer);
+            }
+
             gameObject.OnCreated();
         }
 
@@ -77,11 +93,12 @@ namespace Engine
         public void AddRenderer(Renderer.IRenderer renderer)
         {
             this.Renderers.Add(renderer);
+            renderer.OnCreate();
 
             // Set the SwapBuffer to the last position.
-            this.GameWindow.RenderFrame -= this.SwapBuffers;
             this.GameWindow.RenderFrame += renderer.Render;
-            this.GameWindow.RenderFrame += this.SwapBuffers;
+
+            this.GameWindow.Resize += renderer.Resize;
         }
 
         /// <summary>
@@ -91,7 +108,13 @@ namespace Engine
         public void StartEngine(OpenTK.Windowing.Desktop.GameWindow window)
         {
             this.GameWindow = window;
+            this.Camera = new Camera.Camera();
+            this.AddRenderer(this.Camera);
+
             window.UpdateFrame += this.Update;
+            this.GameWindow.RenderFrame += this.SwapBuffers;
+            GL.Enable(EnableCap.Blend);
+            GL.Enable(EnableCap.Texture2D);
         }
 
         private void Update(OpenTK.Windowing.Common.FrameEventArgs args)
@@ -102,6 +125,7 @@ namespace Engine
         private void SwapBuffers(FrameEventArgs args)
         {
             this.GameWindow.SwapBuffers();
+            GL.Clear(ClearBufferMask.ColorBufferBit);
         }
     }
 }
