@@ -20,18 +20,7 @@ namespace Engine.Renderer.Tile
         {
             this.Tileset = tileset;
             this.TilemapModel = model;
-            this.Tiles = new uint[model.width * model.height];
-
-            int i = 0;
-            for (int y = model.height - 1; y >= 0; y--)
-            {
-                for (int x = 0; x < model.width; x++)
-                {
-                    this.Tiles[i++] = model.data[x + (y * model.width)];
-                }
-            }
-
-            model.data = this.Tiles;
+            this.Tiles = model.data;
         }
 
         /// <summary>

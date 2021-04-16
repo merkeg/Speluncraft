@@ -90,7 +90,7 @@ namespace Engine.Renderer.Tile.Parser
 
                 if (openEnd)
                 {
-                    collisions.Add(new Rectangle(i % layer.width, i / layer.width, 1, 1));
+                    collisions.Add(new Rectangle(i % layer.width, 0 - (i / layer.width), 1, 1));
                 }
             }
 

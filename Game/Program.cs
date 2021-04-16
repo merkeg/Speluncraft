@@ -34,13 +34,13 @@ namespace Example
 
             Assembly assembly = Assembly.GetExecutingAssembly();
             using Stream tilesheet = assembly.GetManifestResourceStream("Game.Resources.tilesheet.png");
-            using Stream tilemapStream = assembly.GetManifestResourceStream("Game.Resources.all.json");
+            using Stream tilemapStream = assembly.GetManifestResourceStream("Game.Resources.lol.json");
 
             Tileset tileset = new Tileset(tilesheet, 16);
             TilemapModel model = TilemapParser.ParseTilemap(tilemapStream);
             Tilemap tilemap = new Tilemap(tileset, model);
 
-            TilemapRenderer renderer = new TilemapRenderer(tilemap);
+            TilemapRenderer renderer = new TilemapRenderer(tilemap, 0, 0);
             engine.AddRenderer(renderer);
 
             CollisionRenderer colRenderer = new CollisionRenderer();
@@ -50,7 +50,6 @@ namespace Example
             Sprite sprite = new Sprite(spriteStream);
 
             GameObject player = new GameObject(-3, -3, 1, 1, sprite);
-            //player.AddComponent(new CameraTrackingComponent());
             engine.AddGameObject(player);
 
             Camera cam = engine.Camera;
@@ -75,8 +74,8 @@ namespace Example
                 float axisLeftRight = state.IsKeyDown(Keys.A) ? -1.0f : state.IsKeyDown(Keys.D) ? 1.0f : 0.0f;
                 float axisUpDown = state.IsKeyDown(Keys.S) ? -1.0f : state.IsKeyDown(Keys.W) ? 1.0f : 0.0f;
 
-                player.MinX += (float)a.Time * axisLeftRight * 2;
-                player.MinY += (float)a.Time * axisUpDown * 2;
+                player.MinX += (float)a.Time * axisLeftRight * 3;
+                player.MinY += (float)a.Time * axisUpDown * 3;
             };
 
             window.Run();

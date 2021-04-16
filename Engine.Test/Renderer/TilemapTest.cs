@@ -52,7 +52,7 @@ namespace Engine.Test.Renderer
             Assert.IsTrue(layer.Width == 48, "Layer width must be 48");
             Assert.IsTrue(layer.Height == 22, "Layer height must be 22");
 
-            Assert.IsTrue(layer[0, 0] == 1, "Wrong tile");
+            Assert.IsTrue(layer[0, 0] == 1, "Wrong tile, " + layer[0, 0]);
         }
 
         // https://www.codeproject.com/Tips/5256504/Using-Embedded-Resources-in-Unit-Tests-with-NET
