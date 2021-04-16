@@ -63,7 +63,7 @@ namespace Engine.Renderer.Tile
                     {
                         if (((bool)prop.value) == true)
                         {
-                            Engine.Instance().Colliders.AddRange(TilemapParser.GenerateCollisionMap(layer.TilemapModel));
+                            Engine.Instance().Colliders.AddRange(TilemapParser.GenerateCollisionMap(layer.TilemapModel, this.OriginX, this.OriginY));
                         }
 
                         break;

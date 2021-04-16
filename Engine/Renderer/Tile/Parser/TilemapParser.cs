@@ -38,8 +38,10 @@ namespace Engine.Renderer.Tile.Parser
         /// Generates an list of collisions from the tile layer.
         /// </summary>
         /// <param name="layer">The layer the list will be chosen from.</param>
+        /// <param name="originX">Origin X.</param>
+        /// <param name="originY">Origin Y.</param>
         /// <returns>a list of collisions.</returns>
-        public static List<Rectangle> GenerateCollisionMap(TilemapLayerModel layer)
+        public static List<Rectangle> GenerateCollisionMap(TilemapLayerModel layer, int originX, int originY)
         {
             List<Rectangle> collisions = new List<Rectangle>();
 
@@ -90,7 +92,7 @@ namespace Engine.Renderer.Tile.Parser
 
                 if (openEnd)
                 {
-                    collisions.Add(new Rectangle(i % layer.width, 0 - (i / layer.width), 1, 1));
+                    collisions.Add(new Rectangle(originX + (i % layer.width), originY - (i / layer.width), 1, 1));
                 }
             }
 
