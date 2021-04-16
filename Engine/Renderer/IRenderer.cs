@@ -1,12 +1,10 @@
-﻿// <copyright file="Renderer.cs" company="RWUwU">
+﻿// <copyright file="IRenderer.cs" company="RWUwU">
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
 namespace Engine.Renderer
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
+    using OpenTK.Windowing.Common;
 
     /// <summary>
     /// Renderer base class.
@@ -16,6 +14,18 @@ namespace Engine.Renderer
         /// <summary>
         /// The render function.
         /// </summary>
-        public void Render();
+        /// <param name="args">Render update arguments.</param>
+        public void Render(FrameEventArgs args);
+
+        /// <summary>
+        /// The resize function.
+        /// </summary>
+        /// <param name="args">resize arguments.</param>
+        public void Resize(ResizeEventArgs args);
+
+        /// <summary>
+        /// Run when the renderer is added.
+        /// </summary>
+        public void OnCreate();
     }
 }

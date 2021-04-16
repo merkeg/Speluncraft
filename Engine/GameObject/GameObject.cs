@@ -4,6 +4,7 @@
 namespace Engine.GameObject
 {
     using System.Collections.Generic;
+    using global::Engine.Renderer.Sprite;
 
     /// <summary>
     /// The GameObject class which active game elements are deriving from.
@@ -11,19 +12,26 @@ namespace Engine.GameObject
     public class GameObject : IRectangle
     {
         /// <summary>
+        /// The sprite the GameObject is drawn with.
+        /// </summary>
+        private Sprite sprite;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="GameObject"/> class.
         /// </summary>
         /// <param name="minX">the X-Coordinate of bottom left point, of the GameObject.</param>
         /// <param name="minY">the Y-Coordinate of bottom left point, of the GameObject.</param>
         /// <param name="sizeX">the width of the GameObject.</param>
         /// <param name="sizeY">the height of the GameObject.</param>
-        public GameObject(float minX, float minY, float sizeX, float sizeY)
+        /// /// <param name="sprite">The sprite.</param>
+        public GameObject(float minX, float minY, float sizeX, float sizeY, Sprite sprite)
         {
             this.MinX = minX;
             this.MinY = minY;
             this.SizeX = sizeX;
             this.SizeY = sizeY;
             this.Components = new List<Component.Component>();
+            this.sprite = sprite;
         }
 
         /// <summary>
@@ -47,19 +55,45 @@ namespace Engine.GameObject
         public float MaxY => this.MinY + this.SizeY;
 
         /// <summary>
-        /// Gets the X-Coordinate of bottom left point, of the GameObject.
+        /// Gets or sets the X-Coordinate of bottom left point, of the GameObject.
         /// </summary>
-        public float MinX { get; internal set; }
+        public float MinX { get; set; }
 
         /// <summary>
-        /// Gets the Y-Coordinate of bottom left point, of the GameObject.
+        /// Gets or sets the Y-Coordinate of bottom left point, of the GameObject.
         /// </summary>
-        public float MinY { get; internal set; }
+        public float MinY { get; set; }
 
         /// <summary>
-        /// Gets or sets Components.
+        /// Gets or sets the Components.
         /// </summary>
         public List<Component.Component> Components { get; protected set; }
+
+        /// <summary>
+        /// Gets or sets the Sprite of the GameObject.
+        /// </summary>
+        public Sprite Sprite
+        {
+        get
+            {
+                return this.sprite;
+            }
+
+        set
+            {
+                if (this.SpriteRenderer != null)
+                {
+                    this.SpriteRenderer.Sprite = value;
+                }
+
+                this.sprite = value;
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the Sprite renderer.
+        /// </summary>
+        internal SpriteRenderer SpriteRenderer { get; set; }
 
         /// <summary>
         /// Checks if the other element intersects with this GameObject.

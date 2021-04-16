@@ -1,0 +1,40 @@
+{ "compressionlevel":-1,
+ "editorsettings":
+    {
+     "export":
+        {
+         "format":"json",
+         "target":"rotation.json"
+        }
+    },
+ "height":1,
+ "infinite":false,
+ "layers":[
+        {
+         "data":[56, 0, 2684354616, 0, 3221225528, 0, 55, 0, 2147483703, 0],
+         "height":1,
+         "id":1,
+         "name":"Tile Layer 1",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":10,
+         "x":0,
+         "y":0
+        }],
+ "nextlayerid":2,
+ "nextobjectid":1,
+ "orientation":"orthogonal",
+ "renderorder":"left-down",
+ "tiledversion":"1.5.0",
+ "tileheight":16,
+ "tilesets":[
+        {
+         "firstgid":1,
+         "source":"..\/..\/..\/..\/..\/..\/Users\/merkeg\/Desktop\/Computergrafiken\/tilesheet.tsx"
+        }],
+ "tilewidth":16,
+ "type":"map",
+ "version":1.5,
+ "width":10
+}

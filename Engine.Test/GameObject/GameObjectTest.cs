@@ -8,9 +8,9 @@
         [TestMethod]
         public void TestGameObjectIntersects()
         {
-            GameObject.GameObject go1 = new GameObject.GameObject(0, 0, 5, 5);
-            GameObject.GameObject go2 = new GameObject.GameObject(1, 1, 5, 5);
-            GameObject.GameObject go3 = new GameObject.GameObject(10, 10, 15, 15);
+            GameObject.GameObject go1 = new GameObject.GameObject(0, 0, 5, 5, null);
+            GameObject.GameObject go2 = new GameObject.GameObject(1, 1, 5, 5, null);
+            GameObject.GameObject go3 = new GameObject.GameObject(10, 10, 15, 15, null);
 
             Assert.IsTrue(go1.Intersects(go2), "Both GameObjects should be intersecting");
             Assert.IsTrue(go2.Intersects(go1), "Both GameObjects should be intersecting");
@@ -20,10 +20,10 @@
         }
 
         [TestMethod]
-        public void TestGameObjectComponents()
+        public void TestGameObjectComponent()
         {
-            GameObject.GameObject go1 = new GameObject.GameObject(0, 0, 5, 5);
-            GameObject.GameObject go2 = new GameObject.GameObject(1, 1, 5, 5);
+            GameObject.GameObject go1 = new GameObject.GameObject(0, 0, 5, 5, null);
+            GameObject.GameObject go2 = new GameObject.GameObject(1, 1, 5, 5, null);
 
             go1.AddComponent(new Component.Physics());
 
