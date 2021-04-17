@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <None Remove="Resources\all.json" />
+    <None Remove="Resources\B.json" />
     <None Remove="Resources\jumpy.json" />
     <None Remove="Resources\lol.json" />
     <None Remove="Resources\player.png" />
@@ -28,6 +29,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\all.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\B.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\jumpy.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
