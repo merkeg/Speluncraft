@@ -131,14 +131,14 @@ namespace Engine.Component
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
-            this.AddGravity();
+            this.AddGravity(frameTime);
 
             this.CheckIfToFast();
             this.GetGameObject().MinX += frameTime * this.velocity.X;
             this.GetGameObject().MinY += frameTime * this.velocity.Y;
         }
 
-        private void AddGravity()
+        private void AddGravity(float frameTime)
         {
             if (!this.isAffectedByGravity)
             {
@@ -147,11 +147,11 @@ namespace Engine.Component
 
             if (this.velocity.Y > 0)
             {
-                this.velocity.Y += this.gravity;
+                this.velocity.Y += this.gravity * frameTime;
             }
             else
             {
-                this.velocity.Y += this.gravity * this.gravityMultiplier;
+                this.velocity.Y += this.gravity * this.gravityMultiplier * frameTime;
             }
         }
 

@@ -39,11 +39,9 @@ namespace Game.Player
             physics.SetIsAffectedByGravity(true);
             physics.SetGravityMultiplier(3);
             this.AddComponent(physics);
+            this.AddComponent(new Engine.Component.Collider());
 
-            if (this.jumpCounterMax == 1)
-            {
-                this.jumpCounterMax = 1;
-            }
+            this.jumpcounter = this.jumpCounterMax;
         }
 
         /// <inheritdoc/>
