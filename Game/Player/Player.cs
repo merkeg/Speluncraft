@@ -92,6 +92,12 @@ namespace Game.Player
             }
 
             base.OnUpdate(frameTime);
+
+            Engine.Component.Collider collider = this.GetComponent<Engine.Component.Collider>();
+            if (collider.GetGroundTouchedFlag())
+            {
+                this.jumpcounter = this.jumpCounterMax;
+            }
         }
     }
 }
