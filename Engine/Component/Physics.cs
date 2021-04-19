@@ -40,6 +40,19 @@ namespace Engine.Component
         private float gravityMultiplier;
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Physics"/> class, with default values.
+        /// </summary>
+        public Physics()
+        {
+            this.velocity = new Vector2(0, 0);
+            this.maxVelocity = new Vector2(7, 20);
+            this.gravity = -12f;
+            this.isAffectedByGravity = false;
+            this.gravityMultiplier = 3f;
+            return;
+        }
+
+        /// <summary>
         /// Add to the x Velocity.
         /// </summary>
         /// <param name="x">How much to add.</param>
@@ -113,16 +126,6 @@ namespace Engine.Component
         {
             this.maxVelocity.X = x;
             this.maxVelocity.Y = y;
-        }
-
-        public Physics()
-        {
-            this.velocity = new Vector2(0, 0);
-            this.maxVelocity = new Vector2(7, 20);
-            this.gravity = -12f;
-            this.isAffectedByGravity = false;
-            this.gravityMultiplier = 3f;
-            return;
         }
 
         /// <inheritdoc/>
