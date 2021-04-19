@@ -99,7 +99,6 @@ namespace Game.Player
                 Console.WriteLine($"JC: {this.jumpcounter} velY: {physics.GetVelocity().Y} ");
                 this.jumpcounter--;
             }
-
         }
     }
 }

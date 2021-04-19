@@ -1,4 +1,8 @@
-﻿namespace Engine.Component
+﻿// <copyright file="Collider.cs" company="RWUwU">
+// Copyright (c) RWUwU. All rights reserved.
+// </copyright>
+
+namespace Engine.Component
 {
     using System;
     using System.Collections.Generic;

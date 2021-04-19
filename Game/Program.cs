@@ -43,9 +43,6 @@ namespace Example
             TilemapRenderer renderer = new TilemapRenderer(tilemap, 0, 0);
             engine.AddRenderer(renderer);
 
-            CollisionRenderer colRenderer = new CollisionRenderer();
-            //engine.AddRenderer(colRenderer);
-
             using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.player.png");
             Sprite sprite = new Sprite(spriteStream);
 
