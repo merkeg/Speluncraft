@@ -115,16 +115,13 @@ namespace Engine.Component
             this.maxVelocity.Y = y;
         }
 
-        /// <summary>
-        /// Sets some Default values.
-        /// </summary>
-        public override void OnCreated()
+        public Physics()
         {
             this.velocity = new Vector2(0, 0);
-            this.maxVelocity = new Vector2(10, 20);
-            this.gravity = -0.5f;
+            this.maxVelocity = new Vector2(7, 20);
+            this.gravity = -12f;
             this.isAffectedByGravity = false;
-            this.gravityMultiplier = 1;
+            this.gravityMultiplier = 3f;
             return;
         }
 

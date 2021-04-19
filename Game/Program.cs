@@ -27,14 +27,14 @@ namespace Example
         private static void Main()
         {
             GameWindow window = new GameWindow(GameWindowSettings.Default, new NativeWindowSettings { Profile = ContextProfile.Compatability });
-            window.Size = new Vector2i(800, 600);
+            window.Size = new Vector2i(1280, 720);
             window.VSync = VSyncMode.Adaptive;
             Engine.Engine engine = Engine.Engine.Instance();
             engine.StartEngine(window);
 
             Assembly assembly = Assembly.GetExecutingAssembly();
             using Stream tilesheet = assembly.GetManifestResourceStream("Game.Resources.tilesheet.png");
-            using Stream tilemapStream = assembly.GetManifestResourceStream("Game.Resources.lol.json");
+            using Stream tilemapStream = assembly.GetManifestResourceStream("Game.Resources.jumpNrun.json");
 
             Tileset tileset = new Tileset(tilesheet, 16);
             TilemapModel model = TilemapParser.ParseTilemap(tilemapStream);
@@ -44,12 +44,13 @@ namespace Example
             engine.AddRenderer(renderer);
 
             CollisionRenderer colRenderer = new CollisionRenderer();
-            engine.AddRenderer(colRenderer);
+            //engine.AddRenderer(colRenderer);
 
             using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.player.png");
             Sprite sprite = new Sprite(spriteStream);
 
-            GameObject player = new GameObject(-3, -3, 1, 1, sprite);
+            Player player = new Player(3, -5, 1, 1, sprite);
+            player.AddComponent(new CameraTrackingComponent());
             engine.AddGameObject(player);
 
             Camera cam = engine.Camera;
@@ -67,17 +68,6 @@ namespace Example
                 var movement = ((float)a.Time) * new Vector2(axisLeftRight, axisUpDown);
                 cam.Center += movement.TransformDirection(cam.CameraMatrix.Inverted());
             };
-
-            window.UpdateFrame += a =>
-            {
-                KeyboardState state = window.KeyboardState;
-                float axisLeftRight = state.IsKeyDown(Keys.A) ? -1.0f : state.IsKeyDown(Keys.D) ? 1.0f : 0.0f;
-                float axisUpDown = state.IsKeyDown(Keys.S) ? -1.0f : state.IsKeyDown(Keys.W) ? 1.0f : 0.0f;
-
-                player.MinX += (float)a.Time * axisLeftRight * 3;
-                player.MinY += (float)a.Time * axisUpDown * 3;
-            };
-
             window.Run();
         }
     }

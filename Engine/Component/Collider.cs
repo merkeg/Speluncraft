@@ -85,15 +85,19 @@
                         case Up:
                             this.GameObject.MinY = r.MaxY;
                             this.touchedGround = true;
+                            this.ResetVelocity(Y);
                             break;
                         case Down:
                             this.GameObject.MinY = r.MinY - this.GameObject.SizeY;
+                            this.ResetVelocity(Y);
                             break;
                         case Left:
                             this.GameObject.MinX = r.MinX - this.GameObject.SizeX;
+                            this.ResetVelocity(X);
                             break;
                         case Right:
                             this.GameObject.MinX = r.MaxX;
+                            this.ResetVelocity(X);
                             break;
                     }
                 }
