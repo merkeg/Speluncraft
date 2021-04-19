@@ -22,7 +22,7 @@ namespace Game.Player
         private float accelaration = 0.3f;
         private float idealBreacking = 0.1f;
         private float activeBreacking = 0.2f;
-        private float jumpPower = 2f;
+        private float jumpPower = 8.8f;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Player"/> class.
@@ -39,11 +39,9 @@ namespace Game.Player
             physics.SetIsAffectedByGravity(true);
             physics.SetGravityMultiplier(3);
             this.AddComponent(physics);
+            this.AddComponent(new Engine.Component.Collider());
 
-            if (this.jumpCounterMax == 1)
-            {
-                this.jumpCounterMax = 1;
-            }
+            this.jumpcounter = this.jumpCounterMax;
         }
 
         /// <inheritdoc/>
@@ -87,13 +85,20 @@ namespace Game.Player
                 }
             }
 
+            base.OnUpdate(frameTime);
+
+            Engine.Component.Collider collider = this.GetComponent<Engine.Component.Collider>();
+            if (collider.GetGroundTouchedFlag())
+            {
+                this.jumpcounter = this.jumpCounterMax;
+            }
+
             if (keyboardState.IsKeyPressed(Keys.Space) && this.jumpcounter > 0)
             {
                 physics.AddVelocitY(this.jumpPower);
+                Console.WriteLine($"JC: {this.jumpcounter} velY: {physics.GetVelocity().Y} ");
                 this.jumpcounter--;
             }
-
-            base.OnUpdate(frameTime);
         }
     }
 }

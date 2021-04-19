@@ -8,8 +8,8 @@ namespace Engine.Renderer.Tile
     using OpenTK.Graphics.OpenGL;
     using SixLabors.ImageSharp;
     using SixLabors.ImageSharp.PixelFormats;
-    using Image = SixLabors.ImageSharp.Image;
     using SixLabors.ImageSharp.Processing;
+    using Image = SixLabors.ImageSharp.Image;
 
     /// <summary>
     /// The Tileset class.

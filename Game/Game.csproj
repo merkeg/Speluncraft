@@ -6,12 +6,15 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <NoWarn>1701;1702;0001</NoWarn>
-    <DocumentationFile></DocumentationFile>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn),1701;1702;0001,1573,1591,1712</NoWarn>
+    <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Resources\all.json" />
+    <None Remove="Resources\B.json" />
+    <None Remove="Resources\jumpNrun.json" />
     <None Remove="Resources\jumpy.json" />
     <None Remove="Resources\lol.json" />
     <None Remove="Resources\player.png" />
@@ -28,6 +31,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\all.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\B.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\jumpNrun.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\jumpy.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -65,5 +74,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.csproj" />
   </ItemGroup>
-
 </Project>

@@ -35,9 +35,22 @@ namespace Engine.Component
         private bool isAffectedByGravity;
 
         /// <summary>
-        /// How often should Gravity be added to accelerate teh Drop. When Velocity Y. < 0.
+        /// How often should Gravity be added to accelerate teh Drop. When Velocity.
         /// </summary>
         private float gravityMultiplier;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Physics"/> class, with default values.
+        /// </summary>
+        public Physics()
+        {
+            this.velocity = new Vector2(0, 0);
+            this.maxVelocity = new Vector2(7, 20);
+            this.gravity = -12f;
+            this.isAffectedByGravity = false;
+            this.gravityMultiplier = 3f;
+            return;
+        }
 
         /// <summary>
         /// Add to the x Velocity.
@@ -60,7 +73,7 @@ namespace Engine.Component
         /// <summary>
         /// Set the Gravity.
         /// </summary>
-        /// <param name="gravity">The paramref name="gravity". Normally a value. < 0</param>
+        /// <param name="gravity">The paramref name="gravity". Normally a value.</param>
         public void SetGravity(float gravity)
         {
             this.gravity = gravity;
@@ -76,9 +89,9 @@ namespace Engine.Component
         }
 
         /// <summary>
-        /// Set how much gravity should be added when Y. < 0 to accelert the drop.
+        /// Set how much gravity should be added when to accelert the drop.
         /// </summary>
-        /// <param name="multi"> how much gravity should be added when Y. < 0 to accelert the drop.</param>
+        /// <param name="multi"> how much gravity should be added when to accelert the drop.</param>
         public void SetGravityMultiplier(float multi)
         {
             this.gravityMultiplier = multi;
@@ -115,30 +128,17 @@ namespace Engine.Component
             this.maxVelocity.Y = y;
         }
 
-        /// <summary>
-        /// Sets some Default values.
-        /// </summary>
-        public override void OnCreated()
-        {
-            this.velocity = new Vector2(0, 0);
-            this.maxVelocity = new Vector2(10, 20);
-            this.gravity = -0.5f;
-            this.isAffectedByGravity = false;
-            this.gravityMultiplier = 1;
-            return;
-        }
-
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
-            this.AddGravity();
+            this.AddGravity(frameTime);
 
             this.CheckIfToFast();
             this.GetGameObject().MinX += frameTime * this.velocity.X;
             this.GetGameObject().MinY += frameTime * this.velocity.Y;
         }
 
-        private void AddGravity()
+        private void AddGravity(float frameTime)
         {
             if (!this.isAffectedByGravity)
             {
@@ -147,11 +147,11 @@ namespace Engine.Component
 
             if (this.velocity.Y > 0)
             {
-                this.velocity.Y += this.gravity;
+                this.velocity.Y += this.gravity * frameTime;
             }
             else
             {
-                this.velocity.Y += this.gravity * this.gravityMultiplier;
+                this.velocity.Y += this.gravity * this.gravityMultiplier * frameTime;
             }
         }
 
