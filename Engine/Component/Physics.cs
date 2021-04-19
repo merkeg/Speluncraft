@@ -35,7 +35,7 @@ namespace Engine.Component
         private bool isAffectedByGravity;
 
         /// <summary>
-        /// How often should Gravity be added to accelerate teh Drop. When Velocity Y. < 0.
+        /// How often should Gravity be added to accelerate teh Drop. When Velocity.
         /// </summary>
         private float gravityMultiplier;
 
@@ -73,7 +73,7 @@ namespace Engine.Component
         /// <summary>
         /// Set the Gravity.
         /// </summary>
-        /// <param name="gravity">The paramref name="gravity". Normally a value. < 0</param>
+        /// <param name="gravity">The paramref name="gravity". Normally a value.</param>
         public void SetGravity(float gravity)
         {
             this.gravity = gravity;
@@ -89,9 +89,9 @@ namespace Engine.Component
         }
 
         /// <summary>
-        /// Set how much gravity should be added when Y. < 0 to accelert the drop.
+        /// Set how much gravity should be added when to accelert the drop.
         /// </summary>
-        /// <param name="multi"> how much gravity should be added when Y. < 0 to accelert the drop.</param>
+        /// <param name="multi"> how much gravity should be added when to accelert the drop.</param>
         public void SetGravityMultiplier(float multi)
         {
             this.gravityMultiplier = multi;
