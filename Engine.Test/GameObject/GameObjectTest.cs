@@ -1,5 +1,7 @@
-﻿namespace Engine.Test
+﻿namespace EngineTest
 {
+    using Engine.Component;
+    using Engine.GameObject;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     [TestClass]
@@ -8,9 +10,9 @@
         [TestMethod]
         public void TestGameObjectIntersects()
         {
-            GameObject.GameObject go1 = new GameObject.GameObject(0, 0, 5, 5, null);
-            GameObject.GameObject go2 = new GameObject.GameObject(1, 1, 5, 5, null);
-            GameObject.GameObject go3 = new GameObject.GameObject(10, 10, 15, 15, null);
+            GameObject go1 = new GameObject(0, 0, 5, 5, null);
+            GameObject go2 = new GameObject(1, 1, 5, 5, null);
+            GameObject go3 = new GameObject(10, 10, 15, 15, null);
 
             Assert.IsTrue(go1.Intersects(go2), "Both GameObjects should be intersecting");
             Assert.IsTrue(go2.Intersects(go1), "Both GameObjects should be intersecting");
@@ -22,16 +24,16 @@
         [TestMethod]
         public void TestGameObjectComponent()
         {
-            GameObject.GameObject go1 = new GameObject.GameObject(0, 0, 5, 5, null);
-            GameObject.GameObject go2 = new GameObject.GameObject(1, 1, 5, 5, null);
+            GameObject go1 = new GameObject(0, 0, 5, 5, null);
+            GameObject go2 = new GameObject(1, 1, 5, 5, null);
 
-            go1.AddComponent(new Component.Physics());
+            go1.AddComponent(new Physics());
 
-            Component.Physics component = go1.GetComponent<Component.Physics>();
+            Physics component = go1.GetComponent<Physics>();
             Assert.IsNotNull(component, "Component should not be null");
             go1.RemoveComponent(component);
 
-            component = go1.GetComponent<Component.Physics>();
+            component = go1.GetComponent<Physics>();
             Assert.IsNull(component, "Component should be null");
         }
     }

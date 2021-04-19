@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Game", "Game\Game.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engine", "Engine\Engine.csproj", "{47F17E97-8442-46A5-8B34-4DF946A144BD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engine.Test", "Engine.Test\Engine.Test.csproj", "{7B5939F1-7C33-44B9-873F-BBB6A78D9177}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EngineTest", "Engine.Test\EngineTest.csproj", "{7B5939F1-7C33-44B9-873F-BBB6A78D9177}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Game.Test", "Game.Test\Game.Test.csproj", "{24BB28AC-95B3-4A20-8B1B-91C9886B4931}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameTest", "Game.Test\GameTest.csproj", "{24BB28AC-95B3-4A20-8B1B-91C9886B4931}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C010241B-A95B-4CE4-B57F-CE78585F69EB}"
 	ProjectSection(SolutionItems) = preProject

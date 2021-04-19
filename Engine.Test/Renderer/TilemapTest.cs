@@ -8,7 +8,7 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Engine.Test.Renderer
+namespace EngineTest.Renderer
 {
     [TestClass]
     public class TilemapTest
