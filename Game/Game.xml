@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Game</name>
+    </assembly>
+    <members>
+        <member name="T:Game.Player.CameraTrackingComponent">
+            <summary>
+            Camera tracking component class.
+            </summary>
+        </member>
+        <member name="M:Game.Player.CameraTrackingComponent.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Player.Player">
+            <summary>
+            The thing the Player COntrolls.
+            </summary>
+        </member>
+        <member name="M:Game.Player.Player.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Player.Player"/> class.
+            </summary>
+            <param name="minX">the X-Coordinate of bottom left point, of the Player.</param>
+            <param name="minY">the Y-Coordinate of bottom left point, of the Player.</param>
+            <param name="sizeX">Player width.</param>
+            <param name="sizeY">Player height.</param>
+            <param name="sprite">Player sprite.</param>
+        </member>
+        <member name="M:Game.Player.Player.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Example.Program">
+            <summary>
+            The Main class of the game.
+            </summary>
+        </member>
+    </members>
+</doc>
