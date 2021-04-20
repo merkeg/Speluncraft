@@ -19,9 +19,9 @@ namespace Game.Player
         private int jumpcounter;
         private int jumpCounterMax = 1;
 
-        private float accelaration = 0.3f;
-        private float idealBreacking = 0.1f;
-        private float activeBreacking = 0.2f;
+        private float accelaration = 18f;
+        private float idealBreacking = 15f;
+        private float activeBreacking = 20f;
         private float jumpPower = 8.8f;
 
         /// <summary>
@@ -54,32 +54,32 @@ namespace Game.Player
             { // Player wants to go left
                 if (physics.GetVelocity().X > 0)
                 { // Player is breaking since he is going right
-                    physics.AddVelocityX(-this.activeBreacking);
+                    physics.AddVelocityX(-this.activeBreacking * frameTime);
                 }
 
-                physics.AddVelocityX(-this.accelaration);
+                physics.AddVelocityX(-this.accelaration * frameTime);
             }
             else if (keyboardState.IsKeyDown(Keys.D))
             { // Player wants to go right
                 if (physics.GetVelocity().X < 0)
                 { // Player is breaking since he going left
-                    physics.AddVelocityX(this.activeBreacking);
+                    physics.AddVelocityX(this.activeBreacking * frameTime);
                 }
 
-                physics.AddVelocityX(this.accelaration);
+                physics.AddVelocityX(this.accelaration * frameTime);
             }
             else
             { // Player is not breaking or accelerating
                 if (physics.GetVelocity().X > 0)
                 { // Player is going right
-                    physics.AddVelocityX(-this.idealBreacking);
+                    physics.AddVelocityX(-this.idealBreacking * frameTime);
                 }
                 else
                 {
-                    physics.AddVelocityX(this.idealBreacking);
+                    physics.AddVelocityX(this.idealBreacking * frameTime);
                 }
 
-                if (Math.Abs(physics.GetVelocity().X) <= this.idealBreacking)
+                if (Math.Abs(physics.GetVelocity().X) <= this.idealBreacking * frameTime)
                 {
                     physics.SetVelocity(0f, physics.GetVelocity().Y);
                 }

@@ -69,8 +69,8 @@ namespace Engine.Component
                     float[] distance = new float[4];
                     distance[Up] = Math.Abs(r.MaxY - this.GameObject.MinY);
                     distance[Down] = Math.Abs(r.MinY - this.GameObject.MaxY);
-                    distance[Left] = Math.Abs(r.MinX - this.GameObject.MaxX);
-                    distance[Right] = Math.Abs(r.MaxX - this.GameObject.MinX);
+                    distance[Left] = Math.Abs(r.MinX - this.GameObject.MaxX) + 0.01f;
+                    distance[Right] = Math.Abs(r.MaxX - this.GameObject.MinX) + 0.1f;
 
                     float minDistance = distance[0];
                     int indexOfMinDistance = 0;
