@@ -62,6 +62,9 @@ namespace Engine.Component
         {
             this.touchedGround = false;
 
+            List<GameObject.Rectangle> sideCollisionRight = new List<GameObject.Rectangle>(); // Those overlaps will only be undone after up and down collisions.
+            List<GameObject.Rectangle> sideCollisionsLeft = new List<GameObject.Rectangle>();
+
             foreach (GameObject.Rectangle r in Engine.Instance().Colliders)
             {
                 if (this.GameObject.Intersects(r))
@@ -69,8 +72,8 @@ namespace Engine.Component
                     float[] distance = new float[4];
                     distance[Up] = Math.Abs(r.MaxY - this.GameObject.MinY);
                     distance[Down] = Math.Abs(r.MinY - this.GameObject.MaxY);
-                    distance[Left] = Math.Abs(r.MinX - this.GameObject.MaxX) + 0.01f;
-                    distance[Right] = Math.Abs(r.MaxX - this.GameObject.MinX) + 0.1f;
+                    distance[Left] = Math.Abs(r.MinX - this.GameObject.MaxX);
+                    distance[Right] = Math.Abs(r.MaxX - this.GameObject.MinX);
 
                     float minDistance = distance[0];
                     int indexOfMinDistance = 0;
@@ -96,14 +99,31 @@ namespace Engine.Component
                             this.ResetVelocity(Y);
                             break;
                         case Left:
-                            this.GameObject.MinX = r.MinX - this.GameObject.SizeX;
-                            this.ResetVelocity(X);
+                            sideCollisionsLeft.Add(r);
                             break;
                         case Right:
-                            this.GameObject.MinX = r.MaxX;
-                            this.ResetVelocity(X);
+                            sideCollisionRight.Add(r);
                             break;
                     }
+                }
+            }
+
+            // After the Up and Down Collisions have been checked, look if other collsion are still there.
+            foreach (GameObject.Rectangle r in sideCollisionsLeft)
+            {
+                if (this.GameObject.Intersects(r))
+                {
+                    this.GameObject.MinX = r.MinX - this.GameObject.SizeX;
+                    this.ResetVelocity(X);
+                }
+            }
+
+            foreach (GameObject.Rectangle r in sideCollisionRight)
+            {
+                if (this.GameObject.Intersects(r))
+                {
+                    this.GameObject.MinX = r.MaxX;
+                    this.ResetVelocity(X);
                 }
             }
         }
@@ -115,6 +135,7 @@ namespace Engine.Component
             {
                 if (axsis == X)
                 {
+                    Console.WriteLine("Hey");
                     physics.SetVelocity(0, physics.GetVelocity().Y);
                 }
                 else
