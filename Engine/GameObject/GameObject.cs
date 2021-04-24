@@ -102,7 +102,7 @@ namespace Engine.GameObject
         /// <returns>the value if the other element intersects with the gameobject.</returns>
         public bool Intersects(IRectangle rectangle)
         {
-            if ( rectangle == this)
+            if (rectangle == this)
             {
                 return false;
             }
