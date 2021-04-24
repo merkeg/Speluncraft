@@ -109,6 +109,7 @@
 
             if (this.currenHealtPoints <= 0)
             {
+                this.currenHealtPoints = 0;
                 this.isDeadFlag = true;
             }
 
@@ -131,6 +132,7 @@
 
             if (this.currenHealtPoints <= 0)
             {
+                this.currenHealtPoints = 0;
                 this.isDeadFlag = true;
             }
 

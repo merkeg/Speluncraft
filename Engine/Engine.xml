@@ -210,6 +210,60 @@
             </summary>
             <returns>the parent GameObject.</returns>
         </member>
+        <member name="T:Engine.Component.HealthPoints">
+            <summary>
+            Gives HP to the Player or an Enemy.
+            </summary>
+        </member>
+        <member name="M:Engine.Component.HealthPoints.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Component.HealthPoints"/> class.
+            </summary>
+            <param name="maxHP">MaxHP mus be creater then currHP</param>
+            <param name="currHP">CurrHP must be less then maxHP, else CurrHP = maxHP</param>
+        </member>
+        <member name="M:Engine.Component.HealthPoints.GetMaxHP">
+            <summary>
+            Get the MaxHP.
+            </summary>
+            <returns>The MaxhHP.</returns>
+        </member>
+        <member name="M:Engine.Component.HealthPoints.GetCurrHP">
+            <summary>
+            Get the currentHP.
+            </summary>
+            <returns>The currenHP.</returns>
+        </member>
+        <member name="M:Engine.Component.HealthPoints.GetIsDeadFlag">
+            <summary>
+            Get the isDeadFlag.
+            </summary>
+            <returns>The isDeadFlag.</returns>
+        </member>
+        <member name="M:Engine.Component.HealthPoints.SetMaxHP(System.Int32)">
+            <summary>
+            Set the maxHP to a new value.
+            </summary>
+            <param name="maxHP">New maxHP.</param>
+            <returns>The isDead Flag.</returns>
+        </member>
+        <member name="M:Engine.Component.HealthPoints.SetHP(System.Int32)">
+            <summary>
+            Set HP to new Value.
+            </summary>
+            <param name="hp">New HP value.</param>
+            <returns>The isDeadFlag.</returns>
+        </member>
+        <member name="M:Engine.Component.HealthPoints.AddHP(System.Int32)">
+            <summary>
+            Add HP.
+            </summary>
+            <param name="hp">HP to be added.</param>
+            <returns>The isDeadFlag.</returns>
+        </member>
+        <member name="M:Engine.Component.HealthPoints.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
         <member name="T:Engine.Component.Physics">
             <summary>
             The physics component.
