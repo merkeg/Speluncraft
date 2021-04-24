@@ -210,6 +210,15 @@
             </summary>
             <returns>the parent GameObject.</returns>
         </member>
+        <member name="T:Engine.Component.DamageCollider">
+            <summary>
+            A Kind of Collider, that Checks, if it Intersects with anything in Engine.Colliders. If yes it will deal DMG, if there is an HP Component.
+            But it wont deal DMG to the GameObject it belongs to.
+            </summary>
+        </member>
+        <member name="M:Engine.Component.DamageCollider.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
         <member name="T:Engine.Component.HealthPoints">
             <summary>
             Gives HP to the Player or an Enemy.

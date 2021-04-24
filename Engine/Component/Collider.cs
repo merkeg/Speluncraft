@@ -67,12 +67,6 @@ namespace Engine.Component
 
             foreach (GameObject.Rectangle r in Engine.Instance().Colliders)
             {
-                // Skip this if Rectangle is the GameObject.
-                if ((GameObject.IRectangle)r == this.GameObject)
-                {
-                    continue;
-                }
-
                 if (this.GameObject.Intersects(r))
                 {
                     float[] distance = new float[4];

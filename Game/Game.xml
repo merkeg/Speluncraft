@@ -4,6 +4,24 @@
         <name>Game</name>
     </assembly>
     <members>
+        <member name="T:Game.Enemy.Enemy">
+            <summary>
+            Basic Enemy that can be shot at.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.Enemy.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.Enemy"/> class.
+            </summary>
+            <param name="minX">X-Coordinate of bottom leftPoint.</param>
+            <param name="minY">Y-Coordinate of bottom leftPoint</param>
+            <param name="sizeX">Size in X axsis.</param>
+            <param name="sizeY">Size in Y axsis.</param>
+            <param name="sprite">Enemy Sprite.</param>
+        </member>
+        <member name="M:Game.Enemy.Enemy.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Player.CameraTrackingComponent">
             <summary>
             Camera tracking component class.
