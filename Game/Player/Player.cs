@@ -41,6 +41,8 @@ namespace Game.Player
             this.AddComponent(physics);
             this.AddComponent(new Engine.Component.Collider());
 
+            this.AddComponent(new Engine.Component.HealthPoints(100, 100));
+
             this.jumpcounter = this.jumpCounterMax;
         }
 
@@ -86,6 +88,11 @@ namespace Game.Player
             }
 
             base.OnUpdate(frameTime);
+
+            if (this.GetComponent<Engine.Component.HealthPoints>().GetIsDeadFlag())
+            {
+                // Destroy this Thing.
+            }
 
             Engine.Component.Collider collider = this.GetComponent<Engine.Component.Collider>();
             if (collider.GetGroundTouchedFlag())
