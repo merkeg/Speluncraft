@@ -31,6 +31,8 @@
             this.AddComponent(new Engine.Component.Collider());
 
             this.AddComponent(new Engine.Component.HealthPoints(100, 100));
+
+            // HitBox of Enemy needs to be in CollideList.
         }
 
         /// <inheritdoc/>
