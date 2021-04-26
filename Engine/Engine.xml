@@ -241,8 +241,8 @@
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Component.HealthPoints"/> class.
             </summary>
-            <param name="maxHP">MaxHP mus be creater then currHP</param>
-            <param name="currHP">CurrHP must be less then maxHP, else CurrHP = maxHP</param>
+            <param name="maxHP">MaxHP mus be creater then currHP.</param>
+            <param name="currHP">CurrHP must be less then maxHP, else CurrHP = maxHP.</param>
         </member>
         <member name="M:Engine.Component.HealthPoints.GetMaxHP">
             <summary>

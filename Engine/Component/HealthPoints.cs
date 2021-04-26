@@ -1,4 +1,8 @@
-﻿namespace Engine.Component
+﻿// <copyright file="HealthPoints.cs" company="RWUwU">
+// Copyright (c) RWUwU. All rights reserved.
+// </copyright>
+
+namespace Engine.Component
 {
     using System;
     using System.Collections.Generic;
@@ -16,8 +20,8 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="HealthPoints"/> class.
         /// </summary>
-        /// <param name="maxHP">MaxHP mus be creater then currHP</param>
-        /// <param name="currHP">CurrHP must be less then maxHP, else CurrHP = maxHP</param>
+        /// <param name="maxHP">MaxHP mus be creater then currHP.</param>
+        /// <param name="currHP">CurrHP must be less then maxHP, else CurrHP = maxHP.</param>
         public HealthPoints(int maxHP, int currHP)
         {
             this.maxHealthPoints = maxHP;

@@ -1,4 +1,8 @@
-﻿namespace Game.Enemy
+﻿// <copyright file="Enemy.cs" company="RWUwU">
+// Copyright (c) RWUwU. All rights reserved.
+// </copyright>
+
+namespace Game.Enemy
 {
     using System;
     using System.Collections.Generic;
@@ -12,12 +16,11 @@
     /// </summary>
     public class Enemy : Engine.GameObject.GameObject
     {
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Enemy"/> class.
         /// </summary>
         /// <param name="minX">X-Coordinate of bottom leftPoint.</param>
-        /// <param name="minY">Y-Coordinate of bottom leftPoint</param>
+        /// <param name="minY">Y-Coordinate of bottom leftPoint.</param>
         /// <param name="sizeX">Size in X axsis.</param>
         /// <param name="sizeY">Size in Y axsis.</param>
         /// <param name="sprite">Enemy Sprite.</param>
@@ -45,6 +48,5 @@
                 this.OnDestroy();
             }
         }
-
     }
 }

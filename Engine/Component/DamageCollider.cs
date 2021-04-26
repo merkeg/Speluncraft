@@ -1,4 +1,8 @@
-﻿namespace Engine.Component
+﻿// <copyright file="DamageCollider.cs" company="RWUwU">
+// Copyright (c) RWUwU. All rights reserved.
+// </copyright>
+
+namespace Engine.Component
 {
     using System;
     using System.Collections.Generic;
@@ -10,11 +14,10 @@
     /// </summary>
     public class DamageCollider : Component
     {
-
         private bool collided = false;
         private int dmg;
-        private float dmgCoolDonw;
-        private float dmgCoolDonwCounter = 0;
+        private float dmgCooldown;
+        private float dmgCooldownCounter = 0;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DamageCollider"/> class.
@@ -24,23 +27,23 @@
         public DamageCollider(int dmg, int dmgCD)
         {
             this.dmg = dmg;
-            this.dmgCoolDonw = dmgCD;
+            this.dmgCooldown = dmgCD;
         }
 
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
-            this.dmgCoolDonwCounter -= frameTime;
-            if (this.dmgCoolDonwCounter > 0)
+            this.dmgCooldownCounter -= frameTime;
+            if (this.dmgCooldownCounter > 0)
             {
                 return;
             }
 
-            if (this.GetGameObject().GetComponent<Collider>().GetCollided().Count != 0)
+            if (this.GetGameObject().GetComponent<Collider>() != null && this.GetGameObject().GetComponent<Collider>().GetCollided().Count != 0)
             {
                 this.collided = true;
 
-                // We already collided with something and the overlap has been undown.
+                // We already collided with something and the overlap has been undone.
                 foreach (GameObject.IRectangle r in this.GetGameObject().GetComponent<Collider>().GetCollided())
                 {
                     if (r is GameObject.GameObject)
@@ -49,7 +52,7 @@
                         if (g.GetComponent<HealthPoints>() != null)
                         {
                             g.GetComponent<HealthPoints>().AddHP(-this.dmg);
-                            this.dmgCoolDonwCounter = this.dmgCoolDonw;
+                            this.dmgCooldownCounter = this.dmgCooldown;
                         }
                     }
                 }
@@ -70,7 +73,7 @@
                         if (g.GetComponent<HealthPoints>() != null)
                         {
                             g.GetComponent<HealthPoints>().AddHP(-this.dmg);
-                            this.dmgCoolDonwCounter = this.dmgCoolDonw;
+                            this.dmgCooldownCounter = this.dmgCooldown;
                         }
                     }
                 }

@@ -14,7 +14,7 @@
             Initializes a new instance of the <see cref="T:Game.Enemy.Enemy"/> class.
             </summary>
             <param name="minX">X-Coordinate of bottom leftPoint.</param>
-            <param name="minY">Y-Coordinate of bottom leftPoint</param>
+            <param name="minY">Y-Coordinate of bottom leftPoint.</param>
             <param name="sizeX">Size in X axsis.</param>
             <param name="sizeY">Size in Y axsis.</param>
             <param name="sprite">Enemy Sprite.</param>
