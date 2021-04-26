@@ -31,6 +31,10 @@
         public override void OnUpdate(float frameTime)
         {
             this.dmgCoolDonwCounter -= frameTime;
+            if (this.dmgCoolDonwCounter > 0)
+            {
+                return;
+            }
 
             if (this.GetGameObject().GetComponent<Collider>().GetCollided().Count != 0)
             {
@@ -39,17 +43,13 @@
                 // We already collided with something and the overlap has been undown.
                 foreach (GameObject.IRectangle r in this.GetGameObject().GetComponent<Collider>().GetCollided())
                 {
-                    foreach (GameObject.GameObject g in Engine.Instance().GameObjects)
+                    if (r is GameObject.GameObject)
                     {
-                        if ((GameObject.IRectangle)r == g)
+                        GameObject.GameObject g = (GameObject.GameObject)r;
+                        if (g.GetComponent<HealthPoints>() != null)
                         {
-                            if (g.GetComponent<HealthPoints>() != null)
-                            {
-                                g.GetComponent<HealthPoints>().AddHP(-this.dmg);
-                                this.dmgCoolDonwCounter = this.dmgCoolDonw;
-                            }
-
-                            break;
+                            g.GetComponent<HealthPoints>().AddHP(-this.dmg);
+                            this.dmgCoolDonwCounter = this.dmgCoolDonw;
                         }
                     }
                 }
@@ -57,28 +57,20 @@
                 return;
             }
 
-            if (this.dmgCoolDonwCounter > 0)
-            {
-                return;
-            }
-
-            foreach (GameObject.Rectangle r in Engine.Instance().Colliders)
+            // If the Collider Component allready checked, then we dont need to check anymore. ( If perfomance problems )
+            foreach (GameObject.IRectangle r in Engine.Instance().Colliders)
             {
                 if (this.GameObject.Intersects(r))
                 {
                     this.collided = true;
 
-                    foreach (GameObject.GameObject g in Engine.Instance().GameObjects)
+                    if (r is GameObject.GameObject)
                     {
-                        if ((GameObject.IRectangle)r == g)
+                        GameObject.GameObject g = (GameObject.GameObject)r;
+                        if (g.GetComponent<HealthPoints>() != null)
                         {
-                            if (g.GetComponent<HealthPoints>() != null)
-                            {
-                                g.GetComponent<HealthPoints>().AddHP(-this.dmg);
-                                this.dmgCoolDonwCounter = this.dmgCoolDonw;
-                            }
-
-                            break;
+                            g.GetComponent<HealthPoints>().AddHP(-this.dmg);
+                            this.dmgCoolDonwCounter = this.dmgCoolDonw;
                         }
                     }
                 }

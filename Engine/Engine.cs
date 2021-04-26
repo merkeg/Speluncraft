@@ -25,7 +25,7 @@ namespace Engine
         public Engine()
         {
             this.GameObjects = new List<GameObject.GameObject>();
-            this.Colliders = new List<Rectangle>();
+            this.Colliders = new List<IRectangle>();
             this.Renderers = new List<Renderer.IRenderer>();
         }
 
@@ -42,7 +42,7 @@ namespace Engine
         /// <summary>
         /// Gets a list of the colliders in the game.
         /// </summary>
-        public List<Rectangle> Colliders { get; private set; }
+        public List<IRectangle> Colliders { get; private set; }
 
         /// <summary>
         /// Gets the GameWindow the Engine runs on.

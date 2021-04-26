@@ -169,6 +169,12 @@
             </summary>
             <returns>The Flag if ground was touced.</returns>
         </member>
+        <member name="M:Engine.Component.Collider.GetCollided">
+            <summary>
+            Get the a List of every Rectanlge we collided with this frame.
+            </summary>
+            <returns>The List.</returns>
+        </member>
         <member name="M:Engine.Component.Collider.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
@@ -215,6 +221,13 @@
             A Kind of Collider, that Checks, if it Intersects with anything in Engine.Colliders. If yes it will deal DMG, if there is an HP Component.
             But it wont deal DMG to the GameObject it belongs to.
             </summary>
+        </member>
+        <member name="M:Engine.Component.DamageCollider.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Component.DamageCollider"/> class.
+            </summary>
+            <param name="dmg">How Much DMG it will deal on Contact.</param>
+            <param name="dmgCD">How long before this can deal dmg again.</param>
         </member>
         <member name="M:Engine.Component.DamageCollider.OnUpdate(System.Single)">
             <inheritdoc/>
