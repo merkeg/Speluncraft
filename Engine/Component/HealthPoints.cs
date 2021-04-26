@@ -9,7 +9,7 @@ namespace Engine.Component
     using System.Text;
 
     /// <summary>
-    /// Gives HP to the Player or an Enemy.
+    /// Gives HP to the Player or an Enemy. To Take DMG the GameObjects needs to be in Engine.Colliders.
     /// </summary>
     public class HealthPoints : Component
     {
