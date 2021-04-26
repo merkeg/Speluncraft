@@ -44,6 +44,8 @@ namespace Game.Player
             this.AddComponent(new Engine.Component.HealthPoints(100, 100));
 
             this.jumpcounter = this.jumpCounterMax;
+
+            Engine.Engine.Instance().Colliders.Add(this);
         }
 
         /// <inheritdoc/>

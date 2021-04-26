@@ -35,7 +35,10 @@ namespace Game.Enemy
 
             this.AddComponent(new Engine.Component.HealthPoints(100, 100));
 
+            this.AddComponent(new Engine.Component.DamageCollider(10, 1));
+
             // HitBox of Enemy needs to be in CollideList.
+            Engine.Engine.Instance().Colliders.Add(this);
         }
 
         /// <inheritdoc/>

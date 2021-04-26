@@ -234,7 +234,7 @@
         </member>
         <member name="T:Engine.Component.HealthPoints">
             <summary>
-            Gives HP to the Player or an Enemy.
+            Gives HP to the Player or an Enemy. To Take DMG the GameObjects needs to be in Engine.Colliders.
             </summary>
         </member>
         <member name="M:Engine.Component.HealthPoints.#ctor(System.Int32,System.Int32)">
