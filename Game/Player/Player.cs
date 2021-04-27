@@ -19,9 +19,9 @@ namespace Game.Player
         private int jumpcounter;
         private int jumpCounterMax = 1;
 
-        private float accelaration = 0.3f;
-        private float idealBreacking = 0.1f;
-        private float activeBreacking = 0.2f;
+        private float accelaration = 18f;
+        private float idealBreacking = 15f;
+        private float activeBreacking = 20f;
         private float jumpPower = 8.8f;
 
         /// <summary>
@@ -41,7 +41,17 @@ namespace Game.Player
             this.AddComponent(physics);
             this.AddComponent(new Engine.Component.Collider());
 
+            this.AddComponent(new Engine.Component.HealthPoints(100, 100));
+
             this.jumpcounter = this.jumpCounterMax;
+
+            Engine.Engine.Instance().Colliders.Add(this);
+
+            // For Demo
+            Enemy.Enemy testEnemy = new Enemy.Enemy(this.MinX + 3, this.MinY, this.SizeX, this.SizeY, this.Sprite);
+            Engine.Engine.Instance().AddGameObject(testEnemy);
+
+            this.AddComponent(new Engine.Component.DamageCollider(10, 1));
         }
 
         /// <inheritdoc/>
@@ -54,38 +64,43 @@ namespace Game.Player
             { // Player wants to go left
                 if (physics.GetVelocity().X > 0)
                 { // Player is breaking since he is going right
-                    physics.AddVelocityX(-this.activeBreacking);
+                    physics.AddVelocityX(-this.activeBreacking * frameTime);
                 }
 
-                physics.AddVelocityX(-this.accelaration);
+                physics.AddVelocityX(-this.accelaration * frameTime);
             }
             else if (keyboardState.IsKeyDown(Keys.D))
             { // Player wants to go right
                 if (physics.GetVelocity().X < 0)
                 { // Player is breaking since he going left
-                    physics.AddVelocityX(this.activeBreacking);
+                    physics.AddVelocityX(this.activeBreacking * frameTime);
                 }
 
-                physics.AddVelocityX(this.accelaration);
+                physics.AddVelocityX(this.accelaration * frameTime);
             }
             else
             { // Player is not breaking or accelerating
                 if (physics.GetVelocity().X > 0)
                 { // Player is going right
-                    physics.AddVelocityX(-this.idealBreacking);
+                    physics.AddVelocityX(-this.idealBreacking * frameTime);
                 }
                 else
                 {
-                    physics.AddVelocityX(this.idealBreacking);
+                    physics.AddVelocityX(this.idealBreacking * frameTime);
                 }
 
-                if (Math.Abs(physics.GetVelocity().X) <= this.idealBreacking)
+                if (Math.Abs(physics.GetVelocity().X) <= this.idealBreacking * frameTime)
                 {
                     physics.SetVelocity(0f, physics.GetVelocity().Y);
                 }
             }
 
             base.OnUpdate(frameTime);
+
+            if (this.GetComponent<Engine.Component.HealthPoints>().GetIsDeadFlag())
+            {
+                // Destroy this Thing.
+            }
 
             Engine.Component.Collider collider = this.GetComponent<Engine.Component.Collider>();
             if (collider.GetGroundTouchedFlag())
@@ -96,9 +111,10 @@ namespace Game.Player
             if (keyboardState.IsKeyPressed(Keys.Space) && this.jumpcounter > 0)
             {
                 physics.AddVelocitY(this.jumpPower);
-                Console.WriteLine($"JC: {this.jumpcounter} velY: {physics.GetVelocity().Y} ");
                 this.jumpcounter--;
             }
+
+            Console.WriteLine("Player: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
         }
     }
 }

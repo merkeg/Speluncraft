@@ -1,4 +1,7 @@
 ﻿[*.cs]
 
 # SA0001: XML comment analysis disabled
-dotnet_diagnostic.SA0001.severity = warning
+dotnet_diagnostic.SA0001.severity = none
+
+# CS0414: The field 'DamageCollider.collided' is assigned but its value is never used
+dotnet_diagnostic.CS0414.severity = none

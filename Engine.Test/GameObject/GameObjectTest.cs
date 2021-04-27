@@ -19,6 +19,12 @@
 
             Assert.IsFalse(go1.Intersects(go3), "Both GameObjects should not be intersecting");
             Assert.IsFalse(go2.Intersects(go3), "Both GameObjects should not be intersecting");
+
+            Assert.IsFalse(go1.Intersects(go1));
+            go2 = go1;
+            Assert.IsFalse(go1.Intersects(go2));
+            IRectangle r1 = (IRectangle)go1;
+            Assert.IsFalse(go1.Intersects(r1));
         }
 
         [TestMethod]

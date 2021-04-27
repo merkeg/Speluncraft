@@ -48,6 +48,8 @@ namespace Engine.Component
         /// </summary>
         private bool touchedGround;
 
+        private List<GameObject.IRectangle> collidedList = new List<GameObject.IRectangle>();
+
         /// <summary>
         /// Get the Flag, if ground was touched on a collsion.
         /// </summary>
@@ -57,15 +59,39 @@ namespace Engine.Component
             return this.touchedGround;
         }
 
+        /// <summary>
+        /// Get the a List of every Rectanlge we collided with this frame.
+        /// </summary>
+        /// <returns>The List.</returns>
+        public List<GameObject.IRectangle> GetCollided()
+        {
+            return this.collidedList;
+        }
+
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
             this.touchedGround = false;
+            this.collidedList = new List<GameObject.IRectangle>();
 
-            foreach (GameObject.Rectangle r in Engine.Instance().Colliders)
+            List<GameObject.IRectangle> sideCollisionRight = new List<GameObject.IRectangle>(); // Those overlaps will only be undone after up and down collisions.
+            List<GameObject.IRectangle> sideCollisionsLeft = new List<GameObject.IRectangle>();
+
+            foreach (GameObject.IRectangle r in Engine.Instance().Colliders)
             {
                 if (this.GameObject.Intersects(r))
                 {
+                    this.collidedList.Add(r);
+
+                    if (r is GameObject.GameObject)
+                    {
+                        GameObject.GameObject g = (GameObject.GameObject)r;
+                        if (g.GetComponent<DamageCollider>() != null)
+                        {
+                            g.GetComponent<DamageCollider>().AddToCollisionList(this.GetGameObject());
+                        }
+                    }
+
                     float[] distance = new float[4];
                     distance[Up] = Math.Abs(r.MaxY - this.GameObject.MinY);
                     distance[Down] = Math.Abs(r.MinY - this.GameObject.MaxY);
@@ -96,14 +122,31 @@ namespace Engine.Component
                             this.ResetVelocity(Y);
                             break;
                         case Left:
-                            this.GameObject.MinX = r.MinX - this.GameObject.SizeX;
-                            this.ResetVelocity(X);
+                            sideCollisionsLeft.Add(r);
                             break;
                         case Right:
-                            this.GameObject.MinX = r.MaxX;
-                            this.ResetVelocity(X);
+                            sideCollisionRight.Add(r);
                             break;
                     }
+                }
+            }
+
+            // After the Up and Down Collisions have been checked, look if other collsion are still there.
+            foreach (GameObject.IRectangle r in sideCollisionsLeft)
+            {
+                if (this.GameObject.Intersects(r))
+                {
+                    this.GameObject.MinX = r.MinX - this.GameObject.SizeX;
+                    this.ResetVelocity(X);
+                }
+            }
+
+            foreach (GameObject.IRectangle r in sideCollisionRight)
+            {
+                if (this.GameObject.Intersects(r))
+                {
+                    this.GameObject.MinX = r.MaxX;
+                    this.ResetVelocity(X);
                 }
             }
         }
