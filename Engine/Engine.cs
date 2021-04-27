@@ -119,9 +119,8 @@ namespace Engine
 
         private void Update(OpenTK.Windowing.Common.FrameEventArgs args)
         {
-            this.GameObjects.ForEach(gameObject => gameObject.OnUpdate((float)args.Time));
-
-            // Danach OnUpdateCleanUp von jeder Methode aufrufen.
+            float elapsed = (float)MathHelper.Clamp(args.Time, 0, 0.08);
+            this.GameObjects.ForEach(gameObject => gameObject.OnUpdate(elapsed));
         }
 
         private void SwapBuffers(FrameEventArgs args)
