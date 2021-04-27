@@ -43,7 +43,6 @@ namespace Engine.Component
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
-            Console.WriteLine("Doing DMG");
             this.dmgCooldownCounter -= frameTime;
             if (this.dmgCooldownCounter > 0)
             {
