@@ -229,6 +229,12 @@
             <param name="dmg">How Much DMG it will deal on Contact.</param>
             <param name="dmgCD">How long before this can deal dmg again.</param>
         </member>
+        <member name="M:Engine.Component.DamageCollider.AddToCollisionList(Engine.GameObject.IRectangle)">
+            <summary>
+            Add a Collision that was undone, but still needs to be checked for DMG.
+            </summary>
+            <param name="r">The Rectangle we collided with.</param>
+        </member>
         <member name="M:Engine.Component.DamageCollider.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>

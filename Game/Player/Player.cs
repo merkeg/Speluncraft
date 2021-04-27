@@ -46,11 +46,18 @@ namespace Game.Player
             this.jumpcounter = this.jumpCounterMax;
 
             Engine.Engine.Instance().Colliders.Add(this);
+
+            // For Demo
+            Enemy.Enemy testEnemy = new Enemy.Enemy(this.MinX + 3, this.MinY, this.SizeX, this.SizeY, this.Sprite);
+            Engine.Engine.Instance().AddGameObject(testEnemy);
+
+            this.AddComponent(new Engine.Component.DamageCollider(10, 1));
         }
 
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
+            Console.WriteLine("PlayerUpdate");
             OpenTK.Windowing.GraphicsLibraryFramework.KeyboardState keyboardState = Engine.Engine.Instance().GameWindow.KeyboardState;
             Engine.Component.Physics physics = this.GetComponent<Engine.Component.Physics>();
 
@@ -105,9 +112,10 @@ namespace Game.Player
             if (keyboardState.IsKeyPressed(Keys.Space) && this.jumpcounter > 0)
             {
                 physics.AddVelocitY(this.jumpPower);
-                Console.WriteLine($"JC: {this.jumpcounter} velY: {physics.GetVelocity().Y} ");
                 this.jumpcounter--;
             }
+
+            Console.WriteLine("Player: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
         }
     }
 }

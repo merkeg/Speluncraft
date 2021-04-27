@@ -44,12 +44,10 @@ namespace Game.Enemy
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
+            Console.WriteLine("Enemy Update");
             base.OnUpdate(frameTime);
-            if (this.GetComponent<Engine.Component.HealthPoints>().GetIsDeadFlag())
-            {
-                // Delete this thing.
-                this.OnDestroy();
-            }
+
+            Console.WriteLine("Enemy: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
         }
     }
 }

@@ -71,6 +71,7 @@ namespace Engine.Component
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
+            Console.WriteLine("Undoing Collision");
             this.touchedGround = false;
             this.collidedList = new List<GameObject.IRectangle>();
 
@@ -82,6 +83,15 @@ namespace Engine.Component
                 if (this.GameObject.Intersects(r))
                 {
                     this.collidedList.Add(r);
+
+                    if (r is GameObject.GameObject)
+                    {
+                        GameObject.GameObject g = (GameObject.GameObject)r;
+                        if (g.GetComponent<DamageCollider>() != null)
+                        {
+                            g.GetComponent<DamageCollider>().AddToCollisionList(this.GetGameObject());
+                        }
+                    }
 
                     float[] distance = new float[4];
                     distance[Up] = Math.Abs(r.MaxY - this.GameObject.MinY);

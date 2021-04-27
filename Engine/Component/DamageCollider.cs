@@ -18,6 +18,7 @@ namespace Engine.Component
         private int dmg;
         private float dmgCooldown;
         private float dmgCooldownCounter = 0;
+        private List<GameObject.IRectangle> collisionList = new List<GameObject.IRectangle>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DamageCollider"/> class.
@@ -30,13 +31,37 @@ namespace Engine.Component
             this.dmgCooldown = dmgCD;
         }
 
+        /// <summary>
+        /// Add a Collision that was undone, but still needs to be checked for DMG.
+        /// </summary>
+        /// <param name="r">The Rectangle we collided with.</param>
+        public void AddToCollisionList(GameObject.IRectangle r)
+        {
+            this.collisionList.Add(r);
+        }
+
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
+            Console.WriteLine("Doing DMG");
             this.dmgCooldownCounter -= frameTime;
             if (this.dmgCooldownCounter > 0)
             {
+                this.collisionList = new List<GameObject.IRectangle>();
                 return;
+            }
+
+            foreach (GameObject.IRectangle r in this.collisionList)
+            {
+                if (r is GameObject.GameObject)
+                {
+                    GameObject.GameObject g = (GameObject.GameObject)r;
+                    if (g.GetComponent<HealthPoints>() != null)
+                    {
+                        g.GetComponent<HealthPoints>().AddHP(-this.dmg);
+                        this.dmgCooldownCounter = this.dmgCooldown;
+                    }
+                }
             }
 
             if (this.GetGameObject().GetComponent<Collider>() != null && this.GetGameObject().GetComponent<Collider>().GetCollided().Count != 0)
@@ -57,6 +82,7 @@ namespace Engine.Component
                     }
                 }
 
+                this.collisionList = new List<GameObject.IRectangle>();
                 return;
             }
 
@@ -78,6 +104,8 @@ namespace Engine.Component
                     }
                 }
             }
+
+            this.collisionList = new List<GameObject.IRectangle>();
         }
     }
 }

@@ -177,5 +177,7 @@ namespace Engine.GameObject
         {
             this.Components.ForEach(component => component.OnDestroy());
         }
+
+        // OnUpdateCleanUp wird nach dem Update in jeden Frame ausgeführt.
     }
 }
