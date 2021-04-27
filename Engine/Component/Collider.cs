@@ -71,7 +71,6 @@ namespace Engine.Component
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
-            Console.WriteLine("Undoing Collision");
             this.touchedGround = false;
             this.collidedList = new List<GameObject.IRectangle>();
 
@@ -159,7 +158,6 @@ namespace Engine.Component
             {
                 if (axsis == X)
                 {
-                    Console.WriteLine("Hey");
                     physics.SetVelocity(0, physics.GetVelocity().Y);
                 }
                 else

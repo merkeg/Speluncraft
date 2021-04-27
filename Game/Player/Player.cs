@@ -57,7 +57,6 @@ namespace Game.Player
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
-            Console.WriteLine("PlayerUpdate");
             OpenTK.Windowing.GraphicsLibraryFramework.KeyboardState keyboardState = Engine.Engine.Instance().GameWindow.KeyboardState;
             Engine.Component.Physics physics = this.GetComponent<Engine.Component.Physics>();
 

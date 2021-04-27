@@ -44,7 +44,6 @@ namespace Game.Enemy
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
-            Console.WriteLine("Enemy Update");
             base.OnUpdate(frameTime);
 
             Console.WriteLine("Enemy: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());

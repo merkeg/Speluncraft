@@ -119,7 +119,6 @@ namespace Engine
 
         private void Update(OpenTK.Windowing.Common.FrameEventArgs args)
         {
-            Console.WriteLine(" ");
             this.GameObjects.ForEach(gameObject => gameObject.OnUpdate((float)args.Time));
 
             // Danach OnUpdateCleanUp von jeder Methode aufrufen.
