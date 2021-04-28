@@ -28,4 +28,20 @@ namespace Engine.Renderer
         /// </summary>
         public void OnCreate();
     }
+
+    /// <summary>
+    /// Rendering layers.
+    /// </summary>
+    public enum RenderLayer
+    {
+        /// <summary>
+        /// Game Elements.
+        /// </summary>
+        GAME,
+
+        /// <summary>
+        /// UI elements.
+        /// </summary>
+        UI,
+    }
 }

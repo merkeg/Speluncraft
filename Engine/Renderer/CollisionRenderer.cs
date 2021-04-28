@@ -25,13 +25,13 @@ namespace Engine.Renderer
         {
             GL.LineWidth(2);
             GL.Color3(System.Drawing.Color.Cyan);
-            foreach (Rectangle rec in Engine.Instance().Colliders)
+            foreach (IRectangle rec in Engine.Instance().Colliders)
             {
                 GL.Begin(PrimitiveType.LineLoop);
                 GL.Vertex2(rec.MinX, rec.MinY);
-                GL.Vertex2(rec.MinX, rec.MinY + rec.SizeY);
-                GL.Vertex2(rec.MinX + rec.SizeX, rec.MinY + rec.SizeY);
-                GL.Vertex2(rec.MinX + rec.SizeX, rec.MinY);
+                GL.Vertex2(rec.MinX, rec.MaxY);
+                GL.Vertex2(rec.MaxX, rec.MaxY);
+                GL.Vertex2(rec.MaxX, rec.MinY);
                 GL.End();
             }
         }

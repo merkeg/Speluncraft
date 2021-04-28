@@ -31,7 +31,6 @@ namespace Example
             window.VSync = VSyncMode.Adaptive;
             Engine.Engine engine = Engine.Engine.Instance();
             engine.StartEngine(window);
-
             Assembly assembly = Assembly.GetExecutingAssembly();
             using Stream tilesheet = assembly.GetManifestResourceStream("Game.Resources.tilesheet.png");
             using Stream tilemapStream = assembly.GetManifestResourceStream("Game.Resources.jumpNrun.json");
