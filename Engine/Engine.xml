@@ -636,6 +636,21 @@
         <member name="M:Engine.Renderer.CollisionRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
+        <member name="T:Engine.Renderer.RenderLayer">
+            <summary>
+            Rendering layers.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.RenderLayer.GAME">
+            <summary>
+            Game Elements.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.RenderLayer.UI">
+            <summary>
+            UI elements.
+            </summary>
+        </member>
         <member name="T:Engine.Renderer.IRenderer">
             <summary>
             Renderer base class.
@@ -656,21 +671,6 @@
         <member name="M:Engine.Renderer.IRenderer.OnCreate">
             <summary>
             Run when the renderer is added.
-            </summary>
-        </member>
-        <member name="T:Engine.Renderer.RenderLayer">
-            <summary>
-            Rendering layers.
-            </summary>
-        </member>
-        <member name="F:Engine.Renderer.RenderLayer.GAME">
-            <summary>
-            Game Elements.
-            </summary>
-        </member>
-        <member name="F:Engine.Renderer.RenderLayer.UI">
-            <summary>
-            UI elements.
             </summary>
         </member>
         <member name="T:Engine.Renderer.Sprite.Sprite">
