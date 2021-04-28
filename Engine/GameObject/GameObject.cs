@@ -102,6 +102,11 @@ namespace Engine.GameObject
         /// <returns>the value if the other element intersects with the gameobject.</returns>
         public bool Intersects(IRectangle rectangle)
         {
+            if (rectangle == this)
+            {
+                return false;
+            }
+
             bool result = false;
             bool noXintersect = (this.MaxX <= rectangle.MinX) || (this.MinX >= rectangle.MaxX);
             bool noYintersect = (this.MaxY <= rectangle.MinY) || (this.MinY >= rectangle.MaxY);
@@ -172,5 +177,7 @@ namespace Engine.GameObject
         {
             this.Components.ForEach(component => component.OnDestroy());
         }
+
+        // OnUpdateCleanUp wird nach dem Update in jeden Frame ausgeführt.
     }
 }

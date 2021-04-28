@@ -41,7 +41,17 @@ namespace Game.Player
             this.AddComponent(physics);
             this.AddComponent(new Engine.Component.Collider());
 
+            this.AddComponent(new Engine.Component.HealthPoints(100, 100));
+
             this.jumpcounter = this.jumpCounterMax;
+
+            Engine.Engine.Instance().Colliders.Add(this);
+
+            // For Demo
+            Enemy.Enemy testEnemy = new Enemy.Enemy(this.MinX + 3, this.MinY, this.SizeX, this.SizeY, this.Sprite);
+            Engine.Engine.Instance().AddGameObject(testEnemy);
+
+            this.AddComponent(new Engine.Component.DamageCollider(10, 1));
         }
 
         /// <inheritdoc/>
@@ -87,6 +97,11 @@ namespace Game.Player
 
             base.OnUpdate(frameTime);
 
+            if (this.GetComponent<Engine.Component.HealthPoints>().GetIsDeadFlag())
+            {
+                // Destroy this Thing.
+            }
+
             Engine.Component.Collider collider = this.GetComponent<Engine.Component.Collider>();
             if (collider.GetGroundTouchedFlag())
             {
@@ -96,9 +111,10 @@ namespace Game.Player
             if (keyboardState.IsKeyPressed(Keys.Space) && this.jumpcounter > 0)
             {
                 physics.AddVelocitY(this.jumpPower);
-                Console.WriteLine($"JC: {this.jumpcounter} velY: {physics.GetVelocity().Y} ");
                 this.jumpcounter--;
             }
+
+            Console.WriteLine("Player: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
         }
     }
 }
