@@ -32,8 +32,8 @@ namespace Example
             Engine.Engine engine = Engine.Engine.Instance();
             engine.StartEngine(window);
             Assembly assembly = Assembly.GetExecutingAssembly();
-            using Stream tilesheet = assembly.GetManifestResourceStream("Game.Resources.tilesheet.png");
-            using Stream tilemapStream = assembly.GetManifestResourceStream("Game.Resources.jumpNrun.json");
+            using Stream tilesheet = assembly.GetManifestResourceStream("Game.Resources.Sprite.tilesheet.png");
+            using Stream tilemapStream = assembly.GetManifestResourceStream("Game.Resources.Level.jumpNrun.json");
 
             Tileset tileset = new Tileset(tilesheet, 16);
             TilemapModel model = TilemapParser.ParseTilemap(tilemapStream);
@@ -42,7 +42,7 @@ namespace Example
             TilemapRenderer renderer = new TilemapRenderer(tilemap, 0, 0);
             engine.AddRenderer(renderer);
 
-            using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.player.png");
+            using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.player.png");
             Sprite sprite = new Sprite(spriteStream);
 
             Player player = new Player(3, -5, 1, 1, sprite);
@@ -50,20 +50,7 @@ namespace Example
             engine.AddGameObject(player);
 
             Camera cam = engine.Camera;
-            window.UpdateFrame += a =>
-            {
-                KeyboardState state = window.KeyboardState;
-                var axisX = state.IsKeyDown(Keys.End) ? -1f : state.IsKeyDown(Keys.Delete) ? 1f : 0f;
-
-                var zoom = cam.Scale * (1 + (a.Time * axisX));
-                zoom = MathHelper.Clamp(zoom, 5f, 10f);
-                cam.Scale = (float)zoom;
-
-                float axisLeftRight = state.IsKeyDown(Keys.Left) ? -1.0f : state.IsKeyDown(Keys.Right) ? 1.0f : 0.0f;
-                float axisUpDown = state.IsKeyDown(Keys.Down) ? -1.0f : state.IsKeyDown(Keys.Up) ? 1.0f : 0.0f;
-                var movement = ((float)a.Time) * new Vector2(axisLeftRight, axisUpDown);
-                cam.Center += movement.TransformDirection(cam.CameraMatrix.Inverted());
-            };
+            cam.Scale = 5f;
             window.Run();
         }
     }
