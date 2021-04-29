@@ -14,4 +14,9 @@
     <PackageReference Include="OpenTK" Version="4.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Engine\Engine.csproj" />
+    <ProjectReference Include="..\Game\Game.csproj" />
+  </ItemGroup>
+
 </Project>
