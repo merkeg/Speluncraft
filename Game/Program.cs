@@ -13,11 +13,11 @@ namespace Example
     using Engine.Renderer.Tile;
     using Engine.Renderer.Tile.Parser;
     using Game.Player;
+    using Game.UI;
     using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
     using OpenTK.Windowing.Desktop;
-    using OpenTK.Windowing.GraphicsLibraryFramework;
 
     /// <summary>
     /// The Main class of the game.
@@ -48,6 +48,10 @@ namespace Example
             Player player = new Player(3, -5, 1, 1, sprite);
             player.AddComponent(new CameraTrackingComponent());
             engine.AddGameObject(player);
+
+            // make sure to initialize healthbar after the player
+            HealthbarPlayer playerhealthbar = new HealthbarPlayer();
+            engine.AddRenderer(playerhealthbar, RenderLayer.UI);
 
             Camera cam = engine.Camera;
             cam.Scale = 5f;

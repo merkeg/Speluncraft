@@ -129,6 +129,7 @@ namespace Engine
             this.GameWindow.RenderFrame += this.Render;
             this.GameWindow.Resize += this.Resize;
             GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.Texture2D);
         }
 

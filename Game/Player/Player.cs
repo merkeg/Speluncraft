@@ -137,8 +137,6 @@ namespace Game.Player
                 physics.AddVelocitY(this.jumpPower);
                 this.jumpcounter--;
             }
-
-            // Console.WriteLine("Player: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
         }
     }
 }
