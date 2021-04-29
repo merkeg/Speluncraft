@@ -27,11 +27,12 @@ namespace Game.UI
         private static int currentHP = 0;
 
         private static Vector2d origin;
-        private static Vector2d currentPos;
-        private static float xMinOffset = -6.0f;
-        private static float yMinOffset = 0.0f;
-        private static float width = 3.5f;
-        private static float height = 0.3f;
+        private static float xMinOffset = -5.8f; // -6.0 Top
+        private static float yMinOffset = -0.1f; // 0.0 Left
+        private float width = 3.5f;
+        private float height = 0.3f;
+        private int health;
+        private float hpScale;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HealthbarPlayer"/> class.
@@ -51,13 +52,16 @@ namespace Game.UI
             }
 
             origin = new Vector2d(player.MinX, player.MinY);
-            currentPos = new Vector2d(player.MinX, player.MinY);
+
+            // Scale for healthbar calc
+            this.health = player.GetComponent<HealthPoints>().GetMaxHP();
+            this.hpScale = this.width / this.health;
         }
 
         /// <summary>
         /// Function so player can retrieve always the same healthbar instance (Singleton).
         /// </summary>
-        /// <returns>HealtbarPlayer instance</returns>
+        /// <returns>HealtbarPlayer instance.</returns>
         public static HealthbarPlayer Instance()
         {
             if (instance == null)
@@ -74,39 +78,34 @@ namespace Game.UI
         /// <param name="args">.</param>
         public void Render(FrameEventArgs args)
         {
-
-            GL.LineWidth(3);
-            GL.Color3(System.Drawing.Color.White);
-            GL.Begin(PrimitiveType.LineLoop);
-            GL.Vertex2(3.0, -8.0);
-            GL.Vertex2(3.0, -5.0);
-            GL.Vertex2(5.0, -5.0);
-            GL.Vertex2(5.0, -8.0);
-            GL.End();
-
-            /*
             currentHP = player.GetComponent<HealthPoints>().GetCurrHP();
 
-            // remove only for debugging
-            Console.WriteLine("Current HP player: " + currentHP + "\nPosition: " + player.MinX + " | " + player.MinY);
-            currentPos.X = player.MinX;
-            currentPos.Y = player.MinY;
-
-            GL.Begin(PrimitiveType.Quads);
-            GL.Color3(System.Drawing.Color.Cyan);
-            GL.Vertex2(currentPos.X - origin.X + xMinOffset, currentPos.Y - origin.Y + yMinOffset);
-            GL.Vertex2(currentPos.X - origin.X + xMinOffset + width, currentPos.Y - origin.Y + yMinOffset);
-            GL.Vertex2(currentPos.X - origin.X + xMinOffset + width, currentPos.Y - origin.Y + yMinOffset - height);
-            GL.Vertex2(currentPos.X - origin.X + xMinOffset, currentPos.Y - origin.Y + yMinOffset - height);
-            GL.End();
+            /* remove only for debugging
+            // Console.WriteLine("Current HP player: " + currentHP + "\nPosition: " + player.MinX + " | " + player.MinY);
             */
+
+            GL.BindTexture(TextureTarget.Texture2D, 0);
+            GL.Begin(PrimitiveType.Quads);
+            GL.Color4(new Color4(1.0f, 0, 0, 0.5f));
+            GL.Vertex2(player.MinX - origin.X + xMinOffset, player.MinY - origin.Y + yMinOffset);
+            GL.Vertex2(player.MinX - origin.X + xMinOffset + (this.hpScale * currentHP), player.MinY - origin.Y + yMinOffset);
+            GL.Vertex2(player.MinX - origin.X + xMinOffset + (this.hpScale * currentHP), player.MinY - origin.Y + yMinOffset - this.height);
+            GL.Vertex2(player.MinX - origin.X + xMinOffset, player.MinY - origin.Y + yMinOffset - this.height);
+            GL.End();
         }
 
+        /// <summary>
+        /// Resize function.
+        /// </summary>
+        /// <param name="args">args.</param>
         public void Resize(ResizeEventArgs args)
         {
             return;
         }
 
+        /// <summary>
+        /// OnCreate function.
+        /// </summary>
         public void OnCreate()
         {
             return;
