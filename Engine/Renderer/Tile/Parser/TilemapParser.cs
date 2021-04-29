@@ -47,52 +47,23 @@ namespace Engine.Renderer.Tile.Parser
 
             for (int i = 0; i < layer.data.Length; i++)
             {
-                bool openEnd = false;
-
                 if (layer.data[i] == 0)
                 {
                     continue;
                 }
 
-                // Check up
-                if ((i - layer.width) >= 0)
-                {
-                    if (layer.data[i - layer.width] == 0)
-                    {
-                        openEnd = true;
-                    }
-                }
+                int[] pos = { i - layer.width, i + layer.width, i - 1, i + 1 };
 
-                // Check down
-                if ((i + layer.width) < layer.data.Length)
+                foreach (int position in pos)
                 {
-                    if (layer.data[i + layer.width] == 0)
+                    if (position >= 0 && position < layer.data.Length)
                     {
-                        openEnd = true;
+                        if (layer.data[position] == 0)
+                        {
+                            collisions.Add(new Rectangle(originX + (i % layer.width), originY - (i / layer.width), 1, 1));
+                            break;
+                        }
                     }
-                }
-
-                // Check left
-                if ((i - 1) >= 0)
-                {
-                    if (layer.data[i - 1] == 0)
-                    {
-                        openEnd = true;
-                    }
-                }
-
-                // Check right
-                if ((i + 1) < layer.data.Length)
-                {
-                    if (layer.data[i + 1] == 0)
-                    {
-                        openEnd = true;
-                    }
-                }
-
-                if (openEnd)
-                {
-                    collisions.Add(new Rectangle(originX + (i % layer.width), originY - (i / layer.width), 1, 1));
                 }
             }
 
