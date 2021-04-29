@@ -19,7 +19,7 @@ namespace Game.Gun
     {
         private readonly float bulletLenght = 0.25f;
         private readonly float bulletHeight = 0.2f;
-        private readonly float bufferDistance = 0.35f;
+        private readonly float bufferDistance = 0.37f;
 
         private readonly float bulletVelocity = 10;
         private int dmg = 10;
