@@ -1,4 +1,5 @@
-﻿using Engine.Renderer.Tile;
+﻿using Engine.GameObject;
+using Engine.Renderer.Tile;
 using Engine.Renderer.Tile.Parser;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -53,6 +54,18 @@ namespace EngineTest.Renderer
             Assert.IsTrue(layer.Height == 22, "Layer height must be 22");
 
             Assert.IsTrue(layer[0, 0] == 1, "Wrong tile, " + layer[0, 0]);
+        }
+
+        [TestMethod]
+        public void TestCollisionGen()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            using Stream tilemapStream = GetEmbeddedResourceStream(assembly, "Resources.collisiontest.json");
+            TilemapModel model = TilemapParser.ParseTilemap(tilemapStream);
+
+            List<Rectangle> collisions = TilemapParser.GenerateCollisionMap(model.layers[0], 0, 0);
+
+            Assert.IsTrue(collisions.Count == 16, "Expected collision count 16, got: " + collisions.Count);
         }
 
         // https://www.codeproject.com/Tips/5256504/Using-Embedded-Resources-in-Unit-Tests-with-NET

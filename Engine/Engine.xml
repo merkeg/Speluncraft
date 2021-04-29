@@ -397,7 +397,7 @@
         </member>
         <member name="P:Engine.Engine.Renderers">
             <summary>
-            Gets a list of Renderers in the game.
+            Gets the renderers.
             </summary>
         </member>
         <member name="P:Engine.Engine.Colliders">
@@ -432,6 +432,13 @@
             Adds an renderer to the list.
             </summary>
             <param name="renderer">The renderer to add.</param>
+        </member>
+        <member name="M:Engine.Engine.AddRenderer(Engine.Renderer.IRenderer,Engine.Renderer.RenderLayer)">
+            <summary>
+            Adds an renderer to the list.
+            </summary>
+            <param name="renderer">The renderer to add.</param>
+            <param name="layer">The render order.</param>
         </member>
         <member name="M:Engine.Engine.StartEngine(OpenTK.Windowing.Desktop.GameWindow)">
             <summary>
@@ -628,6 +635,21 @@
         </member>
         <member name="M:Engine.Renderer.CollisionRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
+        </member>
+        <member name="T:Engine.Renderer.RenderLayer">
+            <summary>
+            Rendering layers.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.RenderLayer.GAME">
+            <summary>
+            Game Elements.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.RenderLayer.UI">
+            <summary>
+            UI elements.
+            </summary>
         </member>
         <member name="T:Engine.Renderer.IRenderer">
             <summary>
