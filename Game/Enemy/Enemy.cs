@@ -46,7 +46,7 @@ namespace Game.Enemy
         {
             base.OnUpdate(frameTime);
 
-            Console.WriteLine("Enemy: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
+            // Console.WriteLine("Enemy: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
         }
     }
 }

@@ -48,8 +48,12 @@ namespace Game.Player
             Engine.Engine.Instance().Colliders.Add(this);
 
             // For Demo
-            Enemy.Enemy testEnemy = new Enemy.Enemy(this.MinX + 3, this.MinY, this.SizeX, this.SizeY, this.Sprite);
-            Engine.Engine.Instance().AddGameObject(testEnemy);
+            // Enemy.Enemy testEnemy = new Enemy.Enemy(this.MinX + 3, this.MinY, this.SizeX, this.SizeY, this.Sprite);
+            // Engine.Engine.Instance().AddGameObject(testEnemy);
+
+            // For Demo 2.0
+            Enemy.DummyAI testAI = new Enemy.DummyAI(this.MinX + 4, this.MinY, this.SizeX, this.SizeY, this.Sprite);
+            Engine.Engine.Instance().AddGameObject(testAI);
 
             this.AddComponent(new Engine.Component.DamageCollider(10, 1));
         }
@@ -114,7 +118,7 @@ namespace Game.Player
                 this.jumpcounter--;
             }
 
-            Console.WriteLine("Player: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
+            // Console.WriteLine("Player: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
         }
     }
 }

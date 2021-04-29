@@ -4,6 +4,24 @@
         <name>Game</name>
     </assembly>
     <members>
+        <member name="T:Game.Enemy.DummyAI">
+            <summary>
+            Lets the enemy walk from one side of the platform to the other side.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.DummyAI.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.DummyAI"/> class.
+            </summary>
+            <param name="minX">minX.</param>
+            <param name="minY">minY.</param>
+            <param name="sizeX">sizeX.</param>
+            <param name="sizeY">sizeY.</param>
+            <param name="sprite">sprite.</param>
+        </member>
+        <member name="M:Game.Enemy.DummyAI.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Enemy.Enemy">
             <summary>
             Basic Enemy that can be shot at.
