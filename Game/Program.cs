@@ -43,15 +43,19 @@ namespace Example
             TilemapRenderer renderer = new TilemapRenderer(tilemap, 0, 0);
             engine.AddRenderer(renderer);
 
-            HealthbarPlayer playerhealthbar = new HealthbarPlayer();
-            engine.AddRenderer(playerhealthbar);
-
             using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.player.png");
             Sprite sprite = new Sprite(spriteStream);
 
             Player player = new Player(3, -5, 1, 1, sprite);
             player.AddComponent(new CameraTrackingComponent());
             engine.AddGameObject(player);
+
+            // make sure to initialize healthbar after the player
+            HealthbarPlayer playerhealthbar = new HealthbarPlayer();
+            engine.AddRenderer(playerhealthbar, RenderLayer.UI);
+
+            CollisionRenderer col = new CollisionRenderer();
+            engine.AddRenderer(col, RenderLayer.GAME);
 
             Camera cam = engine.Camera;
             cam.Scale = 5f;

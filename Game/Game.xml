@@ -64,6 +64,12 @@
             </summary>
             <returns>HealtbarPlayer instance</returns>
         </member>
+        <member name="M:Game.UI.HealthbarPlayer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <summary>
+            Render Healthbar.
+            </summary>
+            <param name="args">.</param>
+        </member>
         <member name="T:Example.Program">
             <summary>
             The Main class of the game.
