@@ -4,12 +4,34 @@
         <name>Game</name>
     </assembly>
     <members>
+        <member name="T:Game.Enemy.DummyAI">
+            <summary>
+            Lets the enemy walk from one side of the platform to the other side.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.DummyAI.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.DummyAI"/> class.
+            </summary>
+            <param name="minX">minX.</param>
+            <param name="minY">minY.</param>
+            <param name="sizeX">sizeX.</param>
+            <param name="sizeY">sizeY.</param>
+            <param name="sprite">sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
+        </member>
+        <member name="M:Game.Enemy.DummyAI.GetDirection">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Enemy.DummyAI.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Enemy.Enemy">
             <summary>
             Basic Enemy that can be shot at.
             </summary>
         </member>
-        <member name="M:Game.Enemy.Enemy.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite)">
+        <member name="M:Game.Enemy.Enemy.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite,System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.Enemy.Enemy"/> class.
             </summary>
@@ -18,8 +40,28 @@
             <param name="sizeX">Size in X axsis.</param>
             <param name="sizeY">Size in Y axsis.</param>
             <param name="sprite">Enemy Sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
         </member>
         <member name="M:Game.Enemy.Enemy.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Enemy.EnemyPistol">
+            <summary>
+            DummyAI with cool Pistol that shoots.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.EnemyPistol.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.EnemyPistol"/> class.
+            </summary>
+            <param name="minX">minX.</param>
+            <param name="minY">minY.</param>
+            <param name="sizeX">sizeX.</param>
+            <param name="sizeY">sizeY.</param>
+            <param name="sprite">sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
+        </member>
+        <member name="M:Game.Enemy.EnemyPistol.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
         <member name="T:Game.Gun.Ammunition.Bullet">
