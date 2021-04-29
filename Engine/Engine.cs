@@ -145,7 +145,7 @@ namespace Engine
                 this.Colliders.Remove(gameObject);
             }
 
-            GC.Collect();
+            // GC.Collect();
         }
 
         /// <summary>

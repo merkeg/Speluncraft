@@ -51,20 +51,7 @@ namespace Example
             engine.AddGameObject(player);
 
             Camera cam = engine.Camera;
-            window.UpdateFrame += a =>
-            {
-                KeyboardState state = window.KeyboardState;
-                var axisX = state.IsKeyDown(Keys.End) ? -1f : state.IsKeyDown(Keys.Delete) ? 1f : 0f;
-
-                var zoom = cam.Scale * (1 + (a.Time * axisX));
-                zoom = MathHelper.Clamp(zoom, 5f, 10f);
-                cam.Scale = (float)zoom;
-
-                float axisLeftRight = state.IsKeyDown(Keys.Left) ? -1.0f : state.IsKeyDown(Keys.Right) ? 1.0f : 0.0f;
-                float axisUpDown = state.IsKeyDown(Keys.Down) ? -1.0f : state.IsKeyDown(Keys.Up) ? 1.0f : 0.0f;
-                var movement = ((float)a.Time) * new Vector2(axisLeftRight, axisUpDown);
-                cam.Center += movement.TransformDirection(cam.CameraMatrix.Inverted());
-            };
+            cam.Scale = 5f;
             window.Run();
         }
     }
