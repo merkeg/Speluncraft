@@ -25,7 +25,7 @@ namespace Engine.Component
         /// </summary>
         /// <param name="dmg">How Much DMG it will deal on Contact.</param>
         /// <param name="dmgCD">How long before this can deal dmg again.</param>
-        public DamageCollider(int dmg, int dmgCD)
+        public DamageCollider(int dmg, float dmgCD)
         {
             this.dmg = dmg;
             this.dmgCooldown = dmgCD;
@@ -40,6 +40,15 @@ namespace Engine.Component
             this.collisionList.Add(r);
         }
 
+        /// <summary>
+        /// Returns, if the DMG Collider already collided once. Usefull for bullets.
+        /// </summary>
+        /// <returns>If we allready Collided with something.</returns>
+        public bool GetIsCollided()
+        {
+            return this.collided;
+        }
+
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
@@ -52,6 +61,7 @@ namespace Engine.Component
 
             foreach (GameObject.IRectangle r in this.collisionList)
             {
+                this.collided = true;
                 if (r is GameObject.GameObject)
                 {
                     GameObject.GameObject g = (GameObject.GameObject)r;

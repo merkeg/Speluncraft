@@ -40,6 +40,58 @@
         <member name="M:Game.Enemy.Enemy.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="T:Game.Gun.Ammunition.Bullet">
+            <summary>
+            A bullet that flies straight untill it hits something, then does DMG and despwans.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.Ammunition.Bullet.#ctor(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.Ammunition.Bullet"/> class.
+            </summary>
+            <param name="dmg">How much dmg it will do on impact.</param>
+            <param name="velocityX">How fast it is flying.</param>
+            <param name="minX">Where it will spawn on X-Axsis.</param>
+            <param name="minY">Where it will spawn on Y-Axsis.</param>
+            <param name="sizeX">Size X.</param>
+            <param name="sizeY">Size Y.</param>
+            <param name="sprite">Its sprite.</param>
+        </member>
+        <member name="M:Game.Gun.Ammunition.Bullet.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Gun.IGun">
+            <summary>
+            Interface for Guns, provides pullTrigger() Methode.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.IGun.PullTrigger">
+            <summary>
+            Pull the trigger of the gun. This should/will cause the gun to shoot in most cases.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.IGun.GetAsComponent">
+            <summary>
+            Retunrs the gun as Component.
+            </summary>
+            <returns>The Gun as a Component.</returns>
+        </member>
+        <member name="T:Game.Gun.Pistol">
+            <summary>
+            A Pistol that shoots normal bullets. With Medium DMG and Medium reload time.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.Pistol.GetAsComponent">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.Pistol.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.Pistol.PullTrigger">
+            <summary>
+            Fires a Bullet, when trigger is pulled and is reloaded.
+            </summary>
+        </member>
         <member name="T:Game.Player.CameraTrackingComponent">
             <summary>
             Camera tracking component class.
@@ -47,6 +99,27 @@
         </member>
         <member name="M:Game.Player.CameraTrackingComponent.OnUpdate(System.Single)">
             <inheritdoc/>
+        </member>
+        <member name="T:Game.Player.ILookDirection">
+            <summary>
+            Interfaces that lets you get the direction an GameObject is faceing.
+            </summary>
+        </member>
+        <member name="F:Game.Player.ILookDirection.Left">
+            <summary>
+            The value getDirection must return, when GameObject is faceing left.
+            </summary>
+        </member>
+        <member name="F:Game.Player.ILookDirection.Right">
+            <summary>
+            The value getDirection must return, when GameObject is faceing right.
+            </summary>
+        </member>
+        <member name="M:Game.Player.ILookDirection.GetDirection">
+            <summary>
+            Get the direction the GameObject is faceing.
+            </summary>
+            <returns>-1 for left, 1 for right.</returns>
         </member>
         <member name="T:Game.Player.Player">
             <summary>
@@ -62,6 +135,9 @@
             <param name="sizeX">Player width.</param>
             <param name="sizeY">Player height.</param>
             <param name="sprite">Player sprite.</param>
+        </member>
+        <member name="M:Game.Player.Player.GetDirection">
+            <inheritdoc/>
         </member>
         <member name="M:Game.Player.Player.OnUpdate(System.Single)">
             <inheritdoc/>
