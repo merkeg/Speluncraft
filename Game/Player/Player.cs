@@ -14,7 +14,7 @@ namespace Game.Player
     /// <summary>
     /// The thing the Player COntrolls.
     /// </summary>
-    public class Player : GameObject
+    public class Player : GameObject, ILookDirection
     {
         private int jumpcounter;
         private int jumpCounterMax = 1;
@@ -23,6 +23,9 @@ namespace Game.Player
         private float idealBreacking = 15f;
         private float activeBreacking = 20f;
         private float jumpPower = 8.8f;
+
+        private int isFaceing;
+        private Gun.IGun gun;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Player"/> class.
@@ -48,10 +51,23 @@ namespace Game.Player
             Engine.Engine.Instance().Colliders.Add(this);
 
             // For Demo
-            Enemy.Enemy testEnemy = new Enemy.Enemy(this.MinX + 3, this.MinY, this.SizeX, this.SizeY, this.Sprite);
+            Enemy.DummyAI testEnemy = new Enemy.DummyAI(this.MinX + 3, this.MinY - 6, this.SizeX, this.SizeY, this.Sprite, 10);
             Engine.Engine.Instance().AddGameObject(testEnemy);
 
+            // For Demo 2.0
+            Enemy.EnemyPistol enemyWithPistol = new Enemy.EnemyPistol(this.MinX + 4, this.MinY, this.SizeX, this.SizeY, this.Sprite, 5);
+            Engine.Engine.Instance().AddGameObject(enemyWithPistol);
+
             this.AddComponent(new Engine.Component.DamageCollider(10, 1));
+
+            this.gun = new Gun.Pistol();
+            this.AddComponent(this.gun.GetAsComponent());
+        }
+
+        /// <inheritdoc/>
+        public int GetDirection()
+        {
+            return this.isFaceing;
         }
 
         /// <inheritdoc/>
@@ -62,6 +78,7 @@ namespace Game.Player
 
             if (keyboardState.IsKeyDown(Keys.A))
             { // Player wants to go left
+                this.isFaceing = ILookDirection.Left;
                 if (physics.GetVelocity().X > 0)
                 { // Player is breaking since he is going right
                     physics.AddVelocityX(-this.activeBreacking * frameTime);
@@ -71,6 +88,7 @@ namespace Game.Player
             }
             else if (keyboardState.IsKeyDown(Keys.D))
             { // Player wants to go right
+                this.isFaceing = ILookDirection.Right;
                 if (physics.GetVelocity().X < 0)
                 { // Player is breaking since he going left
                     physics.AddVelocityX(this.activeBreacking * frameTime);
@@ -95,11 +113,17 @@ namespace Game.Player
                 }
             }
 
+            if (keyboardState.IsKeyDown(Keys.E))
+            {
+                // Console.WriteLine("E");
+                this.gun.PullTrigger();
+            }
+
             base.OnUpdate(frameTime);
 
             if (this.GetComponent<Engine.Component.HealthPoints>().GetIsDeadFlag())
             {
-                // Destroy this Thing.
+                Engine.Engine.Instance().GameObjectsToRemove.Add(this);
             }
 
             Engine.Component.Collider collider = this.GetComponent<Engine.Component.Collider>();
@@ -114,7 +138,7 @@ namespace Game.Player
                 this.jumpcounter--;
             }
 
-            Console.WriteLine("Player: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
+            // Console.WriteLine("Player: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
         }
     }
 }

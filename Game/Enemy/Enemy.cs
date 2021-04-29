@@ -24,7 +24,8 @@ namespace Game.Enemy
         /// <param name="sizeX">Size in X axsis.</param>
         /// <param name="sizeY">Size in Y axsis.</param>
         /// <param name="sprite">Enemy Sprite.</param>
-        public Enemy(float minX, float minY, float sizeX, float sizeY, Sprite sprite)
+        /// <param name="damage">Damage dealt by touching the enemy.</param>
+        public Enemy(float minX, float minY, float sizeX, float sizeY, Sprite sprite, int damage)
             : base(minX, minY, sizeX, sizeY, sprite)
         {
             Engine.Component.Physics physics = new Engine.Component.Physics();
@@ -35,7 +36,7 @@ namespace Game.Enemy
 
             this.AddComponent(new Engine.Component.HealthPoints(100, 100));
 
-            this.AddComponent(new Engine.Component.DamageCollider(5, 1));
+            this.AddComponent(new Engine.Component.DamageCollider(damage, 1));
 
             // HitBox of Enemy needs to be in CollideList.
             Engine.Engine.Instance().Colliders.Add(this);
@@ -45,8 +46,12 @@ namespace Game.Enemy
         public override void OnUpdate(float frameTime)
         {
             base.OnUpdate(frameTime);
+            if (this.GetComponent<Engine.Component.HealthPoints>().GetIsDeadFlag())
+            {
+                Engine.Engine.Instance().GameObjectsToRemove.Add(this);
+            }
 
-            Console.WriteLine("Enemy: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
+            // Console.WriteLine("Enemy: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
         }
     }
 }
