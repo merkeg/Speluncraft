@@ -45,8 +45,12 @@ namespace Game.Enemy
         public override void OnUpdate(float frameTime)
         {
             base.OnUpdate(frameTime);
+            if (this.GetComponent<Engine.Component.HealthPoints>().GetIsDeadFlag())
+            {
+                Engine.Engine.Instance().GameObjectsToRemove.Add(this);
+            }
 
-            Console.WriteLine("Enemy: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
+            // Console.WriteLine("Enemy: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
         }
     }
 }
