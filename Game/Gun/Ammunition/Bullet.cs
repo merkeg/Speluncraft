@@ -36,7 +36,7 @@ namespace Game.Gun.Ammunition
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
-            Console.WriteLine("Hey");
+            base.OnUpdate(frameTime);
             if (this.GetComponent<Engine.Component.DamageCollider>().GetIsCollided())
             {
                 Engine.Engine.Instance().GameObjectsToRemove.Add(this);

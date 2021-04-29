@@ -48,7 +48,7 @@ namespace Game.Gun
                         Assembly assembly = Assembly.GetExecutingAssembly();
                         using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.player.png");
                         Sprite sprite = new Sprite(spriteStream);
-                        Ammunition.Bullet b = new Ammunition.Bullet(10, 5, this.GameObject.MinX - 0.2f, this.GameObject.MinY + 0.5f, 0.25f, 0.2f, sprite);
+                        Ammunition.Bullet b = new Ammunition.Bullet(10, -20, this.GameObject.MinX - 0.25f - 0.2f, this.GameObject.MinY + 0.5f, 0.25f, 0.2f, sprite);
                         Engine.Engine.Instance().GameObjectsToAdd.Add(b);
                     }
 
@@ -57,7 +57,7 @@ namespace Game.Gun
                         Assembly assembly = Assembly.GetExecutingAssembly();
                         using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.player.png");
                         Sprite sprite = new Sprite(spriteStream);
-                        Ammunition.Bullet b = new Ammunition.Bullet(10, 5, this.GameObject.MinX + this.GameObject.SizeX + 0.2f, this.GameObject.MinY + 0.5f, 0.25f, 0.2f, sprite);
+                        Ammunition.Bullet b = new Ammunition.Bullet(10, 20, this.GameObject.MinX + this.GameObject.SizeX + 0.2f, this.GameObject.MinY + 0.5f, 0.25f, 0.2f, sprite);
                         Engine.Engine.Instance().GameObjectsToAdd.Add(b);
                     }
                 }
