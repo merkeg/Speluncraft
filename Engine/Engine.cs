@@ -26,7 +26,12 @@ namespace Engine
         {
             this.GameObjects = new List<GameObject.GameObject>();
             this.Colliders = new List<IRectangle>();
-            this.Renderers = new List<Renderer.IRenderer>();
+            this.Renderers = new Dictionary<Renderer.RenderLayer, List<Renderer.IRenderer>>();
+
+            foreach (Renderer.RenderLayer layer in (Renderer.RenderLayer[])Enum.GetValues(typeof(Renderer.RenderLayer)))
+            {
+                this.Renderers.Add(layer, new List<Renderer.IRenderer>());
+            }
         }
 
         /// <summary>
@@ -35,9 +40,9 @@ namespace Engine
         public List<GameObject.GameObject> GameObjects { get; private set; }
 
         /// <summary>
-        /// Gets a list of Renderers in the game.
+        /// Gets the renderers.
         /// </summary>
-        public List<Renderer.IRenderer> Renderers { get; private set; }
+        public Dictionary<Renderer.RenderLayer, List<Renderer.IRenderer>> Renderers { get; private set; }
 
         /// <summary>
         /// Gets a list of the colliders in the game.
@@ -92,13 +97,18 @@ namespace Engine
         /// <param name="renderer">The renderer to add.</param>
         public void AddRenderer(Renderer.IRenderer renderer)
         {
-            this.Renderers.Add(renderer);
+            this.AddRenderer(renderer, Renderer.RenderLayer.GAME);
+        }
+
+        /// <summary>
+        /// Adds an renderer to the list.
+        /// </summary>
+        /// <param name="renderer">The renderer to add.</param>
+        /// <param name="layer">The render order.</param>
+        public void AddRenderer(Renderer.IRenderer renderer, Renderer.RenderLayer layer)
+        {
+            this.Renderers[layer].Add(renderer);
             renderer.OnCreate();
-
-            // Set the SwapBuffer to the last position.
-            this.GameWindow.RenderFrame += renderer.Render;
-
-            this.GameWindow.Resize += renderer.Resize;
         }
 
         /// <summary>
@@ -112,7 +122,8 @@ namespace Engine
             this.AddRenderer(this.Camera);
 
             window.UpdateFrame += this.Update;
-            this.GameWindow.RenderFrame += this.SwapBuffers;
+            this.GameWindow.RenderFrame += this.Render;
+            this.GameWindow.Resize += this.Resize;
             GL.Enable(EnableCap.Blend);
             GL.Enable(EnableCap.Texture2D);
         }
@@ -123,10 +134,22 @@ namespace Engine
             this.GameObjects.ForEach(gameObject => gameObject.OnUpdate(elapsed));
         }
 
-        private void SwapBuffers(FrameEventArgs args)
+        private void Resize(ResizeEventArgs args)
+        {
+            foreach (KeyValuePair<Renderer.RenderLayer, List<Renderer.IRenderer>> item in this.Renderers)
+            {
+                item.Value.ForEach(renderer => renderer.Resize(args));
+            }
+        }
+
+        private void Render(FrameEventArgs args)
         {
             this.GameWindow.SwapBuffers();
             GL.Clear(ClearBufferMask.ColorBufferBit);
+            foreach (KeyValuePair<Renderer.RenderLayer, List<Renderer.IRenderer>> item in this.Renderers)
+            {
+                item.Value.ForEach(renderer => renderer.Render(args));
+            }
         }
     }
 }
