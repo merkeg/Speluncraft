@@ -51,12 +51,12 @@ namespace Game.Player
             Engine.Engine.Instance().Colliders.Add(this);
 
             // For Demo
-            // Enemy.Enemy testEnemy = new Enemy.Enemy(this.MinX + 3, this.MinY, this.SizeX, this.SizeY, this.Sprite);
-            // Engine.Engine.Instance().AddGameObject(testEnemy);
+            Enemy.DummyAI testEnemy = new Enemy.DummyAI(this.MinX + 3, this.MinY - 6, this.SizeX, this.SizeY, this.Sprite, 10);
+            Engine.Engine.Instance().AddGameObject(testEnemy);
 
             // For Demo 2.0
-            Enemy.DummyAI testAI = new Enemy.DummyAI(this.MinX + 4, this.MinY, this.SizeX, this.SizeY, this.Sprite);
-            Engine.Engine.Instance().AddGameObject(testAI);
+            Enemy.EnemyPistol enemyWithPistol = new Enemy.EnemyPistol(this.MinX + 4, this.MinY, this.SizeX, this.SizeY, this.Sprite, 5);
+            Engine.Engine.Instance().AddGameObject(enemyWithPistol);
 
             this.AddComponent(new Engine.Component.DamageCollider(10, 1));
 
