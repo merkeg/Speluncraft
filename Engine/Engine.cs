@@ -137,12 +137,15 @@ namespace Engine
         private void RemoveGameObject(GameObject.GameObject gameObject)
         {
             this.RemoveRenderer(gameObject.SpriteRenderer);
+            gameObject.SpriteRenderer.Dispose();
             gameObject.OnDestroy();
             this.GameObjects.Remove(gameObject);
             if (this.Colliders.Contains(gameObject))
             {
                 this.Colliders.Remove(gameObject);
             }
+
+            GC.Collect();
         }
 
         /// <summary>

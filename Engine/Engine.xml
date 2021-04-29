@@ -216,6 +216,11 @@
             </summary>
             <returns>the parent GameObject.</returns>
         </member>
+        <member name="M:Engine.Component.Component.Dispose">
+            <summary>
+            Yeet this away.
+            </summary>
+        </member>
         <member name="T:Engine.Component.DamageCollider">
             <summary>
             A Kind of Collider, that Checks, if it Intersects with anything in Engine.Colliders. If yes it will deal DMG, if there is an HP Component.
@@ -575,6 +580,11 @@
             Called if the GameObject is destroyed.
             </summary>
         </member>
+        <member name="M:Engine.GameObject.GameObject.Dispose">
+            <summary>
+            Yeet this away.
+            </summary>
+        </member>
         <member name="T:Engine.GameObject.IRectangle">
             <summary>
             Rectangle definde with 2 points.
@@ -726,6 +736,11 @@
         <member name="P:Engine.Renderer.Sprite.SpriteRenderer.Sprite">
             <summary>
             Gets the sprite to render.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Sprite.SpriteRenderer.Dispose">
+            <summary>
+            Yeet it away.
             </summary>
         </member>
         <member name="M:Engine.Renderer.Sprite.SpriteRenderer.OnCreate">

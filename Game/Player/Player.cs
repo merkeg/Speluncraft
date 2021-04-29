@@ -55,8 +55,8 @@ namespace Game.Player
             Engine.Engine.Instance().AddGameObject(testEnemy);
 
             // For Demo 2.0
-            Enemy.EnemyPistol enemyWithPistol = new Enemy.EnemyPistol(this.MinX + 4, this.MinY, this.SizeX, this.SizeY, this.Sprite, 5);
-            Engine.Engine.Instance().AddGameObject(enemyWithPistol);
+            // Enemy.EnemyPistol enemyWithPistol = new Enemy.EnemyPistol(this.MinX + 4, this.MinY, this.SizeX, this.SizeY, this.Sprite, 5);
+            // Engine.Engine.Instance().AddGameObject(enemyWithPistol);
 
             this.AddComponent(new Engine.Component.DamageCollider(10, 1));
 
