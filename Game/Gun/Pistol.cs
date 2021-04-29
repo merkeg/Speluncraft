@@ -17,6 +17,11 @@ namespace Game.Gun
     /// </summary>
     public class Pistol : Engine.Component.Component, IGun
     {
+        private readonly float bulletLenght = 0.25f;
+        private readonly float bulletHeight = 0.2f;
+        private readonly float bufferDistance = 0.35f;
+
+        private readonly float bulletVelocity = 10;
         private int dmg = 10;
         private float reloadTime = 0.5f;
         private float reloadCoolDown = 0;
@@ -48,7 +53,7 @@ namespace Game.Gun
                         Assembly assembly = Assembly.GetExecutingAssembly();
                         using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.player.png");
                         Sprite sprite = new Sprite(spriteStream);
-                        Ammunition.Bullet b = new Ammunition.Bullet(10, -20, this.GameObject.MinX - 0.25f - 0.2f, this.GameObject.MinY + 0.5f, 0.25f, 0.2f, sprite);
+                        Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, -this.bulletVelocity, this.GameObject.MinX - this.bulletLenght - this.bufferDistance, this.GameObject.MinY + 0.5f, this.bulletLenght, this.bulletHeight, sprite);
                         Engine.Engine.Instance().GameObjectsToAdd.Add(b);
                     }
 
@@ -57,7 +62,7 @@ namespace Game.Gun
                         Assembly assembly = Assembly.GetExecutingAssembly();
                         using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.player.png");
                         Sprite sprite = new Sprite(spriteStream);
-                        Ammunition.Bullet b = new Ammunition.Bullet(10, 20, this.GameObject.MinX + this.GameObject.SizeX + 0.2f, this.GameObject.MinY + 0.5f, 0.25f, 0.2f, sprite);
+                        Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, this.bulletVelocity, this.GameObject.MinX + this.GameObject.SizeX + this.bufferDistance, this.GameObject.MinY + 0.5f, this.bulletLenght, this.bulletHeight, sprite);
                         Engine.Engine.Instance().GameObjectsToAdd.Add(b);
                     }
                 }

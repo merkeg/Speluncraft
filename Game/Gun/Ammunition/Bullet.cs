@@ -29,6 +29,7 @@ namespace Game.Gun.Ammunition
             this.AddComponent(new Engine.Component.DamageCollider(dmg, 10));
             Engine.Component.Physics p = new Engine.Component.Physics();
             p.SetVelocity(velocityX, 0);
+            p.SetMaxVelocity(Math.Abs(velocityX), 0);
             p.SetIsAffectedByGravity(false);
             this.AddComponent(p);
         }
