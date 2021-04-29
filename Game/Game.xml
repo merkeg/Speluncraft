@@ -48,6 +48,22 @@
         <member name="M:Game.Player.Player.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="T:Game.UI.HealthbarPlayer">
+            <summary>
+            The HealthbarPlayer class renders the healthbar UI element.
+            </summary>
+        </member>
+        <member name="M:Game.UI.HealthbarPlayer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.UI.HealthbarPlayer"/> class.
+            </summary>
+        </member>
+        <member name="M:Game.UI.HealthbarPlayer.Instance">
+            <summary>
+            Function so player can retrieve always the same healthbar instance (Singleton).
+            </summary>
+            <returns>HealtbarPlayer instance</returns>
+        </member>
         <member name="T:Example.Program">
             <summary>
             The Main class of the game.

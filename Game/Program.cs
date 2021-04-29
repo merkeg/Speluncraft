@@ -18,6 +18,7 @@ namespace Example
     using OpenTK.Windowing.Common;
     using OpenTK.Windowing.Desktop;
     using OpenTK.Windowing.GraphicsLibraryFramework;
+    using Game.UI;
 
     /// <summary>
     /// The Main class of the game.
@@ -42,6 +43,9 @@ namespace Example
 
             TilemapRenderer renderer = new TilemapRenderer(tilemap, 0, 0);
             engine.AddRenderer(renderer);
+
+            HealthbarPlayer playerhealthbar = new HealthbarPlayer();
+            engine.AddRenderer(playerhealthbar);
 
             using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.player.png");
             Sprite sprite = new Sprite(spriteStream);

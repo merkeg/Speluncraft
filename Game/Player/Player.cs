@@ -114,7 +114,7 @@ namespace Game.Player
                 this.jumpcounter--;
             }
 
-            Console.WriteLine("Player: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
+            Console.WriteLine("Player: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP() + " | " + this.MinX + " | " + this.MinY);
         }
     }
 }
