@@ -50,7 +50,7 @@ namespace Game.Enemy
                 Engine.Engine.Instance().GameObjectsToRemove.Add(this);
             }
 
-            Console.WriteLine("Enemy: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
+            // Console.WriteLine("Enemy: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
         }
     }
 }

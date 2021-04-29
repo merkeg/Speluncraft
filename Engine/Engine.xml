@@ -222,7 +222,7 @@
             But it wont deal DMG to the GameObject it belongs to.
             </summary>
         </member>
-        <member name="M:Engine.Component.DamageCollider.#ctor(System.Int32,System.Int32)">
+        <member name="M:Engine.Component.DamageCollider.#ctor(System.Int32,System.Single)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Component.DamageCollider"/> class.
             </summary>
@@ -234,6 +234,12 @@
             Add a Collision that was undone, but still needs to be checked for DMG.
             </summary>
             <param name="r">The Rectangle we collided with.</param>
+        </member>
+        <member name="M:Engine.Component.DamageCollider.GetIsCollided">
+            <summary>
+            Returns, if the DMG Collider already collided once. Usefull for bullets.
+            </summary>
+            <returns>If we allready Collided with something.</returns>
         </member>
         <member name="M:Engine.Component.DamageCollider.OnUpdate(System.Single)">
             <inheritdoc/>
@@ -418,6 +424,11 @@
         <member name="P:Engine.Engine.GameObjectsToRemove">
             <summary>
             Gets Here you can add GameObjects that should be removed this frame.
+            </summary>
+        </member>
+        <member name="P:Engine.Engine.GameObjectsToAdd">
+            <summary>
+            Gets Here you can add GameObjects that should be added next frame.
             </summary>
         </member>
         <member name="M:Engine.Engine.Instance">

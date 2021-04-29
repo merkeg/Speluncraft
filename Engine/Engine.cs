@@ -28,6 +28,7 @@ namespace Engine
             this.Colliders = new List<IRectangle>();
             this.Renderers = new List<Renderer.IRenderer>();
             this.GameObjectsToRemove = new List<GameObject.GameObject>();
+            this.GameObjectsToAdd = new List<GameObject.GameObject>();
         }
 
         /// <summary>
@@ -59,6 +60,11 @@ namespace Engine
         /// Gets Here you can add GameObjects that should be removed this frame.
         /// </summary>
         public List<GameObject.GameObject> GameObjectsToRemove { get; private set; }
+
+        /// <summary>
+        /// Gets Here you can add GameObjects that should be added next frame.
+        /// </summary>
+        public List<GameObject.GameObject> GameObjectsToAdd { get; private set; }
 
         /// <summary>
         /// Method to get the engine instance.
@@ -162,6 +168,13 @@ namespace Engine
             }
 
             this.GameObjectsToRemove.Clear();
+
+            foreach (GameObject.GameObject g in this.GameObjectsToAdd)
+            {
+                this.AddGameObject(g);
+            }
+
+            this.GameObjectsToAdd.Clear();
         }
 
         private void SwapBuffers(FrameEventArgs args)
