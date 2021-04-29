@@ -43,11 +43,10 @@ namespace Example
             TilemapRenderer renderer = new TilemapRenderer(tilemap, 0, 0);
             engine.AddRenderer(renderer);
 
-            using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.player.png");
             HealthbarPlayer playerhealthbar = new HealthbarPlayer();
             engine.AddRenderer(playerhealthbar);
 
-            using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.player.png");
+            using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.player.png");
             Sprite sprite = new Sprite(spriteStream);
 
             Player player = new Player(3, -5, 1, 1, sprite);
