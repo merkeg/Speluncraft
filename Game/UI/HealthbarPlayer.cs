@@ -4,8 +4,6 @@
 
 namespace Game.UI
 {
-    using System;
-    using System.Collections.Generic;
     using Engine;
     using Engine.Component;
     using Engine.GameObject;
