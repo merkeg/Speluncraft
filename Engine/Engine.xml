@@ -222,7 +222,7 @@
             But it wont deal DMG to the GameObject it belongs to.
             </summary>
         </member>
-        <member name="M:Engine.Component.DamageCollider.#ctor(System.Int32,System.Int32)">
+        <member name="M:Engine.Component.DamageCollider.#ctor(System.Int32,System.Single)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Component.DamageCollider"/> class.
             </summary>
@@ -234,6 +234,12 @@
             Add a Collision that was undone, but still needs to be checked for DMG.
             </summary>
             <param name="r">The Rectangle we collided with.</param>
+        </member>
+        <member name="M:Engine.Component.DamageCollider.GetIsCollided">
+            <summary>
+            Returns, if the DMG Collider already collided once. Usefull for bullets.
+            </summary>
+            <returns>If we allready Collided with something.</returns>
         </member>
         <member name="M:Engine.Component.DamageCollider.OnUpdate(System.Single)">
             <inheritdoc/>
@@ -415,6 +421,16 @@
             Gets the game Camera.
             </summary>
         </member>
+        <member name="P:Engine.Engine.GameObjectsToRemove">
+            <summary>
+            Gets Here you can add GameObjects that should be removed this frame.
+            </summary>
+        </member>
+        <member name="P:Engine.Engine.GameObjectsToAdd">
+            <summary>
+            Gets Here you can add GameObjects that should be added next frame.
+            </summary>
+        </member>
         <member name="M:Engine.Engine.Instance">
             <summary>
             Method to get the engine instance.
@@ -445,6 +461,19 @@
             Start the engine ticks.
             </summary>
             <param name="window">The GameWindow the engine will be run on.</param>
+        </member>
+        <member name="M:Engine.Engine.RemoveGameObject(Engine.GameObject.GameObject)">
+            <summary>
+            Removes an GameObject from the World and Calls it OnDestroy() func.
+            Also checks if there are Colliders from it and delets it.
+            </summary>
+            <param name="gameObject">The GameObject to Destroy.</param>
+        </member>
+        <member name="M:Engine.Engine.RemoveRenderer(Engine.Renderer.IRenderer)">
+            <summary>
+            Removes an rendere.
+            </summary>
+            <param name="renderer">The rendere to Remove.</param>
         </member>
         <member name="T:Engine.GameObject.GameObject">
             <summary>
