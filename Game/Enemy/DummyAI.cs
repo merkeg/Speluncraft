@@ -99,7 +99,6 @@ namespace Game.Enemy
         {
             if (this.phys.GetVelocity().X == 0 && this.phys.GetVelocity().Y == 0)
             {
-                Console.WriteLine(this.phys.GetVelocity());
                 if (this.lookingDirection == Player.ILookDirection.Left)
                 {
                     this.phys.SetVelocity(this.movementSpeed, 0);
