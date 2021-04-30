@@ -2,15 +2,14 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
-using System.Text.RegularExpressions;
-using OpenTK.Graphics.ES11;
-
 namespace Engine.Renderer.Text.Parser
 {
     using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Text;
+    using System.Text.RegularExpressions;
+    using OpenTK.Graphics.ES11;
 
     /// <summary>
     /// Font model class.

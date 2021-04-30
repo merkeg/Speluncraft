@@ -1,10 +1,14 @@
-﻿namespace Engine.Renderer
+﻿// <copyright file="UiMatrixRenderer.cs" company="RWUwU">
+// Copyright (c) RWUwU. All rights reserved.
+// </copyright>
+
+namespace Engine.Renderer
 {
     using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
 
-    /// <summary> 
+    /// <summary>
     /// Internal Renderer.
     /// </summary>
     internal class UiMatrixRenderer : IRenderer
