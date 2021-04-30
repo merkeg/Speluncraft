@@ -20,9 +20,9 @@ namespace Game.Player
         private int jumpCounterMax = 1;
 
         private float accelaration = 18f;
-        private float idealBreacking = 15f;
+        private float idealBreacking = 25f;
         private float activeBreacking = 20f;
-        private float jumpPower = 8.8f;
+        private float jumpPower = 9.5f;
 
         private int isFaceing;
         private Gun.IGun gun;
@@ -69,7 +69,7 @@ namespace Game.Player
             OpenTK.Windowing.GraphicsLibraryFramework.KeyboardState keyboardState = Engine.Engine.Instance().GameWindow.KeyboardState;
             Engine.Component.Physics physics = this.GetComponent<Engine.Component.Physics>();
 
-            if (keyboardState.IsKeyDown(Keys.Left))
+            if (keyboardState.IsKeyDown(Keys.A))
             { // Player wants to go left
                 this.isFaceing = ILookDirection.Left;
                 if (physics.GetVelocity().X > 0)
@@ -79,7 +79,7 @@ namespace Game.Player
 
                 physics.AddVelocityX(-this.accelaration * frameTime);
             }
-            else if (keyboardState.IsKeyDown(Keys.Right))
+            else if (keyboardState.IsKeyDown(Keys.D))
             { // Player wants to go right
                 this.isFaceing = ILookDirection.Right;
                 if (physics.GetVelocity().X < 0)
@@ -106,9 +106,8 @@ namespace Game.Player
                 }
             }
 
-            if (keyboardState.IsKeyDown(Keys.D))
+            if (keyboardState.IsKeyDown(Keys.W))
             {
-                // Console.WriteLine("E");
                 this.gun.PullTrigger();
             }
 

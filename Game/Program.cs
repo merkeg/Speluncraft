@@ -59,7 +59,7 @@ namespace Example
         private void InitializeRenderers()
         {
             using Stream tilesheet = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.tilesheet.png");
-            using Stream tilemapStream = this.assembly.GetManifestResourceStream("Game.Resources.Level.jumpNrun.json");
+            using Stream tilemapStream = this.assembly.GetManifestResourceStream("Game.Resources.Level.getUp.json");
 
             Tileset tileset = new Tileset(tilesheet, 16);
             TilemapModel model = TilemapParser.ParseTilemap(tilemapStream);
@@ -73,7 +73,7 @@ namespace Example
         {
             using Stream spriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.player.png");
             Sprite sprite = new Sprite(spriteStream);
-            Player player = new Player(3, -5, 1, 1, sprite);
+            Player player = new Player(7, -27, 1, 1, sprite);
             player.AddComponent(new CameraTrackingComponent());
             this.engine.AddGameObject(player);
 
@@ -95,12 +95,12 @@ namespace Example
         {
             using Stream enemyStream = this.assembly.GetManifestResourceStream("Game.Resources.enemy.png");
             Sprite enemySprite = new Sprite(enemyStream);
-            DummyAI testEnemy = new DummyAI(6, -11, 1, 1, enemySprite, 10);
+            DummyAI testEnemy = new DummyAI(2, -25, 1, 1, enemySprite, 10);
             this.engine.AddGameObject(testEnemy);
 
             using Stream enemyGunSpriteStream = this.assembly.GetManifestResourceStream("Game.Resources.enemyGun.png");
             Sprite enemyGunSprite = new Sprite(enemyGunSpriteStream);
-            EnemyPistol enemyWithPistol = new EnemyPistol(7, -5, 1, 1, enemyGunSprite, 5);
+            EnemyPistol enemyWithPistol = new EnemyPistol(5, -20, 1, 1, enemyGunSprite, 5);
             this.engine.AddGameObject(enemyWithPistol);
         }
     }

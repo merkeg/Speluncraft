@@ -1062,7 +1062,7 @@
             </summary>
         </member>
         <member name="T:Engine.Renderer.UiMatrixRenderer">
-            <summary> 
+            <summary>
             Internal Renderer.
             </summary>
         </member>
