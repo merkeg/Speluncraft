@@ -10,8 +10,11 @@ namespace Example
     using Engine.GameObject;
     using Engine.Renderer;
     using Engine.Renderer.Sprite;
+    using Engine.Renderer.Text;
+    using Engine.Renderer.Text.Parser;
     using Engine.Renderer.Tile;
     using Engine.Renderer.Tile.Parser;
+    using Game.Enemy;
     using Game.Player;
     using Game.UI;
     using OpenTK.Graphics.OpenGL;
@@ -24,38 +27,81 @@ namespace Example
     /// </summary>
     internal class Program
     {
-        private static void Main()
+        private Engine.Engine engine;
+        private Assembly assembly;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Program"/> class.
+        /// </summary>
+        public Program()
         {
             GameWindow window = new GameWindow(GameWindowSettings.Default, new NativeWindowSettings { Profile = ContextProfile.Compatability });
             window.Size = new Vector2i(1280, 720);
             window.VSync = VSyncMode.Adaptive;
-            Engine.Engine engine = Engine.Engine.Instance();
-            engine.StartEngine(window);
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            using Stream tilesheet = assembly.GetManifestResourceStream("Game.Resources.Sprite.tilesheet.png");
-            using Stream tilemapStream = assembly.GetManifestResourceStream("Game.Resources.Level.jumpNrun.json");
+            this.engine = Engine.Engine.Instance();
+            this.engine.StartEngine(window);
+            this.assembly = Assembly.GetExecutingAssembly();
+
+            this.InitializeRenderers();
+            this.AddPlayer();
+            this.AddEnemies();
+
+            Camera cam = this.engine.Camera;
+            cam.Scale = 5f;
+            window.Run();
+        }
+
+        private static void Main()
+        {
+            new Program();
+        }
+
+        private void InitializeRenderers()
+        {
+            using Stream tilesheet = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.tilesheet.png");
+            using Stream tilemapStream = this.assembly.GetManifestResourceStream("Game.Resources.Level.jumpNrun.json");
 
             Tileset tileset = new Tileset(tilesheet, 16);
             TilemapModel model = TilemapParser.ParseTilemap(tilemapStream);
             Tilemap tilemap = new Tilemap(tileset, model);
 
             TilemapRenderer renderer = new TilemapRenderer(tilemap, 0, 0);
-            engine.AddRenderer(renderer);
+            this.engine.AddRenderer(renderer);
+        }
 
-            using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.player.png");
+        private void AddPlayer()
+        {
+            using Stream spriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.player.png");
             Sprite sprite = new Sprite(spriteStream);
-
             Player player = new Player(3, -5, 1, 1, sprite);
             player.AddComponent(new CameraTrackingComponent());
-            engine.AddGameObject(player);
+            this.engine.AddGameObject(player);
 
             // make sure to initialize healthbar after the player
             HealthbarPlayer playerhealthbar = new HealthbarPlayer();
-            engine.AddRenderer(playerhealthbar, RenderLayer.UI);
+            this.engine.AddRenderer(playerhealthbar, RenderLayer.UI);
 
-            Camera cam = engine.Camera;
-            cam.Scale = 5f;
-            window.Run();
+            using Stream fontModelStream = this.assembly.GetManifestResourceStream("Game.Resources.Font.semicondensed.font.fnt");
+            using Stream fontStream = this.assembly.GetManifestResourceStream("Game.Resources.Font.semicondensed.font.png");
+            FontModel fontModel = FontModel.Parse(fontModelStream);
+            Sprite fontSprite = new Sprite(fontStream);
+            Font font = new Font(fontModel, fontSprite);
+
+            TextRenderer textRenderer = new TextRenderer("It just works! (tm)", font, Color4.White, new Vector2d(100, 100), 0.3f);
+            this.engine.AddRenderer(textRenderer, RenderLayer.UI);
+        }
+
+        private void AddEnemies()
+        {
+            using Stream enemyStream = this.assembly.GetManifestResourceStream("Game.Resources.enemy.png");
+            Sprite enemySprite = new Sprite(enemyStream);
+            DummyAI testEnemy = new DummyAI(6, -11, 1, 1, enemySprite, 10);
+            this.engine.AddGameObject(testEnemy);
+
+            using Stream enemyGunSpriteStream = this.assembly.GetManifestResourceStream("Game.Resources.enemyGun.png");
+            Sprite enemyGunSprite = new Sprite(enemyGunSpriteStream);
+            EnemyPistol enemyWithPistol = new EnemyPistol(7, -5, 1, 1, enemyGunSprite, 5);
+            this.engine.AddGameObject(enemyWithPistol);
         }
     }
 }

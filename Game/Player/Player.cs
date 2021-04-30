@@ -50,26 +50,6 @@ namespace Game.Player
 
             Engine.Engine.Instance().Colliders.Add(this);
 
-            // For Demo
-            if (true)
-            {
-                System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
-                using System.IO.Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.enemy.png");
-                Sprite enenemySprite = new Sprite(spriteStream);
-                Enemy.DummyAI testEnemy = new Enemy.DummyAI(this.MinX + 3, this.MinY - 6, this.SizeX, this.SizeY, enenemySprite, 10);
-                Engine.Engine.Instance().AddGameObject(testEnemy);
-            }
-
-            if (true)
-            {
-                System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
-                using System.IO.Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.enemyGun.png");
-                Sprite enenemySprite = new Sprite(spriteStream);
-
-                Enemy.EnemyPistol enemyWithPistol = new Enemy.EnemyPistol(this.MinX + 4, this.MinY, this.SizeX, this.SizeY, enenemySprite, 5);
-                Engine.Engine.Instance().AddGameObject(enemyWithPistol);
-            }
-
             // For Demo 2.0
             this.AddComponent(new Engine.Component.DamageCollider(10, 1));
 

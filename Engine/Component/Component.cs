@@ -2,10 +2,10 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
-using System;
-
 namespace Engine.Component
 {
+    using System;
+
     /// <summary>
     /// The base class for components in GameObjects.
     /// </summary>

@@ -1,9 +1,13 @@
-﻿namespace Game.Enemy
+﻿// <copyright file="EnemyPistol.cs" company="RWUwU">
+// Copyright (c) RWUwU. All rights reserved.
+// </copyright>
+
+namespace Game.Enemy
 {
-    using Engine.Renderer.Sprite;
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using Engine.Renderer.Sprite;
 
     /// <summary>
     /// DummyAI with cool Pistol that shoots.
@@ -11,6 +15,7 @@
     public class EnemyPistol : DummyAI
     {
         private Gun.Pistol pistol;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="EnemyPistol"/> class.
         /// </summary>

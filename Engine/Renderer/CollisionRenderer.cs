@@ -23,6 +23,7 @@ namespace Engine.Renderer
         /// <inheritdoc/>
         public void Render(FrameEventArgs args)
         {
+            GL.BindTexture(TextureTarget.Texture2D, 0);
             GL.LineWidth(2);
             GL.Color3(System.Drawing.Color.Cyan);
             foreach (IRectangle rec in Engine.Instance().Colliders)
