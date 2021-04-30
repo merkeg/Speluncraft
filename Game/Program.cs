@@ -13,11 +13,11 @@ namespace Example
     using Engine.Renderer.Tile;
     using Engine.Renderer.Tile.Parser;
     using Game.Player;
+    using Game.UI;
     using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
     using OpenTK.Windowing.Desktop;
-    using OpenTK.Windowing.GraphicsLibraryFramework;
 
     /// <summary>
     /// The Main class of the game.
@@ -31,10 +31,9 @@ namespace Example
             window.VSync = VSyncMode.Adaptive;
             Engine.Engine engine = Engine.Engine.Instance();
             engine.StartEngine(window);
-
             Assembly assembly = Assembly.GetExecutingAssembly();
-            using Stream tilesheet = assembly.GetManifestResourceStream("Game.Resources.tilesheet.png");
-            using Stream tilemapStream = assembly.GetManifestResourceStream("Game.Resources.jumpNrun.json");
+            using Stream tilesheet = assembly.GetManifestResourceStream("Game.Resources.Sprite.tilesheet.png");
+            using Stream tilemapStream = assembly.GetManifestResourceStream("Game.Resources.Level.jumpNrun.json");
 
             Tileset tileset = new Tileset(tilesheet, 16);
             TilemapModel model = TilemapParser.ParseTilemap(tilemapStream);
@@ -43,12 +42,16 @@ namespace Example
             TilemapRenderer renderer = new TilemapRenderer(tilemap, 0, 0);
             engine.AddRenderer(renderer);
 
-            using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.Floppa.png");
+            using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.player.png");
             Sprite sprite = new Sprite(spriteStream);
 
             Player player = new Player(3, -5, 1, 1, sprite);
             player.AddComponent(new CameraTrackingComponent());
             engine.AddGameObject(player);
+
+            // make sure to initialize healthbar after the player
+            HealthbarPlayer playerhealthbar = new HealthbarPlayer();
+            engine.AddRenderer(playerhealthbar, RenderLayer.UI);
 
             Camera cam = engine.Camera;
             cam.Scale = 5f;

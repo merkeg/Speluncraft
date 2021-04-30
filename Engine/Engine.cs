@@ -7,6 +7,7 @@ namespace Engine
     using System;
     using System.Collections.Generic;
     using global::Engine.GameObject;
+    using global::Engine.Renderer;
     using global::Engine.Renderer.Sprite;
     using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
@@ -26,9 +27,14 @@ namespace Engine
         {
             this.GameObjects = new List<GameObject.GameObject>();
             this.Colliders = new List<IRectangle>();
-            this.Renderers = new List<Renderer.IRenderer>();
             this.GameObjectsToRemove = new List<GameObject.GameObject>();
             this.GameObjectsToAdd = new List<GameObject.GameObject>();
+            this.Renderers = new Dictionary<Renderer.RenderLayer, List<Renderer.IRenderer>>();
+
+            foreach (Renderer.RenderLayer layer in (Renderer.RenderLayer[])Enum.GetValues(typeof(Renderer.RenderLayer)))
+            {
+                this.Renderers.Add(layer, new List<Renderer.IRenderer>());
+            }
         }
 
         /// <summary>
@@ -37,9 +43,9 @@ namespace Engine
         public List<GameObject.GameObject> GameObjects { get; private set; }
 
         /// <summary>
-        /// Gets a list of Renderers in the game.
+        /// Gets the renderers.
         /// </summary>
-        public List<Renderer.IRenderer> Renderers { get; private set; }
+        public Dictionary<Renderer.RenderLayer, List<Renderer.IRenderer>> Renderers { get; private set; }
 
         /// <summary>
         /// Gets a list of the colliders in the game.
@@ -102,15 +108,11 @@ namespace Engine
         /// Adds an renderer to the list.
         /// </summary>
         /// <param name="renderer">The renderer to add.</param>
-        public void AddRenderer(Renderer.IRenderer renderer)
+        /// <param name="layer">The render order.</param>
+        public void AddRenderer(Renderer.IRenderer renderer, Renderer.RenderLayer layer = RenderLayer.GAME)
         {
-            this.Renderers.Add(renderer);
+            this.Renderers[layer].Add(renderer);
             renderer.OnCreate();
-
-            // Set the SwapBuffer to the last position.
-            this.GameWindow.RenderFrame += renderer.Render;
-
-            this.GameWindow.Resize += renderer.Resize;
         }
 
         /// <summary>
@@ -124,8 +126,10 @@ namespace Engine
             this.AddRenderer(this.Camera);
 
             window.UpdateFrame += this.Update;
-            this.GameWindow.RenderFrame += this.SwapBuffers;
+            this.GameWindow.RenderFrame += this.Render;
+            this.GameWindow.Resize += this.Resize;
             GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.Texture2D);
         }
 
@@ -152,12 +156,9 @@ namespace Engine
         /// Removes an rendere.
         /// </summary>
         /// <param name="renderer">The rendere to Remove.</param>
-        private void RemoveRenderer(Renderer.IRenderer renderer)
+        private void RemoveRenderer(Renderer.IRenderer renderer, RenderLayer layer = RenderLayer.GAME)
         {
-            this.Renderers.Remove(renderer);
-            this.GameWindow.RenderFrame -= renderer.Render;
-
-            this.GameWindow.Resize -= renderer.Resize;
+            this.Renderers[layer].Remove(renderer);
         }
 
         private void Update(OpenTK.Windowing.Common.FrameEventArgs args)
@@ -180,10 +181,22 @@ namespace Engine
             this.GameObjectsToAdd.Clear();
         }
 
-        private void SwapBuffers(FrameEventArgs args)
+        private void Resize(ResizeEventArgs args)
+        {
+            foreach (KeyValuePair<Renderer.RenderLayer, List<Renderer.IRenderer>> item in this.Renderers)
+            {
+                item.Value.ForEach(renderer => renderer.Resize(args));
+            }
+        }
+
+        private void Render(FrameEventArgs args)
         {
             this.GameWindow.SwapBuffers();
             GL.Clear(ClearBufferMask.ColorBufferBit);
+            foreach (KeyValuePair<Renderer.RenderLayer, List<Renderer.IRenderer>> item in this.Renderers)
+            {
+                item.Value.ForEach(renderer => renderer.Render(args));
+            }
         }
     }
 }

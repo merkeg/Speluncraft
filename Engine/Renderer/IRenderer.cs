@@ -7,6 +7,22 @@ namespace Engine.Renderer
     using OpenTK.Windowing.Common;
 
     /// <summary>
+    /// Rendering layers.
+    /// </summary>
+    public enum RenderLayer
+    {
+        /// <summary>
+        /// Game Elements.
+        /// </summary>
+        GAME,
+
+        /// <summary>
+        /// UI elements.
+        /// </summary>
+        UI,
+    }
+
+    /// <summary>
     /// Renderer base class.
     /// </summary>
     public interface IRenderer

@@ -32,9 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\all.json">
+    <EmbeddedResource Include="Resources\Level\all.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Level\B.json">
     <EmbeddedResource Include="Resources\B.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -47,26 +48,26 @@
     <EmbeddedResource Include="Resources\Floppa.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\jumpNrun.json">
+    <EmbeddedResource Include="Resources\Level\jumpNrun.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\jumpy.json">
+    <EmbeddedResource Include="Resources\Level\jumpy.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\lol.json">
+    <EmbeddedResource Include="Resources\Level\lol.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\player.png">
+    <EmbeddedResource Include="Resources\Sprite\player.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\rotation.json">
+    <EmbeddedResource Include="Resources\Level\rotation.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\testmap.json">
+    <EmbeddedResource Include="Resources\Level\testmap.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\tilesheet.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <EmbeddedResource Include="Resources\Sprite\tilesheet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
 
@@ -85,5 +86,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Font\" />
   </ItemGroup>
 </Project>
