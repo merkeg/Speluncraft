@@ -3,13 +3,14 @@
 // </copyright>
 namespace Engine.GameObject
 {
+    using System;
     using System.Collections.Generic;
     using global::Engine.Renderer.Sprite;
 
     /// <summary>
     /// The GameObject class which active game elements are deriving from.
     /// </summary>
-    public class GameObject : IRectangle
+    public class GameObject : IRectangle, IDisposable
     {
         /// <summary>
         /// The sprite the GameObject is drawn with.
@@ -176,6 +177,16 @@ namespace Engine.GameObject
         public virtual void OnDestroy()
         {
             this.Components.ForEach(component => component.OnDestroy());
+            this.Dispose();
+        }
+
+        /// <summary>
+        /// Yeet this away.
+        /// </summary>
+        public void Dispose()
+        {
+            this.Components.ForEach(component => component.Dispose());
+            GC.SuppressFinalize(this);
         }
 
         // OnUpdateCleanUp wird nach dem Update in jeden Frame ausgeführt.

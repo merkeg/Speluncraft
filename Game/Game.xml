@@ -105,6 +105,11 @@
             A Pistol that shoots normal bullets. With Medium DMG and Medium reload time.
             </summary>
         </member>
+        <member name="M:Game.Gun.Pistol.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.Pistol"/> class.
+            </summary>
+        </member>
         <member name="M:Game.Gun.Pistol.GetAsComponent">
             <inheritdoc/>
         </member>
