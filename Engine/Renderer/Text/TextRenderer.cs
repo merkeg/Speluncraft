@@ -48,9 +48,6 @@ namespace Engine.Renderer.Text
 
             GL.BindTexture(TextureTarget.Texture2D, this.font.FontSheet.Handle);
             GL.Color4(this.color);
-            Vector2i windowSize = Engine.Instance().GameWindow.Size;
-            GL.LoadIdentity();
-            GL.Ortho(0f, windowSize.X, windowSize.Y, 0f, -1f, 1f);
             GL.Begin(PrimitiveType.Quads);
 
             foreach (char character in this.text.ToCharArray())

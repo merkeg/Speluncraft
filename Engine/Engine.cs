@@ -123,6 +123,8 @@ namespace Engine
             window.UpdateFrame += this.Update;
             this.GameWindow.RenderFrame += this.Render;
             this.GameWindow.Resize += this.Resize;
+            this.AddRenderer(new UiMatrixRenderer(), RenderLayer.UI);
+
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.Texture2D);

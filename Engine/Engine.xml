@@ -1061,5 +1061,19 @@
             Gets the size of the tile in pixels.
             </summary>
         </member>
+        <member name="T:Engine.Renderer.UiMatrixRenderer">
+            <summary> 
+            Internal Renderer.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.UiMatrixRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UiMatrixRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UiMatrixRenderer.OnCreate">
+            <inheritdoc/>
+        </member>
     </members>
 </doc>

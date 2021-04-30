@@ -2,8 +2,6 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
-using Game.Enemy;
-
 namespace Example
 {
     using System.IO;
@@ -16,6 +14,7 @@ namespace Example
     using Engine.Renderer.Text.Parser;
     using Engine.Renderer.Tile;
     using Engine.Renderer.Tile.Parser;
+    using Game.Enemy;
     using Game.Player;
     using Game.UI;
     using OpenTK.Graphics.OpenGL;
@@ -28,7 +27,6 @@ namespace Example
     /// </summary>
     internal class Program
     {
-
         private Engine.Engine engine;
         private Assembly assembly;
 

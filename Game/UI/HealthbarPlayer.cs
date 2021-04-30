@@ -25,10 +25,10 @@ namespace Game.UI
         private static int currentHP = 0;
 
         private static Vector2d origin;
-        private static float xMinOffset = -5.8f; // -6.0 Top
-        private static float yMinOffset = -0.1f; // 0.0 Left
-        private float width = 3.5f;
-        private float height = 0.3f;
+        private static float xOffset = 20;
+        private static float yOffset = 20;
+        private float width = 300;
+        private float height = 20;
         private int health;
         private float hpScale;
 
@@ -85,10 +85,10 @@ namespace Game.UI
             GL.BindTexture(TextureTarget.Texture2D, 0);
             GL.Begin(PrimitiveType.Quads);
             GL.Color4(new Color4(1.0f, 0, 0, 0.5f));
-            GL.Vertex2(player.MinX - origin.X + xMinOffset, player.MinY - origin.Y + yMinOffset);
-            GL.Vertex2(player.MinX - origin.X + xMinOffset + (this.hpScale * currentHP), player.MinY - origin.Y + yMinOffset);
-            GL.Vertex2(player.MinX - origin.X + xMinOffset + (this.hpScale * currentHP), player.MinY - origin.Y + yMinOffset - this.height);
-            GL.Vertex2(player.MinX - origin.X + xMinOffset, player.MinY - origin.Y + yMinOffset - this.height);
+            GL.Vertex2(xOffset, yOffset);
+            GL.Vertex2(xOffset + (this.hpScale * currentHP), yOffset);
+            GL.Vertex2(xOffset + (this.hpScale * currentHP), yOffset + this.height);
+            GL.Vertex2(xOffset, yOffset + this.height);
             GL.End();
         }
 
