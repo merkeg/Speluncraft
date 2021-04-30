@@ -65,6 +65,14 @@
     <EmbeddedResource Include="Resources\Sprite\tilesheet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Remove="Resources\Font\semicondensed\font.fnt" />
+    <EmbeddedResource Include="Resources\Font\semicondensed\font.fnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\Font\semicondensed\font.png" />
+    <EmbeddedResource Include="Resources\Font\semicondensed\font.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
