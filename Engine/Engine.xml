@@ -448,12 +448,6 @@
             </summary>
             <param name="gameObject">The GameObject to add.</param>
         </member>
-        <member name="M:Engine.Engine.AddRenderer(Engine.Renderer.IRenderer)">
-            <summary>
-            Adds an renderer to the list.
-            </summary>
-            <param name="renderer">The renderer to add.</param>
-        </member>
         <member name="M:Engine.Engine.AddRenderer(Engine.Renderer.IRenderer,Engine.Renderer.RenderLayer)">
             <summary>
             Adds an renderer to the list.
@@ -474,7 +468,7 @@
             </summary>
             <param name="gameObject">The GameObject to Destroy.</param>
         </member>
-        <member name="M:Engine.Engine.RemoveRenderer(Engine.Renderer.IRenderer)">
+        <member name="M:Engine.Engine.RemoveRenderer(Engine.Renderer.IRenderer,Engine.Renderer.RenderLayer)">
             <summary>
             Removes an rendere.
             </summary>
@@ -717,7 +711,7 @@
             The Sprite class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.Sprite.Sprite.#ctor(System.IO.Stream)">
+        <member name="M:Engine.Renderer.Sprite.Sprite.#ctor(System.IO.Stream,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.Sprite.Sprite"/> class.
             </summary>
@@ -772,6 +766,120 @@
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.Sprite.SpriteRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Engine.Renderer.Text.Font">
+            <summary>
+            Font class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Text.Font.#ctor(Engine.Renderer.Text.Parser.FontModel,Engine.Renderer.Sprite.Sprite)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Text.Font"/> class.
+            </summary>
+            <param name="model">Font model.</param>
+            <param name="fontSheet">Spritesheet with handle of the font.</param>
+        </member>
+        <member name="P:Engine.Renderer.Text.Font.Model">
+            <summary>
+            Gets the font model.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Text.Font.FontSheet">
+            <summary>
+            Gets the font sheet.
+            </summary>
+        </member>
+        <member name="T:Engine.Renderer.Text.Parser.FontModel">
+            <summary>
+            Font model class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Text.Parser.FontModel.#ctor(System.Collections.Generic.Dictionary{System.Int32,Engine.Renderer.Text.Parser.FontModel.FontModelCharacter})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Text.Parser.FontModel"/> class.
+            Font model initializer.
+            </summary>
+            <param name="characters">List of characters.</param>
+        </member>
+        <member name="P:Engine.Renderer.Text.Parser.FontModel.Characters">
+            <summary>
+            Gets the List of characters.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Text.Parser.FontModel.Parse(System.IO.Stream)">
+            <summary>
+            Parse a file to an font model.
+            </summary>
+            <param name="stream">Stream to use.</param>
+            <returns>Font model.</returns>
+        </member>
+        <member name="T:Engine.Renderer.Text.Parser.FontModel.FontModelCharacter">
+            <summary>
+            Character model.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.Text.Parser.FontModel.FontModelCharacter.Id">
+            <summary>
+            Character id.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.Text.Parser.FontModel.FontModelCharacter.X">
+            <summary>
+            x position of char.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.Text.Parser.FontModel.FontModelCharacter.Y">
+            <summary>
+            y position of char.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.Text.Parser.FontModel.FontModelCharacter.Width">
+            <summary>
+            width of char.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.Text.Parser.FontModel.FontModelCharacter.Height">
+            <summary>
+            height of char.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.Text.Parser.FontModel.FontModelCharacter.XOffset">
+            <summary>
+            XOffset of char.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.Text.Parser.FontModel.FontModelCharacter.YOffset">
+            <summary>
+            YOffset of char.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.Text.Parser.FontModel.FontModelCharacter.XAdvance">
+            <summary>
+            XAdvance of char.
+            </summary>
+        </member>
+        <member name="T:Engine.Renderer.Text.TextRenderer">
+            <summary>
+            The text renderer class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Text.TextRenderer.#ctor(System.String,Engine.Renderer.Text.Font,OpenTK.Mathematics.Color4,OpenTK.Mathematics.Vector2d,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Text.TextRenderer"/> class.
+            </summary>
+            <param name="text">The text to show.</param>
+            <param name="font">The font to render it with.</param>
+            <param name="color">The color to render it with.</param>
+            <param name="position">Position of the text.</param>
+        </member>
+        <member name="M:Engine.Renderer.Text.TextRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.Text.TextRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.Text.TextRenderer.OnCreate">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Renderer.Tile.Parser.TilemapParser">
@@ -952,6 +1060,20 @@
             <summary>
             Gets the size of the tile in pixels.
             </summary>
+        </member>
+        <member name="T:Engine.Renderer.UiMatrixRenderer">
+            <summary>
+            Internal Renderer.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.UiMatrixRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UiMatrixRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UiMatrixRenderer.OnCreate">
+            <inheritdoc/>
         </member>
     </members>
 </doc>

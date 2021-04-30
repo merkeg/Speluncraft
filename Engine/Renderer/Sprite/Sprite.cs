@@ -24,12 +24,12 @@ namespace Engine.Renderer.Sprite
         /// Initializes a new instance of the <see cref="Sprite"/> class.
         /// </summary>
         /// <param name="resource">The resource to bind as sprite.</param>
-        public Sprite(Stream resource)
+        public Sprite(Stream resource, bool flip = true)
         {
             this.resource = resource;
             this.Handle = GL.GenTexture();
 
-            this.BuildSprite();
+            this.BuildSprite(true);
         }
 
         /// <summary>
@@ -47,10 +47,14 @@ namespace Engine.Renderer.Sprite
         /// </summary>
         public int Height { get; private set; }
 
-        private void BuildSprite()
+        private void BuildSprite(bool flip)
         {
             using Image<Rgba32> image = Image.Load<Rgba32>(this.resource);
-            image.Mutate(x => x.Flip(FlipMode.Vertical));
+            if (flip)
+            {
+                image.Mutate(x => x.Flip(FlipMode.Vertical));
+            }
+
             byte[] data = new byte[image.Width * image.Height * 4];
 
             this.Width = image.Width;

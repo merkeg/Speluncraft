@@ -29,11 +29,11 @@ namespace Engine
             this.Colliders = new List<IRectangle>();
             this.GameObjectsToRemove = new List<GameObject.GameObject>();
             this.GameObjectsToAdd = new List<GameObject.GameObject>();
-            this.Renderers = new Dictionary<Renderer.RenderLayer, List<Renderer.IRenderer>>();
+            this.Renderers = new Dictionary<RenderLayer, List<IRenderer>>();
 
-            foreach (Renderer.RenderLayer layer in (Renderer.RenderLayer[])Enum.GetValues(typeof(Renderer.RenderLayer)))
+            foreach (RenderLayer layer in (RenderLayer[])Enum.GetValues(typeof(RenderLayer)))
             {
-                this.Renderers.Add(layer, new List<Renderer.IRenderer>());
+                this.Renderers.Add(layer, new List<IRenderer>());
             }
         }
 
@@ -45,7 +45,7 @@ namespace Engine
         /// <summary>
         /// Gets the renderers.
         /// </summary>
-        public Dictionary<Renderer.RenderLayer, List<Renderer.IRenderer>> Renderers { get; private set; }
+        public Dictionary<RenderLayer, List<IRenderer>> Renderers { get; private set; }
 
         /// <summary>
         /// Gets a list of the colliders in the game.
@@ -78,12 +78,7 @@ namespace Engine
         /// <returns>Engine instance.</returns>
         public static Engine Instance()
         {
-            if (instance == null)
-            {
-                instance = new Engine();
-            }
-
-            return instance;
+            return instance ??= new Engine();
         }
 
         /// <summary>
@@ -109,7 +104,7 @@ namespace Engine
         /// </summary>
         /// <param name="renderer">The renderer to add.</param>
         /// <param name="layer">The render order.</param>
-        public void AddRenderer(Renderer.IRenderer renderer, Renderer.RenderLayer layer = RenderLayer.GAME)
+        public void AddRenderer(IRenderer renderer, RenderLayer layer = RenderLayer.GAME)
         {
             this.Renderers[layer].Add(renderer);
             renderer.OnCreate();
@@ -128,6 +123,8 @@ namespace Engine
             window.UpdateFrame += this.Update;
             this.GameWindow.RenderFrame += this.Render;
             this.GameWindow.Resize += this.Resize;
+            this.AddRenderer(new UiMatrixRenderer(), RenderLayer.UI);
+
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.Texture2D);
@@ -156,12 +153,12 @@ namespace Engine
         /// Removes an rendere.
         /// </summary>
         /// <param name="renderer">The rendere to Remove.</param>
-        private void RemoveRenderer(Renderer.IRenderer renderer, RenderLayer layer = RenderLayer.GAME)
+        private void RemoveRenderer(IRenderer renderer, RenderLayer layer = RenderLayer.GAME)
         {
             this.Renderers[layer].Remove(renderer);
         }
 
-        private void Update(OpenTK.Windowing.Common.FrameEventArgs args)
+        private void Update(FrameEventArgs args)
         {
             float elapsed = (float)MathHelper.Clamp(args.Time, 0, 0.08);
             this.GameObjects.ForEach(gameObject => gameObject.OnUpdate(elapsed));
@@ -183,7 +180,7 @@ namespace Engine
 
         private void Resize(ResizeEventArgs args)
         {
-            foreach (KeyValuePair<Renderer.RenderLayer, List<Renderer.IRenderer>> item in this.Renderers)
+            foreach (KeyValuePair<RenderLayer, List<IRenderer>> item in this.Renderers)
             {
                 item.Value.ForEach(renderer => renderer.Resize(args));
             }
@@ -193,7 +190,7 @@ namespace Engine
         {
             this.GameWindow.SwapBuffers();
             GL.Clear(ClearBufferMask.ColorBufferBit);
-            foreach (KeyValuePair<Renderer.RenderLayer, List<Renderer.IRenderer>> item in this.Renderers)
+            foreach (KeyValuePair<RenderLayer, List<IRenderer>> item in this.Renderers)
             {
                 item.Value.ForEach(renderer => renderer.Render(args));
             }

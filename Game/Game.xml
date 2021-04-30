@@ -209,5 +209,10 @@
             The Main class of the game.
             </summary>
         </member>
+        <member name="M:Example.Program.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Example.Program"/> class.
+            </summary>
+        </member>
     </members>
 </doc>

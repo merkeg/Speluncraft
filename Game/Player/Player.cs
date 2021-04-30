@@ -20,9 +20,9 @@ namespace Game.Player
         private int jumpCounterMax = 1;
 
         private float accelaration = 18f;
-        private float idealBreacking = 15f;
+        private float idealBreacking = 25f;
         private float activeBreacking = 20f;
-        private float jumpPower = 8.8f;
+        private float jumpPower = 9.5f;
 
         private int isFaceing;
         private Gun.IGun gun;
@@ -50,26 +50,6 @@ namespace Game.Player
 
             Engine.Engine.Instance().Colliders.Add(this);
 
-            // For Demo
-            if (true)
-            {
-                System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
-                using System.IO.Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.enemy.png");
-                Sprite enenemySprite = new Sprite(spriteStream);
-                Enemy.DummyAI testEnemy = new Enemy.DummyAI(this.MinX + 3, this.MinY - 6, this.SizeX, this.SizeY, enenemySprite, 10);
-                Engine.Engine.Instance().AddGameObject(testEnemy);
-            }
-
-            if (true)
-            {
-                System.Reflection.Assembly assembly = System.Reflection.Assembly.GetExecutingAssembly();
-                using System.IO.Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.enemyGun.png");
-                Sprite enenemySprite = new Sprite(spriteStream);
-
-                Enemy.EnemyPistol enemyWithPistol = new Enemy.EnemyPistol(this.MinX + 4, this.MinY, this.SizeX, this.SizeY, enenemySprite, 5);
-                Engine.Engine.Instance().AddGameObject(enemyWithPistol);
-            }
-
             // For Demo 2.0
             this.AddComponent(new Engine.Component.DamageCollider(10, 1));
 
@@ -89,7 +69,7 @@ namespace Game.Player
             OpenTK.Windowing.GraphicsLibraryFramework.KeyboardState keyboardState = Engine.Engine.Instance().GameWindow.KeyboardState;
             Engine.Component.Physics physics = this.GetComponent<Engine.Component.Physics>();
 
-            if (keyboardState.IsKeyDown(Keys.Left))
+            if (keyboardState.IsKeyDown(Keys.A))
             { // Player wants to go left
                 this.isFaceing = ILookDirection.Left;
                 if (physics.GetVelocity().X > 0)
@@ -99,7 +79,7 @@ namespace Game.Player
 
                 physics.AddVelocityX(-this.accelaration * frameTime);
             }
-            else if (keyboardState.IsKeyDown(Keys.Right))
+            else if (keyboardState.IsKeyDown(Keys.D))
             { // Player wants to go right
                 this.isFaceing = ILookDirection.Right;
                 if (physics.GetVelocity().X < 0)
@@ -126,9 +106,8 @@ namespace Game.Player
                 }
             }
 
-            if (keyboardState.IsKeyDown(Keys.D))
+            if (keyboardState.IsKeyDown(Keys.W))
             {
-                // Console.WriteLine("E");
                 this.gun.PullTrigger();
             }
 

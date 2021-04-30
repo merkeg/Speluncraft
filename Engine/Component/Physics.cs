@@ -46,9 +46,9 @@ namespace Engine.Component
         {
             this.velocity = new Vector2(0, 0);
             this.maxVelocity = new Vector2(7, 20);
-            this.gravity = -12f;
+            this.gravity = -20f;
             this.isAffectedByGravity = false;
-            this.gravityMultiplier = 3f;
+            this.gravityMultiplier = 5f;
             return;
         }
 
