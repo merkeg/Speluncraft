@@ -18,12 +18,13 @@ namespace Engine.Renderer.Sprite
     /// </summary>
     public class Sprite
     {
-        private Stream resource;
+        private readonly Stream resource;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Sprite"/> class.
         /// </summary>
         /// <param name="resource">The resource to bind as sprite.</param>
+        /// <param name="flip">Set if flipped.</param>
         public Sprite(Stream resource, bool flip = true)
         {
             this.resource = resource;

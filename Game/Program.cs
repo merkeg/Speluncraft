@@ -2,6 +2,8 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
+using Engine.Component;
+
 namespace Example
 {
     using System.IO;
@@ -87,8 +89,8 @@ namespace Example
             Sprite fontSprite = new Sprite(fontStream);
             Font font = new Font(fontModel, fontSprite);
 
-            TextRenderer textRenderer = new TextRenderer("It just works! (tm)", font, Color4.White, new Vector2d(100, 100), 0.3f);
-            this.engine.AddRenderer(textRenderer, RenderLayer.UI);
+            DebugRenderer debugRenderer = new DebugRenderer(new Rectangle(20, 60, 300, 325), new Color4(0, 0, 0, 0.3f), font, player);
+            this.engine.AddRenderer(debugRenderer, RenderLayer.UI);
         }
 
         private void AddEnemies()

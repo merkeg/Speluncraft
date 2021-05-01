@@ -669,6 +669,26 @@
         <member name="M:Engine.Renderer.CollisionRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
+        <member name="T:Engine.Renderer.DebugRenderer">
+            <summary>
+            Debug renderer class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.DebugRenderer.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.GameObject.GameObject)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.DebugRenderer"/> class.
+            </summary>
+            <param name="bounds">Bounds.</param>
+            <param name="backgroundColor">Background color.</param>
+            <param name="font">Font.</param>
+            <param name="gameObject">gameobject with physics component.</param>
+        </member>
+        <member name="M:Engine.Renderer.DebugRenderer.OnCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.DebugRenderer.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
         <member name="T:Engine.Renderer.RenderLayer">
             <summary>
             Rendering layers.
@@ -716,6 +736,7 @@
             Initializes a new instance of the <see cref="T:Engine.Renderer.Sprite.Sprite"/> class.
             </summary>
             <param name="resource">The resource to bind as sprite.</param>
+            <param name="flip">Set if flipped.</param>
         </member>
         <member name="P:Engine.Renderer.Sprite.Sprite.Handle">
             <summary>
@@ -872,6 +893,32 @@
             <param name="font">The font to render it with.</param>
             <param name="color">The color to render it with.</param>
             <param name="position">Position of the text.</param>
+            <param name="fontScale">Scale of the text.</param>
+        </member>
+        <member name="P:Engine.Renderer.Text.TextRenderer.Text">
+            <summary>
+            Gets or sets the text.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Text.TextRenderer.Font">
+            <summary>
+            Gets or sets the font.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Text.TextRenderer.Color">
+            <summary>
+            Gets or sets the color.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Text.TextRenderer.Position">
+            <summary>
+            Gets or sets the position.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Text.TextRenderer.FontScale">
+            <summary>
+            Gets or sets the font scale.
+            </summary>
         </member>
         <member name="M:Engine.Renderer.Text.TextRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
             <inheritdoc/>
@@ -1074,6 +1121,171 @@
         </member>
         <member name="M:Engine.Renderer.UiMatrixRenderer.OnCreate">
             <inheritdoc/>
+        </member>
+        <member name="T:Engine.Renderer.UI.Graph.GraphDataSet">
+            <summary>
+            Graph data set class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.UI.Graph.GraphDataSet.#ctor(System.Int32,OpenTK.Mathematics.Color4)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.UI.Graph.GraphDataSet"/> class.
+            </summary>
+            <param name="dataPoints">Data points.</param>
+            <param name="color">Color to draw with.</param>
+        </member>
+        <member name="P:Engine.Renderer.UI.Graph.GraphDataSet.Data">
+            <summary>
+            Gets the data.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.UI.Graph.GraphDataSet.Color">
+            <summary>
+            Gets or sets the color.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.UI.Graph.GraphDataSet.AddData(System.Single)">
+            <summary>
+            Function to add a data point to the DataSet.
+            </summary>
+            <param name="data">Data point.</param>
+        </member>
+        <member name="T:Engine.Renderer.UI.Graph.GraphRenderer">
+            <summary>
+            Graph renderer class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.#ctor(System.String,Engine.Renderer.Text.Font,OpenTK.Mathematics.Vector2,System.Int32,System.Int32,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.UI.Graph.GraphRenderer"/> class.
+            </summary>
+            <param name="title">Graph title.</param>
+            <param name="font">Font of text.</param>
+            <param name="position">Position of graph (Top left).</param>
+            <param name="width">Width.</param>
+            <param name="height">Height.</param>
+            <param name="min">Min y.</param>
+            <param name="max">Max y.</param>
+        </member>
+        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.OnCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.AddDataSet(Engine.Renderer.UI.Graph.GraphDataSet)">
+            <summary>
+            Adds an dataset to the graph.
+            </summary>
+            <param name="dataSet">Dataset to add.</param>
+        </member>
+        <member name="T:Engine.Renderer.UI.Primitive.QuadRenderer">
+            <summary>
+            Quad Renderer class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.#ctor(Engine.GameObject.IRectangle,OpenTK.Mathematics.Color4,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.UI.Primitive.QuadRenderer"/> class.
+            </summary>
+            <param name="bounds">Bounds of quad.</param>
+            <param name="color">Color of quad.</param>
+            <param name="filled">Quad filled.</param>
+        </member>
+        <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.OnCreate">
+            <inheritdoc/>
+        </member>
+        <member name="T:Engine.Renderer.UI.UiElement">
+            <summary>
+            UI element class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.UI.UiElement"/> class.
+            </summary>
+            <param name="bounds">Bounds.</param>
+            <param name="backgroundColor">Background color.</param>
+            <param name="font">Font.</param>
+        </member>
+        <member name="P:Engine.Renderer.UI.UiElement.Renderers">
+            <summary>
+            Gets the Renderers.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.UI.UiElement.Bounds">
+            <summary>
+            Gets or sets Bounds.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.UI.UiElement.Font">
+            <summary>
+            Gets or sets Font.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.UI.UiElement.BackgroundColor">
+            <summary>
+            Gets or sets background color.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.OnCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
+            <summary>
+            Renders before everything on ui.
+            </summary>
+            <param name="args">Frame args.</param>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.AddRenderElement(Engine.Renderer.IRenderer)">
+            <summary>
+            Adds an renderer to the ui element.
+            </summary>
+            <param name="renderer">Renderer element.</param>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.AddQuad(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,System.Boolean)">
+            <summary>
+            Adds an quad to the ui element.
+            </summary>
+            <param name="rectangleBounds">Bounds of the quad.</param>
+            <param name="color">Color of the quad.</param>
+            <param name="filled">Quad filled.</param>
+            <returns>The Quad element.</returns>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.AddGraph(System.String,Engine.GameObject.Rectangle,System.Single,System.Single)">
+            <summary>
+            Adds a graph to the ui element.
+            </summary>
+            <param name="title">Title of graph.</param>
+            <param name="graphBounds">Bounds of graph.</param>
+            <param name="min">Min.</param>
+            <param name="max">Max.</param>
+            <returns>Graph renderer object.</returns>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.AddText(System.String,OpenTK.Mathematics.Color4,OpenTK.Mathematics.Vector2,System.Single)">
+            <summary>
+            Add text to ui element.
+            </summary>
+            <param name="text">Text.</param>
+            <param name="color">Color of text.</param>
+            <param name="position">Position of text.</param>
+            <param name="textScale">Scale of text.</param>
+            <returns>Text renderer object.</returns>
         </member>
     </members>
 </doc>
