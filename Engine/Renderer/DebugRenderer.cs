@@ -4,6 +4,7 @@
 
 namespace Engine.Renderer
 {
+    using System.Diagnostics;
     using global::Engine.Component;
     using global::Engine.GameObject;
     using global::Engine.Renderer.Text;
@@ -38,13 +39,14 @@ namespace Engine.Renderer
         /// <param name="bounds">Bounds.</param>
         /// <param name="backgroundColor">Background color.</param>
         /// <param name="font">Font.</param>
-        /// <param name="gameObject">gameobject with physics component.</param>
-        public DebugRenderer(Rectangle bounds, Color4 backgroundColor, Font font, GameObject gameObject)
-            : base(bounds, backgroundColor, font)
+        /// <param name="gameObject">Gameobject with physics component.</param>
+        /// <param name="alignment">Alignment.</param>
+        public DebugRenderer(Rectangle bounds, Color4 backgroundColor, Font font, GameObject gameObject, UiAlignment alignment = UiAlignment.Left)
+            : base(bounds, backgroundColor, font, alignment)
         {
-            this.engineInfoText = this.AddText(string.Empty, Color4.White, new Vector2(5, 10), 0.2f);
-            this.frameInfoText = this.AddText(string.Empty, Color4.White, new Vector2(5,  25), 0.2f);
-            this.playerInfoText = this.AddText(string.Empty, Color4.White, new Vector2(5, 45), 0.2f);
+            this.engineInfoText = this.AddText(string.Empty, Color4.White, new RelativeRectangle(this.AbsoluteBounds, 5, 10, 1, 1), 0.2f);
+            this.frameInfoText = this.AddText(string.Empty, Color4.White, new RelativeRectangle(this.AbsoluteBounds, 5, 25, 1, 1), 0.2f);
+            this.playerInfoText = this.AddText(string.Empty, Color4.White, new RelativeRectangle(this.AbsoluteBounds, 5, 40, 1, 1), 0.2f);
             this.physics = gameObject.GetComponent<Physics>();
 
             this.tickDataSet = new GraphDataSet(100, Color4.Yellow);
@@ -52,8 +54,8 @@ namespace Engine.Renderer
             this.velXDataSet = new GraphDataSet(100, Color4.Coral);
             this.velYDataSet = new GraphDataSet(100, Color4.Lime);
 
-            this.frameGraphRenderer = this.AddGraph("Render time (Yellow) & GameObjects (Blue)", new Rectangle(5, 70, 290, 120), 0, 15);
-            this.movementGraphRenderer = this.AddGraph("Player velocity (X=Red, Y=Green)", new Rectangle(5, 200, 290, 120), -15, 15);
+            this.frameGraphRenderer = this.AddGraph("Render time (Y) & GameObjects (B)", new RelativeRectangle(this.AbsoluteBounds, 5, 70, 290, 120), 0, 15);
+            this.movementGraphRenderer = this.AddGraph("Player velocity (X=Red, Y=Green)", new RelativeRectangle(this.AbsoluteBounds, 5, 200, 290, 120), -15, 15);
 
             this.frameGraphRenderer.AddDataSet(this.tickDataSet);
             this.frameGraphRenderer.AddDataSet(this.gODataSet);
@@ -71,9 +73,9 @@ namespace Engine.Renderer
         public override void OnRender(FrameEventArgs args)
         {
             Engine engine = Engine.Instance();
-            this.engineInfoText.Text = $"GO: {engine.GameObjects.Count} - COL: {engine.Colliders.Count} -- GA: {engine.Renderers[RenderLayer.GAME].Count} - UI: {engine.Renderers[RenderLayer.UI].Count}";
-            this.frameInfoText.Text = $"time: {MathHelper.Round(args.Time * 1000, 2)}ms";
-            this.playerInfoText.Text = $"velX: {MathHelper.Round(this.physics.GetVelocity().X, 2),-10} velY: {MathHelper.Round(this.physics.GetVelocity().Y, 2),-10}";
+            this.engineInfoText.Text = $"GO: {engine.GameObjects.Count} - COL: {engine.Colliders.Count}";
+            this.frameInfoText.Text = $"mem: {Process.GetCurrentProcess().PrivateMemorySize64 / 1000 / 1000}MB - time: {MathHelper.Round(args.Time * 1000, 2)}ms";
+            this.playerInfoText.Text = $"velX: {MathHelper.Round(this.physics.GetVelocity().X, 2),-6} velY: {MathHelper.Round(this.physics.GetVelocity().Y, 2),-6}";
 
             this.deltaTime += args.Time;
             if (this.deltaTime >= 0.05)

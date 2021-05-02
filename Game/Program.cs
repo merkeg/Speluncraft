@@ -14,6 +14,7 @@ namespace Example
     using Engine.Renderer.Text.Parser;
     using Engine.Renderer.Tile;
     using Engine.Renderer.Tile.Parser;
+    using Engine.Renderer.UI;
     using Game.Enemy;
     using Game.Player;
     using Game.UI;
@@ -81,13 +82,13 @@ namespace Example
             HealthbarPlayer playerhealthbar = new HealthbarPlayer();
             this.engine.AddRenderer(playerhealthbar, RenderLayer.UI);
 
-            using Stream fontModelStream = this.assembly.GetManifestResourceStream("Game.Resources.Font.semicondensed.font.fnt");
-            using Stream fontStream = this.assembly.GetManifestResourceStream("Game.Resources.Font.semicondensed.font.png");
+            using Stream fontModelStream = this.assembly.GetManifestResourceStream("Game.Resources.Font.hack.font.fnt");
+            using Stream fontStream = this.assembly.GetManifestResourceStream("Game.Resources.Font.hack.font.png");
             FontModel fontModel = FontModel.Parse(fontModelStream);
             Sprite fontSprite = new Sprite(fontStream);
             Font font = new Font(fontModel, fontSprite);
 
-            DebugRenderer debugRenderer = new DebugRenderer(new Rectangle(20, 60, 300, 325), new Color4(0, 0, 0, 0.3f), font, player);
+            DebugRenderer debugRenderer = new DebugRenderer(new Rectangle(5, 5, 300, 325), new Color4(0, 0, 0, 0.3f), font, player, UiAlignment.Right);
             this.engine.AddRenderer(debugRenderer, RenderLayer.UI);
         }
 

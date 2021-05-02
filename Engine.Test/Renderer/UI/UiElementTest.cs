@@ -14,7 +14,7 @@ namespace EngineTest.Renderer.UI
         public void TestUiElementsText()
         {
             UiElementStud uiElement = new UiElementStud(new Rectangle(0, 0, 1, 1), Color4.Aqua);
-            uiElement.AddText("test", Color4.Aqua, Vector2.One, 0.1f);
+            uiElement.AddText("test", Color4.Aqua, new Rectangle(0, 0, 1, 1), 0.1f);
             Assert.IsTrue(uiElement.Renderers.Count == 2, "Should be 2.");
         }
         
@@ -32,15 +32,6 @@ namespace EngineTest.Renderer.UI
             UiElementStud uiElement = new UiElementStud(new Rectangle(0, 0, 1, 1), Color4.Aqua);
             uiElement.AddQuad(new Rectangle(0, 0, 1, 1), Color4.Aqua);
             Assert.IsTrue(uiElement.Renderers.Count == 2, "Should be 2.");
-        }
-        
-        [TestMethod]
-        public void TestUiElementsRelativity()
-        {
-            UiElementStud uiElement = new UiElementStud(new Rectangle(10, 10, 10, 10), Color4.Aqua);
-            QuadRenderer quadRenderer = uiElement.AddQuad(new Rectangle(0, 0, 5, 5), Color4.Aqua);
-            Assert.IsTrue(quadRenderer.Bounds.MinX == 10, "Not relative");
-            Assert.IsTrue(quadRenderer.Bounds.MinY == 10, "Not relative");
         }
     }
 }
