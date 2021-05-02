@@ -87,16 +87,7 @@ namespace Engine
         /// <param name="gameObject">The GameObject to add.</param>
         public void AddGameObject(GameObject.GameObject gameObject)
         {
-            this.GameObjects.Add(gameObject);
-
-            if (gameObject.Sprite != null)
-            {
-                SpriteRenderer renderer = new SpriteRenderer(gameObject.Sprite, gameObject);
-                gameObject.SpriteRenderer = renderer;
-                this.AddRenderer(renderer);
-            }
-
-            gameObject.OnCreated();
+            this.GameObjectsToAdd.Add(gameObject);
         }
 
         /// <summary>
@@ -135,7 +126,17 @@ namespace Engine
         /// Also checks if there are Colliders from it and delets it.
         /// </summary>
         /// <param name="gameObject">The GameObject to Destroy.</param>
-        private void RemoveGameObject(GameObject.GameObject gameObject)
+        public void RemoveGameObject(GameObject.GameObject gameObject)
+        {
+            this.GameObjectsToRemove.Add(gameObject);
+        }
+
+        /// <summary>
+        /// Removes an GameObject from the World and Calls it OnDestroy() func.
+        /// Also checks if there are Colliders from it and delets it.
+        /// </summary>
+        /// <param name="gameObject">The GameObject to Destroy.</param>
+        private void ExcludeGameObject(GameObject.GameObject gameObject)
         {
             this.RemoveRenderer(gameObject.SpriteRenderer);
             gameObject.SpriteRenderer.Dispose();
@@ -147,6 +148,24 @@ namespace Engine
             }
 
             // GC.Collect();
+        }
+
+        /// <summary>
+        /// Adds an GameObject to the list.
+        /// </summary>
+        /// <param name="gameObject">The GameObject to add.</param>
+        private void ImplementGameObject(GameObject.GameObject gameObject)
+        {
+            this.GameObjects.Add(gameObject);
+
+            if (gameObject.Sprite != null)
+            {
+                SpriteRenderer renderer = new SpriteRenderer(gameObject.Sprite, gameObject);
+                gameObject.SpriteRenderer = renderer;
+                this.AddRenderer(renderer);
+            }
+
+            gameObject.OnCreated();
         }
 
         /// <summary>
@@ -165,14 +184,14 @@ namespace Engine
 
             foreach (GameObject.GameObject g in this.GameObjectsToRemove)
             {
-                this.RemoveGameObject(g);
+                this.ExcludeGameObject(g);
             }
 
             this.GameObjectsToRemove.Clear();
 
             foreach (GameObject.GameObject g in this.GameObjectsToAdd)
             {
-                this.AddGameObject(g);
+                this.ImplementGameObject(g);
             }
 
             this.GameObjectsToAdd.Clear();

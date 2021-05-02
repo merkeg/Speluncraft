@@ -2,7 +2,7 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
-namespace Example
+namespace Game
 {
     using System.IO;
     using System.Reflection;
@@ -37,6 +37,8 @@ namespace Example
         public Program()
         {
             GameWindow window = new GameWindow(GameWindowSettings.Default, new NativeWindowSettings { Profile = ContextProfile.Compatability });
+            window.RenderFrequency = 60;
+
             window.Size = new Vector2i(1280, 720);
             window.VSync = VSyncMode.Adaptive;
             this.engine = Engine.Engine.Instance();
@@ -74,7 +76,7 @@ namespace Example
         {
             using Stream spriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.player.png");
             Sprite sprite = new Sprite(spriteStream);
-            Player player = new Player(7, -27, 1, 1, sprite);
+            Player.Player player = new Player.Player(7, -27, 1, 1, sprite);
             player.AddComponent(new CameraTrackingComponent());
             this.engine.AddGameObject(player);
 

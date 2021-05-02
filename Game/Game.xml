@@ -171,6 +171,30 @@
         <member name="M:Game.Player.Player.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="T:Game.Program">
+            <summary>
+            The Main class of the game.
+            </summary>
+        </member>
+        <member name="M:Game.Program.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Program"/> class.
+            </summary>
+        </member>
+        <member name="T:Game.StresstestComponent">
+            <summary>
+            Stresstest component class.
+            </summary>
+        </member>
+        <member name="M:Game.StresstestComponent.#ctor(Engine.Renderer.Sprite.Sprite)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.StresstestComponent"/> class.
+            </summary>
+            <param name="sprite">Sprite to render.</param>
+        </member>
+        <member name="M:Game.StresstestComponent.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.UI.HealthbarPlayer">
             <summary>
             The HealthbarPlayer class renders the healthbar UI element.
@@ -202,16 +226,6 @@
         <member name="M:Game.UI.HealthbarPlayer.OnCreate">
             <summary>
             OnCreate function.
-            </summary>
-        </member>
-        <member name="T:Example.Program">
-            <summary>
-            The Main class of the game.
-            </summary>
-        </member>
-        <member name="M:Example.Program.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Example.Program"/> class.
             </summary>
         </member>
     </members>

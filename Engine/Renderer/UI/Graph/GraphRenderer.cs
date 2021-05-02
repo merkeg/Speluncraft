@@ -31,7 +31,7 @@ namespace Engine.Renderer.UI.Graph
         /// </summary>
         /// <param name="title">Graph title.</param>
         /// <param name="font">Font of text.</param>
-        /// <param name="bounds">Bounds of the graph</param>
+        /// <param name="bounds">Bounds of the graph.</param>
         /// <param name="min">Min y.</param>
         /// <param name="max">Max y.</param>
         public GraphRenderer(string title, Font font, Rectangle bounds, float min = 0f, float max = 15f)

@@ -40,7 +40,7 @@ namespace Game.Player
         {
             Engine.Component.Physics physics = new Engine.Component.Physics();
             physics.SetIsAffectedByGravity(true);
-            physics.SetGravityMultiplier(3);
+            physics.SetGravityMultiplier(2);
             this.AddComponent(physics);
             this.AddComponent(new Engine.Component.Collider());
 
