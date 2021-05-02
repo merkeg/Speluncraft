@@ -468,6 +468,19 @@
             </summary>
             <param name="gameObject">The GameObject to Destroy.</param>
         </member>
+        <member name="M:Engine.Engine.ExcludeGameObject(Engine.GameObject.GameObject)">
+            <summary>
+            Removes an GameObject from the World and Calls it OnDestroy() func.
+            Also checks if there are Colliders from it and delets it.
+            </summary>
+            <param name="gameObject">The GameObject to Destroy.</param>
+        </member>
+        <member name="M:Engine.Engine.ImplementGameObject(Engine.GameObject.GameObject)">
+            <summary>
+            Adds an GameObject to the list.
+            </summary>
+            <param name="gameObject">The GameObject to add.</param>
+        </member>
         <member name="M:Engine.Engine.RemoveRenderer(Engine.Renderer.IRenderer,Engine.Renderer.RenderLayer)">
             <summary>
             Removes an rendere.
@@ -1162,7 +1175,7 @@
             </summary>
             <param name="title">Graph title.</param>
             <param name="font">Font of text.</param>
-            <param name="bounds">Bounds of the graph</param>
+            <param name="bounds">Bounds of the graph.</param>
             <param name="min">Min y.</param>
             <param name="max">Max y.</param>
         </member>
@@ -1207,6 +1220,11 @@
         </member>
         <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.OnCreate">
             <inheritdoc/>
+        </member>
+        <member name="T:Engine.Renderer.UI.RelativeRectangle">
+            <summary>
+            Relative rectangle class.
+            </summary>
         </member>
         <member name="M:Engine.Renderer.UI.RelativeRectangle.#ctor(Engine.GameObject.Rectangle,System.Single,System.Single,System.Single,System.Single)">
             <summary>

@@ -21,7 +21,6 @@ namespace Engine.Component
         /// </summary>
         public virtual void OnCreated()
         {
-            return;
         }
 
         /// <summary>
@@ -35,7 +34,6 @@ namespace Engine.Component
         /// </summary>
         public virtual void OnDestroy()
         {
-            return;
         }
 
         /// <summary>

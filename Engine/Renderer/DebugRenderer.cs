@@ -26,7 +26,6 @@ namespace Engine.Renderer
         private readonly GraphRenderer movementGraphRenderer;
 
         private readonly GraphDataSet tickDataSet;
-        private readonly GraphDataSet gODataSet;
         private readonly GraphDataSet velXDataSet;
         private readonly GraphDataSet velYDataSet;
 
@@ -50,16 +49,13 @@ namespace Engine.Renderer
             this.physics = gameObject.GetComponent<Physics>();
 
             this.tickDataSet = new GraphDataSet(100, Color4.Yellow);
-            this.gODataSet = new GraphDataSet(100, Color4.Aqua);
             this.velXDataSet = new GraphDataSet(100, Color4.Coral);
             this.velYDataSet = new GraphDataSet(100, Color4.Lime);
 
-            this.frameGraphRenderer = this.AddGraph("Render time (Y) & GameObjects (B)", new RelativeRectangle(this.AbsoluteBounds, 5, 70, 290, 120), 0, 15);
+            this.frameGraphRenderer = this.AddGraph("Render time (Yellow)", new RelativeRectangle(this.AbsoluteBounds, 5, 70, 290, 120), 0, 25);
             this.movementGraphRenderer = this.AddGraph("Player velocity (X=Red, Y=Green)", new RelativeRectangle(this.AbsoluteBounds, 5, 200, 290, 120), -15, 15);
 
             this.frameGraphRenderer.AddDataSet(this.tickDataSet);
-            this.frameGraphRenderer.AddDataSet(this.gODataSet);
-
             this.movementGraphRenderer.AddDataSet(this.velXDataSet);
             this.movementGraphRenderer.AddDataSet(this.velYDataSet);
         }
@@ -82,7 +78,6 @@ namespace Engine.Renderer
             {
                 this.deltaTime = 0;
                 this.tickDataSet.AddData((float)args.Time * 1000);
-                this.gODataSet.AddData(engine.GameObjects.Count);
                 this.velXDataSet.AddData(this.physics.GetVelocity().X);
                 this.velYDataSet.AddData(this.physics.GetVelocity().Y);
             }
