@@ -57,7 +57,7 @@ namespace Engine.Renderer.UI.Graph
             float calcMax = this.max - this.min;
             float yMultiply = this.height / calcMax;
 
-            // X line
+            // Outer box
             GL.Begin(PrimitiveType.LineLoop);
             GL.Color4(Color4.White);
             GL.LineWidth(2);
@@ -70,6 +70,7 @@ namespace Engine.Renderer.UI.Graph
             foreach (GraphDataSet dataSet in this.data)
             {
                 GL.Color4(dataSet.Color);
+                GL.LineWidth(2);
                 GL.Begin(PrimitiveType.LineStrip);
 
                 float xAdvance = (float)this.width / dataSet.Data.Length;

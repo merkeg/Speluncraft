@@ -1195,6 +1195,11 @@
             <param name="color">Color of quad.</param>
             <param name="filled">Quad filled.</param>
         </member>
+        <member name="P:Engine.Renderer.UI.Primitive.QuadRenderer.Bounds">
+            <summary>
+            Gets or sets bounds.
+            </summary>
+        </member>
         <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
             <inheritdoc/>
         </member>

@@ -14,7 +14,6 @@ namespace Engine.Renderer.UI.Primitive
     /// </summary>
     public class QuadRenderer : IRenderer
     {
-        private IRectangle bounds;
         private bool filled;
         private Color4 color;
 
@@ -26,10 +25,15 @@ namespace Engine.Renderer.UI.Primitive
         /// <param name="filled">Quad filled.</param>
         public QuadRenderer(IRectangle bounds, Color4 color, bool filled = true)
         {
-            this.bounds = bounds;
+            this.Bounds = bounds;
             this.color = color;
             this.filled = filled;
         }
+
+        /// <summary>
+        /// Gets or sets bounds.
+        /// </summary>
+        public IRectangle Bounds { get; set; }
 
         /// <inheritdoc/>
         public void Render(FrameEventArgs args)
@@ -37,10 +41,10 @@ namespace Engine.Renderer.UI.Primitive
             GL.BindTexture(TextureTarget.Texture2D, 0);
             GL.Color4(this.color);
             GL.Begin(this.filled ? PrimitiveType.Quads : PrimitiveType.LineStrip);
-            GL.Vertex2(this.bounds.MinX, this.bounds.MinY);
-            GL.Vertex2(this.bounds.MaxX, this.bounds.MinY);
-            GL.Vertex2(this.bounds.MaxX, this.bounds.MaxY);
-            GL.Vertex2(this.bounds.MinX, this.bounds.MaxY);
+            GL.Vertex2(this.Bounds.MinX, this.Bounds.MinY);
+            GL.Vertex2(this.Bounds.MaxX, this.Bounds.MinY);
+            GL.Vertex2(this.Bounds.MaxX, this.Bounds.MaxY);
+            GL.Vertex2(this.Bounds.MinX, this.Bounds.MaxY);
             GL.End();
         }
 
