@@ -26,7 +26,7 @@ namespace Engine.Renderer.Text
         /// <param name="color">The color to render it with.</param>
         /// <param name="position">Position of the text.</param>
         /// <param name="fontScale">Scale of the text.</param>
-        public TextRenderer(string text, Font font, Color4 color, Vector2d position, float fontScale = 1.0f)
+        public TextRenderer(string text, Font font, Color4 color, GameObject.Rectangle position, float fontScale = 1.0f)
         {
             this.Text = text;
             this.Font = font;
@@ -53,7 +53,7 @@ namespace Engine.Renderer.Text
         /// <summary>
         /// Gets or sets the position.
         /// </summary>
-        public Vector2d Position { get; set; }
+        public GameObject.Rectangle Position { get; set; }
 
         /// <summary>
         /// Gets or sets the font scale.
@@ -63,8 +63,8 @@ namespace Engine.Renderer.Text
         /// <inheritdoc/>
         public void Render(FrameEventArgs args)
         {
-            double x = this.Position.X;
-            double y = this.Position.Y;
+            double x = this.Position.MinX;
+            double y = this.Position.MinY;
 
             GL.BindTexture(TextureTarget.Texture2D, this.Font.FontSheet.Handle);
             GL.Color4(this.Color);

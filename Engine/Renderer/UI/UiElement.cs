@@ -13,29 +13,64 @@ namespace Engine.Renderer.UI
     using OpenTK.Windowing.Common;
 
     /// <summary>
+    /// UI alignment class.
+    /// </summary>
+    public enum UiAlignment
+    {
+        /// <summary>
+        /// Float left.
+        /// </summary>
+        Left,
+
+        /// <summary>
+        /// Float right.
+        /// </summary>
+        Right,
+    }
+
+    /// <summary>
     /// UI element class.
     /// </summary>
     public abstract class UiElement : IRenderer
     {
+        private UiAlignment alignment;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="UiElement"/> class.
         /// </summary>
         /// <param name="bounds">Bounds.</param>
         /// <param name="backgroundColor">Background color.</param>
         /// <param name="font">Font.</param>
-        protected UiElement(Rectangle bounds, Color4 backgroundColor, Font font)
+        /// <param name="alignment">Alignment.</param>
+        protected UiElement(Rectangle bounds, Color4 backgroundColor, Font font, UiAlignment alignment = UiAlignment.Left)
         {
+            this.alignment = alignment;
             this.Renderers = new List<IRenderer>();
             this.Font = font;
             this.BackgroundColor = backgroundColor;
             this.Bounds = bounds;
-            this.AddQuad(new Rectangle(0, 0, this.Bounds.SizeX, this.Bounds.SizeY), backgroundColor);
+            if (alignment == UiAlignment.Left)
+            {
+                this.AbsoluteBounds = new Rectangle(0, 0, 1, 1);
+            }
+            else
+            {
+                Vector2i monitor = Engine.Instance().GameWindow.Size;
+                this.AbsoluteBounds = new Rectangle(monitor.X - this.Bounds.MinX - this.Bounds.SizeX, this.Bounds.MinY, this.Bounds.SizeX, this.Bounds.SizeY);
+            }
+
+            this.AddQuad(new RelativeRectangle(this.AbsoluteBounds, 0, 0, this.Bounds.SizeX, this.Bounds.SizeY), backgroundColor);
         }
 
         /// <summary>
         /// Gets the Renderers.
         /// </summary>
         public List<IRenderer> Renderers { get; private set; }
+
+        /// <summary>
+        /// Gets the absolute bounds.
+        /// </summary>
+        protected Rectangle AbsoluteBounds { get; }
 
         /// <summary>
         /// Gets or sets Bounds.
@@ -62,6 +97,10 @@ namespace Engine.Renderer.UI
         /// <inheritdoc/>
         public void Resize(ResizeEventArgs args)
         {
+            if (this.alignment == UiAlignment.Right)
+            {
+                this.AbsoluteBounds.MinX = args.Width - this.Bounds.MinX - this.Bounds.SizeX;
+            }
         }
 
         /// <inheritdoc/>
@@ -91,7 +130,6 @@ namespace Engine.Renderer.UI
         /// <returns>The Quad element.</returns>
         public QuadRenderer AddQuad(Rectangle rectangleBounds, Color4 color, bool filled = true)
         {
-            rectangleBounds = this.Combine(this.Bounds, rectangleBounds);
             QuadRenderer quadRenderer = new QuadRenderer(rectangleBounds, color, filled);
             this.AddRenderElement(quadRenderer);
             return quadRenderer;
@@ -107,8 +145,7 @@ namespace Engine.Renderer.UI
         /// <returns>Graph renderer object.</returns>
         public GraphRenderer AddGraph(string title, Rectangle graphBounds, float min = 0f, float max = 10f)
         {
-            graphBounds = this.Combine(this.Bounds, graphBounds);
-            GraphRenderer graphRenderer = new GraphRenderer(title, this.Font, new Vector2(graphBounds.MinX, graphBounds.MinY), (int)graphBounds.SizeX, (int)graphBounds.SizeY, min, max);
+            GraphRenderer graphRenderer = new GraphRenderer(title, this.Font, graphBounds, min, max);
             this.AddRenderElement(graphRenderer);
             return graphRenderer;
         }
@@ -121,16 +158,11 @@ namespace Engine.Renderer.UI
         /// <param name="position">Position of text.</param>
         /// <param name="textScale">Scale of text.</param>
         /// <returns>Text renderer object.</returns>
-        public TextRenderer AddText(string text, Color4 color, Vector2 position, float textScale)
+        public TextRenderer AddText(string text, Color4 color, Rectangle position, float textScale)
         {
-            TextRenderer textRenderer = new TextRenderer(text, this.Font, color, new Vector2(this.Bounds.MinX + position.X, this.Bounds.MinY + position.Y), textScale);
+            TextRenderer textRenderer = new TextRenderer(text, this.Font, color, position, textScale);
             this.AddRenderElement(textRenderer);
             return textRenderer;
-        }
-
-        private Rectangle Combine(Rectangle a, Rectangle b)
-        {
-            return new Rectangle(a.MinX + b.MinX, a.MinY + b.MinY, b.SizeX, b.SizeY);
         }
     }
 }

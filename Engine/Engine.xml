@@ -632,7 +632,7 @@
         </member>
         <member name="P:Engine.GameObject.Rectangle.SizeY">
             <summary>
-            Gets the hieght of the Rectangle.
+            Gets the height of the Rectangle.
             </summary>
         </member>
         <member name="P:Engine.GameObject.Rectangle.MaxX">
@@ -674,14 +674,15 @@
             Debug renderer class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.DebugRenderer.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.GameObject.GameObject)">
+        <member name="M:Engine.Renderer.DebugRenderer.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.GameObject.GameObject,Engine.Renderer.UI.UiAlignment)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.DebugRenderer"/> class.
             </summary>
             <param name="bounds">Bounds.</param>
             <param name="backgroundColor">Background color.</param>
             <param name="font">Font.</param>
-            <param name="gameObject">gameobject with physics component.</param>
+            <param name="gameObject">Gameobject with physics component.</param>
+            <param name="alignment">Alignment.</param>
         </member>
         <member name="M:Engine.Renderer.DebugRenderer.OnCreate">
             <inheritdoc/>
@@ -885,7 +886,7 @@
             The text renderer class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.Text.TextRenderer.#ctor(System.String,Engine.Renderer.Text.Font,OpenTK.Mathematics.Color4,OpenTK.Mathematics.Vector2d,System.Single)">
+        <member name="M:Engine.Renderer.Text.TextRenderer.#ctor(System.String,Engine.Renderer.Text.Font,OpenTK.Mathematics.Color4,Engine.GameObject.Rectangle,System.Single)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.Text.TextRenderer"/> class.
             </summary>
@@ -1155,15 +1156,13 @@
             Graph renderer class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.#ctor(System.String,Engine.Renderer.Text.Font,OpenTK.Mathematics.Vector2,System.Int32,System.Int32,System.Single,System.Single)">
+        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.#ctor(System.String,Engine.Renderer.Text.Font,Engine.GameObject.Rectangle,System.Single,System.Single)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.UI.Graph.GraphRenderer"/> class.
             </summary>
             <param name="title">Graph title.</param>
             <param name="font">Font of text.</param>
-            <param name="position">Position of graph (Top left).</param>
-            <param name="width">Width.</param>
-            <param name="height">Height.</param>
+            <param name="bounds">Bounds of the graph</param>
             <param name="min">Min y.</param>
             <param name="max">Max y.</param>
         </member>
@@ -1209,22 +1208,71 @@
         <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.OnCreate">
             <inheritdoc/>
         </member>
+        <member name="M:Engine.Renderer.UI.RelativeRectangle.#ctor(Engine.GameObject.Rectangle,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.UI.RelativeRectangle"/> class.
+            </summary>
+            <param name="absolute">Absolute position.</param>
+            <param name="minX">Relative minx.</param>
+            <param name="minY">Relative miny.</param>
+            <param name="sizeX">Relative sizex.</param>
+            <param name="sizeY">Relative sizey.</param>
+        </member>
+        <member name="P:Engine.Renderer.UI.RelativeRectangle.SizeX">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.UI.RelativeRectangle.SizeY">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.UI.RelativeRectangle.MaxX">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.UI.RelativeRectangle.MaxY">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.UI.RelativeRectangle.MinX">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.UI.RelativeRectangle.MinY">
+            <inheritdoc/>
+        </member>
+        <member name="T:Engine.Renderer.UI.UiAlignment">
+            <summary>
+            UI alignment class.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.UI.UiAlignment.Left">
+            <summary>
+            Float left.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.UI.UiAlignment.Right">
+            <summary>
+            Float right.
+            </summary>
+        </member>
         <member name="T:Engine.Renderer.UI.UiElement">
             <summary>
             UI element class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.UI.UiElement.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font)">
+        <member name="M:Engine.Renderer.UI.UiElement.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.Renderer.UI.UiAlignment)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.UI.UiElement"/> class.
             </summary>
             <param name="bounds">Bounds.</param>
             <param name="backgroundColor">Background color.</param>
             <param name="font">Font.</param>
+            <param name="alignment">Alignment.</param>
         </member>
         <member name="P:Engine.Renderer.UI.UiElement.Renderers">
             <summary>
             Gets the Renderers.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.UI.UiElement.AbsoluteBounds">
+            <summary>
+            Gets the absolute bounds.
             </summary>
         </member>
         <member name="P:Engine.Renderer.UI.UiElement.Bounds">
@@ -1282,7 +1330,7 @@
             <param name="max">Max.</param>
             <returns>Graph renderer object.</returns>
         </member>
-        <member name="M:Engine.Renderer.UI.UiElement.AddText(System.String,OpenTK.Mathematics.Color4,OpenTK.Mathematics.Vector2,System.Single)">
+        <member name="M:Engine.Renderer.UI.UiElement.AddText(System.String,OpenTK.Mathematics.Color4,Engine.GameObject.Rectangle,System.Single)">
             <summary>
             Add text to ui element.
             </summary>
