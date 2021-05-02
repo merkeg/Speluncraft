@@ -52,7 +52,7 @@ namespace Engine.Renderer
             this.velXDataSet = new GraphDataSet(100, Color4.Coral);
             this.velYDataSet = new GraphDataSet(100, Color4.Lime);
 
-            this.frameGraphRenderer = this.AddGraph("Render time (Y) & GameObjects (B)", new RelativeRectangle(this.AbsoluteBounds, 5, 70, 290, 120), 0, 25);
+            this.frameGraphRenderer = this.AddGraph("Render time (Yellow)", new RelativeRectangle(this.AbsoluteBounds, 5, 70, 290, 120), 0, 25);
             this.movementGraphRenderer = this.AddGraph("Player velocity (X=Red, Y=Green)", new RelativeRectangle(this.AbsoluteBounds, 5, 200, 290, 120), -15, 15);
 
             this.frameGraphRenderer.AddDataSet(this.tickDataSet);
