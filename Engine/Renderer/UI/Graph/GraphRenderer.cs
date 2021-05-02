@@ -2,12 +2,11 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
-using Engine.GameObject;
-
 namespace Engine.Renderer.UI.Graph
 {
     using System;
     using System.Collections.Generic;
+    using global::Engine.GameObject;
     using global::Engine.Renderer.Text;
     using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;

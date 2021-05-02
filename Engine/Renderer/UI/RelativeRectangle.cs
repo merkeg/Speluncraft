@@ -1,7 +1,14 @@
-﻿using Engine.GameObject;
+﻿// <copyright file="RelativeRectangle.cs" company="RWUwU">
+// Copyright (c) RWUwU. All rights reserved.
+// </copyright>
 
 namespace Engine.Renderer.UI
 {
+    using global::Engine.GameObject;
+
+    /// <summary>
+    /// Relative rectangle class.
+    /// </summary>
     public class RelativeRectangle : Rectangle
     {
         private readonly Rectangle absolute;
