@@ -74,7 +74,7 @@ namespace Game
 
         private void AddPlayer()
         {
-            using Stream spriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.player.png");
+            using Stream spriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Floppa.png");
             Sprite sprite = new Sprite(spriteStream);
             Player.Player player = new Player.Player(7, -27, 1, 1, sprite);
             player.AddComponent(new CameraTrackingComponent());
