@@ -4,6 +4,7 @@
 
 namespace Engine.Renderer
 {
+    using System;
     using System.Diagnostics;
     using global::Engine.Component;
     using global::Engine.GameObject;
@@ -52,7 +53,7 @@ namespace Engine.Renderer
             this.velXDataSet = new GraphDataSet(100, Color4.Coral);
             this.velYDataSet = new GraphDataSet(100, Color4.Lime);
 
-            this.frameGraphRenderer = this.AddGraph("Render time (Yellow)", new RelativeRectangle(this.AbsoluteBounds, 5, 70, 290, 120), 0, 25);
+            this.frameGraphRenderer = this.AddGraph("Render time (Yellow)", new RelativeRectangle(this.AbsoluteBounds, 5, 70, 290, 120), 0, 30);
             this.movementGraphRenderer = this.AddGraph("Player velocity (X=Red, Y=Green)", new RelativeRectangle(this.AbsoluteBounds, 5, 200, 290, 120), -15, 15);
 
             this.frameGraphRenderer.AddDataSet(this.tickDataSet);
@@ -70,7 +71,7 @@ namespace Engine.Renderer
         {
             Engine engine = Engine.Instance();
             this.engineInfoText.Text = $"GO: {engine.GameObjects.Count} - COL: {engine.Colliders.Count}";
-            this.frameInfoText.Text = $"mem: {Process.GetCurrentProcess().PrivateMemorySize64 / 1000 / 1000}MB - time: {MathHelper.Round(args.Time * 1000, 2)}ms";
+            this.frameInfoText.Text = $"mem: {GC.GetTotalMemory(false) / 1000 / 1000,-3}MB - time: {MathHelper.Round(args.Time * 1000, 2)}ms";
             this.playerInfoText.Text = $"velX: {MathHelper.Round(this.physics.GetVelocity().X, 2),-6} velY: {MathHelper.Round(this.physics.GetVelocity().Y, 2),-6}";
 
             this.deltaTime += args.Time;
