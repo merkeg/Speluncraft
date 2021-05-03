@@ -1,4 +1,5 @@
-﻿using Engine.Renderer.Tile;
+﻿using Engine.GameObject;
+using Engine.Renderer.Tile;
 using Engine.Renderer.Tile.Parser;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -17,7 +18,7 @@ namespace EngineTest.Renderer
         public void TestTilemapModel()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            using Stream tilemapStream = GetEmbeddedResourceStream(assembly, "Resources.all.json");
+            using Stream tilemapStream = Util.GetEmbeddedResourceStream(assembly, "Resources.all.json");
 
             TilemapModel model = TilemapParser.ParseTilemap(tilemapStream);
             
@@ -42,7 +43,7 @@ namespace EngineTest.Renderer
         public void TestTilemap()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            using Stream tilemapStream = GetEmbeddedResourceStream(assembly, "Resources.all.json");
+            using Stream tilemapStream = Util.GetEmbeddedResourceStream(assembly, "Resources.all.json");
 
             TilemapModel model = TilemapParser.ParseTilemap(tilemapStream);
             Tilemap tilemap = new Tilemap(null, model);
@@ -55,20 +56,17 @@ namespace EngineTest.Renderer
             Assert.IsTrue(layer[0, 0] == 1, "Wrong tile, " + layer[0, 0]);
         }
 
-        // https://www.codeproject.com/Tips/5256504/Using-Embedded-Resources-in-Unit-Tests-with-NET
-        public static Stream GetEmbeddedResourceStream(Assembly assembly, string relativeResourcePath)
+        [TestMethod]
+        public void TestCollisionGen()
         {
-            if (string.IsNullOrEmpty(relativeResourcePath))
-                throw new ArgumentNullException("relativeResourcePath");
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            using Stream tilemapStream = Util.GetEmbeddedResourceStream(assembly, "Resources.collisiontest.json");
+            TilemapModel model = TilemapParser.ParseTilemap(tilemapStream);
 
-            var resourcePath = String.Format("{0}.{1}",
-                Regex.Replace(assembly.ManifestModule.Name, @"\.(exe|dll)$", string.Empty, RegexOptions.IgnoreCase), relativeResourcePath);
+            List<Rectangle> collisions = TilemapParser.GenerateCollisionMap(model.layers[0], 0, 0);
 
-            var stream = assembly.GetManifestResourceStream(resourcePath);
-            if (stream == null)
-                throw new ArgumentException(String.Format("The specified embedded resource \"{0}\" is not found.", relativeResourcePath));
-            return stream;
-        
+            Assert.IsTrue(collisions.Count == 16, "Expected collision count 16, got: " + collisions.Count);
         }
+        
     }
 }

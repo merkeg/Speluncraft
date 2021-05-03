@@ -12,12 +12,19 @@
 
   <ItemGroup>
     <None Remove="Resources\all.json" />
+    <None Remove="Resources\collisiontest.json" />
     <None Remove="Resources\tilesheet.png" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\all.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\collisiontest.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\font.fnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\tilesheet.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

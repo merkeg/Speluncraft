@@ -18,16 +18,44 @@ namespace Engine.Renderer.Sprite
     /// </summary>
     public class Sprite
     {
+        private readonly Stream resource;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Sprite"/> class.
         /// </summary>
         /// <param name="resource">The resource to bind as sprite.</param>
-        public Sprite(Stream resource)
+        /// <param name="flip">Set if flipped.</param>
+        public Sprite(Stream resource, bool flip = true)
         {
+            this.resource = resource;
             this.Handle = GL.GenTexture();
 
-            using Image<Rgba32> image = Image.Load<Rgba32>(resource);
-            image.Mutate(x => x.Flip(FlipMode.Vertical));
+            this.BuildSprite(true);
+        }
+
+        /// <summary>
+        /// Gets the OpenGL texture handle.
+        /// </summary>
+        public int Handle { get; private set; }
+
+        /// <summary>
+        /// Gets the sprite width.
+        /// </summary>
+        public int Width { get; private set; }
+
+        /// <summary>
+        /// Gets the sprite height.
+        /// </summary>
+        public int Height { get; private set; }
+
+        private void BuildSprite(bool flip)
+        {
+            using Image<Rgba32> image = Image.Load<Rgba32>(this.resource);
+            if (flip)
+            {
+                image.Mutate(x => x.Flip(FlipMode.Vertical));
+            }
+
             byte[] data = new byte[image.Width * image.Height * 4];
 
             this.Width = image.Width;
@@ -53,20 +81,5 @@ namespace Engine.Renderer.Sprite
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)TextureMagFilter.Nearest);
         }
-
-        /// <summary>
-        /// Gets the OpenGL texture handle.
-        /// </summary>
-        public int Handle { get; private set; }
-
-        /// <summary>
-        /// Gets the sprite width.
-        /// </summary>
-        public int Width { get; private set; }
-
-        /// <summary>
-        /// Gets the sprite height.
-        /// </summary>
-        public int Height { get; private set; }
     }
 }

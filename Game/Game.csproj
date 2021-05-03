@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
@@ -14,6 +14,9 @@
   <ItemGroup>
     <None Remove="Resources\all.json" />
     <None Remove="Resources\B.json" />
+    <None Remove="Resources\enemy.png" />
+    <None Remove="Resources\enemyGun.png" />
+    <None Remove="Resources\Floppa.png" />
     <None Remove="Resources\jumpNrun.json" />
     <None Remove="Resources\jumpy.json" />
     <None Remove="Resources\lol.json" />
@@ -29,32 +32,49 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\all.json">
+    <EmbeddedResource Include="Resources\Level\all.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\B.json">
+    <EmbeddedResource Include="Resources\enemy.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\jumpNrun.json">
+    <EmbeddedResource Include="Resources\enemyGun.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\jumpy.json">
+    <EmbeddedResource Include="Resources\Floppa.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\lol.json">
+    <EmbeddedResource Include="Resources\Level\jumpNrun.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\player.png">
+    <EmbeddedResource Include="Resources\Sprite\player.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\rotation.json">
+    <EmbeddedResource Include="Resources\Level\rotation.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\testmap.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <EmbeddedResource Include="Resources\Sprite\tilesheet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\tilesheet.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <None Remove="Resources\Font\semicondensed\font.fnt" />
+    <EmbeddedResource Include="Resources\Font\semicondensed\font.fnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\Font\semicondensed\font.png" />
+    <EmbeddedResource Include="Resources\Font\semicondensed\font.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\Level\getUp.json" />
+    <EmbeddedResource Include="Resources\Level\getUp.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\Font\hack\font.fnt" />
+    <EmbeddedResource Include="Resources\Font\hack\font.fnt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <None Remove="Resources\Font\hack\font.png" />
+    <EmbeddedResource Include="Resources\Font\hack\font.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
 
@@ -73,5 +93,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Engine\Engine.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resources\Font\" />
   </ItemGroup>
 </Project>

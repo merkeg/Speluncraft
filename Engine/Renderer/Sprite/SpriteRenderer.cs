@@ -15,7 +15,7 @@ namespace Engine.Renderer.Sprite
     /// <summary>
     /// The SpriteRenderer class.
     /// </summary>
-    public class SpriteRenderer : IRenderer
+    public class SpriteRenderer : IRenderer, IDisposable
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SpriteRenderer"/> class.
@@ -37,6 +37,14 @@ namespace Engine.Renderer.Sprite
         /// Gets the sprite to render.
         /// </summary>
         public Sprite Sprite { get; internal set; }
+
+        /// <summary>
+        /// Yeet it away.
+        /// </summary>
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
+        }
 
         /// <inheritdoc/>
         public void OnCreate()

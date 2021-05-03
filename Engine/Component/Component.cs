@@ -4,10 +4,12 @@
 
 namespace Engine.Component
 {
+    using System;
+
     /// <summary>
     /// The base class for components in GameObjects.
     /// </summary>
-    public abstract class Component
+    public abstract class Component : IDisposable
     {
         /// <summary>
         /// Gets the GameObject the component is in.
@@ -19,7 +21,6 @@ namespace Engine.Component
         /// </summary>
         public virtual void OnCreated()
         {
-            return;
         }
 
         /// <summary>
@@ -33,7 +34,6 @@ namespace Engine.Component
         /// </summary>
         public virtual void OnDestroy()
         {
-            return;
         }
 
         /// <summary>
@@ -52,6 +52,14 @@ namespace Engine.Component
         public GameObject.GameObject GetGameObject()
         {
             return this.GameObject;
+        }
+
+        /// <summary>
+        /// Yeet this away.
+        /// </summary>
+        public void Dispose()
+        {
+            GC.SuppressFinalize(this);
         }
     }
 }

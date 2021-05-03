@@ -169,6 +169,12 @@
             </summary>
             <returns>The Flag if ground was touced.</returns>
         </member>
+        <member name="M:Engine.Component.Collider.GetCollided">
+            <summary>
+            Get the a List of every Rectanlge we collided with this frame.
+            </summary>
+            <returns>The List.</returns>
+        </member>
         <member name="M:Engine.Component.Collider.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
@@ -209,6 +215,93 @@
             Gets the GameObject.
             </summary>
             <returns>the parent GameObject.</returns>
+        </member>
+        <member name="M:Engine.Component.Component.Dispose">
+            <summary>
+            Yeet this away.
+            </summary>
+        </member>
+        <member name="T:Engine.Component.DamageCollider">
+            <summary>
+            A Kind of Collider, that Checks, if it Intersects with anything in Engine.Colliders. If yes it will deal DMG, if there is an HP Component.
+            But it wont deal DMG to the GameObject it belongs to.
+            </summary>
+        </member>
+        <member name="M:Engine.Component.DamageCollider.#ctor(System.Int32,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Component.DamageCollider"/> class.
+            </summary>
+            <param name="dmg">How Much DMG it will deal on Contact.</param>
+            <param name="dmgCD">How long before this can deal dmg again.</param>
+        </member>
+        <member name="M:Engine.Component.DamageCollider.AddToCollisionList(Engine.GameObject.IRectangle)">
+            <summary>
+            Add a Collision that was undone, but still needs to be checked for DMG.
+            </summary>
+            <param name="r">The Rectangle we collided with.</param>
+        </member>
+        <member name="M:Engine.Component.DamageCollider.GetIsCollided">
+            <summary>
+            Returns, if the DMG Collider already collided once. Usefull for bullets.
+            </summary>
+            <returns>If we allready Collided with something.</returns>
+        </member>
+        <member name="M:Engine.Component.DamageCollider.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Engine.Component.HealthPoints">
+            <summary>
+            Gives HP to the Player or an Enemy. To Take DMG the GameObjects needs to be in Engine.Colliders.
+            </summary>
+        </member>
+        <member name="M:Engine.Component.HealthPoints.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Component.HealthPoints"/> class.
+            </summary>
+            <param name="maxHP">MaxHP mus be creater then currHP.</param>
+            <param name="currHP">CurrHP must be less then maxHP, else CurrHP = maxHP.</param>
+        </member>
+        <member name="M:Engine.Component.HealthPoints.GetMaxHP">
+            <summary>
+            Get the MaxHP.
+            </summary>
+            <returns>The MaxhHP.</returns>
+        </member>
+        <member name="M:Engine.Component.HealthPoints.GetCurrHP">
+            <summary>
+            Get the currentHP.
+            </summary>
+            <returns>The currenHP.</returns>
+        </member>
+        <member name="M:Engine.Component.HealthPoints.GetIsDeadFlag">
+            <summary>
+            Get the isDeadFlag.
+            </summary>
+            <returns>The isDeadFlag.</returns>
+        </member>
+        <member name="M:Engine.Component.HealthPoints.SetMaxHP(System.Int32)">
+            <summary>
+            Set the maxHP to a new value.
+            </summary>
+            <param name="maxHP">New maxHP.</param>
+            <returns>The isDead Flag.</returns>
+        </member>
+        <member name="M:Engine.Component.HealthPoints.SetHP(System.Int32)">
+            <summary>
+            Set HP to new Value.
+            </summary>
+            <param name="hp">New HP value.</param>
+            <returns>The isDeadFlag.</returns>
+        </member>
+        <member name="M:Engine.Component.HealthPoints.AddHP(System.Int32)">
+            <summary>
+            Add HP.
+            </summary>
+            <param name="hp">HP to be added.</param>
+            <returns>The isDeadFlag.</returns>
+        </member>
+        <member name="M:Engine.Component.HealthPoints.OnUpdate(System.Single)">
+            <inheritdoc/>
         </member>
         <member name="T:Engine.Component.Physics">
             <summary>
@@ -315,7 +408,7 @@
         </member>
         <member name="P:Engine.Engine.Renderers">
             <summary>
-            Gets a list of Renderers in the game.
+            Gets the renderers.
             </summary>
         </member>
         <member name="P:Engine.Engine.Colliders">
@@ -333,6 +426,16 @@
             Gets the game Camera.
             </summary>
         </member>
+        <member name="P:Engine.Engine.GameObjectsToRemove">
+            <summary>
+            Gets Here you can add GameObjects that should be removed this frame.
+            </summary>
+        </member>
+        <member name="P:Engine.Engine.GameObjectsToAdd">
+            <summary>
+            Gets Here you can add GameObjects that should be added next frame.
+            </summary>
+        </member>
         <member name="M:Engine.Engine.Instance">
             <summary>
             Method to get the engine instance.
@@ -345,17 +448,44 @@
             </summary>
             <param name="gameObject">The GameObject to add.</param>
         </member>
-        <member name="M:Engine.Engine.AddRenderer(Engine.Renderer.IRenderer)">
+        <member name="M:Engine.Engine.AddRenderer(Engine.Renderer.IRenderer,Engine.Renderer.RenderLayer)">
             <summary>
             Adds an renderer to the list.
             </summary>
             <param name="renderer">The renderer to add.</param>
+            <param name="layer">The render order.</param>
         </member>
         <member name="M:Engine.Engine.StartEngine(OpenTK.Windowing.Desktop.GameWindow)">
             <summary>
             Start the engine ticks.
             </summary>
             <param name="window">The GameWindow the engine will be run on.</param>
+        </member>
+        <member name="M:Engine.Engine.RemoveGameObject(Engine.GameObject.GameObject)">
+            <summary>
+            Removes an GameObject from the World and Calls it OnDestroy() func.
+            Also checks if there are Colliders from it and delets it.
+            </summary>
+            <param name="gameObject">The GameObject to Destroy.</param>
+        </member>
+        <member name="M:Engine.Engine.ExcludeGameObject(Engine.GameObject.GameObject)">
+            <summary>
+            Removes an GameObject from the World and Calls it OnDestroy() func.
+            Also checks if there are Colliders from it and delets it.
+            </summary>
+            <param name="gameObject">The GameObject to Destroy.</param>
+        </member>
+        <member name="M:Engine.Engine.ImplementGameObject(Engine.GameObject.GameObject)">
+            <summary>
+            Adds an GameObject to the list.
+            </summary>
+            <param name="gameObject">The GameObject to add.</param>
+        </member>
+        <member name="M:Engine.Engine.RemoveRenderer(Engine.Renderer.IRenderer,Engine.Renderer.RenderLayer)">
+            <summary>
+            Removes an rendere.
+            </summary>
+            <param name="renderer">The rendere to Remove.</param>
         </member>
         <member name="T:Engine.GameObject.GameObject">
             <summary>
@@ -464,6 +594,11 @@
             Called if the GameObject is destroyed.
             </summary>
         </member>
+        <member name="M:Engine.GameObject.GameObject.Dispose">
+            <summary>
+            Yeet this away.
+            </summary>
+        </member>
         <member name="T:Engine.GameObject.IRectangle">
             <summary>
             Rectangle definde with 2 points.
@@ -510,7 +645,7 @@
         </member>
         <member name="P:Engine.GameObject.Rectangle.SizeY">
             <summary>
-            Gets the hieght of the Rectangle.
+            Gets the height of the Rectangle.
             </summary>
         </member>
         <member name="P:Engine.GameObject.Rectangle.MaxX">
@@ -547,6 +682,42 @@
         <member name="M:Engine.Renderer.CollisionRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
+        <member name="T:Engine.Renderer.DebugRenderer">
+            <summary>
+            Debug renderer class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.DebugRenderer.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.GameObject.GameObject,Engine.Renderer.UI.UiAlignment)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.DebugRenderer"/> class.
+            </summary>
+            <param name="bounds">Bounds.</param>
+            <param name="backgroundColor">Background color.</param>
+            <param name="font">Font.</param>
+            <param name="gameObject">Gameobject with physics component.</param>
+            <param name="alignment">Alignment.</param>
+        </member>
+        <member name="M:Engine.Renderer.DebugRenderer.OnCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.DebugRenderer.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Engine.Renderer.RenderLayer">
+            <summary>
+            Rendering layers.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.RenderLayer.GAME">
+            <summary>
+            Game Elements.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.RenderLayer.UI">
+            <summary>
+            UI elements.
+            </summary>
+        </member>
         <member name="T:Engine.Renderer.IRenderer">
             <summary>
             Renderer base class.
@@ -574,11 +745,12 @@
             The Sprite class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.Sprite.Sprite.#ctor(System.IO.Stream)">
+        <member name="M:Engine.Renderer.Sprite.Sprite.#ctor(System.IO.Stream,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.Sprite.Sprite"/> class.
             </summary>
             <param name="resource">The resource to bind as sprite.</param>
+            <param name="flip">Set if flipped.</param>
         </member>
         <member name="P:Engine.Renderer.Sprite.Sprite.Handle">
             <summary>
@@ -617,6 +789,11 @@
             Gets the sprite to render.
             </summary>
         </member>
+        <member name="M:Engine.Renderer.Sprite.SpriteRenderer.Dispose">
+            <summary>
+            Yeet it away.
+            </summary>
+        </member>
         <member name="M:Engine.Renderer.Sprite.SpriteRenderer.OnCreate">
             <inheritdoc/>
         </member>
@@ -624,6 +801,146 @@
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.Sprite.SpriteRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Engine.Renderer.Text.Font">
+            <summary>
+            Font class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Text.Font.#ctor(Engine.Renderer.Text.Parser.FontModel,Engine.Renderer.Sprite.Sprite)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Text.Font"/> class.
+            </summary>
+            <param name="model">Font model.</param>
+            <param name="fontSheet">Spritesheet with handle of the font.</param>
+        </member>
+        <member name="P:Engine.Renderer.Text.Font.Model">
+            <summary>
+            Gets the font model.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Text.Font.FontSheet">
+            <summary>
+            Gets the font sheet.
+            </summary>
+        </member>
+        <member name="T:Engine.Renderer.Text.Parser.FontModel">
+            <summary>
+            Font model class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Text.Parser.FontModel.#ctor(System.Collections.Generic.Dictionary{System.Int32,Engine.Renderer.Text.Parser.FontModel.FontModelCharacter})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Text.Parser.FontModel"/> class.
+            Font model initializer.
+            </summary>
+            <param name="characters">List of characters.</param>
+        </member>
+        <member name="P:Engine.Renderer.Text.Parser.FontModel.Characters">
+            <summary>
+            Gets the List of characters.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Text.Parser.FontModel.Parse(System.IO.Stream)">
+            <summary>
+            Parse a file to an font model.
+            </summary>
+            <param name="stream">Stream to use.</param>
+            <returns>Font model.</returns>
+        </member>
+        <member name="T:Engine.Renderer.Text.Parser.FontModel.FontModelCharacter">
+            <summary>
+            Character model.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.Text.Parser.FontModel.FontModelCharacter.Id">
+            <summary>
+            Character id.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.Text.Parser.FontModel.FontModelCharacter.X">
+            <summary>
+            x position of char.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.Text.Parser.FontModel.FontModelCharacter.Y">
+            <summary>
+            y position of char.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.Text.Parser.FontModel.FontModelCharacter.Width">
+            <summary>
+            width of char.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.Text.Parser.FontModel.FontModelCharacter.Height">
+            <summary>
+            height of char.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.Text.Parser.FontModel.FontModelCharacter.XOffset">
+            <summary>
+            XOffset of char.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.Text.Parser.FontModel.FontModelCharacter.YOffset">
+            <summary>
+            YOffset of char.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.Text.Parser.FontModel.FontModelCharacter.XAdvance">
+            <summary>
+            XAdvance of char.
+            </summary>
+        </member>
+        <member name="T:Engine.Renderer.Text.TextRenderer">
+            <summary>
+            The text renderer class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Text.TextRenderer.#ctor(System.String,Engine.Renderer.Text.Font,OpenTK.Mathematics.Color4,Engine.GameObject.Rectangle,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Text.TextRenderer"/> class.
+            </summary>
+            <param name="text">The text to show.</param>
+            <param name="font">The font to render it with.</param>
+            <param name="color">The color to render it with.</param>
+            <param name="position">Position of the text.</param>
+            <param name="fontScale">Scale of the text.</param>
+        </member>
+        <member name="P:Engine.Renderer.Text.TextRenderer.Text">
+            <summary>
+            Gets or sets the text.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Text.TextRenderer.Font">
+            <summary>
+            Gets or sets the font.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Text.TextRenderer.Color">
+            <summary>
+            Gets or sets the color.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Text.TextRenderer.Position">
+            <summary>
+            Gets or sets the position.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Text.TextRenderer.FontScale">
+            <summary>
+            Gets or sets the font scale.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Text.TextRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.Text.TextRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.Text.TextRenderer.OnCreate">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Renderer.Tile.Parser.TilemapParser">
@@ -804,6 +1121,242 @@
             <summary>
             Gets the size of the tile in pixels.
             </summary>
+        </member>
+        <member name="T:Engine.Renderer.UiMatrixRenderer">
+            <summary>
+            Internal Renderer.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.UiMatrixRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UiMatrixRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UiMatrixRenderer.OnCreate">
+            <inheritdoc/>
+        </member>
+        <member name="T:Engine.Renderer.UI.Graph.GraphDataSet">
+            <summary>
+            Graph data set class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.UI.Graph.GraphDataSet.#ctor(System.Int32,OpenTK.Mathematics.Color4)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.UI.Graph.GraphDataSet"/> class.
+            </summary>
+            <param name="dataPoints">Data points.</param>
+            <param name="color">Color to draw with.</param>
+        </member>
+        <member name="P:Engine.Renderer.UI.Graph.GraphDataSet.Data">
+            <summary>
+            Gets the data.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.UI.Graph.GraphDataSet.Color">
+            <summary>
+            Gets or sets the color.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.UI.Graph.GraphDataSet.AddData(System.Single)">
+            <summary>
+            Function to add a data point to the DataSet.
+            </summary>
+            <param name="data">Data point.</param>
+        </member>
+        <member name="T:Engine.Renderer.UI.Graph.GraphRenderer">
+            <summary>
+            Graph renderer class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.#ctor(System.String,Engine.Renderer.Text.Font,Engine.GameObject.Rectangle,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.UI.Graph.GraphRenderer"/> class.
+            </summary>
+            <param name="title">Graph title.</param>
+            <param name="font">Font of text.</param>
+            <param name="bounds">Bounds of the graph.</param>
+            <param name="min">Min y.</param>
+            <param name="max">Max y.</param>
+        </member>
+        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.OnCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.AddDataSet(Engine.Renderer.UI.Graph.GraphDataSet)">
+            <summary>
+            Adds an dataset to the graph.
+            </summary>
+            <param name="dataSet">Dataset to add.</param>
+        </member>
+        <member name="T:Engine.Renderer.UI.Primitive.QuadRenderer">
+            <summary>
+            Quad Renderer class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.#ctor(Engine.GameObject.IRectangle,OpenTK.Mathematics.Color4,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.UI.Primitive.QuadRenderer"/> class.
+            </summary>
+            <param name="bounds">Bounds of quad.</param>
+            <param name="color">Color of quad.</param>
+            <param name="filled">Quad filled.</param>
+        </member>
+        <member name="P:Engine.Renderer.UI.Primitive.QuadRenderer.Bounds">
+            <summary>
+            Gets or sets bounds.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.OnCreate">
+            <inheritdoc/>
+        </member>
+        <member name="T:Engine.Renderer.UI.RelativeRectangle">
+            <summary>
+            Relative rectangle class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.UI.RelativeRectangle.#ctor(Engine.GameObject.Rectangle,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.UI.RelativeRectangle"/> class.
+            </summary>
+            <param name="absolute">Absolute position.</param>
+            <param name="minX">Relative minx.</param>
+            <param name="minY">Relative miny.</param>
+            <param name="sizeX">Relative sizex.</param>
+            <param name="sizeY">Relative sizey.</param>
+        </member>
+        <member name="P:Engine.Renderer.UI.RelativeRectangle.SizeX">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.UI.RelativeRectangle.SizeY">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.UI.RelativeRectangle.MaxX">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.UI.RelativeRectangle.MaxY">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.UI.RelativeRectangle.MinX">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.UI.RelativeRectangle.MinY">
+            <inheritdoc/>
+        </member>
+        <member name="T:Engine.Renderer.UI.UiAlignment">
+            <summary>
+            UI alignment class.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.UI.UiAlignment.Left">
+            <summary>
+            Float left.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.UI.UiAlignment.Right">
+            <summary>
+            Float right.
+            </summary>
+        </member>
+        <member name="T:Engine.Renderer.UI.UiElement">
+            <summary>
+            UI element class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.Renderer.UI.UiAlignment)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.UI.UiElement"/> class.
+            </summary>
+            <param name="bounds">Bounds.</param>
+            <param name="backgroundColor">Background color.</param>
+            <param name="font">Font.</param>
+            <param name="alignment">Alignment.</param>
+        </member>
+        <member name="P:Engine.Renderer.UI.UiElement.Renderers">
+            <summary>
+            Gets the Renderers.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.UI.UiElement.AbsoluteBounds">
+            <summary>
+            Gets the absolute bounds.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.UI.UiElement.Bounds">
+            <summary>
+            Gets or sets Bounds.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.UI.UiElement.Font">
+            <summary>
+            Gets or sets Font.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.UI.UiElement.BackgroundColor">
+            <summary>
+            Gets or sets background color.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.OnCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
+            <summary>
+            Renders before everything on ui.
+            </summary>
+            <param name="args">Frame args.</param>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.AddRenderElement(Engine.Renderer.IRenderer)">
+            <summary>
+            Adds an renderer to the ui element.
+            </summary>
+            <param name="renderer">Renderer element.</param>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.AddQuad(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,System.Boolean)">
+            <summary>
+            Adds an quad to the ui element.
+            </summary>
+            <param name="rectangleBounds">Bounds of the quad.</param>
+            <param name="color">Color of the quad.</param>
+            <param name="filled">Quad filled.</param>
+            <returns>The Quad element.</returns>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.AddGraph(System.String,Engine.GameObject.Rectangle,System.Single,System.Single)">
+            <summary>
+            Adds a graph to the ui element.
+            </summary>
+            <param name="title">Title of graph.</param>
+            <param name="graphBounds">Bounds of graph.</param>
+            <param name="min">Min.</param>
+            <param name="max">Max.</param>
+            <returns>Graph renderer object.</returns>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.AddText(System.String,OpenTK.Mathematics.Color4,Engine.GameObject.Rectangle,System.Single)">
+            <summary>
+            Add text to ui element.
+            </summary>
+            <param name="text">Text.</param>
+            <param name="color">Color of text.</param>
+            <param name="position">Position of text.</param>
+            <param name="textScale">Scale of text.</param>
+            <returns>Text renderer object.</returns>
         </member>
     </members>
 </doc>

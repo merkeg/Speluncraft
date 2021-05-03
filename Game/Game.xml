@@ -4,6 +4,123 @@
         <name>Game</name>
     </assembly>
     <members>
+        <member name="T:Game.Enemy.DummyAI">
+            <summary>
+            Lets the enemy walk from one side of the platform to the other side.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.DummyAI.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.DummyAI"/> class.
+            </summary>
+            <param name="minX">minX.</param>
+            <param name="minY">minY.</param>
+            <param name="sizeX">sizeX.</param>
+            <param name="sizeY">sizeY.</param>
+            <param name="sprite">sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
+        </member>
+        <member name="M:Game.Enemy.DummyAI.GetDirection">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Enemy.DummyAI.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Enemy.Enemy">
+            <summary>
+            Basic Enemy that can be shot at.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.Enemy.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.Enemy"/> class.
+            </summary>
+            <param name="minX">X-Coordinate of bottom leftPoint.</param>
+            <param name="minY">Y-Coordinate of bottom leftPoint.</param>
+            <param name="sizeX">Size in X axsis.</param>
+            <param name="sizeY">Size in Y axsis.</param>
+            <param name="sprite">Enemy Sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
+        </member>
+        <member name="M:Game.Enemy.Enemy.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Enemy.EnemyPistol">
+            <summary>
+            DummyAI with cool Pistol that shoots.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.EnemyPistol.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.EnemyPistol"/> class.
+            </summary>
+            <param name="minX">minX.</param>
+            <param name="minY">minY.</param>
+            <param name="sizeX">sizeX.</param>
+            <param name="sizeY">sizeY.</param>
+            <param name="sprite">sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
+        </member>
+        <member name="M:Game.Enemy.EnemyPistol.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Gun.Ammunition.Bullet">
+            <summary>
+            A bullet that flies straight untill it hits something, then does DMG and despwans.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.Ammunition.Bullet.#ctor(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.Ammunition.Bullet"/> class.
+            </summary>
+            <param name="dmg">How much dmg it will do on impact.</param>
+            <param name="velocityX">How fast it is flying.</param>
+            <param name="minX">Where it will spawn on X-Axsis.</param>
+            <param name="minY">Where it will spawn on Y-Axsis.</param>
+            <param name="sizeX">Size X.</param>
+            <param name="sizeY">Size Y.</param>
+            <param name="sprite">Its sprite.</param>
+        </member>
+        <member name="M:Game.Gun.Ammunition.Bullet.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Gun.IGun">
+            <summary>
+            Interface for Guns, provides pullTrigger() Methode.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.IGun.PullTrigger">
+            <summary>
+            Pull the trigger of the gun. This should/will cause the gun to shoot in most cases.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.IGun.GetAsComponent">
+            <summary>
+            Retunrs the gun as Component.
+            </summary>
+            <returns>The Gun as a Component.</returns>
+        </member>
+        <member name="T:Game.Gun.Pistol">
+            <summary>
+            A Pistol that shoots normal bullets. With Medium DMG and Medium reload time.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.Pistol.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.Pistol"/> class.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.Pistol.GetAsComponent">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.Pistol.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.Pistol.PullTrigger">
+            <summary>
+            Fires a Bullet, when trigger is pulled and is reloaded.
+            </summary>
+        </member>
         <member name="T:Game.Player.CameraTrackingComponent">
             <summary>
             Camera tracking component class.
@@ -11,6 +128,27 @@
         </member>
         <member name="M:Game.Player.CameraTrackingComponent.OnUpdate(System.Single)">
             <inheritdoc/>
+        </member>
+        <member name="T:Game.Player.ILookDirection">
+            <summary>
+            Interfaces that lets you get the direction an GameObject is faceing.
+            </summary>
+        </member>
+        <member name="F:Game.Player.ILookDirection.Left">
+            <summary>
+            The value getDirection must return, when GameObject is faceing left.
+            </summary>
+        </member>
+        <member name="F:Game.Player.ILookDirection.Right">
+            <summary>
+            The value getDirection must return, when GameObject is faceing right.
+            </summary>
+        </member>
+        <member name="M:Game.Player.ILookDirection.GetDirection">
+            <summary>
+            Get the direction the GameObject is faceing.
+            </summary>
+            <returns>-1 for left, 1 for right.</returns>
         </member>
         <member name="T:Game.Player.Player">
             <summary>
@@ -27,12 +165,67 @@
             <param name="sizeY">Player height.</param>
             <param name="sprite">Player sprite.</param>
         </member>
+        <member name="M:Game.Player.Player.GetDirection">
+            <inheritdoc/>
+        </member>
         <member name="M:Game.Player.Player.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
-        <member name="T:Example.Program">
+        <member name="T:Game.Program">
             <summary>
             The Main class of the game.
+            </summary>
+        </member>
+        <member name="M:Game.Program.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Program"/> class.
+            </summary>
+        </member>
+        <member name="T:Game.StresstestComponent">
+            <summary>
+            Stresstest component class.
+            </summary>
+        </member>
+        <member name="M:Game.StresstestComponent.#ctor(Engine.Renderer.Sprite.Sprite)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.StresstestComponent"/> class.
+            </summary>
+            <param name="sprite">Sprite to render.</param>
+        </member>
+        <member name="M:Game.StresstestComponent.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.UI.HealthbarPlayer">
+            <summary>
+            The HealthbarPlayer class renders the healthbar UI element.
+            </summary>
+        </member>
+        <member name="M:Game.UI.HealthbarPlayer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.UI.HealthbarPlayer"/> class.
+            </summary>
+        </member>
+        <member name="M:Game.UI.HealthbarPlayer.Instance">
+            <summary>
+            Function so player can retrieve always the same healthbar instance (Singleton).
+            </summary>
+            <returns>HealtbarPlayer instance.</returns>
+        </member>
+        <member name="M:Game.UI.HealthbarPlayer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <summary>
+            Render Healthbar.
+            </summary>
+            <param name="args">.</param>
+        </member>
+        <member name="M:Game.UI.HealthbarPlayer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <summary>
+            Resize function.
+            </summary>
+            <param name="args">args.</param>
+        </member>
+        <member name="M:Game.UI.HealthbarPlayer.OnCreate">
+            <summary>
+            OnCreate function.
             </summary>
         </member>
     </members>
