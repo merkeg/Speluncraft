@@ -497,7 +497,7 @@
             The sprite the GameObject is drawn with.
             </summary>
         </member>
-        <member name="M:Engine.GameObject.GameObject.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite)">
+        <member name="M:Engine.GameObject.GameObject.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.GameObject.GameObject"/> class.
             </summary>
@@ -547,6 +547,9 @@
             Gets or sets the Sprite of the GameObject.
             </summary>
         </member>
+        <member name="P:Engine.GameObject.GameObject.Mirrored">
+            <inheritdoc/>
+        </member>
         <member name="P:Engine.GameObject.GameObject.SpriteRenderer">
             <summary>
             Gets or sets the Sprite renderer.
@@ -594,9 +597,14 @@
             Called if the GameObject is destroyed.
             </summary>
         </member>
-        <member name="M:Engine.GameObject.GameObject.Dispose">
+        <member name="T:Engine.GameObject.IMirrorable">
             <summary>
-            Yeet this away.
+            IMirrorable class.
+            </summary>
+        </member>
+        <member name="P:Engine.GameObject.IMirrorable.Mirrored">
+            <summary>
+            Gets or sets a value indicating whether gets or sets if mirrored.
             </summary>
         </member>
         <member name="T:Engine.GameObject.IRectangle">
@@ -667,6 +675,9 @@
             <summary>
             Gets or sets the Y-Coordinate of bottom left point.
             </summary>
+        </member>
+        <member name="P:Engine.GameObject.Rectangle.Mirrored">
+            <inheritdoc/>
         </member>
         <member name="T:Engine.Renderer.CollisionRenderer">
             <summary>
@@ -740,6 +751,122 @@
             Run when the renderer is added.
             </summary>
         </member>
+        <member name="T:Engine.Renderer.Sprite.AnimatedSprite">
+            <summary>
+            Animated sprite class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Sprite.AnimatedSprite.#ctor(Engine.Renderer.Tile.ITilesheet,Engine.Renderer.Sprite.Keyframe[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Sprite.AnimatedSprite"/> class.
+            </summary>
+            <param name="tilesheet">The tilesheet.</param>
+            <param name="keyframes">Keyframes.</param>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.AnimatedSprite.Handle">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.AnimatedSprite.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.AnimatedSprite.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.AnimatedSprite.TexX0">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.AnimatedSprite.TexX1">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.AnimatedSprite.TexY0">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.AnimatedSprite.TexY1">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.AnimatedSprite.Item(System.Int32)">
+            <summary>
+            Reference to this.
+            </summary>
+            <param name="keyframe">The keyframe.</param>
+        </member>
+        <member name="M:Engine.Renderer.Sprite.AnimatedSprite.TimeElapsed(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Engine.Renderer.Sprite.ISprite">
+            <summary>
+            ISprite class.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.ISprite.Handle">
+            <summary>
+            Gets the OpenGL texture handle.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.ISprite.Width">
+            <summary>
+            Gets the sprite width.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.ISprite.Height">
+            <summary>
+            Gets the sprite height.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.ISprite.TexX0">
+            <summary>
+            Gets the texture x0 position.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.ISprite.TexX1">
+            <summary>
+            Gets the texture x1 position.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.ISprite.TexY0">
+            <summary>
+            Gets the texture y0 position.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.ISprite.TexY1">
+            <summary>
+            Gets the texture y1 position.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Sprite.ISprite.TimeElapsed(System.Single)">
+            <summary>
+            Before rendering the renderer runs this with the time attached.
+            </summary>
+            <param name="time">The elapsed time in seconds.</param>
+        </member>
+        <member name="T:Engine.Renderer.Sprite.Keyframe">
+            <summary>
+            Keyframe struct.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Sprite.Keyframe.#ctor(System.Int32,System.Int32,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Sprite.Keyframe"/> struct.
+            </summary>
+            <param name="x">the X position of the sprite in the tilesheet.</param>
+            <param name="y">the Y position of the sprite in the tilesheet.</param>
+            <param name="time">time it stays at this sprite.</param>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.Keyframe.X">
+            <summary>
+            Gets the X position of the sprite in the tilesheet.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.Keyframe.Y">
+            <summary>
+            Gets the Y position of the sprite in the tilesheet.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.Keyframe.Time">
+            <summary>
+            Gets the time it stays at this sprite.
+            </summary>
+        </member>
         <member name="T:Engine.Renderer.Sprite.Sprite">
             <summary>
             The Sprite class.
@@ -767,12 +894,27 @@
             Gets the sprite height.
             </summary>
         </member>
+        <member name="P:Engine.Renderer.Sprite.Sprite.TexX0">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.Sprite.TexX1">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.Sprite.TexY0">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.Sprite.TexY1">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.Sprite.Sprite.TimeElapsed(System.Single)">
+            <inheritdoc/>
+        </member>
         <member name="T:Engine.Renderer.Sprite.SpriteRenderer">
             <summary>
             The SpriteRenderer class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.Sprite.SpriteRenderer.#ctor(Engine.Renderer.Sprite.Sprite,Engine.GameObject.IRectangle)">
+        <member name="M:Engine.Renderer.Sprite.SpriteRenderer.#ctor(Engine.Renderer.Sprite.ISprite,Engine.GameObject.IRectangle)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.Sprite.SpriteRenderer"/> class.
             </summary>
@@ -787,11 +929,6 @@
         <member name="P:Engine.Renderer.Sprite.SpriteRenderer.Sprite">
             <summary>
             Gets the sprite to render.
-            </summary>
-        </member>
-        <member name="M:Engine.Renderer.Sprite.SpriteRenderer.Dispose">
-            <summary>
-            Yeet it away.
             </summary>
         </member>
         <member name="M:Engine.Renderer.Sprite.SpriteRenderer.OnCreate">
@@ -943,6 +1080,41 @@
         <member name="M:Engine.Renderer.Text.TextRenderer.OnCreate">
             <inheritdoc/>
         </member>
+        <member name="T:Engine.Renderer.Tile.ITilesheet">
+            <summary>
+            ITilesheet class.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.ITilesheet.Handle">
+            <summary>
+            Gets the handle id for the specific Tileset.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.ITilesheet.AmountTileHeight">
+            <summary>
+            Gets the amount in height.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.ITilesheet.AmountTileWidth">
+            <summary>
+            Gets the amount in width.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.ITilesheet.TileSize">
+            <summary>
+            Gets the size of the tile in pixels.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.ITilesheet.TileTexSizeX">
+            <summary>
+            Gets the Tile texture size X.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.ITilesheet.TileTexSizeY">
+            <summary>
+            Gets the Tile texture size Y.
+            </summary>
+        </member>
         <member name="T:Engine.Renderer.Tile.Parser.TilemapParser">
             <summary>
             Helper class to parse Tilemap json files into models.
@@ -969,11 +1141,11 @@
             The Tilemap class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.Tile.Tilemap.#ctor(Engine.Renderer.Tile.Tileset,Engine.Renderer.Tile.Parser.TilemapModel)">
+        <member name="M:Engine.Renderer.Tile.Tilemap.#ctor(Engine.Renderer.Tile.Tilesheet,Engine.Renderer.Tile.Parser.TilemapModel)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.Tile.Tilemap"/> class.
             </summary>
-            <param name="tileset">The tileset the tilemap will use.</param>
+            <param name="tilesheet">The tileset the tilemap will use.</param>
             <param name="model">The model which the tilemap will be built.</param>
         </member>
         <member name="P:Engine.Renderer.Tile.Tilemap.Layers">
@@ -981,7 +1153,7 @@
             Gets the Layers.
             </summary>
         </member>
-        <member name="P:Engine.Renderer.Tile.Tilemap.Tileset">
+        <member name="P:Engine.Renderer.Tile.Tilemap.Tilesheet">
             <summary>
             Gets the Tileset the tilemap is using.
             </summary>
@@ -998,11 +1170,11 @@
             The Tilemap class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.Tile.TilemapLayer.#ctor(Engine.Renderer.Tile.Tileset,Engine.Renderer.Tile.Parser.TilemapLayerModel)">
+        <member name="M:Engine.Renderer.Tile.TilemapLayer.#ctor(Engine.Renderer.Tile.Tilesheet,Engine.Renderer.Tile.Parser.TilemapLayerModel)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.Tile.TilemapLayer"/> class.
             </summary>
-            <param name="tileset"> The tileset the tilemap is using.</param>
+            <param name="tilesheet"> The tileset the tilemap is using.</param>
             <param name="model"> The model the tilemap bases on.</param>
         </member>
         <member name="P:Engine.Renderer.Tile.TilemapLayer.Width">
@@ -1020,7 +1192,7 @@
             Gets the tiles.
             </summary>
         </member>
-        <member name="P:Engine.Renderer.Tile.TilemapLayer.Tileset">
+        <member name="P:Engine.Renderer.Tile.TilemapLayer.Tilesheet">
             <summary>
             Gets or sets the tileset.
             </summary>
@@ -1090,37 +1262,35 @@
         <member name="M:Engine.Renderer.Tile.TilemapRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
-        <member name="T:Engine.Renderer.Tile.Tileset">
+        <member name="T:Engine.Renderer.Tile.Tilesheet">
             <summary>
             The Tileset class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.Tile.Tileset.#ctor(System.IO.Stream,System.Int32)">
+        <member name="M:Engine.Renderer.Tile.Tilesheet.#ctor(System.IO.Stream,System.Int32)">
             <summary>
-            Initializes a new instance of the <see cref="T:Engine.Renderer.Tile.Tileset"/> class.
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Tile.Tilesheet"/> class.
             </summary>
             <param name="resource">The resource location.</param>
             <param name="tileSize">The size of tiles in pixels.</param>
         </member>
-        <member name="P:Engine.Renderer.Tile.Tileset.Handle">
-            <summary>
-            Gets the handle id for the specifit Tileset.
-            </summary>
+        <member name="P:Engine.Renderer.Tile.Tilesheet.Handle">
+            <inheritdoc/>
         </member>
-        <member name="P:Engine.Renderer.Tile.Tileset.AmountTileHeight">
-            <summary>
-            Gets the amount in height.
-            </summary>
+        <member name="P:Engine.Renderer.Tile.Tilesheet.AmountTileHeight">
+            <inheritdoc/>
         </member>
-        <member name="P:Engine.Renderer.Tile.Tileset.AmountTileWidth">
-            <summary>
-            Gets the amount in width.
-            </summary>
+        <member name="P:Engine.Renderer.Tile.Tilesheet.AmountTileWidth">
+            <inheritdoc/>
         </member>
-        <member name="P:Engine.Renderer.Tile.Tileset.TileSize">
-            <summary>
-            Gets the size of the tile in pixels.
-            </summary>
+        <member name="P:Engine.Renderer.Tile.Tilesheet.TileSize">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Tile.Tilesheet.TileTexSizeX">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Tile.Tilesheet.TileTexSizeY">
+            <inheritdoc/>
         </member>
         <member name="T:Engine.Renderer.UiMatrixRenderer">
             <summary>

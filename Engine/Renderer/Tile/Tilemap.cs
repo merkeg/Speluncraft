@@ -16,15 +16,15 @@ namespace Engine.Renderer.Tile
         /// <summary>
         /// Initializes a new instance of the <see cref="Tilemap"/> class.
         /// </summary>
-        /// <param name="tileset">The tileset the tilemap will use.</param>
+        /// <param name="tilesheet">The tileset the tilemap will use.</param>
         /// <param name="model">The model which the tilemap will be built.</param>
-        public Tilemap(Tileset tileset, TilemapModel model)
+        public Tilemap(Tilesheet tilesheet, TilemapModel model)
         {
             this.Layers = new TilemapLayer[model.layers.Count];
-            this.Tileset = tileset;
+            this.Tilesheet = tilesheet;
             foreach (TilemapLayerModel layer in model.layers)
             {
-                this.Layers[layer.id - 1] = new TilemapLayer(tileset, layer);
+                this.Layers[layer.id - 1] = new TilemapLayer(tilesheet, layer);
             }
         }
 
@@ -36,7 +36,7 @@ namespace Engine.Renderer.Tile
         /// <summary>
         /// Gets the Tileset the tilemap is using.
         /// </summary>
-        public Tileset Tileset { get; private set; }
+        public Tilesheet Tilesheet { get; private set; }
 
         /// <summary>
         /// Reference to this.

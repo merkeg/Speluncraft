@@ -1,4 +1,4 @@
-﻿// <copyright file="Tileset.cs" company="RWUwU">
+﻿// <copyright file="Tilesheet.cs" company="RWUwU">
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
@@ -14,14 +14,14 @@ namespace Engine.Renderer.Tile
     /// <summary>
     /// The Tileset class.
     /// </summary>
-    public class Tileset
+    public class Tilesheet : ITilesheet
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Tileset"/> class.
+        /// Initializes a new instance of the <see cref="Tilesheet"/> class.
         /// </summary>
         /// <param name="resource">The resource location.</param>
         /// <param name="tileSize">The size of tiles in pixels.</param>
-        public Tileset(Stream resource, int tileSize)
+        public Tilesheet(Stream resource, int tileSize)
         {
             // Source: https://github.com/davudk/OpenGL-TileMap-Demos
             using Image<Rgba32> image = Image.Load<Rgba32>(resource);
@@ -60,24 +60,22 @@ namespace Engine.Renderer.Tile
             this.Handle = handle;
         }
 
-        /// <summary>
-        /// Gets the handle id for the specifit Tileset.
-        /// </summary>
+        /// <inheritdoc/>
         public int Handle { get; private set; }
 
-        /// <summary>
-        /// Gets the amount in height.
-        /// </summary>
+        /// <inheritdoc/>
         public int AmountTileHeight { get; private set; }
 
-        /// <summary>
-        /// Gets the amount in width.
-        /// </summary>
+        /// <inheritdoc/>
         public int AmountTileWidth { get; private set; }
 
-        /// <summary>
-        /// Gets the size of the tile in pixels.
-        /// </summary>
+        /// <inheritdoc/>
         public int TileSize { get; private set; }
+
+        /// <inheritdoc/>
+        public float TileTexSizeX => 1f / this.AmountTileWidth;
+
+        /// <inheritdoc/>
+        public float TileTexSizeY => 1f / this.AmountTileHeight;
     }
 }

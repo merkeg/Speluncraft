@@ -75,7 +75,7 @@ namespace Engine.Renderer.Tile
         /// <inheritdoc/>
         public void Render(FrameEventArgs args)
         {
-            GL.BindTexture(TextureTarget.Texture2D, this.Tilemap.Tileset.Handle);
+            GL.BindTexture(TextureTarget.Texture2D, this.Tilemap.Tilesheet.Handle);
             GL.Color3(Color.White);
             foreach (TilemapLayer tilemap in this.Tilemap.Layers)
             {
@@ -97,8 +97,8 @@ namespace Engine.Renderer.Tile
                         tile &= ~(BitFlippedHorizontal | BitFlippedVertical | BitFlippedDiagonal);
                         tile--;
 
-                        float tileTexCoordX0 = (tile % this.Tilemap.Tileset.AmountTileWidth) * tilemap.TileTexSizeX;
-                        float tileTexCoordY0 = tile / this.Tilemap.Tileset.AmountTileWidth * tilemap.TileTexSizeY;
+                        float tileTexCoordX0 = (tile % this.Tilemap.Tilesheet.AmountTileWidth) * tilemap.TileTexSizeX;
+                        float tileTexCoordY0 = tile / this.Tilemap.Tilesheet.AmountTileWidth * tilemap.TileTexSizeY;
                         float tileTexCoordX1 = tileTexCoordX0 + tilemap.TileTexSizeX;
                         float tileTexCoordY1 = tileTexCoordY0 + tilemap.TileTexSizeY;
 
