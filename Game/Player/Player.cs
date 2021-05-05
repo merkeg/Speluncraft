@@ -22,7 +22,7 @@ namespace Game.Player
         private float accelaration = 18f;
         private float idealBreacking = 25f;
         private float activeBreacking = 20f;
-        private float jumpPower = 9.5f;
+        private float jumpPower = 10f;
 
         private int isFaceing;
         private Gun.IGun gun;
@@ -35,7 +35,7 @@ namespace Game.Player
         /// <param name="sizeX">Player width.</param>
         /// <param name="sizeY">Player height.</param>
         /// <param name="sprite">Player sprite.</param>
-        public Player(float minX, float minY, float sizeX, float sizeY, Sprite sprite)
+        public Player(float minX, float minY, float sizeX, float sizeY, ISprite sprite)
             : base(minX, minY, sizeX, sizeY, sprite)
         {
             Engine.Component.Physics physics = new Engine.Component.Physics();

@@ -10,12 +10,12 @@ namespace Engine.GameObject
     /// <summary>
     /// The GameObject class which active game elements are deriving from.
     /// </summary>
-    public class GameObject : IRectangle, IDisposable
+    public class GameObject : IRectangle
     {
         /// <summary>
         /// The sprite the GameObject is drawn with.
         /// </summary>
-        private Sprite sprite;
+        private ISprite sprite;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GameObject"/> class.
@@ -25,7 +25,7 @@ namespace Engine.GameObject
         /// <param name="sizeX">the width of the GameObject.</param>
         /// <param name="sizeY">the height of the GameObject.</param>
         /// /// <param name="sprite">The sprite.</param>
-        public GameObject(float minX, float minY, float sizeX, float sizeY, Sprite sprite)
+        public GameObject(float minX, float minY, float sizeX, float sizeY, ISprite sprite)
         {
             this.MinX = minX;
             this.MinY = minY;
@@ -73,12 +73,9 @@ namespace Engine.GameObject
         /// <summary>
         /// Gets or sets the Sprite of the GameObject.
         /// </summary>
-        public Sprite Sprite
+        public ISprite Sprite
         {
-        get
-            {
-                return this.sprite;
-            }
+        get => this.sprite;
 
         set
             {
@@ -90,6 +87,9 @@ namespace Engine.GameObject
                 this.sprite = value;
             }
         }
+
+        /// <inheritdoc/>
+        public bool Mirrored { get; set; }
 
         /// <summary>
         /// Gets or sets the Sprite renderer.
@@ -177,16 +177,6 @@ namespace Engine.GameObject
         public virtual void OnDestroy()
         {
             this.Components.ForEach(component => component.OnDestroy());
-            this.Dispose();
-        }
-
-        /// <summary>
-        /// Yeet this away.
-        /// </summary>
-        public void Dispose()
-        {
-            this.Components.ForEach(component => component.Dispose());
-            GC.SuppressFinalize(this);
         }
 
         // OnUpdateCleanUp wird nach dem Update in jeden Frame ausgeführt.

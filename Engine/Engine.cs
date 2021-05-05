@@ -139,7 +139,6 @@ namespace Engine
         private void ExcludeGameObject(GameObject.GameObject gameObject)
         {
             this.RemoveRenderer(gameObject.SpriteRenderer);
-            gameObject.SpriteRenderer.Dispose();
             gameObject.OnDestroy();
             this.GameObjects.Remove(gameObject);
             if (this.Colliders.Contains(gameObject))

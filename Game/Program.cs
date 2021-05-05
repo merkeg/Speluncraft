@@ -61,12 +61,12 @@ namespace Game
 
         private void InitializeRenderers()
         {
-            using Stream tilesheet = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.tilesheet.png");
+            using Stream tilesheetStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.tilesheet.png");
             using Stream tilemapStream = this.assembly.GetManifestResourceStream("Game.Resources.Level.getUp.json");
 
-            Tileset tileset = new Tileset(tilesheet, 16);
+            Tilesheet tilesheet = new Tilesheet(tilesheetStream, 16);
             TilemapModel model = TilemapParser.ParseTilemap(tilemapStream);
-            Tilemap tilemap = new Tilemap(tileset, model);
+            Tilemap tilemap = new Tilemap(tilesheet, model);
 
             TilemapRenderer renderer = new TilemapRenderer(tilemap, 0, 0);
             this.engine.AddRenderer(renderer);
@@ -74,10 +74,13 @@ namespace Game
 
         private void AddPlayer()
         {
-            using Stream spriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Floppa.png");
-            Sprite sprite = new Sprite(spriteStream);
+            using Stream tilesheetStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.tilesheet.png");
+            Tilesheet tilesheet = new Tilesheet(tilesheetStream, 16);
+            AnimatedSprite sprite = new AnimatedSprite(tilesheet, new[] { new Keyframe(9, 0), new Keyframe(10, 0), new Keyframe(12, 0) });
+
             Player.Player player = new Player.Player(7, -27, 1, 1, sprite);
             player.AddComponent(new CameraTrackingComponent());
+            player.Mirrored = true;
             this.engine.AddGameObject(player);
 
             // make sure to initialize healthbar after the player

@@ -155,7 +155,7 @@
             The thing the Player COntrolls.
             </summary>
         </member>
-        <member name="M:Game.Player.Player.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite)">
+        <member name="M:Game.Player.Player.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.Player.Player"/> class.
             </summary>

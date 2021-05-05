@@ -16,7 +16,7 @@ namespace Engine.Renderer.Sprite
     /// <summary>
     /// The Sprite class.
     /// </summary>
-    public class Sprite
+    public class Sprite : ISprite
     {
         private readonly Stream resource;
 
@@ -29,6 +29,11 @@ namespace Engine.Renderer.Sprite
         {
             this.resource = resource;
             this.Handle = GL.GenTexture();
+
+            this.TexX0 = 0;
+            this.TexX1 = 1;
+            this.TexY0 = 0;
+            this.TexY1 = 1;
 
             this.BuildSprite(true);
         }
@@ -47,6 +52,23 @@ namespace Engine.Renderer.Sprite
         /// Gets the sprite height.
         /// </summary>
         public int Height { get; private set; }
+
+        /// <inheritdoc/>
+        public float TexX0 { get; private set; }
+
+        /// <inheritdoc/>
+        public float TexX1 { get; private set; }
+
+        /// <inheritdoc/>
+        public float TexY0 { get; private set; }
+
+        /// <inheritdoc/>
+        public float TexY1 { get; private set; }
+
+        /// <inheritdoc/>
+        public void TimeElapsed(float time)
+        {
+        }
 
         private void BuildSprite(bool flip)
         {
