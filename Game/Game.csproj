@@ -22,6 +22,7 @@
     <None Remove="Resources\lol.json" />
     <None Remove="Resources\player.png" />
     <None Remove="Resources\rotation.json" />
+    <None Remove="Resources\Sprite\UI\Healthbar\halfheart.png" />
     <None Remove="Resources\testmap.json" />
     <None Remove="Resources\tilesheet.png" />
     <None Remove="stylecop.json" />
@@ -74,6 +75,9 @@
     </EmbeddedResource>
     <None Remove="Resources\Font\hack\font.png" />
     <EmbeddedResource Include="Resources\Font\hack\font.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Sprite\UI\Healthbar\halfheart.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

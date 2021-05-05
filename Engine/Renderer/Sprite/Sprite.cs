@@ -30,7 +30,7 @@ namespace Engine.Renderer.Sprite
             this.resource = resource;
             this.Handle = GL.GenTexture();
 
-            this.BuildSprite(true);
+            this.BuildSprite(flip);
         }
 
         /// <summary>
