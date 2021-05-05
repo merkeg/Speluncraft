@@ -14,7 +14,7 @@ namespace Engine.Renderer.Tile
     /// <summary>
     /// The Tileset class.
     /// </summary>
-    public class Tilesheet
+    public class Tilesheet : ITilesheet
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="Tilesheet"/> class.
@@ -60,34 +60,22 @@ namespace Engine.Renderer.Tile
             this.Handle = handle;
         }
 
-        /// <summary>
-        /// Gets the handle id for the specific Tileset.
-        /// </summary>
+        /// <inheritdoc/>
         public int Handle { get; private set; }
 
-        /// <summary>
-        /// Gets the amount in height.
-        /// </summary>
+        /// <inheritdoc/>
         public int AmountTileHeight { get; private set; }
 
-        /// <summary>
-        /// Gets the amount in width.
-        /// </summary>
+        /// <inheritdoc/>
         public int AmountTileWidth { get; private set; }
 
-        /// <summary>
-        /// Gets the size of the tile in pixels.
-        /// </summary>
+        /// <inheritdoc/>
         public int TileSize { get; private set; }
 
-        /// <summary>
-        /// Gets the Tile texture size X.
-        /// </summary>
+        /// <inheritdoc/>
         public float TileTexSizeX => 1f / this.AmountTileWidth;
 
-        /// <summary>
-        /// Gets the Tile texture size Y.
-        /// </summary>
+        /// <inheritdoc/>
         public float TileTexSizeY => 1f / this.AmountTileHeight;
     }
 }

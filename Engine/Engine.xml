@@ -756,7 +756,7 @@
             Animated sprite class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.Sprite.AnimatedSprite.#ctor(Engine.Renderer.Tile.Tilesheet,Engine.Renderer.Sprite.Keyframe[])">
+        <member name="M:Engine.Renderer.Sprite.AnimatedSprite.#ctor(Engine.Renderer.Tile.ITilesheet,Engine.Renderer.Sprite.Keyframe[])">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.Sprite.AnimatedSprite"/> class.
             </summary>
@@ -1080,6 +1080,41 @@
         <member name="M:Engine.Renderer.Text.TextRenderer.OnCreate">
             <inheritdoc/>
         </member>
+        <member name="T:Engine.Renderer.Tile.ITilesheet">
+            <summary>
+            ITilesheet class.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.ITilesheet.Handle">
+            <summary>
+            Gets the handle id for the specific Tileset.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.ITilesheet.AmountTileHeight">
+            <summary>
+            Gets the amount in height.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.ITilesheet.AmountTileWidth">
+            <summary>
+            Gets the amount in width.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.ITilesheet.TileSize">
+            <summary>
+            Gets the size of the tile in pixels.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.ITilesheet.TileTexSizeX">
+            <summary>
+            Gets the Tile texture size X.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.ITilesheet.TileTexSizeY">
+            <summary>
+            Gets the Tile texture size Y.
+            </summary>
+        </member>
         <member name="T:Engine.Renderer.Tile.Parser.TilemapParser">
             <summary>
             Helper class to parse Tilemap json files into models.
@@ -1240,34 +1275,22 @@
             <param name="tileSize">The size of tiles in pixels.</param>
         </member>
         <member name="P:Engine.Renderer.Tile.Tilesheet.Handle">
-            <summary>
-            Gets the handle id for the specific Tileset.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="P:Engine.Renderer.Tile.Tilesheet.AmountTileHeight">
-            <summary>
-            Gets the amount in height.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="P:Engine.Renderer.Tile.Tilesheet.AmountTileWidth">
-            <summary>
-            Gets the amount in width.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="P:Engine.Renderer.Tile.Tilesheet.TileSize">
-            <summary>
-            Gets the size of the tile in pixels.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="P:Engine.Renderer.Tile.Tilesheet.TileTexSizeX">
-            <summary>
-            Gets the Tile texture size X.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="P:Engine.Renderer.Tile.Tilesheet.TileTexSizeY">
-            <summary>
-            Gets the Tile texture size Y.
-            </summary>
+            <inheritdoc/>
         </member>
         <member name="T:Engine.Renderer.UiMatrixRenderer">
             <summary>

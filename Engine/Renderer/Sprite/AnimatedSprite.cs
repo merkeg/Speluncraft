@@ -13,7 +13,7 @@ namespace Engine.Renderer.Sprite
     {
         private int currentIndex;
         private float elapsed;
-        private Tilesheet tilesheet;
+        private ITilesheet tilesheet;
         private Keyframe[] keyframes;
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace Engine.Renderer.Sprite
         /// </summary>
         /// <param name="tilesheet">The tilesheet.</param>
         /// <param name="keyframes">Keyframes.</param>
-        public AnimatedSprite(Tilesheet tilesheet, Keyframe[] keyframes)
+        public AnimatedSprite(ITilesheet tilesheet, Keyframe[] keyframes)
         {
             this.tilesheet = tilesheet;
             this.keyframes = keyframes;
