@@ -40,6 +40,7 @@ namespace Game
 
             window.Size = new Vector2i(1280, 720);
             window.VSync = VSyncMode.Adaptive;
+            window.Title = "Speluncraft";
             Engine.Engine.StartEngine(window);
             this.assembly = Assembly.GetExecutingAssembly();
             Engine.Engine.AddService(new TestService());

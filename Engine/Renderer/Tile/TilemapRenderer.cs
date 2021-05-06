@@ -118,42 +118,42 @@ namespace Engine.Renderer.Tile
                         if (!flipped_diagonal)
                         {
                             GL.TexCoord2(tileTexCoordX0, tileTexCoordY0);
-                            GL.Vertex2(this.OriginX + x - 0.01, this.OriginY - y - 0.01);
+                            GL.Vertex2(this.OriginX + x - 0.0001, this.OriginY - y - 0.0001);
 
                             GL.TexCoord2(tileTexCoordX1, tileTexCoordY0);
-                            GL.Vertex2(this.OriginX + x + 1 + 0.01, this.OriginY - y - 0.01);
+                            GL.Vertex2(this.OriginX + x + 1 + 0.0001, this.OriginY - y - 0.0001);
 
                             GL.TexCoord2(tileTexCoordX0, tileTexCoordY1);
-                            GL.Vertex2(this.OriginX + x - 0.01, this.OriginY - y + 1 + 0.01);
+                            GL.Vertex2(this.OriginX + x - 0.0001, this.OriginY - y + 1 + 0.0001);
 
                             GL.TexCoord2(tileTexCoordX1, tileTexCoordY0);
-                            GL.Vertex2(this.OriginX + x + 1 + 0.01, this.OriginY - y - 0.01);
+                            GL.Vertex2(this.OriginX + x + 1 + 0.0001, this.OriginY - y - 0.0001);
 
                             GL.TexCoord2(tileTexCoordX0, tileTexCoordY1);
-                            GL.Vertex2(this.OriginX + x - 0.01, this.OriginY - y + 1 + 0.01);
+                            GL.Vertex2(this.OriginX + x - 0.0001, this.OriginY - y + 1 + 0.0001);
 
                             GL.TexCoord2(tileTexCoordX1, tileTexCoordY1);
-                            GL.Vertex2(this.OriginX + x + 1 + 0.01, this.OriginY - y + 1 + 0.01);
+                            GL.Vertex2(this.OriginX + x + 1 + 0.0001, this.OriginY - y + 1 + 0.0001);
                         }
                         else
                         {
                             GL.TexCoord2(tileTexCoordX1, tileTexCoordY1);
-                            GL.Vertex2(this.OriginX + x - 0.01, this.OriginY - y - 0.01);
+                            GL.Vertex2(this.OriginX + x - 0.0001, this.OriginY - y - 0.0001);
 
                             GL.TexCoord2(tileTexCoordX1, tileTexCoordY0);
-                            GL.Vertex2(this.OriginX + x + 1 + 0.01, this.OriginY - y - 0.01);
+                            GL.Vertex2(this.OriginX + x + 1 + 0.0001, this.OriginY - y - 0.0001);
 
                             GL.TexCoord2(tileTexCoordX0, tileTexCoordY1);
-                            GL.Vertex2(this.OriginX + x - 0.01, this.OriginY - y + 1 + 0.01);
+                            GL.Vertex2(this.OriginX + x - 0.0001, this.OriginY - y + 1 + 0.0001);
 
                             GL.TexCoord2(tileTexCoordX1, tileTexCoordY0);
-                            GL.Vertex2(this.OriginX + x + 1 + 0.01, this.OriginY - y - 0.01);
+                            GL.Vertex2(this.OriginX + x + 1 + 0.0001, this.OriginY - y - 0.0001);
 
                             GL.TexCoord2(tileTexCoordX0, tileTexCoordY1);
-                            GL.Vertex2(this.OriginX + x - 0.01, this.OriginY - y + 1 + 0.01);
+                            GL.Vertex2(this.OriginX + x - 0.0001, this.OriginY - y + 1 + 0.0001);
 
                             GL.TexCoord2(tileTexCoordX0, tileTexCoordY0);
-                            GL.Vertex2(this.OriginX + x + 1 + 0.01, this.OriginY - y + 1 + 0.01);
+                            GL.Vertex2(this.OriginX + x + 1 + 0.0001, this.OriginY - y + 1 + 0.0001);
                         }
 
                         GL.End();
