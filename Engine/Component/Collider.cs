@@ -77,7 +77,7 @@ namespace Engine.Component
             List<GameObject.IRectangle> sideCollisionRight = new List<GameObject.IRectangle>(); // Those overlaps will only be undone after up and down collisions.
             List<GameObject.IRectangle> sideCollisionsLeft = new List<GameObject.IRectangle>();
 
-            foreach (GameObject.IRectangle r in Engine.Instance().Colliders)
+            foreach (GameObject.IRectangle r in Engine.Colliders)
             {
                 if (this.GameObject.Intersects(r))
                 {

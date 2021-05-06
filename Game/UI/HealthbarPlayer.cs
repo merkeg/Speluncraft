@@ -20,7 +20,6 @@ namespace Game.UI
     {
         private static HealthbarPlayer instance;
         private static Player player;
-        private static Engine engine;
 
         private static int currentHP = 0;
 
@@ -37,10 +36,9 @@ namespace Game.UI
         /// </summary>
         public HealthbarPlayer()
         {
-            engine = Engine.Instance();
             instance = this;
 
-            foreach (IRectangle r in engine.Colliders)
+            foreach (IRectangle r in Engine.Colliders)
             {
                 if (r is Player)
                 {
@@ -104,7 +102,7 @@ namespace Game.UI
         /// <summary>
         /// OnCreate function.
         /// </summary>
-        public void OnCreate()
+        public void OnRendererCreate()
         {
             return;
         }

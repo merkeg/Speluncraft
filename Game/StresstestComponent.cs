@@ -34,7 +34,7 @@ namespace Game
             if (this.deltaTime >= 0.2f)
             {
                 this.deltaTime = 0;
-                KeyboardState keyboardState = Engine.Engine.Instance().GameWindow.KeyboardState;
+                KeyboardState keyboardState = Engine.Engine.GameWindow.KeyboardState;
 
                 if (keyboardState.IsKeyDown(Keys.Z))
                 {
@@ -47,7 +47,7 @@ namespace Game
                         GameObject gameObject = new GameObject(-2, 0, 1, 1, this.sprite);
                         gameObject.AddComponent(new Physics());
                         gameObject.AddComponent(new Collider());
-                        Engine.Engine.Instance().GameObjectsToAdd.Add(gameObject);
+                        Engine.Engine.AddGameObject(gameObject);
                     }
                 }
             }

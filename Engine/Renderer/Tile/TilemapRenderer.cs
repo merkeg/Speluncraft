@@ -48,7 +48,7 @@ namespace Engine.Renderer.Tile
         public int OriginY { get; private set; }
 
         /// <inheritdoc/>
-        public void OnCreate()
+        public void OnRendererCreate()
         {
             foreach (TilemapLayer layer in this.Tilemap.Layers)
             {
@@ -63,7 +63,7 @@ namespace Engine.Renderer.Tile
                     {
                         if (((bool)prop.value) == true)
                         {
-                            Engine.Instance().Colliders.AddRange(TilemapParser.GenerateCollisionMap(layer.TilemapModel, this.OriginX, this.OriginY));
+                            Engine.Colliders.AddRange(TilemapParser.GenerateCollisionMap(layer.TilemapModel, this.OriginX, this.OriginY));
                         }
 
                         break;

@@ -39,7 +39,7 @@ namespace Game.Enemy
             this.AddComponent(new Engine.Component.DamageCollider(damage, 1));
 
             // HitBox of Enemy needs to be in CollideList.
-            Engine.Engine.Instance().Colliders.Add(this);
+            Engine.Engine.Colliders.Add(this);
         }
 
         /// <inheritdoc/>
@@ -48,7 +48,7 @@ namespace Game.Enemy
             base.OnUpdate(frameTime);
             if (this.GetComponent<Engine.Component.HealthPoints>().GetIsDeadFlag())
             {
-                Engine.Engine.Instance().GameObjectsToRemove.Add(this);
+                Engine.Engine.RemoveGameObject(this);
             }
 
             // Console.WriteLine("Enemy: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());

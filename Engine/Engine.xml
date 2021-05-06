@@ -25,7 +25,7 @@
         <member name="M:Engine.Camera.Camera.Render(OpenTK.Windowing.Common.FrameEventArgs)">
             <inheritdoc/>
         </member>
-        <member name="M:Engine.Camera.Camera.OnCreate">
+        <member name="M:Engine.Camera.Camera.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="P:Engine.Camera.Camera.Center">
@@ -396,11 +396,6 @@
             The Engine instance to bind with OpenGL.
             </summary>
         </member>
-        <member name="M:Engine.Engine.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Engine.Engine"/> class.
-            </summary>
-        </member>
         <member name="P:Engine.Engine.GameObjects">
             <summary>
             Gets a list of GameObjects in the game.
@@ -426,21 +421,20 @@
             Gets the game Camera.
             </summary>
         </member>
+        <member name="P:Engine.Engine.Services">
+            <summary>
+            Gets the services.
+            </summary>
+        </member>
         <member name="P:Engine.Engine.GameObjectsToRemove">
             <summary>
-            Gets Here you can add GameObjects that should be removed this frame.
+            Gets or sets Here you can add GameObjects that should be removed Engine frame.
             </summary>
         </member>
         <member name="P:Engine.Engine.GameObjectsToAdd">
             <summary>
-            Gets Here you can add GameObjects that should be added next frame.
+            Gets or sets Here you can add GameObjects that should be added next frame.
             </summary>
-        </member>
-        <member name="M:Engine.Engine.Instance">
-            <summary>
-            Method to get the engine instance.
-            </summary>
-            <returns>Engine instance.</returns>
         </member>
         <member name="M:Engine.Engine.AddGameObject(Engine.GameObject.GameObject)">
             <summary>
@@ -467,6 +461,26 @@
             Also checks if there are Colliders from it and delets it.
             </summary>
             <param name="gameObject">The GameObject to Destroy.</param>
+        </member>
+        <member name="M:Engine.Engine.AddService(Engine.Service.IService)">
+            <summary>
+            Adds an service to the engine.
+            </summary>
+            <param name="service">the service.</param>
+        </member>
+        <member name="M:Engine.Engine.GetService(System.String)">
+            <summary>
+            Gets a service by name.
+            </summary>
+            <param name="key">the name.</param>
+            <returns>the service.</returns>
+        </member>
+        <member name="M:Engine.Engine.GetService``1">
+            <summary>
+            Gets service by type.
+            </summary>
+            <typeparam name="T">the type.</typeparam>
+            <returns>the service.</returns>
         </member>
         <member name="M:Engine.Engine.ExcludeGameObject(Engine.GameObject.GameObject)">
             <summary>
@@ -581,7 +595,7 @@
             <typeparam name="T">Component.</typeparam>
             <returns>The component or null if not existant.</returns>
         </member>
-        <member name="M:Engine.GameObject.GameObject.OnCreated">
+        <member name="M:Engine.GameObject.GameObject.OnUpdatableCreate">
             <summary>
             Called if the GameObject is created.
             </summary>
@@ -592,7 +606,7 @@
             </summary>
             <param name="frameTime">Time between the frame.</param>
         </member>
-        <member name="M:Engine.GameObject.GameObject.OnDestroy">
+        <member name="M:Engine.GameObject.GameObject.OnUpdatableDestroy">
             <summary>
             Called if the GameObject is destroyed.
             </summary>
@@ -630,6 +644,27 @@
         <member name="P:Engine.GameObject.IRectangle.MaxY">
             <summary>
             Gets the X-Coordinate of the top right point, of the Rectangle.
+            </summary>
+        </member>
+        <member name="T:Engine.GameObject.IUpdatable">
+            <summary>
+            IUpdatable class.
+            </summary>
+        </member>
+        <member name="M:Engine.GameObject.IUpdatable.OnUpdate(System.Single)">
+            <summary>
+            Called every tick.
+            </summary>
+            <param name="frameTime">Time between the frame.</param>
+        </member>
+        <member name="M:Engine.GameObject.IUpdatable.OnUpdatableDestroy">
+            <summary>
+            Called if created.
+            </summary>
+        </member>
+        <member name="M:Engine.GameObject.IUpdatable.OnUpdatableCreate">
+            <summary>
+            Called if destroyed.
             </summary>
         </member>
         <member name="T:Engine.GameObject.Rectangle">
@@ -684,7 +719,7 @@
             The collision renderer class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.CollisionRenderer.OnCreate">
+        <member name="M:Engine.Renderer.CollisionRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.CollisionRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
@@ -708,7 +743,7 @@
             <param name="gameObject">Gameobject with physics component.</param>
             <param name="alignment">Alignment.</param>
         </member>
-        <member name="M:Engine.Renderer.DebugRenderer.OnCreate">
+        <member name="M:Engine.Renderer.DebugRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.DebugRenderer.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
@@ -746,7 +781,7 @@
             </summary>
             <param name="args">resize arguments.</param>
         </member>
-        <member name="M:Engine.Renderer.IRenderer.OnCreate">
+        <member name="M:Engine.Renderer.IRenderer.OnRendererCreate">
             <summary>
             Run when the renderer is added.
             </summary>
@@ -931,7 +966,7 @@
             Gets the sprite to render.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.Sprite.SpriteRenderer.OnCreate">
+        <member name="M:Engine.Renderer.Sprite.SpriteRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.Sprite.SpriteRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
@@ -1077,7 +1112,7 @@
         <member name="M:Engine.Renderer.Text.TextRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
-        <member name="M:Engine.Renderer.Text.TextRenderer.OnCreate">
+        <member name="M:Engine.Renderer.Text.TextRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Renderer.Tile.ITilesheet">
@@ -1253,7 +1288,7 @@
             Gets the origin y.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.Tile.TilemapRenderer.OnCreate">
+        <member name="M:Engine.Renderer.Tile.TilemapRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.Tile.TilemapRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
@@ -1303,7 +1338,7 @@
         <member name="M:Engine.Renderer.UiMatrixRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
-        <member name="M:Engine.Renderer.UiMatrixRenderer.OnCreate">
+        <member name="M:Engine.Renderer.UiMatrixRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Renderer.UI.Graph.GraphDataSet">
@@ -1355,7 +1390,7 @@
         <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
-        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.OnCreate">
+        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.AddDataSet(Engine.Renderer.UI.Graph.GraphDataSet)">
@@ -1388,7 +1423,7 @@
         <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
-        <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.OnCreate">
+        <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Renderer.UI.RelativeRectangle">
@@ -1484,7 +1519,7 @@
         <member name="M:Engine.Renderer.UI.UiElement.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
-        <member name="M:Engine.Renderer.UI.UiElement.OnCreate">
+        <member name="M:Engine.Renderer.UI.UiElement.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.UI.UiElement.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
@@ -1527,6 +1562,56 @@
             <param name="position">Position of text.</param>
             <param name="textScale">Scale of text.</param>
             <returns>Text renderer object.</returns>
+        </member>
+        <member name="T:Engine.Service.IService">
+            <summary>
+            IService class.
+            </summary>
+        </member>
+        <member name="T:Engine.Service.ServiceInfo">
+            <summary>
+            Service Info class.
+            </summary>
+        </member>
+        <member name="M:Engine.Service.ServiceInfo.#ctor(System.String,Engine.Renderer.RenderLayer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Service.ServiceInfo"/> class.
+            </summary>
+            <param name="name">Name of the service.</param>
+            <param name="renderLayer">Render layer of the service.</param>
+        </member>
+        <member name="P:Engine.Service.ServiceInfo.Name">
+            <summary>
+            Gets the name of the service.
+            </summary>
+        </member>
+        <member name="P:Engine.Service.ServiceInfo.RenderLayer">
+            <summary>
+            Gets the Render layer the service wants to render on.
+            </summary>
+        </member>
+        <member name="T:Engine.Service.TestService">
+            <summary>
+            TestService class.
+            </summary>
+        </member>
+        <member name="M:Engine.Service.TestService.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.TestService.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.TestService.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.TestService.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.TestService.OnUpdatableDestroy">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.TestService.OnUpdatableCreate">
+            <inheritdoc/>
         </member>
     </members>
 </doc>

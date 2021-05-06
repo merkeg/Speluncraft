@@ -40,7 +40,7 @@ namespace Game.Gun.Ammunition
             base.OnUpdate(frameTime);
             if (this.GetComponent<Engine.Component.DamageCollider>().GetIsCollided())
             {
-                Engine.Engine.Instance().GameObjectsToRemove.Add(this);
+                Engine.Engine.RemoveGameObject(this);
             }
         }
     }
