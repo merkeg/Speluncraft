@@ -4,6 +4,7 @@
 
 namespace Engine.Renderer.Tile
 {
+    using System;
     using System.Drawing;
     using global::Engine.Renderer.Tile;
     using global::Engine.Renderer.Tile.Parser;
@@ -13,6 +14,7 @@ namespace Engine.Renderer.Tile
     /// <summary>
     /// The Tilemap renderer.
     /// </summary>
+    [Obsolete]
     public class TilemapRenderer : IRenderer
     {
         private const uint BitFlippedHorizontal = 0x80000000;

@@ -109,6 +109,10 @@ namespace Engine
             Engine.GameWindow.Resize += Engine.Resize;
             Engine.AddRenderer(new UiMatrixRenderer(), RenderLayer.UI);
 
+            // Services
+            Engine.AddService(new TilemapService());
+
+            // OpenGL capabilities
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.Texture2D);

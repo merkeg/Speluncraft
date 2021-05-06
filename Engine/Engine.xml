@@ -1321,10 +1321,63 @@
         <member name="P:Engine.Renderer.Tile.Tilesheet.TileSize">
             <inheritdoc/>
         </member>
+        <member name="P:Engine.Renderer.Tile.Tilesheet.Tiles">
+            <summary>
+            Gets or sets the Tiles with tex coordinates.
+            </summary>
+        </member>
         <member name="P:Engine.Renderer.Tile.Tilesheet.TileTexSizeX">
             <inheritdoc/>
         </member>
         <member name="P:Engine.Renderer.Tile.Tilesheet.TileTexSizeY">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.Tile.Tilesheet.SetCustomSprite(System.Int32,Engine.Renderer.Sprite.ISprite)">
+            <summary>
+            Sets a custom Sprite to an Sprite id.
+            </summary>
+            <param name="tileId">sprite id.</param>
+            <param name="sprite">Sprite to replace with.</param>
+        </member>
+        <member name="T:Engine.Renderer.Tile.TileSprite">
+            <summary>
+            TileSprite class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Tile.TileSprite.#ctor(System.Int32,System.Int32,System.Int32,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Tile.TileSprite"/> class.
+            </summary>
+            <param name="handle">Handle.</param>
+            <param name="width">Width.</param>
+            <param name="height">Height.</param>
+            <param name="texX0">TexX0.</param>
+            <param name="texY0">TexY0.</param>
+            <param name="texX1">TexX1.</param>
+            <param name="texY1">TexY1.</param>
+        </member>
+        <member name="P:Engine.Renderer.Tile.TileSprite.Handle">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Tile.TileSprite.Width">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Tile.TileSprite.Height">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Tile.TileSprite.TexX0">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Tile.TileSprite.TexX1">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Tile.TileSprite.TexY0">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Tile.TileSprite.TexY1">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.Tile.TileSprite.TimeElapsed(System.Single)">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Renderer.UiMatrixRenderer">
@@ -1612,6 +1665,41 @@
         </member>
         <member name="M:Engine.Service.TestService.OnUpdatableCreate">
             <inheritdoc/>
+        </member>
+        <member name="T:Engine.Service.TilemapService">
+            <summary>
+            Tilemap service class.
+            </summary>
+        </member>
+        <member name="M:Engine.Service.TilemapService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Service.TilemapService"/> class.
+            </summary>
+        </member>
+        <member name="M:Engine.Service.TilemapService.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.TilemapService.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.TilemapService.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.TilemapService.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.TilemapService.OnUpdatableDestroy">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.TilemapService.OnUpdatableCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.TilemapService.AddTilemap(Engine.Renderer.Tile.Tilemap,OpenTK.Mathematics.Vector2i)">
+            <summary>
+            Add Tilemap to the renderer.
+            </summary>
+            <param name="tilemap">Tilemap.</param>
+            <param name="offset">Offset.</param>
         </member>
     </members>
 </doc>
