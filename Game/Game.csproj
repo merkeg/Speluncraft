@@ -9,6 +9,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn),1701;1702;0001,1573,1591,1712</NoWarn>
     <DocumentationFile>$(OutputPath)$(AssemblyName).xml</DocumentationFile>
+    <WarningLevel>0</WarningLevel>
   </PropertyGroup>
 
   <ItemGroup>

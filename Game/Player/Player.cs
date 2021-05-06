@@ -6,6 +6,7 @@ namespace Game.Player
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Text;
     using Engine.GameObject;
     using Engine.Renderer.Sprite;
@@ -124,8 +125,10 @@ namespace Game.Player
                 this.jumpcounter = this.jumpCounterMax;
             }
 
+            // Debug.WriteLine("" + this.jumpcounter);
             if (keyboardState.IsKeyPressed(Keys.Space) && this.jumpcounter > 0)
             {
+                Debug.WriteLine("JUMP");
                 physics.AddVelocitY(this.jumpPower);
                 this.jumpcounter--;
             }
