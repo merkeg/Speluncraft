@@ -139,6 +139,24 @@ namespace Engine
         }
 
         /// <summary>
+        /// Adds an GameObject to the list.
+        /// </summary>
+        /// <param name="gameObject">The GameObject to add.</param>
+        public static void ImplementGameObject(GameObject.GameObject gameObject)
+        {
+            Engine.GameObjects.Add(gameObject);
+
+            if (gameObject.Sprite != null)
+            {
+                SpriteRenderer renderer = new SpriteRenderer(gameObject.Sprite, gameObject);
+                gameObject.SpriteRenderer = renderer;
+                Engine.AddRenderer(renderer);
+            }
+
+            gameObject.OnUpdatableCreate();
+        }
+
+        /// <summary>
         /// Gets a service by name.
         /// </summary>
         /// <param name="key">the name.</param>
@@ -176,24 +194,6 @@ namespace Engine
             }
 
             // GC.Collect();
-        }
-
-        /// <summary>
-        /// Adds an GameObject to the list.
-        /// </summary>
-        /// <param name="gameObject">The GameObject to add.</param>
-        private static void ImplementGameObject(GameObject.GameObject gameObject)
-        {
-            Engine.GameObjects.Add(gameObject);
-
-            if (gameObject.Sprite != null)
-            {
-                SpriteRenderer renderer = new SpriteRenderer(gameObject.Sprite, gameObject);
-                gameObject.SpriteRenderer = renderer;
-                Engine.AddRenderer(renderer);
-            }
-
-            gameObject.OnUpdatableCreate();
         }
 
         /// <summary>

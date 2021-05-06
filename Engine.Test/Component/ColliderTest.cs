@@ -16,7 +16,7 @@ namespace EngineTest.Component
             GameObject g = new GameObject(0.25f, 0.75f, 0.5f, 1, null);
             Rectangle r = new Rectangle(0, 0, 1, 1);
             Engine.Engine.Colliders.Add(r);
-            Engine.Engine.AddGameObject(g);
+            Engine.Engine.ImplementGameObject(g);
             Engine.Component.Physics p = new Engine.Component.Physics();
 
             g.AddComponent(new Engine.Component.UndoOverlapCollisionResponse());
@@ -26,6 +26,7 @@ namespace EngineTest.Component
 
             Assert.IsTrue(g.Intersects(r));
 
+            Engine.Engine.GetService<Engine.Service.CollisionService>().OnUpdate(0.01f);
             g.OnUpdate(0.01f);
 
             Assert.IsFalse(g.Intersects(r));
@@ -41,7 +42,7 @@ namespace EngineTest.Component
             GameObject g = new GameObject(0.2f, -0.5f, 0.5f, 1, null);
             Rectangle r = new Rectangle(0, 0, 1, 1);
             Engine.Engine.Colliders.Add(r);
-            Engine.Engine.AddGameObject(g);
+            Engine.Engine.ImplementGameObject(g);
             Engine.Component.Physics p = new Engine.Component.Physics();
 
             g.AddComponent(new Engine.Component.UndoOverlapCollisionResponse());
@@ -51,6 +52,7 @@ namespace EngineTest.Component
 
             Assert.IsTrue(g.Intersects(r));
 
+            Engine.Engine.GetService<Engine.Service.CollisionService>().OnUpdate(0.01f);
             g.OnUpdate(0.01f);
 
             Assert.IsFalse(g.Intersects(r));
@@ -67,7 +69,7 @@ namespace EngineTest.Component
             GameObject g = new GameObject(-0.5f, 0, 1f, 1, null);
             Rectangle r = new Rectangle(0, 0, 1, 1);
             Engine.Engine.Colliders.Add(r);
-            Engine.Engine.AddGameObject(g);
+            Engine.Engine.ImplementGameObject(g);
             Engine.Component.Physics p = new Engine.Component.Physics();
 
             g.AddComponent(new Engine.Component.UndoOverlapCollisionResponse());
@@ -77,6 +79,7 @@ namespace EngineTest.Component
 
             Assert.IsTrue(g.Intersects(r));
 
+            Engine.Engine.GetService<Engine.Service.CollisionService>().OnUpdate(0.01f);
             g.OnUpdate(0.01f);
 
             Assert.IsFalse(g.Intersects(r));
@@ -92,7 +95,7 @@ namespace EngineTest.Component
             GameObject g = new GameObject(0.7f, 0, 1f, 1, null);
             Rectangle r = new Rectangle(0, 0, 1, 1);
             Engine.Engine.Colliders.Add(r);
-            Engine.Engine.AddGameObject(g);
+            Engine.Engine.ImplementGameObject(g);
             Engine.Component.Physics p = new Engine.Component.Physics();
 
             g.AddComponent(new Engine.Component.UndoOverlapCollisionResponse());
@@ -102,6 +105,7 @@ namespace EngineTest.Component
 
             Assert.IsTrue(g.Intersects(r));
 
+            Engine.Engine.GetService<Engine.Service.CollisionService>().OnUpdate(0.01f);
             g.OnUpdate(0.01f);
 
             Assert.IsFalse(g.Intersects(r));

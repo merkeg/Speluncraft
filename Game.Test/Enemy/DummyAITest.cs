@@ -18,10 +18,11 @@ namespace GameTest.Enemy
             Engine.Engine.Colliders.Add(floor);
 
             Game.Enemy.DummyAI ai = new Game.Enemy.DummyAI(0, 1, 1, 1, null, 5);
-            Engine.Engine.GameObjects.Add(ai);
+            Engine.Engine.ImplementGameObject(ai);
 
             for (int i = 0; i < 100; i++)
             {
+                Engine.Engine.GetService<Engine.Service.CollisionService>().OnUpdate(0.1f);
                 ai.OnUpdate(0.1f);
             }
 

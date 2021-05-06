@@ -461,6 +461,12 @@
             </summary>
             <param name="service">the service.</param>
         </member>
+        <member name="M:Engine.Engine.ImplementGameObject(Engine.GameObject.GameObject)">
+            <summary>
+            Adds an GameObject to the list.
+            </summary>
+            <param name="gameObject">The GameObject to add.</param>
+        </member>
         <member name="M:Engine.Engine.GetService(System.String)">
             <summary>
             Gets a service by name.
@@ -481,12 +487,6 @@
             Also checks if there are Colliders from it and delets it.
             </summary>
             <param name="gameObject">The GameObject to Destroy.</param>
-        </member>
-        <member name="M:Engine.Engine.ImplementGameObject(Engine.GameObject.GameObject)">
-            <summary>
-            Adds an GameObject to the list.
-            </summary>
-            <param name="gameObject">The GameObject to add.</param>
         </member>
         <member name="M:Engine.Engine.RemoveRenderer(Engine.Renderer.IRenderer,Engine.Renderer.RenderLayer)">
             <summary>
