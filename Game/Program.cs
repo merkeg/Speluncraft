@@ -43,7 +43,6 @@ namespace Game
             window.Title = "Speluncraft";
             Engine.Engine.StartEngine(window);
             this.assembly = Assembly.GetExecutingAssembly();
-            Engine.Engine.AddService(new TestService());
             this.InitializeRenderers();
             this.AddPlayer();
             this.AddEnemies();
@@ -67,8 +66,7 @@ namespace Game
             TilemapModel model = TilemapParser.ParseTilemap(tilemapStream);
             Tilemap tilemap = new Tilemap(tilesheet, model);
 
-            TilemapRenderer renderer = new TilemapRenderer(tilemap, 0, 0);
-            Engine.Engine.AddRenderer(renderer);
+            Engine.Engine.GetService<TilemapService>().AddTilemap(tilemap, Vector2i.Zero);
         }
 
         private void AddPlayer()
