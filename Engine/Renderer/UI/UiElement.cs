@@ -104,7 +104,7 @@ namespace Engine.Renderer.UI
         }
 
         /// <inheritdoc/>
-        public abstract void OnCreate();
+        public abstract void OnRendererCreate();
 
         /// <summary>
         /// Renders before everything on ui.

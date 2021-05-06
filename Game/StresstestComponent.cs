@@ -47,7 +47,7 @@ namespace Game
                         GameObject gameObject = new GameObject(-2, 0, 1, 1, this.sprite);
                         gameObject.AddComponent(new Physics());
                         gameObject.AddComponent(new Collider());
-                        Engine.Engine.GameObjectsToAdd.Add(gameObject);
+                        Engine.Engine.AddGameObject(gameObject);
                     }
                 }
             }

@@ -27,7 +27,7 @@ namespace Engine.Renderer
         }
 
         /// <inheritdoc/>
-        public void OnCreate()
+        public void OnRendererCreate()
         {
         }
     }

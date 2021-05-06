@@ -62,7 +62,7 @@ namespace Engine.Renderer
         }
 
         /// <inheritdoc/>
-        public override void OnCreate()
+        public override void OnRendererCreate()
         {
         }
 

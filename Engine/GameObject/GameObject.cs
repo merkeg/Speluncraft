@@ -10,7 +10,7 @@ namespace Engine.GameObject
     /// <summary>
     /// The GameObject class which active game elements are deriving from.
     /// </summary>
-    public class GameObject : IRectangle
+    public class GameObject : IRectangle, IUpdatable
     {
         /// <summary>
         /// The sprite the GameObject is drawn with.
@@ -157,7 +157,7 @@ namespace Engine.GameObject
         /// <summary>
         /// Called if the GameObject is created.
         /// </summary>
-        public virtual void OnCreated()
+        public virtual void OnUpdatableCreate()
         {
             this.Components.ForEach(component => component.OnCreated());
         }
@@ -174,7 +174,7 @@ namespace Engine.GameObject
         /// <summary>
         /// Called if the GameObject is destroyed.
         /// </summary>
-        public virtual void OnDestroy()
+        public virtual void OnUpdatableDestroy()
         {
             this.Components.ForEach(component => component.OnDestroy());
         }

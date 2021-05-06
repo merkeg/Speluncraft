@@ -48,7 +48,7 @@ namespace Engine.Renderer.Tile
         public int OriginY { get; private set; }
 
         /// <inheritdoc/>
-        public void OnCreate()
+        public void OnRendererCreate()
         {
             foreach (TilemapLayer layer in this.Tilemap.Layers)
             {

@@ -42,6 +42,6 @@ namespace Engine.Renderer
         /// <summary>
         /// Run when the renderer is added.
         /// </summary>
-        public void OnCreate();
+        public void OnRendererCreate();
     }
 }

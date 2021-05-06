@@ -115,7 +115,7 @@ namespace Game.Player
 
             if (this.GetComponent<Engine.Component.HealthPoints>().GetIsDeadFlag())
             {
-                Engine.Engine.GameObjectsToRemove.Add(this);
+                Engine.Engine.RemoveGameObject(this);
             }
 
             Engine.Component.Collider collider = this.GetComponent<Engine.Component.Collider>();

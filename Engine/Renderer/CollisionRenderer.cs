@@ -15,7 +15,7 @@ namespace Engine.Renderer
     public class CollisionRenderer : IRenderer
     {
         /// <inheritdoc/>
-        public void OnCreate()
+        public void OnRendererCreate()
         {
             return;
         }

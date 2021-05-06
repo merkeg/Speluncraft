@@ -15,10 +15,10 @@ namespace Game
     using Engine.Renderer.Tile;
     using Engine.Renderer.Tile.Parser;
     using Engine.Renderer.UI;
+    using Engine.Service;
     using Game.Enemy;
     using Game.Player;
     using Game.UI;
-    using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
     using OpenTK.Windowing.Desktop;
@@ -42,7 +42,7 @@ namespace Game
             window.VSync = VSyncMode.Adaptive;
             Engine.Engine.StartEngine(window);
             this.assembly = Assembly.GetExecutingAssembly();
-
+            Engine.Engine.AddService(new TestService());
             this.InitializeRenderers();
             this.AddPlayer();
             this.AddEnemies();

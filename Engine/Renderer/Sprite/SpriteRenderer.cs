@@ -39,7 +39,7 @@ namespace Engine.Renderer.Sprite
         public ISprite Sprite { get; internal set; }
 
         /// <inheritdoc/>
-        public void OnCreate()
+        public void OnRendererCreate()
         {
             return;
         }

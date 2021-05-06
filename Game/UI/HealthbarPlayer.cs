@@ -102,7 +102,7 @@ namespace Game.UI
         /// <summary>
         /// OnCreate function.
         /// </summary>
-        public void OnCreate()
+        public void OnRendererCreate()
         {
             return;
         }

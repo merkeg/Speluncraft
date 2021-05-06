@@ -91,7 +91,7 @@ namespace Engine.Renderer.UI.Graph
         }
 
         /// <inheritdoc/>
-        public void OnCreate()
+        public void OnRendererCreate()
         {
         }
 

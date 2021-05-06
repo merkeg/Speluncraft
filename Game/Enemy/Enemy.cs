@@ -48,7 +48,7 @@ namespace Game.Enemy
             base.OnUpdate(frameTime);
             if (this.GetComponent<Engine.Component.HealthPoints>().GetIsDeadFlag())
             {
-                Engine.Engine.GameObjectsToRemove.Add(this);
+                Engine.Engine.RemoveGameObject(this);
             }
 
             // Console.WriteLine("Enemy: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
