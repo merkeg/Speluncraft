@@ -223,7 +223,7 @@
             </summary>
             <param name="args">args.</param>
         </member>
-        <member name="M:Game.UI.HealthbarPlayer.OnRenderableCreate">
+        <member name="M:Game.UI.HealthbarPlayer.OnRendererCreate">
             <summary>
             OnCreate function.
             </summary>

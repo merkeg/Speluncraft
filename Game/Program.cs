@@ -42,7 +42,7 @@ namespace Game
             window.VSync = VSyncMode.Adaptive;
             Engine.Engine.StartEngine(window);
             this.assembly = Assembly.GetExecutingAssembly();
-            Engine.Engine.AddService(new TestService());
+            Engine.Engine.AddService(new CollisionService());
             this.InitializeRenderers();
             this.AddPlayer();
             this.AddEnemies();
