@@ -154,7 +154,7 @@ namespace Engine
         public static T GetService<T>()
             where T : IService
         {
-            Service.ServiceInfo serviceInfo = (Service.ServiceInfo)typeof(Service.ServiceInfo).GetCustomAttributes(typeof(Service.ServiceInfo), false)[0];
+            Service.ServiceInfo serviceInfo = (Service.ServiceInfo)Attribute.GetCustomAttributes(typeof(T), typeof(Service.ServiceInfo))[0];
             return (T)Engine.GetService(serviceInfo.Name);
         }
 

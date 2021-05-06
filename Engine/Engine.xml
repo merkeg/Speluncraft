@@ -25,7 +25,7 @@
         <member name="M:Engine.Camera.Camera.Render(OpenTK.Windowing.Common.FrameEventArgs)">
             <inheritdoc/>
         </member>
-        <member name="M:Engine.Camera.Camera.OnRenderableCreate">
+        <member name="M:Engine.Camera.Camera.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="P:Engine.Camera.Camera.Center">
@@ -719,7 +719,7 @@
             The collision renderer class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.CollisionRenderer.OnRenderableCreate">
+        <member name="M:Engine.Renderer.CollisionRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.CollisionRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
@@ -743,7 +743,7 @@
             <param name="gameObject">Gameobject with physics component.</param>
             <param name="alignment">Alignment.</param>
         </member>
-        <member name="M:Engine.Renderer.DebugRenderer.OnRenderableCreate">
+        <member name="M:Engine.Renderer.DebugRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.DebugRenderer.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
@@ -781,7 +781,7 @@
             </summary>
             <param name="args">resize arguments.</param>
         </member>
-        <member name="M:Engine.Renderer.IRenderer.OnRenderableCreate">
+        <member name="M:Engine.Renderer.IRenderer.OnRendererCreate">
             <summary>
             Run when the renderer is added.
             </summary>
@@ -966,7 +966,7 @@
             Gets the sprite to render.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.Sprite.SpriteRenderer.OnRenderableCreate">
+        <member name="M:Engine.Renderer.Sprite.SpriteRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.Sprite.SpriteRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
@@ -1112,7 +1112,7 @@
         <member name="M:Engine.Renderer.Text.TextRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
-        <member name="M:Engine.Renderer.Text.TextRenderer.OnRenderableCreate">
+        <member name="M:Engine.Renderer.Text.TextRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Renderer.Tile.ITilesheet">
@@ -1288,7 +1288,7 @@
             Gets the origin y.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.Tile.TilemapRenderer.OnRenderableCreate">
+        <member name="M:Engine.Renderer.Tile.TilemapRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.Tile.TilemapRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
@@ -1338,7 +1338,7 @@
         <member name="M:Engine.Renderer.UiMatrixRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
-        <member name="M:Engine.Renderer.UiMatrixRenderer.OnRenderableCreate">
+        <member name="M:Engine.Renderer.UiMatrixRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Renderer.UI.Graph.GraphDataSet">
@@ -1390,7 +1390,7 @@
         <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
-        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.OnRenderableCreate">
+        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.AddDataSet(Engine.Renderer.UI.Graph.GraphDataSet)">
@@ -1423,7 +1423,7 @@
         <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
-        <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.OnRenderableCreate">
+        <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Renderer.UI.RelativeRectangle">
@@ -1519,7 +1519,7 @@
         <member name="M:Engine.Renderer.UI.UiElement.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
-        <member name="M:Engine.Renderer.UI.UiElement.OnRenderableCreate">
+        <member name="M:Engine.Renderer.UI.UiElement.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.UI.UiElement.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
@@ -1601,7 +1601,7 @@
         <member name="M:Engine.Service.TestService.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
-        <member name="M:Engine.Service.TestService.OnRenderableCreate">
+        <member name="M:Engine.Service.TestService.OnRendererCreate">
             <inheritdoc/>
         </member>
         <member name="M:Engine.Service.TestService.OnUpdate(System.Single)">
