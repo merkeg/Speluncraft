@@ -58,18 +58,9 @@ namespace Game
         }
 
         private void InitializeRenderers()
-        {
-            Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheet.png", 16, 16);
-
-            AnimatedSprite animatedSprite =
-                new AnimatedSprite(tilesheet, new[] { new Keyframe(0, 1, .3f), new Keyframe(1, 1, .3f) });
-            tilesheet.SetCustomSprite(0, animatedSprite);
-            TilemapModel model = TilemapParser.ParseTilemap("Game.Resources.Level.getUp.json");
-            using Stream tilesheetStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.tilesheetMC.png");
-            using Stream tilemapStream = this.assembly.GetManifestResourceStream("Game.Resources.Level.mapalla.json");
-
-            Tilesheet tilesheet = new Tilesheet(tilesheetStream, 32);
-            TilemapModel model = TilemapParser.ParseTilemap(tilemapStream);
+        { 
+            Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheetMC.png", 32, 32);
+            TilemapModel model = TilemapParser.ParseTilemap("Game.Resources.Level.mapalla.json");
             Tilemap tilemap = new Tilemap(tilesheet, model);
 
             Engine.Engine.GetService<TilemapService>().AddTilemap(tilemap, Vector2i.Zero);
@@ -77,8 +68,7 @@ namespace Game
 
         private void AddPlayer()
         {
-            using Stream tilesheetStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.tilesheetMC.png");
-            Tilesheet tilesheet = new Tilesheet(tilesheetStream, 32);
+            Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheetMC.png", 32, 32);
             AnimatedSprite sprite = new AnimatedSprite(tilesheet, new[] { new Keyframe(1, 0), new Keyframe(2, 0), new Keyframe(3, 0) });
 
             Player.Player player = new Player.Player(96, -33, 1, 1, sprite);
@@ -110,10 +100,9 @@ namespace Game
             EnemyPistol enemyWithPistol = new EnemyPistol(81, -43, 1, 1, enemyGunSprite, 5);
             Engine.Engine.AddGameObject(enemyWithPistol);
 
-            using Stream fireStream = this.assembly.GetManifestResourceStream("Game.Resources.Animated.fire.png");
-            Tilesheet fireTilesheet = new Tilesheet(fireStream, 32);
+            Tilesheet fireTilesheet = new Tilesheet("Game.Resources.Animated.fire.png", 32, 32);
             float delay = 0.041f;
-            ISprite fireSprite = new AnimatedSprite(fireTilesheet, new[] { new Keyframe(0, 0, delay), new Keyframe(0, 1, delay), new Keyframe(0, 2, delay), new Keyframe(0, 3, delay), new Keyframe(0, 4, delay), new Keyframe(0, 5, delay), new Keyframe(0, 6, delay), new Keyframe(0, 7, delay), new Keyframe(0, 8, delay), new Keyframe(0, 9, delay), new Keyframe(0, 10, delay), new Keyframe(0, 11, delay), new Keyframe(0, 12, delay), new Keyframe(0, 13, delay), new Keyframe(0, 14, delay), new Keyframe(0, 15, delay), new Keyframe(0, 16, delay), new Keyframe(0, 17, delay), new Keyframe(0, 18, delay), new Keyframe(0, 19, delay), new Keyframe(0, 20, delay), new Keyframe(0, 21, delay), new Keyframe(0, 22, delay), new Keyframe(0, 23, delay) });
+            ISprite fireSprite = new AnimatedSprite(fireTilesheet, Keyframe.RangeY(0, 0, 23, delay));
             Enemy.Enemy fire = new Enemy.Enemy(100, -44, 1, 1, fireSprite, 25);
             Engine.Engine.AddGameObject(fire);
         }

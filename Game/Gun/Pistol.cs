@@ -34,8 +34,7 @@ namespace Game.Gun
         public Pistol()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.Animated.bullet.png");
-            Engine.Renderer.Tile.Tilesheet animatedBullet = new Engine.Renderer.Tile.Tilesheet(spriteStream, 32);
+            Engine.Renderer.Tile.Tilesheet animatedBullet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Animated.bullet.png", 32, 32);
             this.bulletSprite = new AnimatedSprite(animatedBullet, new[] { new Keyframe(0, 0, 0.5f), new Keyframe(0, 1, 0.5f) });
         }
 
