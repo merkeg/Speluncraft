@@ -59,6 +59,12 @@ namespace Game
 
         private void InitializeRenderers()
         {
+            Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheet.png", 16, 16);
+
+            AnimatedSprite animatedSprite =
+                new AnimatedSprite(tilesheet, new[] { new Keyframe(0, 1, .3f), new Keyframe(1, 1, .3f) });
+            tilesheet.SetCustomSprite(0, animatedSprite);
+            TilemapModel model = TilemapParser.ParseTilemap("Game.Resources.Level.getUp.json");
             using Stream tilesheetStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.tilesheetMC.png");
             using Stream tilemapStream = this.assembly.GetManifestResourceStream("Game.Resources.Level.mapalla.json");
 
@@ -84,10 +90,8 @@ namespace Game
             HealthbarPlayer playerhealthbar = new HealthbarPlayer();
             Engine.Engine.AddRenderer(playerhealthbar, RenderLayer.UI);
 
-            using Stream fontModelStream = this.assembly.GetManifestResourceStream("Game.Resources.Font.hack.font.fnt");
-            using Stream fontStream = this.assembly.GetManifestResourceStream("Game.Resources.Font.hack.font.png");
-            FontModel fontModel = FontModel.Parse(fontModelStream);
-            Sprite fontSprite = new Sprite(fontStream);
+            FontModel fontModel = FontModel.Parse("Game.Resources.Font.hack.font.fnt");
+            Sprite fontSprite = new Sprite("Game.Resources.Font.hack.font.png");
             Font font = new Font(fontModel, fontSprite);
 
             DebugRenderer debugRenderer = new DebugRenderer(new Rectangle(5, 5, 300, 325), new Color4(0, 0, 0, 0.3f), font, player, UiAlignment.Right);
