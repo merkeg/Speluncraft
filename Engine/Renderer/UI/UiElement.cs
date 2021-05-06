@@ -55,7 +55,7 @@ namespace Engine.Renderer.UI
             }
             else
             {
-                Vector2i monitor = Engine.Instance().GameWindow.Size;
+                Vector2i monitor = Engine.GameWindow.Size;
                 this.AbsoluteBounds = new Rectangle(monitor.X - this.Bounds.MinX - this.Bounds.SizeX, this.Bounds.MinY, this.Bounds.SizeX, this.Bounds.SizeY);
             }
 

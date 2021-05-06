@@ -69,8 +69,7 @@ namespace Engine.Renderer
         /// <inheritdoc/>
         public override void OnRender(FrameEventArgs args)
         {
-            Engine engine = Engine.Instance();
-            this.engineInfoText.Text = $"GO: {engine.GameObjects.Count} - COL: {engine.Colliders.Count}";
+            this.engineInfoText.Text = $"GO: {Engine.GameObjects.Count} - COL: {Engine.Colliders.Count}";
             this.frameInfoText.Text = $"mem: {GC.GetTotalMemory(false) / 1000 / 1000,-3}MB - time: {MathHelper.Round(args.Time * 1000, 2)}ms";
             this.playerInfoText.Text = $"velX: {MathHelper.Round(this.physics.GetVelocity().X, 2),-6} velY: {MathHelper.Round(this.physics.GetVelocity().Y, 2),-6}";
 

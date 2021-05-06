@@ -16,7 +16,7 @@ namespace Engine.Renderer
         /// <inheritdoc/>
         public void Render(FrameEventArgs args)
         {
-            Vector2i windowSize = Engine.Instance().GameWindow.Size;
+            Vector2i windowSize = Engine.GameWindow.Size;
             GL.LoadIdentity();
             GL.Ortho(0f, windowSize.X, windowSize.Y, 0f, -1f, 1f);
         }

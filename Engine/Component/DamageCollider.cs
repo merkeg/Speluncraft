@@ -96,7 +96,7 @@ namespace Engine.Component
             }
 
             // If the Collider Component allready checked, then we dont need to check anymore. ( If perfomance problems )
-            foreach (GameObject.IRectangle r in Engine.Instance().Colliders)
+            foreach (GameObject.IRectangle r in Engine.Colliders)
             {
                 if (this.GameObject.Intersects(r))
                 {

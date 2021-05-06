@@ -56,7 +56,7 @@ namespace Game.Enemy
             bool hasFloorLeft = false;
             bool hasFloorRight = false;
 
-            foreach (Engine.GameObject.IRectangle r in Engine.Engine.Instance().Colliders)
+            foreach (Engine.GameObject.IRectangle r in Engine.Engine.Colliders)
             {
                 if (checkLeft.Intersects(r))
                 {

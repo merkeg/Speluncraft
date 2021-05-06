@@ -396,11 +396,6 @@
             The Engine instance to bind with OpenGL.
             </summary>
         </member>
-        <member name="M:Engine.Engine.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Engine.Engine"/> class.
-            </summary>
-        </member>
         <member name="P:Engine.Engine.GameObjects">
             <summary>
             Gets a list of GameObjects in the game.
@@ -428,19 +423,13 @@
         </member>
         <member name="P:Engine.Engine.GameObjectsToRemove">
             <summary>
-            Gets Here you can add GameObjects that should be removed this frame.
+            Gets Here you can add GameObjects that should be removed Engine frame.
             </summary>
         </member>
         <member name="P:Engine.Engine.GameObjectsToAdd">
             <summary>
             Gets Here you can add GameObjects that should be added next frame.
             </summary>
-        </member>
-        <member name="M:Engine.Engine.Instance">
-            <summary>
-            Method to get the engine instance.
-            </summary>
-            <returns>Engine instance.</returns>
         </member>
         <member name="M:Engine.Engine.AddGameObject(Engine.GameObject.GameObject)">
             <summary>
