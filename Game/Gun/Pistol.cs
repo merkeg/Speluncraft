@@ -17,16 +17,16 @@ namespace Game.Gun
     /// </summary>
     public class Pistol : Engine.Component.Component, IGun
     {
-        private readonly float bulletLenght = 0.25f;
-        private readonly float bulletHeight = 0.2f;
-        private readonly float bufferDistance = 0.37f;
+        private readonly float bulletLenght = 0.5f;
+        private readonly float bulletHeight = 0.5f;
+        private readonly float bufferDistance = 0.2f;
 
-        private readonly float bulletVelocity = 10;
+        private readonly float bulletVelocity = 25;
         private int dmg = 10;
         private float reloadTime = 0.5f;
         private float reloadCoolDown = 0;
 
-        private Sprite bulletSprite;
+        private ISprite bulletSprite;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Pistol"/> class.
@@ -34,8 +34,9 @@ namespace Game.Gun
         public Pistol()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
-            using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.Floppa.png");
-            this.bulletSprite = new Sprite(spriteStream);
+            using Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.Animated.bullet.png");
+            Engine.Renderer.Tile.Tilesheet animatedBullet = new Engine.Renderer.Tile.Tilesheet(spriteStream, 32);
+            this.bulletSprite = new AnimatedSprite(animatedBullet, new[] { new Keyframe(0, 0, 0.5f), new Keyframe(0, 1, 0.5f) });
         }
 
         /// <inheritdoc/>
