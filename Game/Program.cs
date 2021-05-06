@@ -59,10 +59,10 @@ namespace Game
 
         private void InitializeRenderers()
         {
-            using Stream tilesheetStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.tilesheet.png");
-            using Stream tilemapStream = this.assembly.GetManifestResourceStream("Game.Resources.Level.getUp.json");
+            using Stream tilesheetStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.tilesheetMC.png");
+            using Stream tilemapStream = this.assembly.GetManifestResourceStream("Game.Resources.Level.mapalla.json");
 
-            Tilesheet tilesheet = new Tilesheet(tilesheetStream, 16);
+            Tilesheet tilesheet = new Tilesheet(tilesheetStream, 32);
             TilemapModel model = TilemapParser.ParseTilemap(tilemapStream);
             Tilemap tilemap = new Tilemap(tilesheet, model);
 
@@ -72,11 +72,11 @@ namespace Game
 
         private void AddPlayer()
         {
-            using Stream tilesheetStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.tilesheet.png");
-            Tilesheet tilesheet = new Tilesheet(tilesheetStream, 16);
-            AnimatedSprite sprite = new AnimatedSprite(tilesheet, new[] { new Keyframe(9, 0), new Keyframe(10, 0), new Keyframe(12, 0) });
+            using Stream tilesheetStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.tilesheetMC.png");
+            Tilesheet tilesheet = new Tilesheet(tilesheetStream, 32);
+            AnimatedSprite sprite = new AnimatedSprite(tilesheet, new[] { new Keyframe(1, 0), new Keyframe(2, 0), new Keyframe(3, 0) });
 
-            Player.Player player = new Player.Player(7, -27, 1, 1, sprite);
+            Player.Player player = new Player.Player(30, -30, 1, 1, sprite);
             player.AddComponent(new CameraTrackingComponent());
             player.Mirrored = true;
             Engine.Engine.AddGameObject(player);
@@ -99,13 +99,20 @@ namespace Game
         {
             using Stream enemyStream = this.assembly.GetManifestResourceStream("Game.Resources.enemy.png");
             Sprite enemySprite = new Sprite(enemyStream);
-            DummyAI testEnemy = new DummyAI(2, -25, 1, 1, enemySprite, 10);
+            DummyAI testEnemy = new DummyAI(75, -25, 1, 1, enemySprite, 10);
             Engine.Engine.AddGameObject(testEnemy);
 
             using Stream enemyGunSpriteStream = this.assembly.GetManifestResourceStream("Game.Resources.enemyGun.png");
             Sprite enemyGunSprite = new Sprite(enemyGunSpriteStream);
-            EnemyPistol enemyWithPistol = new EnemyPistol(5, -20, 1, 1, enemyGunSprite, 5);
+            EnemyPistol enemyWithPistol = new EnemyPistol(60, -90, 1, 1, enemyGunSprite, 5);
             Engine.Engine.AddGameObject(enemyWithPistol);
+
+            using Stream fireStream = this.assembly.GetManifestResourceStream("Game.Resources.Animated.fire.png");
+            Tilesheet fireTilesheet = new Tilesheet(fireStream, 32);
+            float delay = 0.041f;
+            ISprite fireSprite = new AnimatedSprite(fireTilesheet, new[] { new Keyframe(0, 0, delay), new Keyframe(0, 1, delay), new Keyframe(0, 2, delay), new Keyframe(0, 3, delay), new Keyframe(0, 4, delay), new Keyframe(0, 5, delay), new Keyframe(0, 6, delay), new Keyframe(0, 7, delay), new Keyframe(0, 8, delay), new Keyframe(0, 9, delay), new Keyframe(0, 10, delay), new Keyframe(0, 11, delay), new Keyframe(0, 12, delay), new Keyframe(0, 13, delay), new Keyframe(0, 14, delay), new Keyframe(0, 15, delay), new Keyframe(0, 16, delay), new Keyframe(0, 17, delay), new Keyframe(0, 18, delay), new Keyframe(0, 19, delay), new Keyframe(0, 20, delay), new Keyframe(0, 21, delay), new Keyframe(0, 22, delay), new Keyframe(0, 23, delay) });
+            Enemy.Enemy fire = new Enemy.Enemy(50, -30, 1, 1, fireSprite, 25);
+            Engine.Engine.AddGameObject(fire);
         }
     }
 }

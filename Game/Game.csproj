@@ -13,17 +13,22 @@
 
   <ItemGroup>
     <None Remove="Resources\all.json" />
+    <None Remove="Resources\Animated\fire.png" />
     <None Remove="Resources\B.json" />
     <None Remove="Resources\enemy.png" />
     <None Remove="Resources\enemyGun.png" />
     <None Remove="Resources\Floppa.png" />
     <None Remove="Resources\jumpNrun.json" />
     <None Remove="Resources\jumpy.json" />
+    <None Remove="Resources\Level\mapalla.json" />
     <None Remove="Resources\lol.json" />
     <None Remove="Resources\player.png" />
     <None Remove="Resources\rotation.json" />
+    <None Remove="Resources\Sprite\bullet.png" />
+    <None Remove="Resources\Sprite\tilesheetMC.png" />
     <None Remove="Resources\testmap.json" />
     <None Remove="Resources\tilesheet.png" />
+	<None Remove="Resources\tilesheetMC.png" />
     <None Remove="stylecop.json" />
   </ItemGroup>
 
@@ -32,6 +37,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Animated\fire.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Level\all.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -47,6 +55,12 @@
     <EmbeddedResource Include="Resources\Level\jumpNrun.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Level\mapalla.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Animated\bullet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Sprite\player.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -54,6 +68,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Sprite\tilesheet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Sprite\tilesheetMC.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Remove="Resources\Font\semicondensed\font.fnt" />
@@ -97,5 +114,11 @@
 
   <ItemGroup>
     <Folder Include="Resources\Font\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="Resources\Sprite\tilesheetMC.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
   </ItemGroup>
 </Project>
