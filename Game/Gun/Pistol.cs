@@ -21,7 +21,7 @@ namespace Game.Gun
         private readonly float bulletHeight = 0.5f;
         private readonly float bufferDistance = 0.2f;
 
-        private readonly float bulletVelocity = 25;
+        private readonly float bulletVelocity = 10;
         private int dmg = 10;
         private float reloadTime = 0.5f;
         private float reloadCoolDown = 0;

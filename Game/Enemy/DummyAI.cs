@@ -103,12 +103,14 @@ namespace Game.Enemy
                 {
                     this.phys.SetVelocity(this.movementSpeed, 0);
                     this.lookingDirection = Player.ILookDirection.Right;
+                    return;
                 }
 
                 if (this.lookingDirection == Player.ILookDirection.Right)
                 {
                     this.phys.SetVelocity(-this.movementSpeed, 0);
                     this.lookingDirection = Player.ILookDirection.Left;
+                    return;
                 }
             }
         }
