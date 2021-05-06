@@ -902,10 +902,37 @@
             Gets the time it stays at this sprite.
             </summary>
         </member>
+        <member name="M:Engine.Renderer.Sprite.Keyframe.RangeX(System.Int32,System.Int32,System.Int32,System.Single)">
+            <summary>
+            Function to get a keyframe array with a set range.
+            </summary>
+            <param name="minX">min x.</param>
+            <param name="maxX">max x.</param>
+            <param name="y">y.</param>
+            <param name="time">time in seconds.</param>
+            <returns>an array.</returns>
+        </member>
+        <member name="M:Engine.Renderer.Sprite.Keyframe.RangeY(System.Int32,System.Int32,System.Int32,System.Single)">
+            <summary>
+            Function to get a keyframe array with a set range.
+            </summary>
+            <param name="x">x.</param>
+            <param name="minY">min y.</param>
+            <param name="maxY">max y.</param>
+            <param name="time">time in seconds.</param>
+            <returns>an array.</returns>
+        </member>
         <member name="T:Engine.Renderer.Sprite.Sprite">
             <summary>
             The Sprite class.
             </summary>
+        </member>
+        <member name="M:Engine.Renderer.Sprite.Sprite.#ctor(System.String,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Sprite.Sprite"/> class.
+            </summary>
+            <param name="resource">The resource to bind as sprite.</param>
+            <param name="flip">Set if flipped.</param>
         </member>
         <member name="M:Engine.Renderer.Sprite.Sprite.#ctor(System.IO.Stream,System.Boolean)">
             <summary>
@@ -1013,6 +1040,13 @@
             <summary>
             Gets the List of characters.
             </summary>
+        </member>
+        <member name="M:Engine.Renderer.Text.Parser.FontModel.Parse(System.String)">
+            <summary>
+            Parse a file to an font model.
+            </summary>
+            <param name="stream">Stream to use.</param>
+            <returns>Font model.</returns>
         </member>
         <member name="M:Engine.Renderer.Text.Parser.FontModel.Parse(System.IO.Stream)">
             <summary>
@@ -1135,7 +1169,12 @@
             Gets the amount in width.
             </summary>
         </member>
-        <member name="P:Engine.Renderer.Tile.ITilesheet.TileSize">
+        <member name="P:Engine.Renderer.Tile.ITilesheet.TileSizeX">
+            <summary>
+            Gets the size of the tile in pixels.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.ITilesheet.TileSizeY">
             <summary>
             Gets the size of the tile in pixels.
             </summary>
@@ -1154,6 +1193,13 @@
             <summary>
             Helper class to parse Tilemap json files into models.
             </summary>
+        </member>
+        <member name="M:Engine.Renderer.Tile.Parser.TilemapParser.ParseTilemap(System.String)">
+            <summary>
+            Parses Tilemap json files into a Tilemap model.
+            </summary>
+            <param name="resource">The Tilemap json stream.</param>
+            <returns>The Tilemap model.</returns>
         </member>
         <member name="M:Engine.Renderer.Tile.Parser.TilemapParser.ParseTilemap(System.IO.Stream)">
             <summary>
@@ -1237,11 +1283,6 @@
             Gets the Tilemap model.
             </summary>
         </member>
-        <member name="P:Engine.Renderer.Tile.TilemapLayer.TileSize">
-            <summary>
-            Gets the tile size.
-            </summary>
-        </member>
         <member name="P:Engine.Renderer.Tile.TilemapLayer.TileTexSizeX">
             <summary>
             Gets the Tile texture size X.
@@ -1302,12 +1343,21 @@
             The Tileset class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.Tile.Tilesheet.#ctor(System.IO.Stream,System.Int32)">
+        <member name="M:Engine.Renderer.Tile.Tilesheet.#ctor(System.String,System.Int32,System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.Tile.Tilesheet"/> class.
             </summary>
             <param name="resource">The resource location.</param>
-            <param name="tileSize">The size of tiles in pixels.</param>
+            <param name="tileSizeX">The X size of tiles in pixels.</param>
+            <param name="tileSizeY">The Y size of tiles in pixels.</param>
+        </member>
+        <member name="M:Engine.Renderer.Tile.Tilesheet.#ctor(System.IO.Stream,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Tile.Tilesheet"/> class.
+            </summary>
+            <param name="resource">The resource location.</param>
+            <param name="tileSizeX">The X size of tiles in pixels.</param>
+            <param name="tileSizeY">The Y size of tiles in pixels.</param>
         </member>
         <member name="P:Engine.Renderer.Tile.Tilesheet.Handle">
             <inheritdoc/>
@@ -1318,7 +1368,10 @@
         <member name="P:Engine.Renderer.Tile.Tilesheet.AmountTileWidth">
             <inheritdoc/>
         </member>
-        <member name="P:Engine.Renderer.Tile.Tilesheet.TileSize">
+        <member name="P:Engine.Renderer.Tile.Tilesheet.TileSizeX">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Tile.Tilesheet.TileSizeY">
             <inheritdoc/>
         </member>
         <member name="P:Engine.Renderer.Tile.Tilesheet.Tiles">

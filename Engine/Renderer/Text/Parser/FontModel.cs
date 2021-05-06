@@ -7,6 +7,7 @@ namespace Engine.Renderer.Text.Parser
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Reflection;
     using System.Text;
     using System.Text.RegularExpressions;
     using OpenTK.Graphics.ES11;
@@ -30,6 +31,17 @@ namespace Engine.Renderer.Text.Parser
         /// Gets the List of characters.
         /// </summary>
         public Dictionary<int, FontModelCharacter> Characters { get; private set; }
+
+        /// <summary>
+        /// Parse a file to an font model.
+        /// </summary>
+        /// <param name="stream">Stream to use.</param>
+        /// <returns>Font model.</returns>
+        public static FontModel Parse(string stream)
+        {
+            Assembly asm = Assembly.GetEntryAssembly();
+            return Parse(asm.GetManifestResourceStream(stream));
+        }
 
         /// <summary>
         /// Parse a file to an font model.

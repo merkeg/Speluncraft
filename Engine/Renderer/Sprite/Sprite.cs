@@ -4,14 +4,15 @@
 
 namespace Engine.Renderer.Sprite
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Reflection;
+    using System.Text;
     using OpenTK.Graphics.OpenGL;
     using SixLabors.ImageSharp;
     using SixLabors.ImageSharp.PixelFormats;
     using SixLabors.ImageSharp.Processing;
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Text;
 
     /// <summary>
     /// The Sprite class.
@@ -19,6 +20,26 @@ namespace Engine.Renderer.Sprite
     public class Sprite : ISprite
     {
         private readonly Stream resource;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Sprite"/> class.
+        /// </summary>
+        /// <param name="resource">The resource to bind as sprite.</param>
+        /// <param name="flip">Set if flipped.</param>
+        public Sprite(string resource, bool flip = true)
+        {
+            Assembly asm = Assembly.GetEntryAssembly();
+
+            this.resource = asm.GetManifestResourceStream(resource);
+            this.Handle = GL.GenTexture();
+
+            this.TexX0 = 0;
+            this.TexX1 = 1;
+            this.TexY0 = 0;
+            this.TexY1 = 1;
+
+            this.BuildSprite(true);
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Sprite"/> class.

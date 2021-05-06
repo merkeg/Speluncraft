@@ -27,7 +27,12 @@ namespace Engine.Renderer.Tile
         /// <summary>
         /// Gets the size of the tile in pixels.
         /// </summary>
-        public int TileSize { get; }
+        public int TileSizeX { get; }
+
+        /// <summary>
+        /// Gets the size of the tile in pixels.
+        /// </summary>
+        public int TileSizeY { get; }
 
         /// <summary>
         /// Gets the Tile texture size X.
