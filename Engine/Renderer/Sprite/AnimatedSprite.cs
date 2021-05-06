@@ -31,10 +31,10 @@ namespace Engine.Renderer.Sprite
         public int Handle => this.tilesheet.Handle;
 
         /// <inheritdoc/>
-        public int Width => this.tilesheet.TileSize;
+        public int Width => this.tilesheet.TileSizeX;
 
         /// <inheritdoc/>
-        public int Height => this.tilesheet.TileSize;
+        public int Height => this.tilesheet.TileSizeY;
 
         /// <inheritdoc/>
         public float TexX0 => this.tilesheet.TileTexSizeX * this[this.currentIndex].X;

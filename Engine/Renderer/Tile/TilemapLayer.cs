@@ -61,17 +61,6 @@ namespace Engine.Renderer.Tile
         public TilemapLayerModel TilemapModel { get; private set; }
 
         /// <summary>
-        /// Gets the tile size.
-        /// </summary>
-        public int TileSize
-        {
-            get
-            {
-                return this.Tilesheet.TileSize;
-            }
-        }
-
-        /// <summary>
         /// Gets the Tile texture size X.
         /// </summary>
         public float TileTexSizeX => 1f / this.Tilesheet.AmountTileWidth;

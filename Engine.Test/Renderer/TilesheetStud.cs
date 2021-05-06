@@ -7,6 +7,7 @@ namespace EngineTest.Renderer
         public int Handle => 0;
         public int AmountTileHeight => 10;
         public int AmountTileWidth => 10;
-        public int TileSize => 16;
+        public int TileSizeX => 16;
+        public int TileSizeY => 16;
     }
 }

@@ -58,15 +58,12 @@ namespace Game
 
         private void InitializeRenderers()
         {
-            using Stream tilesheetStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.tilesheet.png");
-            using Stream tilemapStream = this.assembly.GetManifestResourceStream("Game.Resources.Level.getUp.json");
-
-            Tilesheet tilesheet = new Tilesheet(tilesheetStream, 16);
+            Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheet.png", 16, 16);
 
             AnimatedSprite animatedSprite =
                 new AnimatedSprite(tilesheet, new[] { new Keyframe(0, 1, .3f), new Keyframe(1, 1, .3f) });
             tilesheet.SetCustomSprite(0, animatedSprite);
-            TilemapModel model = TilemapParser.ParseTilemap(tilemapStream);
+            TilemapModel model = TilemapParser.ParseTilemap("Game.Resources.Level.getUp.json");
             Tilemap tilemap = new Tilemap(tilesheet, model);
 
             Engine.Engine.GetService<TilemapService>().AddTilemap(tilemap, Vector2i.Zero);
@@ -74,8 +71,7 @@ namespace Game
 
         private void AddPlayer()
         {
-            using Stream tilesheetStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.tilesheet.png");
-            Tilesheet tilesheet = new Tilesheet(tilesheetStream, 16);
+            Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheet.png", 16, 16);
             AnimatedSprite sprite = new AnimatedSprite(tilesheet, new[] { new Keyframe(9, 0), new Keyframe(10, 0), new Keyframe(12, 0) });
 
             Player.Player player = new Player.Player(7, -27, 1, 1, sprite);
@@ -87,10 +83,8 @@ namespace Game
             HealthbarPlayer playerhealthbar = new HealthbarPlayer();
             Engine.Engine.AddRenderer(playerhealthbar, RenderLayer.UI);
 
-            using Stream fontModelStream = this.assembly.GetManifestResourceStream("Game.Resources.Font.hack.font.fnt");
-            using Stream fontStream = this.assembly.GetManifestResourceStream("Game.Resources.Font.hack.font.png");
-            FontModel fontModel = FontModel.Parse(fontModelStream);
-            Sprite fontSprite = new Sprite(fontStream);
+            FontModel fontModel = FontModel.Parse("Game.Resources.Font.hack.font.fnt");
+            Sprite fontSprite = new Sprite("Game.Resources.Font.hack.font.png");
             Font font = new Font(fontModel, fontSprite);
 
             DebugRenderer debugRenderer = new DebugRenderer(new Rectangle(5, 5, 300, 325), new Color4(0, 0, 0, 0.3f), font, player, UiAlignment.Right);
@@ -99,13 +93,11 @@ namespace Game
 
         private void AddEnemies()
         {
-            using Stream enemyStream = this.assembly.GetManifestResourceStream("Game.Resources.enemy.png");
-            Sprite enemySprite = new Sprite(enemyStream);
+            Sprite enemySprite = new Sprite("Game.Resources.enemy.png");
             DummyAI testEnemy = new DummyAI(2, -25, 1, 1, enemySprite, 10);
             Engine.Engine.AddGameObject(testEnemy);
 
-            using Stream enemyGunSpriteStream = this.assembly.GetManifestResourceStream("Game.Resources.enemyGun.png");
-            Sprite enemyGunSprite = new Sprite(enemyGunSpriteStream);
+            Sprite enemyGunSprite = new Sprite("Game.Resources.enemyGun.png");
             EnemyPistol enemyWithPistol = new EnemyPistol(5, -20, 1, 1, enemyGunSprite, 5);
             Engine.Engine.AddGameObject(enemyWithPistol);
         }
