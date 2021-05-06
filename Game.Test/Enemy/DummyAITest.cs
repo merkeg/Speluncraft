@@ -17,6 +17,8 @@ namespace GameTest.Enemy
             Engine.GameObject.Rectangle floor = new Engine.GameObject.Rectangle(0, 0, 5, 1);
             Engine.Engine.Colliders.Add(floor);
 
+            List<Engine.GameObject.IRectangle> test = Engine.Engine.Colliders;
+
             Game.Enemy.DummyAI ai = new Game.Enemy.DummyAI(0, 1, 1, 1, null, 5);
             Engine.Engine.ImplementGameObject(ai);
 
@@ -26,7 +28,7 @@ namespace GameTest.Enemy
                 ai.OnUpdate(0.1f);
             }
 
-            Assert.IsTrue(ai.MinY == 1);
+            Assert.IsTrue(ai.MinY == 1, "Got: " + ai.MinY);
         }
     }
 }
