@@ -59,8 +59,12 @@ namespace Engine.Service
         /// <returns>A List of the Collisions.</returns>
         public List<GameObject.IRectangle> GetCollosions(GameObject.GameObject gameObject)
         {
-            List<GameObject.IRectangle> output = this.collision[gameObject];
-            if (output == null)
+            List<GameObject.IRectangle> output;
+            try
+            {
+               output = this.collision[gameObject];
+            }
+            catch
             {
                 output = new List<GameObject.IRectangle>();
             }
