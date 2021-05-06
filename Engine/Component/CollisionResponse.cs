@@ -13,16 +13,5 @@ namespace Engine.Component
     /// </summary>
     public abstract class CollisionResponse : Component
     {
-        /// <summary>
-        /// Gets called by the Collosion service, when you start intersecting with something.
-        /// </summary>
-        /// <param name="rectangle">The Rectanlge, we are now colliding with.</param>
-        public abstract void OnTriggerEnter(GameObject.IRectangle rectangle);
-
-        /// <summary>
-        /// Gets called by the Collosion service, when you stop intersecting with something.
-        /// </summary>
-        /// <param name="rectangle">The Rectangle, we no longer collid with.</param>
-        public abstract void OnTriggerExit(GameObject.IRectangle rectangle);
     }
 }

@@ -32,11 +32,11 @@ namespace Game.Enemy
             physics.SetIsAffectedByGravity(true);
             physics.SetGravityMultiplier(3);
             this.AddComponent(physics);
-            this.AddComponent(new Engine.Component.Collider());
+            this.AddComponent(new Engine.Component.UndoOverlapCollisionResponse());
 
             this.AddComponent(new Engine.Component.HealthPoints(100, 100));
 
-            this.AddComponent(new Engine.Component.DamageCollider(damage, 1));
+            this.AddComponent(new Engine.Component.DoDamageCollisionResponse(damage, 1));
 
             // HitBox of Enemy needs to be in CollideList.
             Engine.Engine.Colliders.Add(this);

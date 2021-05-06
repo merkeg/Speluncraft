@@ -42,7 +42,7 @@ namespace Game.Player
             physics.SetIsAffectedByGravity(true);
             physics.SetGravityMultiplier(2);
             this.AddComponent(physics);
-            this.AddComponent(new Engine.Component.Collider());
+            this.AddComponent(new Engine.Component.UndoOverlapCollisionResponse());
 
             this.AddComponent(new Engine.Component.HealthPoints(100, 100));
 
@@ -51,7 +51,7 @@ namespace Game.Player
             Engine.Engine.Colliders.Add(this);
 
             // For Demo 2.0
-            this.AddComponent(new Engine.Component.DamageCollider(10, 1));
+            this.AddComponent(new Engine.Component.DoDamageCollisionResponse(10, 1));
 
             this.gun = new Gun.Pistol();
             this.AddComponent(this.gun.GetAsComponent());
@@ -118,7 +118,7 @@ namespace Game.Player
                 Engine.Engine.RemoveGameObject(this);
             }
 
-            Engine.Component.Collider collider = this.GetComponent<Engine.Component.Collider>();
+            Engine.Component.UndoOverlapCollisionResponse collider = this.GetComponent<Engine.Component.UndoOverlapCollisionResponse>();
             if (collider.GetGroundTouchedFlag())
             {
                 this.jumpcounter = this.jumpCounterMax;
