@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace EngineTest.Component
 {
     [TestClass]
-    public class DamageColliderTest
+    public class DoDamageCollisionResponseTest
     {
         [TestMethod]
         public void TestDealingDMG()

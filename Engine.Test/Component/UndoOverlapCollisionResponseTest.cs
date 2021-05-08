@@ -7,7 +7,7 @@ using System.Text;
 namespace EngineTest.Component
 {
     [TestClass]
-    public class ColliderTest
+    public class UndoOverlapCollisionResponseTest
     {
         [TestMethod]
         public void TestColliderUp()
