@@ -27,7 +27,7 @@ namespace Game.UI
         private static Engine engine;
 
         private static int currentHP = 0;
-
+        private static float uiScale = 0.5f;
         private static float xOffset = 20;
         private static float yOffset = 20;
         private float width = 300;
@@ -60,7 +60,7 @@ namespace Game.UI
             this.hpScale = this.width / this.health;
 
             this.assembly = Assembly.GetExecutingAssembly();
-            using Stream spriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.halfheart.png");
+            using Stream spriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.10_hearts.png");
             this.sprite = new Sprite(spriteStream, false);
         }
 
@@ -89,7 +89,7 @@ namespace Game.UI
             /* remove only for debugging
             // Console.WriteLine("Current HP player: " + currentHP + "\nPosition: " + player.MinX + " | " + player.MinY);
             */
-
+            /*
             GL.BindTexture(TextureTarget.Texture2D, 0);
             GL.Begin(PrimitiveType.Quads);
             GL.Color4(new Color4(1.0f, 0, 0, 0.5f));
@@ -98,22 +98,24 @@ namespace Game.UI
             GL.Vertex2(xOffset + (this.hpScale * currentHP), yOffset + this.height);
             GL.Vertex2(xOffset, yOffset + this.height);
             GL.End();
+            */
+
 
             GL.BindTexture(TextureTarget.Texture2D, this.sprite.Handle);
             GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
             GL.Begin(PrimitiveType.Quads);
 
             GL.TexCoord2(0, 0);
-            GL.Vertex2(200, 200);
+            GL.Vertex2(xOffset, yOffset);
 
             GL.TexCoord2(1, 0);
-            GL.Vertex2(250, 200);
+            GL.Vertex2(xOffset + (640 * uiScale), yOffset);
 
             GL.TexCoord2(1, 1);
-            GL.Vertex2(250, 250);
+            GL.Vertex2(xOffset + (640 * uiScale), yOffset + (64 * uiScale));
 
             GL.TexCoord2(0, 1);
-            GL.Vertex2(200, 250);
+            GL.Vertex2(xOffset, yOffset + (64 * uiScale));
 
             GL.End();
         }
