@@ -60,7 +60,7 @@ namespace Game.UI
             this.hpScale = this.width / this.health;
 
             this.assembly = Assembly.GetExecutingAssembly();
-            using Stream spriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.hearts_sheet.png");
+            using Stream spriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.heart_sheet.png");
             this.sprite = new Sprite(spriteStream, false);
         }
 
@@ -111,10 +111,10 @@ namespace Game.UI
             GL.TexCoord2(1, 0);
             GL.Vertex2(xOffset + (640 * uiScale), yOffset);
 
-            GL.TexCoord2(1, 1);
+            GL.TexCoord2(1, 0.05);
             GL.Vertex2(xOffset + (640 * uiScale), yOffset + (64 * uiScale));
 
-            GL.TexCoord2(0, 1);
+            GL.TexCoord2(0, 0.05);
             GL.Vertex2(xOffset, yOffset + (64 * uiScale));
 
             GL.End();
