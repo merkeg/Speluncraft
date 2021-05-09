@@ -60,7 +60,7 @@ namespace Game.UI
             this.hpScale = this.width / this.health;
 
             this.assembly = Assembly.GetExecutingAssembly();
-            using Stream spriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.10_hearts.png");
+            using Stream spriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.hearts_sheet.png");
             this.sprite = new Sprite(spriteStream, false);
         }
 

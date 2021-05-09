@@ -25,6 +25,7 @@
     <None Remove="Resources\Sprite\UI\Healthbar\10_hearts.png" />
     <None Remove="Resources\Sprite\UI\Healthbar\background.png" />
     <None Remove="Resources\Sprite\UI\Healthbar\halfheart.png" />
+    <None Remove="Resources\Sprite\UI\Healthbar\heart_sheet.png" />
     <None Remove="Resources\testmap.json" />
     <None Remove="Resources\tilesheet.png" />
     <None Remove="stylecop.json" />
@@ -79,13 +80,7 @@
     <EmbeddedResource Include="Resources\Font\hack\font.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Sprite\UI\Healthbar\10_hearts.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Sprite\UI\Healthbar\background.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Sprite\UI\Healthbar\halfheart.png">
+    <EmbeddedResource Include="Resources\Sprite\UI\Healthbar\heart_sheet.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
