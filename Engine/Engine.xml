@@ -467,6 +467,12 @@
             </summary>
             <param name="service">the service.</param>
         </member>
+        <member name="M:Engine.Engine.ImplementGameObject(Engine.GameObject.GameObject)">
+            <summary>
+            Adds an GameObject to the list.
+            </summary>
+            <param name="gameObject">The GameObject to add.</param>
+        </member>
         <member name="M:Engine.Engine.GetService(System.String)">
             <summary>
             Gets a service by name.
@@ -1741,29 +1747,6 @@
             <summary>
             Gets the Render layer the service wants to render on.
             </summary>
-        </member>
-        <member name="T:Engine.Service.TestService">
-            <summary>
-            TestService class.
-            </summary>
-        </member>
-        <member name="M:Engine.Service.TestService.Render(OpenTK.Windowing.Common.FrameEventArgs)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Service.TestService.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Service.TestService.OnRendererCreate">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Service.TestService.OnUpdate(System.Single)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Service.TestService.OnUpdatableDestroy">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Service.TestService.OnUpdatableCreate">
-            <inheritdoc/>
         </member>
         <member name="T:Engine.Service.TilemapService">
             <summary>
