@@ -119,7 +119,6 @@ namespace Game.Player
             }
 
             Engine.Component.UndoOverlapCollisionResponse collider = this.GetComponent<Engine.Component.UndoOverlapCollisionResponse>();
-            // Debug.WriteLine(collider.GetGroundTouchedFlag());
             if (collider.GetGroundTouchedFlag())
             {
                 this.jumpcounter = this.jumpCounterMax;
