@@ -9,7 +9,7 @@ namespace Game.UI
     /// <summary>
     /// Loader Class to initialize the whole UI of the Game. (hopefully).
     /// </summary>
-    internal class UI_Loader
+    internal class UILoader
     {
         /// <summary>
         /// Initializes the UI.

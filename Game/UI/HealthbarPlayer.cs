@@ -25,15 +25,18 @@ namespace Game.UI
         private static HealthbarPlayer instance;
         private static Player player;
         private static Engine engine;
+        private Assembly assembly;
+        private Sprite sprite;
 
         private static int currentHP = 0;
         private static float uiScale = 1.5f;
-        private static float xOffset = 20;
-        private static float yOffset = 20;
+
         private float hTexX0;
 
-        private Assembly assembly;
-        private Sprite sprite;
+        private static float xOffset = 25;
+        private static float yOffset = 25;
+        private static int screenX;
+        private static int screenY;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HealthbarPlayer"/> class.
@@ -105,7 +108,7 @@ namespace Game.UI
 
             // heart inlay
             GL.BindTexture(TextureTarget.Texture2D, this.sprite.Handle);
-            GL.Color4(new Color4(0.5f, 1.0f, 1.0f, 1.0f)); // change color of inlay here
+            GL.Color4(new Color4(1.0f, 0f, 0f, 1.0f)); // change color of inlay here
             GL.Begin(PrimitiveType.Quads);
 
             GL.TexCoord2(0, 0);
@@ -131,6 +134,9 @@ namespace Game.UI
         /// <param name="args">args.</param>
         public void Resize(ResizeEventArgs args)
         {
+            // Debug.WriteLine(args.Size);
+            screenX = args.Size.X;
+            screenY = args.Size.Y;
             return;
         }
 

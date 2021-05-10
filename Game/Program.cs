@@ -82,7 +82,7 @@ namespace Game
             this.engine.AddGameObject(player);
 
             // make sure to initialize UI after the player
-            UI_Loader.Initialize_UI(this.engine);
+            UILoader.Initialize_UI(this.engine);
 
             using Stream fontModelStream = this.assembly.GetManifestResourceStream("Game.Resources.Font.hack.font.fnt");
             using Stream fontStream = this.assembly.GetManifestResourceStream("Game.Resources.Font.hack.font.png");
