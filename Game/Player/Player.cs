@@ -128,7 +128,7 @@ namespace Game.Player
             // Debug.WriteLine("" + this.jumpcounter);
             if (keyboardState.IsKeyPressed(Keys.Space) && this.jumpcounter > 0)
             {
-                Debug.WriteLine("JUMP");
+                // Debug.WriteLine("JUMP");
                 physics.AddVelocitY(this.jumpPower);
                 this.jumpcounter--;
             }
