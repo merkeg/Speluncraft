@@ -7,7 +7,6 @@ namespace Game.UI
     using System.IO;
     using Engine.Renderer.Sprite;
     using System.Reflection;
-
     using Engine;
     using Engine.Component;
     using Engine.GameObject;
@@ -16,6 +15,7 @@ namespace Game.UI
     using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
+    using System.Diagnostics;
 
     /// <summary>
     /// The HealthbarPlayer class renders the healthbar UI element.
@@ -30,10 +30,8 @@ namespace Game.UI
         private static float uiScale = 0.5f;
         private static float xOffset = 20;
         private static float yOffset = 20;
-        private float width = 300;
-        private float height = 20;
-        private int health;
-        private float hpScale;
+        private float hTexY0;
+        private float hTexY1;
 
         private Assembly assembly;
         private Sprite sprite;
@@ -55,9 +53,6 @@ namespace Game.UI
                 }
             }
 
-            // Scale for healthbar calc
-            this.health = player.GetComponent<HealthPoints>().GetMaxHP();
-            this.hpScale = this.width / this.health;
 
             this.assembly = Assembly.GetExecutingAssembly();
             using Stream spriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.heart_sheet.png");
@@ -86,35 +81,25 @@ namespace Game.UI
         {
             currentHP = player.GetComponent<HealthPoints>().GetCurrHP();
 
-            /* remove only for debugging
-            // Console.WriteLine("Current HP player: " + currentHP + "\nPosition: " + player.MinX + " | " + player.MinY);
-            */
-            /*
-            GL.BindTexture(TextureTarget.Texture2D, 0);
-            GL.Begin(PrimitiveType.Quads);
-            GL.Color4(new Color4(1.0f, 0, 0, 0.5f));
-            GL.Vertex2(xOffset, yOffset);
-            GL.Vertex2(xOffset + (this.hpScale * currentHP), yOffset);
-            GL.Vertex2(xOffset + (this.hpScale * currentHP), yOffset + this.height);
-            GL.Vertex2(xOffset, yOffset + this.height);
-            GL.End();
-            */
+            this.hTexY0 = 1 - (currentHP / 5f * (1f / 20f));
+            this.hTexY1 = this.hTexY0 + (1f / 20f);
 
+            // Debug.WriteLine("Y0: " + this.hTexY0 + "hTexY1: " + this.hTexY1);
 
             GL.BindTexture(TextureTarget.Texture2D, this.sprite.Handle);
             GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
             GL.Begin(PrimitiveType.Quads);
 
-            GL.TexCoord2(0, 0);
+            GL.TexCoord2(0, this.hTexY0);
             GL.Vertex2(xOffset, yOffset);
 
-            GL.TexCoord2(1, 0);
+            GL.TexCoord2(1, this.hTexY0);
             GL.Vertex2(xOffset + (640 * uiScale), yOffset);
 
-            GL.TexCoord2(1, 0.05);
+            GL.TexCoord2(1, this.hTexY1);
             GL.Vertex2(xOffset + (640 * uiScale), yOffset + (64 * uiScale));
 
-            GL.TexCoord2(0, 0.05);
+            GL.TexCoord2(0, this.hTexY1);
             GL.Vertex2(xOffset, yOffset + (64 * uiScale));
 
             GL.End();
