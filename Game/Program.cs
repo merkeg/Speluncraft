@@ -22,6 +22,7 @@ namespace Game
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
     using OpenTK.Windowing.Desktop;
+    using Game.UI;
 
     /// <summary>
     /// The Main class of the game.
@@ -80,9 +81,8 @@ namespace Game
             player.AddComponent(new CameraTrackingComponent());
             this.engine.AddGameObject(player);
 
-            // make sure to initialize healthbar after the player
-            HealthbarPlayer playerhealthbar = new HealthbarPlayer();
-            this.engine.AddRenderer(playerhealthbar, RenderLayer.UI);
+            // make sure to initialize UI after the player
+            UI_Loader.Initialize_UI(this.engine);
 
             using Stream fontModelStream = this.assembly.GetManifestResourceStream("Game.Resources.Font.hack.font.fnt");
             using Stream fontStream = this.assembly.GetManifestResourceStream("Game.Resources.Font.hack.font.png");

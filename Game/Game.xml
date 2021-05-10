@@ -228,5 +228,16 @@
             OnCreate function.
             </summary>
         </member>
+        <member name="T:Game.UI.UI_Loader">
+            <summary>
+            Loader Class to initialize the whole UI of the Game. (hopefully).
+            </summary>
+        </member>
+        <member name="M:Game.UI.UI_Loader.Initialize_UI(Engine.Engine)">
+            <summary>
+            Initializes the UI.
+            </summary>
+            <param name="engine">reference to engine for adding the renderes.</param>
+        </member>
     </members>
 </doc>

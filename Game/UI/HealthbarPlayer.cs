@@ -27,15 +27,13 @@ namespace Game.UI
         private static Engine engine;
 
         private static int currentHP = 0;
-        private static float uiScale = 0.5f;
+        private static float uiScale = 1.5f;
         private static float xOffset = 20;
         private static float yOffset = 20;
-        private float hTexY0;
-        private float hTexY1;
+        private float hTexX0;
 
         private Assembly assembly;
         private Sprite sprite;
-        private Sprite uiBackground;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HealthbarPlayer"/> class.
@@ -55,11 +53,11 @@ namespace Game.UI
             }
 
             this.assembly = Assembly.GetExecutingAssembly();
-            using Stream spriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.heart_sheet.png");
+            using Stream spriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.heartsheet_new.png");
             this.sprite = new Sprite(spriteStream, false);
 
-            using Stream backgroundStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.ui_background.png");
-            this.uiBackground = new Sprite(backgroundStream, false);
+            //using Stream backgroundStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.ui_background.png");
+            //this.uiBackground = new Sprite(backgroundStream, false);
         }
 
         /// <summary>
@@ -82,48 +80,49 @@ namespace Game.UI
         /// <param name="args">.</param>
         public void Render(FrameEventArgs args)
         {
-            GL.BindTexture(TextureTarget.Texture2D, this.uiBackground.Handle);
-            GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
-            GL.Begin(PrimitiveType.Quads);
-
-            GL.TexCoord2(0, 0);
-            GL.Vertex2(0, 0);
-
-            GL.TexCoord2(1, 0);
-            GL.Vertex2(0 + (900 * uiScale), 0);
-
-            GL.TexCoord2(1, 1);
-            GL.Vertex2(0 + (900 * uiScale), 0 + (256 * uiScale));
-
-            GL.TexCoord2(0, 1);
-            GL.Vertex2(0, 0 + (256 * uiScale));
-
-            GL.End();
-
             currentHP = player.GetComponent<HealthPoints>().GetCurrHP();
 
-            this.hTexY0 = 1 - (currentHP / 5f * (1f / 20f));
-            this.hTexY1 = this.hTexY0 + (1f / 20f);
+            this.hTexX0 = currentHP / 100f;
 
-            // Debug.WriteLine("Y0: " + this.hTexY0 + "hTexY1: " + this.hTexY1);
+            // heart outline
             GL.BindTexture(TextureTarget.Texture2D, this.sprite.Handle);
             GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
             GL.Begin(PrimitiveType.Quads);
 
-            GL.TexCoord2(0, this.hTexY0);
+            GL.TexCoord2(0, 1f / 20f);
             GL.Vertex2(xOffset, yOffset);
 
-            GL.TexCoord2(1, this.hTexY0);
-            GL.Vertex2(xOffset + (640 * uiScale), yOffset);
+            GL.TexCoord2(1, 1f / 20f);
+            GL.Vertex2(xOffset + (220 * uiScale), yOffset);
 
-            GL.TexCoord2(1, this.hTexY1);
-            GL.Vertex2(xOffset + (640 * uiScale), yOffset + (64 * uiScale));
+            GL.TexCoord2(1, 1f / 20f * 2f);
+            GL.Vertex2(xOffset + (220 * uiScale), yOffset + (18 * uiScale));
 
-            GL.TexCoord2(0, this.hTexY1);
-            GL.Vertex2(xOffset, yOffset + (64 * uiScale));
+            GL.TexCoord2(0, 1f / 20f * 2f);
+            GL.Vertex2(xOffset, yOffset + (18 * uiScale));
 
             GL.End();
 
+            // heart inlay
+            GL.BindTexture(TextureTarget.Texture2D, this.sprite.Handle);
+            GL.Color4(new Color4(0.5f, 1.0f, 1.0f, 1.0f)); // change color of inlay here
+            GL.Begin(PrimitiveType.Quads);
+
+            GL.TexCoord2(0, 0);
+            GL.Vertex2(xOffset, yOffset);
+
+            GL.TexCoord2(this.hTexX0, 0);
+            GL.Vertex2(xOffset + ((220 * uiScale) * this.hTexX0), yOffset);
+
+            GL.TexCoord2(this.hTexX0, 1f / 20f);
+            GL.Vertex2(xOffset + ((220 * uiScale) * this.hTexX0), yOffset + (18 * uiScale));
+
+            GL.TexCoord2(0, 1f / 20f);
+            GL.Vertex2(xOffset, yOffset + (18 * uiScale));
+
+            GL.End();
+
+            // Debug.WriteLine("Y0: " + this.hTexY0 + "hTexY1: " + this.hTexY1);
         }
 
         /// <summary>
