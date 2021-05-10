@@ -208,7 +208,7 @@ namespace Engine
 
         private static void Update(FrameEventArgs args)
         {
-            float elapsed = (float)MathHelper.Clamp(args.Time, 0, 0.08);
+            float elapsed = (float)MathHelper.Clamp(args.Time, 0, 0.02);
             foreach (IService service in Engine.Services.Values)
             {
                 service.OnUpdate(elapsed);
