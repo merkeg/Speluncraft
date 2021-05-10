@@ -33,6 +33,7 @@ namespace Engine
                 Engine.Renderers.Add(layer, new List<IRenderer>());
             }
 
+            Engine.AddService(new PhysicsService());
             Engine.AddService(new CollisionService());
         }
 

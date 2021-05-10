@@ -69,7 +69,6 @@ namespace Game.Player
         {
             OpenTK.Windowing.GraphicsLibraryFramework.KeyboardState keyboardState = Engine.Engine.GameWindow.KeyboardState;
             Engine.Component.Physics physics = this.GetComponent<Engine.Component.Physics>();
-
             if (keyboardState.IsKeyDown(Keys.A))
             { // Player wants to go left
                 this.isFaceing = ILookDirection.Left;
@@ -120,7 +119,7 @@ namespace Game.Player
             }
 
             Engine.Component.UndoOverlapCollisionResponse collider = this.GetComponent<Engine.Component.UndoOverlapCollisionResponse>();
-            Debug.WriteLine(collider.GetGroundTouchedFlag());
+            // Debug.WriteLine(collider.GetGroundTouchedFlag());
             if (collider.GetGroundTouchedFlag())
             {
                 this.jumpcounter = this.jumpCounterMax;

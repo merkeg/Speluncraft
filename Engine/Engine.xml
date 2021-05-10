@@ -335,6 +335,12 @@
         <member name="M:Engine.Component.Physics.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="M:Engine.Component.Physics.UpdateForService(System.Single)">
+            <summary>
+            Update which get called by the PhysicsService, to move this GameObject.
+            </summary>
+            <param name="frameTime">Time pased since last Frame.</param>
+        </member>
         <member name="T:Engine.Component.UndoOverlapCollisionResponse">
             <summary>
             Adds a Collider to a GameObject that undoes overlaps with other Colliders.
@@ -1590,6 +1596,29 @@
             <summary>
             IService class.
             </summary>
+        </member>
+        <member name="T:Engine.Service.PhysicsService">
+            <summary>
+            Moves every Component with a phsics Component.
+            </summary>
+        </member>
+        <member name="M:Engine.Service.PhysicsService.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.PhysicsService.OnUpdatableCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.PhysicsService.OnUpdatableDestroy">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.PhysicsService.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.PhysicsService.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.PhysicsService.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
         </member>
         <member name="T:Engine.Service.ServiceInfo">
             <summary>
