@@ -94,6 +94,11 @@ namespace Game
             EnemyPistol enemyWithPistol = new EnemyPistol(81, -43, 1, 1.375f, spriteWalking, 5);
             Engine.Engine.AddGameObject(enemyWithPistol);
 
+            // Spam map with Enemys (TEMPORARY)
+            Engine.Engine.AddGameObject(new DummyAI(42, -35, 1, 1.375f, spriteWalking, 5));
+            Engine.Engine.AddGameObject(new DummyAI(81, -56, 1, 1.375f, spriteWalking, 5));
+            Engine.Engine.AddGameObject(new DummyAI(81, -73, 1, 1.375f, spriteWalking, 5));
+
             Tilesheet fireTilesheet = new Tilesheet("Game.Resources.Animated.fire.png", 32, 32);
             float delay = 0.041f;
             ISprite fireSprite = new AnimatedSprite(fireTilesheet, Keyframe.RangeY(0, 0, 23, delay));
