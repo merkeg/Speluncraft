@@ -22,21 +22,19 @@ namespace Game.UI
     /// </summary>
     public class HealthbarPlayer : IRenderer
     {
-        private static HealthbarPlayer instance;
-        private static Player player;
-        private static Engine engine;
-        private Assembly assembly;
-        private Sprite sprite;
-
         private static int currentHP = 0;
         private static float uiScale = 1.5f;
-
-        private float hTexX0;
 
         private static float xOffset = 25;
         private static float yOffset = 25;
         private static int screenX;
         private static int screenY;
+
+        private static HealthbarPlayer instance;
+        private static Player player;
+        private Assembly assembly;
+        private Sprite sprite;
+        private float hTexX0;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HealthbarPlayer"/> class.
@@ -58,8 +56,8 @@ namespace Game.UI
             using Stream spriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.heartsheet_new.png");
             this.sprite = new Sprite(spriteStream, false);
 
-            //using Stream backgroundStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.ui_background.png");
-            //this.uiBackground = new Sprite(backgroundStream, false);
+            // using Stream backgroundStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.ui_background.png");
+            // this.uiBackground = new Sprite(backgroundStream, false);
         }
 
         /// <summary>

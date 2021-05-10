@@ -22,7 +22,6 @@ namespace Game
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
     using OpenTK.Windowing.Desktop;
-    using Game.UI;
 
     /// <summary>
     /// The Main class of the game.
@@ -78,7 +77,7 @@ namespace Game
             Engine.Engine.AddGameObject(player);
 
             // make sure to initialize UI after the player
-            UILoader.Initialize_UI(this.engine);
+            UILoader.Initialize_UI();
 
             FontModel fontModel = FontModel.Parse("Game.Resources.Font.hack.font.fnt");
             Sprite fontSprite = new Sprite("Game.Resources.Font.hack.font.png");
@@ -93,8 +92,8 @@ namespace Game
             using Stream enemyStream = this.assembly.GetManifestResourceStream("Game.Resources.enemy.png");
             Sprite enemySprite = new Sprite(enemyStream);
             DummyAI testEnemy = new DummyAI(75, -25, 1, 1, enemySprite, 10);
-            // Engine.Engine.AddGameObject(testEnemy);
 
+            // Engine.Engine.AddGameObject(testEnemy);
             using Stream enemyGunSpriteStream = this.assembly.GetManifestResourceStream("Game.Resources.enemyGun.png");
             Sprite enemyGunSprite = new Sprite(enemyGunSpriteStream);
             EnemyPistol enemyWithPistol = new EnemyPistol(81, -43, 1, 1, enemyGunSprite, 5);

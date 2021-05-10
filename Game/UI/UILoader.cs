@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Engine;
-using Engine.Renderer;
+﻿// <copyright file="UILoader.cs" company="RWUwU">
+// Copyright (c) RWUwU. All rights reserved.
+// </copyright>
 
 namespace Game.UI
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+    using Engine;
+    using Engine.Renderer;
+
     /// <summary>
     /// Loader Class to initialize the whole UI of the Game. (hopefully).
     /// </summary>
@@ -14,11 +18,10 @@ namespace Game.UI
         /// <summary>
         /// Initializes the UI.
         /// </summary>
-        /// <param name="engine">reference to engine for adding the renderes.</param>
-        public static void Initialize_UI(Engine.Engine engine)
+        public static void Initialize_UI()
         {
             HealthbarPlayer playerhealthbar = new HealthbarPlayer();
-            engine.AddRenderer(playerhealthbar, RenderLayer.UI);
+            Engine.AddRenderer(playerhealthbar, RenderLayer.UI);
         }
     }
 }
