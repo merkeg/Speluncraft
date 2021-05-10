@@ -4,18 +4,18 @@
 
 namespace Game.UI
 {
+    using System.Diagnostics;
     using System.IO;
-    using Engine.Renderer.Sprite;
     using System.Reflection;
     using Engine;
     using Engine.Component;
     using Engine.GameObject;
     using Engine.Renderer;
+    using Engine.Renderer.Sprite;
     using Game.Player;
     using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
-    using System.Diagnostics;
 
     /// <summary>
     /// The HealthbarPlayer class renders the healthbar UI element.
@@ -35,6 +35,7 @@ namespace Game.UI
 
         private Assembly assembly;
         private Sprite sprite;
+        private Sprite uiBackground;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HealthbarPlayer"/> class.
@@ -53,10 +54,12 @@ namespace Game.UI
                 }
             }
 
-
             this.assembly = Assembly.GetExecutingAssembly();
             using Stream spriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.heart_sheet.png");
             this.sprite = new Sprite(spriteStream, false);
+
+            using Stream backgroundStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.ui_background.png");
+            this.uiBackground = new Sprite(backgroundStream, false);
         }
 
         /// <summary>
@@ -79,13 +82,30 @@ namespace Game.UI
         /// <param name="args">.</param>
         public void Render(FrameEventArgs args)
         {
+            GL.BindTexture(TextureTarget.Texture2D, this.uiBackground.Handle);
+            GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
+            GL.Begin(PrimitiveType.Quads);
+
+            GL.TexCoord2(0, 0);
+            GL.Vertex2(0, 0);
+
+            GL.TexCoord2(1, 0);
+            GL.Vertex2(0 + (900 * uiScale), 0);
+
+            GL.TexCoord2(1, 1);
+            GL.Vertex2(0 + (900 * uiScale), 0 + (256 * uiScale));
+
+            GL.TexCoord2(0, 1);
+            GL.Vertex2(0, 0 + (256 * uiScale));
+
+            GL.End();
+
             currentHP = player.GetComponent<HealthPoints>().GetCurrHP();
 
             this.hTexY0 = 1 - (currentHP / 5f * (1f / 20f));
             this.hTexY1 = this.hTexY0 + (1f / 20f);
 
             // Debug.WriteLine("Y0: " + this.hTexY0 + "hTexY1: " + this.hTexY1);
-
             GL.BindTexture(TextureTarget.Texture2D, this.sprite.Handle);
             GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
             GL.Begin(PrimitiveType.Quads);
@@ -103,6 +123,7 @@ namespace Game.UI
             GL.Vertex2(xOffset, yOffset + (64 * uiScale));
 
             GL.End();
+
         }
 
         /// <summary>
