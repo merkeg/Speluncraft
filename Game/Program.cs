@@ -73,7 +73,6 @@ namespace Game
 
             Player.Player player = new Player.Player(96, -33, 1, 1.375f, sprite);
             player.AddComponent(new CameraTrackingComponent());
-            player.Mirrored = true;
             Engine.Engine.AddGameObject(player);
 
             // make sure to initialize healthbar after the player

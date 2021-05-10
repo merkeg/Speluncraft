@@ -24,6 +24,11 @@ namespace Game.Player
         private float activeBreacking = 20f;
         private float jumpPower = 10f;
 
+        private AnimatedSprite spriteWalking;
+        private Sprite spriteIdle;
+        private Sprite spriteJump;
+        private Sprite spriteFall;
+
         private int isFaceing;
         private Gun.IGun gun;
 
@@ -48,6 +53,8 @@ namespace Game.Player
 
             this.jumpcounter = this.jumpCounterMax;
 
+            this.InitializeSprites();
+
             Engine.Engine.Colliders.Add(this);
 
             // For Demo 2.0
@@ -71,6 +78,8 @@ namespace Game.Player
 
             if (keyboardState.IsKeyDown(Keys.A))
             { // Player wants to go left
+                this.Sprite = this.spriteWalking;
+                this.Mirrored = true;
                 this.isFaceing = ILookDirection.Left;
                 if (physics.GetVelocity().X > 0)
                 { // Player is breaking since he is going right
@@ -81,6 +90,8 @@ namespace Game.Player
             }
             else if (keyboardState.IsKeyDown(Keys.D))
             { // Player wants to go right
+                this.Sprite = this.spriteWalking;
+                this.Mirrored = false;
                 this.isFaceing = ILookDirection.Right;
                 if (physics.GetVelocity().X < 0)
                 { // Player is breaking since he going left
@@ -91,6 +102,7 @@ namespace Game.Player
             }
             else
             { // Player is not breaking or accelerating
+                this.Sprite = this.spriteIdle;
                 if (physics.GetVelocity().X > 0)
                 { // Player is going right
                     physics.AddVelocityX(-this.idealBreacking * frameTime);
@@ -112,6 +124,7 @@ namespace Game.Player
             }
 
             base.OnUpdate(frameTime);
+            this.UpdateAnimations();
 
             if (this.GetComponent<Engine.Component.HealthPoints>().GetIsDeadFlag())
             {
@@ -126,9 +139,34 @@ namespace Game.Player
 
             if (keyboardState.IsKeyPressed(Keys.Space) && this.jumpcounter > 0)
             {
+                this.Sprite = spriteJump;
                 physics.AddVelocitY(this.jumpPower);
                 this.jumpcounter--;
             }
+        }
+
+        private void UpdateAnimations()
+        {
+            Engine.Component.Physics phys = this.GetComponent<Engine.Component.Physics>();
+            if (phys.GetVelocity().Y < -0.1)
+            {
+                this.Sprite = this.spriteFall;
+            }
+
+            if (phys.GetVelocity().Y > 0.5)
+            {
+                this.Sprite = this.spriteJump;
+            }
+        }
+
+        private void InitializeSprites()
+        {
+            Engine.Renderer.Tile.Tilesheet walkingSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Player.adventurer_walking.png", 80, 110);
+            this.spriteWalking = new AnimatedSprite(walkingSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
+
+            this.spriteIdle = new Sprite("Game.Resources.Player.adventurer_idle.png", false);
+            this.spriteJump = new Sprite("Game.Resources.Player.adventurer_jump.png", false);
+            this.spriteFall = new Sprite("Game.Resources.Player.adventurer_fall.png", false);
         }
     }
 }

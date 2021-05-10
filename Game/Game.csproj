@@ -30,9 +30,11 @@
     <None Remove="Resources\Level\mapalla.json" />
     <None Remove="Resources\lol.json" />
     <None Remove="Resources\player.png" />
+    <None Remove="Resources\Player\adventurer_fall.png" />
     <None Remove="Resources\Player\adventurer_hurt.png" />
     <None Remove="Resources\Player\adventurer_idle.png" />
     <None Remove="Resources\Player\adventurer_jump.png" />
+    <None Remove="Resources\Player\adventurer_walking.png" />
     <None Remove="Resources\rotation.json" />
     <None Remove="Resources\Sprite\bullet.png" />
     <None Remove="Resources\Sprite\tilesheetMC.png" />
@@ -101,6 +103,12 @@
     <EmbeddedResource Include="Resources\Player\adventurer_jump.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+	  <EmbeddedResource Include="Resources\Player\adventurer_fall.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Player\adventurer_walking.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Sprite\player.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -130,6 +138,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Remove="Resources\Font\hack\font.png" />
+    <ApplicationDefinition Include="Resources\Player\adventurer_fall.png" />
     <EmbeddedResource Include="Resources\Font\hack\font.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
