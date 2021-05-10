@@ -32,6 +32,9 @@ namespace Engine
             {
                 Engine.Renderers.Add(layer, new List<IRenderer>());
             }
+
+            Engine.AddService(new PhysicsService());
+            Engine.AddService(new CollisionService());
         }
 
         /// <summary>
@@ -141,6 +144,24 @@ namespace Engine
         }
 
         /// <summary>
+        /// Adds an GameObject to the list.
+        /// </summary>
+        /// <param name="gameObject">The GameObject to add.</param>
+        public static void ImplementGameObject(GameObject.GameObject gameObject)
+        {
+            Engine.GameObjects.Add(gameObject);
+
+            if (gameObject.Sprite != null)
+            {
+                SpriteRenderer renderer = new SpriteRenderer(gameObject.Sprite, gameObject);
+                gameObject.SpriteRenderer = renderer;
+                Engine.AddRenderer(renderer);
+            }
+
+            gameObject.OnUpdatableCreate();
+        }
+
+        /// <summary>
         /// Gets a service by name.
         /// </summary>
         /// <param name="key">the name.</param>
@@ -181,24 +202,6 @@ namespace Engine
         }
 
         /// <summary>
-        /// Adds an GameObject to the list.
-        /// </summary>
-        /// <param name="gameObject">The GameObject to add.</param>
-        private static void ImplementGameObject(GameObject.GameObject gameObject)
-        {
-            Engine.GameObjects.Add(gameObject);
-
-            if (gameObject.Sprite != null)
-            {
-                SpriteRenderer renderer = new SpriteRenderer(gameObject.Sprite, gameObject);
-                gameObject.SpriteRenderer = renderer;
-                Engine.AddRenderer(renderer);
-            }
-
-            gameObject.OnUpdatableCreate();
-        }
-
-        /// <summary>
         /// Removes an rendere.
         /// </summary>
         /// <param name="renderer">The rendere to Remove.</param>
@@ -209,7 +212,7 @@ namespace Engine
 
         private static void Update(FrameEventArgs args)
         {
-            float elapsed = (float)MathHelper.Clamp(args.Time, 0, 0.08);
+            float elapsed = (float)MathHelper.Clamp(args.Time, 0, 0.02);
             foreach (IService service in Engine.Services.Values)
             {
                 service.OnUpdate(elapsed);

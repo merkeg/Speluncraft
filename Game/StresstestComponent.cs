@@ -46,7 +46,7 @@ namespace Game
                     {
                         GameObject gameObject = new GameObject(-2, 0, 1, 1, this.sprite);
                         gameObject.AddComponent(new Physics());
-                        gameObject.AddComponent(new Collider());
+                        gameObject.AddComponent(new UndoOverlapCollisionResponse());
                         Engine.Engine.AddGameObject(gameObject);
                     }
                 }
