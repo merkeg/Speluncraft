@@ -40,6 +40,7 @@ namespace Game
 
             window.Size = new Vector2i(1280, 720);
             window.VSync = VSyncMode.Adaptive;
+            window.Title = "Speluncraft";
             Engine.Engine.StartEngine(window);
             this.assembly = Assembly.GetExecutingAssembly();
             this.InitializeRenderers();
@@ -58,25 +59,20 @@ namespace Game
 
         private void InitializeRenderers()
         {
-            Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheet.png", 16, 16);
-
-            AnimatedSprite animatedSprite =
-                new AnimatedSprite(tilesheet, new[] { new Keyframe(0, 1, .3f), new Keyframe(1, 1, .3f) });
-            tilesheet.SetCustomSprite(0, animatedSprite);
-            TilemapModel model = TilemapParser.ParseTilemap("Game.Resources.Level.getUp.json");
+            Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheetMC.png", 32, 32);
+            TilemapModel model = TilemapParser.ParseTilemap("Game.Resources.Level.mapalla.json");
             Tilemap tilemap = new Tilemap(tilesheet, model);
-
+            this.AnimateTiles(tilesheet);
             Engine.Engine.GetService<TilemapService>().AddTilemap(tilemap, Vector2i.Zero);
         }
 
         private void AddPlayer()
         {
-            Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheet.png", 16, 16);
-            AnimatedSprite sprite = new AnimatedSprite(tilesheet, new[] { new Keyframe(9, 0), new Keyframe(10, 0), new Keyframe(12, 0) });
+            Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheetMC.png", 32, 32);
+            Sprite sprite = new Sprite("Game.Resources.Player.adventurer_idle.png", false);
 
-            Player.Player player = new Player.Player(7, -27, 1, 1, sprite);
+            Player.Player player = new Player.Player(96, -33, 1, 1.375f, sprite);
             player.AddComponent(new CameraTrackingComponent());
-            player.Mirrored = true;
             Engine.Engine.AddGameObject(player);
 
             // make sure to initialize healthbar after the player
@@ -93,13 +89,39 @@ namespace Game
 
         private void AddEnemies()
         {
-            Sprite enemySprite = new Sprite("Game.Resources.enemy.png");
-            DummyAI testEnemy = new DummyAI(2, -25, 1, 1, enemySprite, 10);
-            Engine.Engine.AddGameObject(testEnemy);
-
-            Sprite enemyGunSprite = new Sprite("Game.Resources.enemyGun.png");
-            EnemyPistol enemyWithPistol = new EnemyPistol(5, -20, 1, 1, enemyGunSprite, 5);
+            Tilesheet walkingSheet = new Tilesheet("Game.Resources.Enemy.zombie_walking.png", 80, 110);
+            AnimatedSprite spriteWalking = new AnimatedSprite(walkingSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
+            EnemyPistol enemyWithPistol = new EnemyPistol(81, -43, 1, 1.375f, spriteWalking, 5);
             Engine.Engine.AddGameObject(enemyWithPistol);
+
+            // Spam map with Enemys (TEMPORARY)
+            Engine.Engine.AddGameObject(new DummyAI(42, -35, 1, 1.375f, spriteWalking, 5));
+            Engine.Engine.AddGameObject(new DummyAI(81, -56, 1, 1.375f, spriteWalking, 5));
+            Engine.Engine.AddGameObject(new DummyAI(81, -73, 1, 1.375f, spriteWalking, 5));
+
+            Tilesheet fireTilesheet = new Tilesheet("Game.Resources.Animated.fire.png", 32, 32);
+            float delay = 0.041f;
+            ISprite fireSprite = new AnimatedSprite(fireTilesheet, Keyframe.RangeY(0, 0, 23, delay));
+            Enemy.Enemy fire = new Enemy.Enemy(100, -44, 1, 1, fireSprite, 25);
+            Engine.Engine.AddGameObject(fire);
+        }
+
+        private void AnimateTiles(Tilesheet sheet)
+        {
+            AnimatedSprite netherPortal = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.nether_portal.png", 32, 32), Keyframe.RangeY(0, 0, 31, 0.03f));
+            sheet.SetCustomSprite(36, netherPortal);
+            AnimatedSprite waterFlow = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.water_flow.png", 32, 32), Keyframe.RangeY(0, 0, 35, 0.1f));
+            sheet.SetCustomSprite(81, waterFlow);
+            AnimatedSprite waterStill = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.water_still.png", 32, 32), Keyframe.RangeY(0, 0, 50, 0.05f));
+            sheet.SetCustomSprite(91, waterStill);
+            AnimatedSprite waterCut = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.water_still_cut.png", 32, 32), Keyframe.RangeY(0, 0, 50, 0.05f));
+            sheet.SetCustomSprite(92, waterCut);
+            AnimatedSprite lavaFlow = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.lava_flow.png", 32, 32), Keyframe.RangeY(0, 0, 245, 0.03f));
+            sheet.SetCustomSprite(83, lavaFlow);
+            AnimatedSprite lavaStill = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.lava_still.png", 32, 32), Keyframe.RangeY(0, 0, 122, 0.03f));
+            sheet.SetCustomSprite(93, lavaStill);
+            AnimatedSprite lavaCut = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.lava_still_cut.png", 32, 32), Keyframe.RangeY(0, 0, 122, 0.03f));
+            sheet.SetCustomSprite(94, lavaCut);
         }
     }
 }

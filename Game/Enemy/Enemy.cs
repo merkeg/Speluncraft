@@ -25,7 +25,7 @@ namespace Game.Enemy
         /// <param name="sizeY">Size in Y axsis.</param>
         /// <param name="sprite">Enemy Sprite.</param>
         /// <param name="damage">Damage dealt by touching the enemy.</param>
-        public Enemy(float minX, float minY, float sizeX, float sizeY, Sprite sprite, int damage)
+        public Enemy(float minX, float minY, float sizeX, float sizeY, ISprite sprite, int damage)
             : base(minX, minY, sizeX, sizeY, sprite)
         {
             Engine.Component.Physics physics = new Engine.Component.Physics();

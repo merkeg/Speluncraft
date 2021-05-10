@@ -22,9 +22,10 @@ namespace Engine.Renderer.Tile
         {
             this.Layers = new TilemapLayer[model.layers.Count];
             this.Tilesheet = tilesheet;
+            int i = 0;
             foreach (TilemapLayerModel layer in model.layers)
             {
-                this.Layers[layer.id - 1] = new TilemapLayer(tilesheet, layer);
+                this.Layers[i++] = new TilemapLayer(tilesheet, layer);
             }
         }
 

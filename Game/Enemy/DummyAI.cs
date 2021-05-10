@@ -19,6 +19,8 @@ namespace Game.Enemy
         private Engine.Component.Physics phys;
         private int lookingDirection = 1;
 
+        private AnimatedSprite spriteWalking;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DummyAI"/> class.
         /// </summary>
@@ -28,11 +30,16 @@ namespace Game.Enemy
         /// <param name="sizeY">sizeY.</param>
         /// <param name="sprite">sprite.</param>
         /// <param name="damage">Damage dealt by touching the enemy.</param>
-        public DummyAI(float minX, float minY, float sizeX, float sizeY, Sprite sprite, int damage)
+        public DummyAI(float minX, float minY, float sizeX, float sizeY, ISprite sprite, int damage)
             : base(minX, minY, sizeX, sizeY, sprite, damage)
         {
             this.phys = this.GetComponent<Engine.Component.Physics>();
             this.phys.AddVelocityX(this.movementSpeed);
+            if (sprite != null)
+            {
+                Engine.Renderer.Tile.Tilesheet walkingSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Enemy.zombie_walking.png", 80, 110);
+                this.spriteWalking = new AnimatedSprite(walkingSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
+            }
         }
 
         /// <inheritdoc/>
@@ -47,6 +54,7 @@ namespace Game.Enemy
             this.CheckLedge();
             base.OnUpdate(frameTime);
             this.CheckWall();
+            this.UpdateAnimations();
         }
 
         private void CheckLedge()
@@ -103,13 +111,32 @@ namespace Game.Enemy
                 {
                     this.phys.SetVelocity(this.movementSpeed, 0);
                     this.lookingDirection = Player.ILookDirection.Right;
+                    return;
                 }
 
                 if (this.lookingDirection == Player.ILookDirection.Right)
                 {
                     this.phys.SetVelocity(-this.movementSpeed, 0);
                     this.lookingDirection = Player.ILookDirection.Left;
+                    return;
                 }
+            }
+        }
+
+        private void UpdateAnimations()
+        {
+            Engine.Component.Physics phys = this.GetComponent<Engine.Component.Physics>();
+
+            if (phys.GetVelocity().X < -0.1)
+            {
+                this.Sprite = this.spriteWalking;
+                this.Mirrored = true;
+            }
+
+            if (phys.GetVelocity().X > 0.1)
+            {
+                this.Sprite = this.spriteWalking;
+                this.Mirrored = false;
             }
         }
     }

@@ -47,7 +47,7 @@ namespace Engine.Renderer.Sprite
         /// <returns>an array.</returns>
         public static Keyframe[] RangeX(int minX, int maxX, int y, float time)
         {
-            Keyframe[] keyframes = new Keyframe[maxX - minX];
+            Keyframe[] keyframes = new Keyframe[maxX - minX + 1];
             for (int x = minX; x <= maxX; x++)
             {
                 keyframes[x - minX] = new Keyframe(x, y, time);
@@ -66,7 +66,7 @@ namespace Engine.Renderer.Sprite
         /// <returns>an array.</returns>
         public static Keyframe[] RangeY(int x, int minY, int maxY, float time)
         {
-            Keyframe[] keyframes = new Keyframe[maxY - minY];
+            Keyframe[] keyframes = new Keyframe[maxY - minY + 1];
             for (int y = minY; y <= maxY; y++)
             {
                 keyframes[y - minY] = new Keyframe(x, y, time);

@@ -25,6 +25,11 @@ namespace Game.Player
         private float activeBreacking = 20f;
         private float jumpPower = 10f;
 
+        private AnimatedSprite spriteWalking;
+        private Sprite spriteIdle;
+        private Sprite spriteJump;
+        private Sprite spriteFall;
+
         private int isFaceing;
         private Gun.IGun gun;
 
@@ -48,6 +53,8 @@ namespace Game.Player
             this.AddComponent(new Engine.Component.HealthPoints(100, 100));
 
             this.jumpcounter = this.jumpCounterMax;
+
+            this.InitializeSprites();
 
             Engine.Engine.Colliders.Add(this);
 
@@ -91,6 +98,7 @@ namespace Game.Player
             }
             else
             { // Player is not breaking or accelerating
+                this.Sprite = this.spriteIdle;
                 if (physics.GetVelocity().X > 0)
                 { // Player is going right
                     physics.AddVelocityX(-this.idealBreacking * frameTime);
@@ -112,6 +120,7 @@ namespace Game.Player
             }
 
             base.OnUpdate(frameTime);
+            this.UpdateAnimations();
 
             if (this.GetComponent<Engine.Component.HealthPoints>().GetIsDeadFlag())
             {
@@ -131,6 +140,43 @@ namespace Game.Player
                 physics.AddVelocitY(this.jumpPower);
                 this.jumpcounter--;
             }
+        }
+
+        private void UpdateAnimations()
+        {
+            Engine.Component.Physics phys = this.GetComponent<Engine.Component.Physics>();
+
+            if (phys.GetVelocity().X < -0.1)
+            {
+                this.Sprite = this.spriteWalking;
+                this.Mirrored = true;
+            }
+
+            if (phys.GetVelocity().X > 0.1)
+            {
+                this.Sprite = this.spriteWalking;
+                this.Mirrored = false;
+            }
+
+            if (phys.GetVelocity().Y < -0.1)
+            {
+                this.Sprite = this.spriteFall;
+            }
+
+            if (phys.GetVelocity().Y > 0.5)
+            {
+                this.Sprite = this.spriteJump;
+            }
+        }
+
+        private void InitializeSprites()
+        {
+            Engine.Renderer.Tile.Tilesheet walkingSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Player.adventurer_walking.png", 80, 110);
+            this.spriteWalking = new AnimatedSprite(walkingSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
+
+            this.spriteIdle = new Sprite("Game.Resources.Player.adventurer_idle.png", false);
+            this.spriteJump = new Sprite("Game.Resources.Player.adventurer_jump.png", false);
+            this.spriteFall = new Sprite("Game.Resources.Player.adventurer_fall.png", false);
         }
     }
 }
