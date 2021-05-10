@@ -48,21 +48,18 @@ namespace Engine.Component
         /// </summary>
         private bool touchedGround;
 
-        private bool touchedGroundLastFrame;
-
         /// <summary>
         /// Get the Flag, if ground was touched on a collsion.
         /// </summary>
         /// <returns>The Flag if ground was touced.</returns>
         public bool GetGroundTouchedFlag()
         {
-            return this.touchedGround || this.touchedGroundLastFrame;
+            return this.touchedGround;
         }
 
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
-            this.touchedGroundLastFrame = this.touchedGround;
             this.touchedGround = false;
 
             List<GameObject.IRectangle> sideCollisionRight = new List<GameObject.IRectangle>(); // Those overlaps will only be undone after up and down collisions.
