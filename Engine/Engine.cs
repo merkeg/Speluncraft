@@ -9,6 +9,7 @@ namespace Engine
     using global::Engine.GameObject;
     using global::Engine.Renderer;
     using global::Engine.Renderer.Sprite;
+    using global::Engine.Service;
     using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
@@ -18,76 +19,68 @@ namespace Engine
     /// </summary>
     public class Engine
     {
-        private static Engine instance;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Engine"/> class.
-        /// </summary>
-        public Engine()
+        static Engine()
         {
-            this.GameObjects = new List<GameObject.GameObject>();
-            this.Colliders = new List<IRectangle>();
-            this.GameObjectsToRemove = new List<GameObject.GameObject>();
-            this.GameObjectsToAdd = new List<GameObject.GameObject>();
-            this.Renderers = new Dictionary<RenderLayer, List<IRenderer>>();
+            Engine.GameObjects = new List<GameObject.GameObject>();
+            Engine.Colliders = new List<IRectangle>();
+            Engine.GameObjectsToRemove = new List<GameObject.GameObject>();
+            Engine.GameObjectsToAdd = new List<GameObject.GameObject>();
+            Engine.Renderers = new Dictionary<RenderLayer, List<IRenderer>>();
+            Engine.Services = new Dictionary<string, IService>();
 
             foreach (RenderLayer layer in (RenderLayer[])Enum.GetValues(typeof(RenderLayer)))
             {
-                this.Renderers.Add(layer, new List<IRenderer>());
+                Engine.Renderers.Add(layer, new List<IRenderer>());
             }
         }
 
         /// <summary>
         /// Gets a list of GameObjects in the game.
         /// </summary>
-        public List<GameObject.GameObject> GameObjects { get; private set; }
+        public static List<GameObject.GameObject> GameObjects { get; private set; }
 
         /// <summary>
         /// Gets the renderers.
         /// </summary>
-        public Dictionary<RenderLayer, List<IRenderer>> Renderers { get; private set; }
+        public static Dictionary<RenderLayer, List<IRenderer>> Renderers { get; private set; }
 
         /// <summary>
         /// Gets a list of the colliders in the game.
         /// </summary>
-        public List<IRectangle> Colliders { get; private set; }
+        public static List<IRectangle> Colliders { get; private set; }
 
         /// <summary>
         /// Gets the GameWindow the Engine runs on.
         /// </summary>
-        public OpenTK.Windowing.Desktop.GameWindow GameWindow { get; private set; }
+        public static OpenTK.Windowing.Desktop.GameWindow GameWindow { get; private set; }
 
         /// <summary>
         /// Gets the game Camera.
         /// </summary>
-        public Camera.Camera Camera { get; private set; }
+        public static Camera.Camera Camera { get; private set; }
 
         /// <summary>
-        /// Gets Here you can add GameObjects that should be removed this frame.
+        /// Gets the services.
         /// </summary>
-        public List<GameObject.GameObject> GameObjectsToRemove { get; private set; }
+        public static Dictionary<string, IService> Services { get; private set; }
 
         /// <summary>
-        /// Gets Here you can add GameObjects that should be added next frame.
+        /// Gets or sets Here you can add GameObjects that should be removed Engine frame.
         /// </summary>
-        public List<GameObject.GameObject> GameObjectsToAdd { get; private set; }
+        private static List<GameObject.GameObject> GameObjectsToRemove { get; set; }
 
         /// <summary>
-        /// Method to get the engine instance.
+        /// Gets or sets Here you can add GameObjects that should be added next frame.
         /// </summary>
-        /// <returns>Engine instance.</returns>
-        public static Engine Instance()
-        {
-            return instance ??= new Engine();
-        }
+        private static List<GameObject.GameObject> GameObjectsToAdd { get; set; }
 
         /// <summary>
         /// Adds an GameObject to the list.
         /// </summary>
         /// <param name="gameObject">The GameObject to add.</param>
-        public void AddGameObject(GameObject.GameObject gameObject)
+        public static void AddGameObject(GameObject.GameObject gameObject)
         {
-            this.GameObjectsToAdd.Add(gameObject);
+            Engine.GameObjectsToAdd.Add(gameObject);
         }
 
         /// <summary>
@@ -95,27 +88,31 @@ namespace Engine
         /// </summary>
         /// <param name="renderer">The renderer to add.</param>
         /// <param name="layer">The render order.</param>
-        public void AddRenderer(IRenderer renderer, RenderLayer layer = RenderLayer.GAME)
+        public static void AddRenderer(IRenderer renderer, RenderLayer layer = RenderLayer.GAME)
         {
-            this.Renderers[layer].Add(renderer);
-            renderer.OnCreate();
+            Engine.Renderers[layer].Add(renderer);
+            renderer.OnRendererCreate();
         }
 
         /// <summary>
         /// Start the engine ticks.
         /// </summary>
         /// <param name="window">The GameWindow the engine will be run on.</param>
-        public void StartEngine(OpenTK.Windowing.Desktop.GameWindow window)
+        public static void StartEngine(OpenTK.Windowing.Desktop.GameWindow window)
         {
-            this.GameWindow = window;
-            this.Camera = new Camera.Camera();
-            this.AddRenderer(this.Camera);
+            Engine.GameWindow = window;
+            Engine.Camera = new Camera.Camera();
+            Engine.AddRenderer(Engine.Camera);
 
-            window.UpdateFrame += this.Update;
-            this.GameWindow.RenderFrame += this.Render;
-            this.GameWindow.Resize += this.Resize;
-            this.AddRenderer(new UiMatrixRenderer(), RenderLayer.UI);
+            window.UpdateFrame += Engine.Update;
+            Engine.GameWindow.RenderFrame += Engine.Render;
+            Engine.GameWindow.Resize += Engine.Resize;
+            Engine.AddRenderer(new UiMatrixRenderer(), RenderLayer.UI);
 
+            // Services
+            Engine.AddService(new TilemapService());
+
+            // OpenGL capabilities
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.Texture2D);
@@ -126,9 +123,43 @@ namespace Engine
         /// Also checks if there are Colliders from it and delets it.
         /// </summary>
         /// <param name="gameObject">The GameObject to Destroy.</param>
-        public void RemoveGameObject(GameObject.GameObject gameObject)
+        public static void RemoveGameObject(GameObject.GameObject gameObject)
         {
-            this.GameObjectsToRemove.Add(gameObject);
+            Engine.GameObjectsToRemove.Add(gameObject);
+        }
+
+        /// <summary>
+        /// Adds an service to the engine.
+        /// </summary>
+        /// <param name="service">the service.</param>
+        public static void AddService(IService service)
+        {
+            Service.ServiceInfo serviceInfo = (Service.ServiceInfo)service.GetType().GetCustomAttributes(typeof(Service.ServiceInfo), false)[0];
+            Engine.Services.Add(serviceInfo.Name, service);
+            service.OnUpdatableCreate();
+            Engine.AddRenderer(service, serviceInfo.RenderLayer);
+        }
+
+        /// <summary>
+        /// Gets a service by name.
+        /// </summary>
+        /// <param name="key">the name.</param>
+        /// <returns>the service.</returns>
+        public static IService GetService(string key)
+        {
+            return Engine.Services[key];
+        }
+
+        /// <summary>
+        /// Gets service by type.
+        /// </summary>
+        /// <typeparam name="T">the type.</typeparam>
+        /// <returns>the service.</returns>
+        public static T GetService<T>()
+            where T : IService
+        {
+            Service.ServiceInfo serviceInfo = (Service.ServiceInfo)Attribute.GetCustomAttributes(typeof(T), typeof(Service.ServiceInfo))[0];
+            return (T)Engine.GetService(serviceInfo.Name);
         }
 
         /// <summary>
@@ -136,15 +167,14 @@ namespace Engine
         /// Also checks if there are Colliders from it and delets it.
         /// </summary>
         /// <param name="gameObject">The GameObject to Destroy.</param>
-        private void ExcludeGameObject(GameObject.GameObject gameObject)
+        private static void ExcludeGameObject(GameObject.GameObject gameObject)
         {
-            this.RemoveRenderer(gameObject.SpriteRenderer);
-            gameObject.SpriteRenderer.Dispose();
-            gameObject.OnDestroy();
-            this.GameObjects.Remove(gameObject);
-            if (this.Colliders.Contains(gameObject))
+            Engine.RemoveRenderer(gameObject.SpriteRenderer);
+            gameObject.OnUpdatableDestroy();
+            Engine.GameObjects.Remove(gameObject);
+            if (Engine.Colliders.Contains(gameObject))
             {
-                this.Colliders.Remove(gameObject);
+                Engine.Colliders.Remove(gameObject);
             }
 
             // GC.Collect();
@@ -154,62 +184,70 @@ namespace Engine
         /// Adds an GameObject to the list.
         /// </summary>
         /// <param name="gameObject">The GameObject to add.</param>
-        private void ImplementGameObject(GameObject.GameObject gameObject)
+        private static void ImplementGameObject(GameObject.GameObject gameObject)
         {
-            this.GameObjects.Add(gameObject);
+            Engine.GameObjects.Add(gameObject);
 
             if (gameObject.Sprite != null)
             {
                 SpriteRenderer renderer = new SpriteRenderer(gameObject.Sprite, gameObject);
                 gameObject.SpriteRenderer = renderer;
-                this.AddRenderer(renderer);
+                Engine.AddRenderer(renderer);
             }
 
-            gameObject.OnCreated();
+            gameObject.OnUpdatableCreate();
         }
 
         /// <summary>
         /// Removes an rendere.
         /// </summary>
         /// <param name="renderer">The rendere to Remove.</param>
-        private void RemoveRenderer(IRenderer renderer, RenderLayer layer = RenderLayer.GAME)
+        private static void RemoveRenderer(IRenderer renderer, RenderLayer layer = RenderLayer.GAME)
         {
-            this.Renderers[layer].Remove(renderer);
+            Engine.Renderers[layer].Remove(renderer);
         }
 
-        private void Update(FrameEventArgs args)
+        private static void Update(FrameEventArgs args)
         {
             float elapsed = (float)MathHelper.Clamp(args.Time, 0, 0.08);
-            this.GameObjects.ForEach(gameObject => gameObject.OnUpdate(elapsed));
-
-            foreach (GameObject.GameObject g in this.GameObjectsToRemove)
+            foreach (IService service in Engine.Services.Values)
             {
-                this.ExcludeGameObject(g);
+                service.OnUpdate(elapsed);
             }
 
-            this.GameObjectsToRemove.Clear();
-
-            foreach (GameObject.GameObject g in this.GameObjectsToAdd)
+            foreach (GameObject.GameObject gameObject in Engine.GameObjects)
             {
-                this.ImplementGameObject(g);
+                gameObject.OnUpdate(elapsed);
             }
 
-            this.GameObjectsToAdd.Clear();
+            foreach (GameObject.GameObject g in Engine.GameObjectsToRemove)
+            {
+                Engine.ExcludeGameObject(g);
+            }
+
+            Engine.GameObjectsToRemove.Clear();
+
+            foreach (GameObject.GameObject g in Engine.GameObjectsToAdd)
+            {
+                Engine.ImplementGameObject(g);
+            }
+
+            Engine.GameObjectsToAdd.Clear();
         }
 
-        private void Resize(ResizeEventArgs args)
+        private static void Resize(ResizeEventArgs args)
         {
-            foreach (KeyValuePair<RenderLayer, List<IRenderer>> item in this.Renderers)
+            foreach (KeyValuePair<RenderLayer, List<IRenderer>> item in Engine.Renderers)
             {
                 item.Value.ForEach(renderer => renderer.Resize(args));
             }
         }
 
-        private void Render(FrameEventArgs args)
+        private static void Render(FrameEventArgs args)
         {
-            this.GameWindow.SwapBuffers();
+            Engine.GameWindow.SwapBuffers();
             GL.Clear(ClearBufferMask.ColorBufferBit);
-            foreach (KeyValuePair<RenderLayer, List<IRenderer>> item in this.Renderers)
+            foreach (KeyValuePair<RenderLayer, List<IRenderer>> item in Engine.Renderers)
             {
                 item.Value.ForEach(renderer => renderer.Render(args));
             }

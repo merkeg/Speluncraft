@@ -54,7 +54,7 @@ namespace Engine.Renderer.UI.Primitive
         }
 
         /// <inheritdoc/>
-        public void OnCreate()
+        public void OnRendererCreate()
         {
         }
     }

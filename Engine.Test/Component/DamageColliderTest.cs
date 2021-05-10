@@ -12,12 +12,12 @@ namespace EngineTest.Component
         [TestMethod]
         public void TestDealingDMG()
         {
-            Engine.Engine.Instance().Colliders.Clear();
+            Engine.Engine.Colliders.Clear();
 
             GameObject takeingDMG = new GameObject(0, 0, 1, 1, null);
             takeingDMG.AddComponent(new Engine.Component.HealthPoints(100, 100));
-            Engine.Engine.Instance().AddGameObject(takeingDMG);
-            Engine.Engine.Instance().Colliders.Add(takeingDMG);
+            Engine.Engine.AddGameObject(takeingDMG);
+            Engine.Engine.Colliders.Add(takeingDMG);
 
             GameObject doingDMG = new GameObject(0, 0, 1, 1, null);
             doingDMG.AddComponent(new Engine.Component.DamageCollider(10, 1));
@@ -31,13 +31,13 @@ namespace EngineTest.Component
         [TestMethod]
         public void TestDealingDMGWithCollider()
         {
-            Engine.Engine.Instance().Colliders.Clear();
-            Engine.Engine.Instance().GameObjects.Clear();
+            Engine.Engine.Colliders.Clear();
+            Engine.Engine.GameObjects.Clear();
 
             GameObject takeingDMG = new GameObject(0, 0, 1, 1, null);
             takeingDMG.AddComponent(new Engine.Component.HealthPoints(100, 100));
-            Engine.Engine.Instance().AddGameObject(takeingDMG);
-            Engine.Engine.Instance().Colliders.Add(takeingDMG);
+            Engine.Engine.AddGameObject(takeingDMG);
+            Engine.Engine.Colliders.Add(takeingDMG);
 
             GameObject doingDMG = new GameObject(0, 0, 1, 1, null);
             doingDMG.AddComponent(new Engine.Component.Collider());
@@ -52,22 +52,22 @@ namespace EngineTest.Component
         [TestMethod]
         public void TestDoingDMGWithTwoColliders()
         {
-            Engine.Engine.Instance().Colliders.Clear();
-            Engine.Engine.Instance().GameObjects.Clear();
+            Engine.Engine.Colliders.Clear();
+            Engine.Engine.GameObjects.Clear();
 
             GameObject takeingDMG = new GameObject(0, 0, 1, 1, null);
             takeingDMG.AddComponent(new Engine.Component.HealthPoints(100, 100));
             takeingDMG.AddComponent(new Engine.Component.DamageCollider(10,1));
             takeingDMG.AddComponent(new Engine.Component.Collider());
-            Engine.Engine.Instance().AddGameObject(takeingDMG);
-            Engine.Engine.Instance().Colliders.Add(takeingDMG);
+            Engine.Engine.AddGameObject(takeingDMG);
+            Engine.Engine.Colliders.Add(takeingDMG);
 
             GameObject doingDMG = new GameObject(0, 0, 1, 1, null);
             doingDMG.AddComponent(new Engine.Component.Collider());
             doingDMG.AddComponent(new Engine.Component.DamageCollider(10, 1));
             doingDMG.AddComponent(new Engine.Component.HealthPoints(100, 100));
-            Engine.Engine.Instance().AddGameObject(doingDMG);
-            Engine.Engine.Instance().Colliders.Add(doingDMG);
+            Engine.Engine.AddGameObject(doingDMG);
+            Engine.Engine.Colliders.Add(doingDMG);
 
             doingDMG.OnUpdate(0.1f);
             takeingDMG.OnUpdate(0.1f);

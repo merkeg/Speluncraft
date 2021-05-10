@@ -31,7 +31,7 @@
             Basic Enemy that can be shot at.
             </summary>
         </member>
-        <member name="M:Game.Enemy.Enemy.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite,System.Int32)">
+        <member name="M:Game.Enemy.Enemy.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.Enemy.Enemy"/> class.
             </summary>
@@ -69,7 +69,7 @@
             A bullet that flies straight untill it hits something, then does DMG and despwans.
             </summary>
         </member>
-        <member name="M:Game.Gun.Ammunition.Bullet.#ctor(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite)">
+        <member name="M:Game.Gun.Ammunition.Bullet.#ctor(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.Gun.Ammunition.Bullet"/> class.
             </summary>
@@ -155,7 +155,7 @@
             The thing the Player COntrolls.
             </summary>
         </member>
-        <member name="M:Game.Player.Player.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite)">
+        <member name="M:Game.Player.Player.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.Player.Player"/> class.
             </summary>
@@ -223,7 +223,7 @@
             </summary>
             <param name="args">args.</param>
         </member>
-        <member name="M:Game.UI.HealthbarPlayer.OnCreate">
+        <member name="M:Game.UI.HealthbarPlayer.OnRendererCreate">
             <summary>
             OnCreate function.
             </summary>

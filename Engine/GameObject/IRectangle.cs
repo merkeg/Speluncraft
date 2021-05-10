@@ -11,7 +11,7 @@ namespace Engine.GameObject
     /// <summary>
     /// Rectangle definde with 2 points.
     /// </summary>
-    public interface IRectangle
+    public interface IRectangle : IMirrorable
     {
         /// <summary>
         /// Gets X-Coordinate of the left bottom point, of the Rectangle.

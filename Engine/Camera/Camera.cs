@@ -44,7 +44,7 @@ namespace Engine.Camera
         }
 
         /// <inheritdoc/>
-        public void OnCreate()
+        public void OnRendererCreate()
         {
             return;
         }

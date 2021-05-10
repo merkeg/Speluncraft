@@ -7,6 +7,7 @@ namespace Engine.Renderer.Tile.Parser
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Reflection;
     using global::Engine.GameObject;
     using Newtonsoft.Json;
     using OpenTK.Mathematics;
@@ -16,6 +17,17 @@ namespace Engine.Renderer.Tile.Parser
     /// </summary>
     public class TilemapParser
     {
+        /// <summary>
+        /// Parses Tilemap json files into a Tilemap model.
+        /// </summary>
+        /// <param name="resource">The Tilemap json stream.</param>
+        /// <returns>The Tilemap model.</returns>
+        public static TilemapModel ParseTilemap(string resource)
+        {
+            Assembly asm = Assembly.GetEntryAssembly();
+            return ParseTilemap(asm.GetManifestResourceStream(resource));
+        }
+
         /// <summary>
         /// Parses Tilemap json files into a Tilemap model.
         /// </summary>

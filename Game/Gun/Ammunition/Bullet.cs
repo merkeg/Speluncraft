@@ -23,7 +23,7 @@ namespace Game.Gun.Ammunition
         /// <param name="sizeX">Size X.</param>
         /// <param name="sizeY">Size Y.</param>
         /// <param name="sprite">Its sprite.</param>
-        public Bullet(int dmg, float velocityX, float minX, float minY, float sizeX, float sizeY, Engine.Renderer.Sprite.Sprite sprite)
+        public Bullet(int dmg, float velocityX, float minX, float minY, float sizeX, float sizeY, Engine.Renderer.Sprite.ISprite sprite)
             : base(minX, minY, sizeX, sizeY, sprite)
         {
             this.AddComponent(new Engine.Component.DamageCollider(dmg, 10));
@@ -40,7 +40,7 @@ namespace Game.Gun.Ammunition
             base.OnUpdate(frameTime);
             if (this.GetComponent<Engine.Component.DamageCollider>().GetIsCollided())
             {
-                Engine.Engine.Instance().GameObjectsToRemove.Add(this);
+                Engine.Engine.RemoveGameObject(this);
             }
         }
     }

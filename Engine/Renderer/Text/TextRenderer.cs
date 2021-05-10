@@ -110,7 +110,7 @@ namespace Engine.Renderer.Text
         }
 
         /// <inheritdoc/>
-        public void OnCreate()
+        public void OnRendererCreate()
         {
         }
     }
