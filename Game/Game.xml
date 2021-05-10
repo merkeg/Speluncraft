@@ -9,7 +9,7 @@
             Lets the enemy walk from one side of the platform to the other side.
             </summary>
         </member>
-        <member name="M:Game.Enemy.DummyAI.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite,System.Int32)">
+        <member name="M:Game.Enemy.DummyAI.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.Enemy.DummyAI"/> class.
             </summary>
@@ -50,7 +50,7 @@
             DummyAI with cool Pistol that shoots.
             </summary>
         </member>
-        <member name="M:Game.Enemy.EnemyPistol.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.Sprite,System.Int32)">
+        <member name="M:Game.Enemy.EnemyPistol.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.Enemy.EnemyPistol"/> class.
             </summary>

@@ -89,14 +89,9 @@ namespace Game
 
         private void AddEnemies()
         {
-            using Stream enemyStream = this.assembly.GetManifestResourceStream("Game.Resources.enemy.png");
-            Sprite enemySprite = new Sprite(enemyStream);
-            DummyAI testEnemy = new DummyAI(75, -25, 1, 1, enemySprite, 10);
-            // Engine.Engine.AddGameObject(testEnemy);
-
-            using Stream enemyGunSpriteStream = this.assembly.GetManifestResourceStream("Game.Resources.enemyGun.png");
-            Sprite enemyGunSprite = new Sprite(enemyGunSpriteStream);
-            EnemyPistol enemyWithPistol = new EnemyPistol(81, -43, 1, 1, enemyGunSprite, 5);
+            Tilesheet walkingSheet = new Tilesheet("Game.Resources.Enemy.zombie_walking.png", 80, 110);
+            AnimatedSprite spriteWalking = new AnimatedSprite(walkingSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
+            EnemyPistol enemyWithPistol = new EnemyPistol(81, -43, 1, 1.375f, spriteWalking, 5);
             Engine.Engine.AddGameObject(enemyWithPistol);
 
             Tilesheet fireTilesheet = new Tilesheet("Game.Resources.Animated.fire.png", 32, 32);

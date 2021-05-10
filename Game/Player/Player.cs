@@ -78,8 +78,6 @@ namespace Game.Player
 
             if (keyboardState.IsKeyDown(Keys.A))
             { // Player wants to go left
-                this.Sprite = this.spriteWalking;
-                this.Mirrored = true;
                 this.isFaceing = ILookDirection.Left;
                 if (physics.GetVelocity().X > 0)
                 { // Player is breaking since he is going right
@@ -90,8 +88,6 @@ namespace Game.Player
             }
             else if (keyboardState.IsKeyDown(Keys.D))
             { // Player wants to go right
-                this.Sprite = this.spriteWalking;
-                this.Mirrored = false;
                 this.isFaceing = ILookDirection.Right;
                 if (physics.GetVelocity().X < 0)
                 { // Player is breaking since he going left
@@ -139,7 +135,6 @@ namespace Game.Player
 
             if (keyboardState.IsKeyPressed(Keys.Space) && this.jumpcounter > 0)
             {
-                this.Sprite = spriteJump;
                 physics.AddVelocitY(this.jumpPower);
                 this.jumpcounter--;
             }
@@ -148,6 +143,19 @@ namespace Game.Player
         private void UpdateAnimations()
         {
             Engine.Component.Physics phys = this.GetComponent<Engine.Component.Physics>();
+
+            if (phys.GetVelocity().X < -0.1)
+            {
+                this.Sprite = this.spriteWalking;
+                this.Mirrored = true;
+            }
+
+            if (phys.GetVelocity().X > 0.1)
+            {
+                this.Sprite = this.spriteWalking;
+                this.Mirrored = false;
+            }
+
             if (phys.GetVelocity().Y < -0.1)
             {
                 this.Sprite = this.spriteFall;
