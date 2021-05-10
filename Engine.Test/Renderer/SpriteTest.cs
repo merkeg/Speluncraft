@@ -19,8 +19,8 @@ namespace EngineTest.Renderer
             Assert.IsTrue(sprite[0].X == kf1.X);
             Assert.IsTrue(sprite[0].Y == kf1.Y);
             
-            Assert.IsTrue(sprite.Width == stud.TileSize);
-            Assert.IsTrue(sprite.Height == stud.TileSize);
+            Assert.IsTrue(sprite.Width == stud.TileSizeX);
+            Assert.IsTrue(sprite.Height == stud.TileSizeY);
             
         }
         
