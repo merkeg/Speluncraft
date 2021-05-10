@@ -58,20 +58,20 @@ namespace Game
         }
 
         private void InitializeRenderers()
-        { 
+        {
             Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheetMC.png", 32, 32);
             TilemapModel model = TilemapParser.ParseTilemap("Game.Resources.Level.mapalla.json");
             Tilemap tilemap = new Tilemap(tilesheet, model);
-
+            this.AnimateTiles(tilesheet);
             Engine.Engine.GetService<TilemapService>().AddTilemap(tilemap, Vector2i.Zero);
         }
 
         private void AddPlayer()
         {
             Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheetMC.png", 32, 32);
-            AnimatedSprite sprite = new AnimatedSprite(tilesheet, new[] { new Keyframe(1, 0), new Keyframe(2, 0), new Keyframe(3, 0) });
+            Sprite sprite = new Sprite("Game.Resources.Player.adventurer_idle.png", false);
 
-            Player.Player player = new Player.Player(96, -33, 1, 1, sprite);
+            Player.Player player = new Player.Player(96, -33, 1, 1.375f, sprite);
             player.AddComponent(new CameraTrackingComponent());
             player.Mirrored = true;
             Engine.Engine.AddGameObject(player);
@@ -105,6 +105,24 @@ namespace Game
             ISprite fireSprite = new AnimatedSprite(fireTilesheet, Keyframe.RangeY(0, 0, 23, delay));
             Enemy.Enemy fire = new Enemy.Enemy(100, -44, 1, 1, fireSprite, 25);
             Engine.Engine.AddGameObject(fire);
+        }
+
+        private void AnimateTiles(Tilesheet sheet)
+        {
+            AnimatedSprite netherPortal = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.nether_portal.png", 32, 32), Keyframe.RangeY(0, 0, 31, 0.03f));
+            sheet.SetCustomSprite(36, netherPortal);
+            AnimatedSprite waterFlow = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.water_flow.png", 32, 32), Keyframe.RangeY(0, 0, 35, 0.1f));
+            sheet.SetCustomSprite(81, waterFlow);
+            AnimatedSprite waterStill = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.water_still.png", 32, 32), Keyframe.RangeY(0, 0, 50, 0.05f));
+            sheet.SetCustomSprite(91, waterStill);
+            AnimatedSprite waterCut = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.water_still_cut.png", 32, 32), Keyframe.RangeY(0, 0, 50, 0.05f));
+            sheet.SetCustomSprite(92, waterCut);
+            AnimatedSprite lavaFlow = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.lava_flow.png", 32, 32), Keyframe.RangeY(0, 0, 245, 0.03f));
+            sheet.SetCustomSprite(83, lavaFlow);
+            AnimatedSprite lavaStill = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.lava_still.png", 32, 32), Keyframe.RangeY(0, 0, 122, 0.03f));
+            sheet.SetCustomSprite(93, lavaStill);
+            AnimatedSprite lavaCut = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.lava_still_cut.png", 32, 32), Keyframe.RangeY(0, 0, 122, 0.03f));
+            sheet.SetCustomSprite(94, lavaCut);
         }
     }
 }
