@@ -4,8 +4,10 @@
 
 namespace Engine.Service
 {
+    using System;
     using System.Collections.Generic;
     using System.Drawing;
+    using global::Engine.GameObject;
     using global::Engine.Renderer;
     using global::Engine.Renderer.Sprite;
     using global::Engine.Renderer.Tile;
@@ -27,6 +29,9 @@ namespace Engine.Service
         private Dictionary<Tilemap, Vector2i> tilemaps;
         private List<Tilesheet> tilesheets;
 
+        private IRectangle optimizationPoint;
+        private int renderRange;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TilemapService"/> class.
         /// </summary>
@@ -34,20 +39,46 @@ namespace Engine.Service
         {
             this.tilemaps = new Dictionary<Tilemap, Vector2i>();
             this.tilesheets = new List<Tilesheet>();
+            this.renderRange = 15;
         }
 
         /// <inheritdoc/>
         public void Render(FrameEventArgs args)
         {
             GL.Color3(Color.White);
+            float tileTexCoordX0;
+            float tileTexCoordY0;
+            float tileTexCoordX1;
+            float tileTexCoordY1;
+
+            bool flippedHorizontal;
+            bool flippedVertical;
+            bool flippedDiagonal;
+
+            int tilemapHandle;
+
             foreach (Tilemap tilemap in this.tilemaps.Keys)
             {
+                tilemapHandle = tilemap.Tilesheet.Handle;
+                GL.BindTexture(TextureTarget.Texture2D, tilemapHandle);
+
                 foreach (TilemapLayer layer in tilemap.Layers)
                 {
+                    Vector2 offset = this.tilemaps[tilemap];
                     for (int x = 0; x < layer.Width; x++)
                     {
+                        if (Math.Abs(this.optimizationPoint.MinX - offset.X - x) > this.renderRange)
+                        {
+                            continue;
+                        }
+
                         for (int y = 0; y < layer.Height; y++)
                         {
+                            if (Math.Abs(this.optimizationPoint.MinY - (offset.Y - y)) > this.renderRange)
+                            {
+                                continue;
+                            }
+
                             uint tile = layer[x, y];
                             if (tile == 0)
                             {
@@ -55,37 +86,40 @@ namespace Engine.Service
                             }
 
                             // https://doc.mapeditor.org/en/stable/reference/tmx-map-format/#tile-flipping
-                            bool flipped_horizontal = (tile & BitFlippedHorizontal) > 0;
-                            bool flipped_vertical = (tile & BitFlippedVertical) > 0;
-                            bool flipped_diagonal = (tile & BitFlippedDiagonal) > 0;
+                            flippedHorizontal = (tile & BitFlippedHorizontal) > 0;
+                            flippedVertical = (tile & BitFlippedVertical) > 0;
+                            flippedDiagonal = (tile & BitFlippedDiagonal) > 0;
 
                             tile &= ~(BitFlippedHorizontal | BitFlippedVertical | BitFlippedDiagonal);
                             tile--;
                             ISprite sprite = tilemap.Tilesheet.Tiles[tile];
 
-                            float tileTexCoordX0 = sprite.TexX0;
-                            float tileTexCoordY0 = sprite.TexY0;
-                            float tileTexCoordX1 = sprite.TexX1;
-                            float tileTexCoordY1 = sprite.TexY1;
+                            tileTexCoordX0 = sprite.TexX0;
+                            tileTexCoordY0 = sprite.TexY0;
+                            tileTexCoordX1 = sprite.TexX1;
+                            tileTexCoordY1 = sprite.TexY1;
 
-                            if (flipped_horizontal)
+                            if (flippedHorizontal)
                             {
                                 tileTexCoordY0 += layer.TileTexSizeY;
                                 tileTexCoordY1 -= layer.TileTexSizeY;
                             }
 
-                            if (flipped_vertical)
+                            if (flippedVertical)
                             {
                                 tileTexCoordX0 += layer.TileTexSizeX;
                                 tileTexCoordX1 -= layer.TileTexSizeX;
                             }
 
-                            Vector2 offset = this.tilemaps[tilemap];
-                            GL.BindTexture(TextureTarget.Texture2D, sprite.Handle);
+                            if (sprite.Handle != tilemapHandle)
+                            {
+                                GL.BindTexture(TextureTarget.Texture2D, sprite.Handle);
+                            }
+
                             float overlap = 0.0001f;
 
-                            GL.Begin(PrimitiveType.Triangles);
-                            if (!flipped_diagonal)
+                            GL.Begin(PrimitiveType.Quads);
+                            if (!flippedDiagonal)
                             {
                                 GL.TexCoord2(tileTexCoordX0, tileTexCoordY0);
                                 GL.Vertex2(offset.X + x - overlap, offset.Y - y - overlap);
@@ -93,40 +127,32 @@ namespace Engine.Service
                                 GL.TexCoord2(tileTexCoordX1, tileTexCoordY0);
                                 GL.Vertex2(offset.X + x + 1 + overlap, offset.Y - y - overlap);
 
-                                GL.TexCoord2(tileTexCoordX0, tileTexCoordY1);
-                                GL.Vertex2(offset.X + x - overlap, offset.Y - y + 1 + overlap);
-
-                                GL.TexCoord2(tileTexCoordX1, tileTexCoordY0);
-                                GL.Vertex2(offset.X + x + 1 + overlap, offset.Y - y - overlap);
-
-                                GL.TexCoord2(tileTexCoordX0, tileTexCoordY1);
-                                GL.Vertex2(offset.X + x - overlap, offset.Y - y + 1 + overlap);
-
                                 GL.TexCoord2(tileTexCoordX1, tileTexCoordY1);
                                 GL.Vertex2(offset.X + x + 1 + overlap, offset.Y - y + 1 + overlap);
+
+                                GL.TexCoord2(tileTexCoordX0, tileTexCoordY1);
+                                GL.Vertex2(offset.X + x - overlap, offset.Y - y + 1 + overlap);
                             }
                             else
                             {
                                 GL.TexCoord2(tileTexCoordX1, tileTexCoordY1);
                                 GL.Vertex2(offset.X + x - overlap, offset.Y - y - overlap);
 
-                                GL.TexCoord2(tileTexCoordX1, tileTexCoordY0);
-                                GL.Vertex2(offset.X + x + 1 + overlap, offset.Y - y - overlap);
-
-                                GL.TexCoord2(tileTexCoordX0, tileTexCoordY1);
-                                GL.Vertex2(offset.X + x - overlap, offset.Y - y + 1 + overlap);
-
-                                GL.TexCoord2(tileTexCoordX1, tileTexCoordY0);
-                                GL.Vertex2(offset.X + x + 1 + overlap, offset.Y - y - overlap);
-
                                 GL.TexCoord2(tileTexCoordX0, tileTexCoordY1);
                                 GL.Vertex2(offset.X + x - overlap, offset.Y - y + 1 + overlap);
 
                                 GL.TexCoord2(tileTexCoordX0, tileTexCoordY0);
                                 GL.Vertex2(offset.X + x + 1 + overlap, offset.Y - y + 1 + overlap);
+
+                                GL.TexCoord2(tileTexCoordX1, tileTexCoordY0);
+                                GL.Vertex2(offset.X + x + 1 + overlap, offset.Y - y - overlap);
                             }
 
                             GL.End();
+                            if (sprite.Handle != tilemapHandle)
+                            {
+                                GL.BindTexture(TextureTarget.Texture2D, tilemap.Tilesheet.Handle);
+                            }
                         }
                     }
                 }
@@ -134,7 +160,7 @@ namespace Engine.Service
 
             foreach (Tilesheet sheet in this.tilesheets)
             {
-                foreach (ISprite sprite in sheet.Tiles)
+                foreach (ISprite sprite in sheet.CustomSprites)
                 {
                     sprite.TimeElapsed((float)args.Time);
                 }
@@ -195,6 +221,15 @@ namespace Engine.Service
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Sets the optimization point.
+        /// </summary>
+        /// <param name="rectangle">optimization point.</param>
+        public void SetOptimizationPoint(IRectangle rectangle)
+        {
+            this.optimizationPoint = rectangle;
         }
     }
 }

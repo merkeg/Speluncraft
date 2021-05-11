@@ -85,6 +85,7 @@ namespace Game
 
             DebugRenderer debugRenderer = new DebugRenderer(new Rectangle(5, 5, 300, 325), new Color4(0, 0, 0, 0.3f), font, player, UiAlignment.Right);
             Engine.Engine.AddRenderer(debugRenderer, RenderLayer.UI);
+            Engine.Engine.GetService<TilemapService>().SetOptimizationPoint(player);
         }
 
         private void AddEnemies()
