@@ -1783,5 +1783,11 @@
             <param name="tilemap">Tilemap.</param>
             <param name="offset">Offset.</param>
         </member>
+        <member name="M:Engine.Service.TilemapService.SetOptimizationPoint(Engine.GameObject.IRectangle)">
+            <summary>
+            Sets the optimization point.
+            </summary>
+            <param name="rectangle">optimization point.</param>
+        </member>
     </members>
 </doc>

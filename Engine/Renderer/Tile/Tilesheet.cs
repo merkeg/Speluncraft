@@ -60,9 +60,14 @@ namespace Engine.Renderer.Tile
         public int TileSizeY { get; private set; }
 
         /// <summary>
-        /// Gets or sets the Tiles with tex coordinates.
+        /// Gets the Tiles with tex coordinates.
         /// </summary>
-        public ISprite[] Tiles { get; set; }
+        public ISprite[] Tiles { get; private set; }
+
+        /// <summary>
+        /// Gets or sets custom sprites.
+        /// </summary>
+        public List<ISprite> CustomSprites { get; set; }
 
         /// <inheritdoc/>
         public float TileTexSizeX => 1f / this.AmountTileWidth;
@@ -78,10 +83,13 @@ namespace Engine.Renderer.Tile
         public void SetCustomSprite(int tileId, ISprite sprite)
         {
             this.Tiles[tileId] = sprite;
+            this.CustomSprites.Add(sprite);
         }
 
         private void Init(Stream resource, int tileSizeX, int tileSizeY)
         {
+            this.CustomSprites = new List<ISprite>();
+
             // Source: https://github.com/davudk/OpenGL-TileMap-Demos
             using Image<Rgba32> image = Image.Load<Rgba32>(resource);
             image.Mutate(x => x.Flip(FlipMode.Vertical));
