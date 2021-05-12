@@ -19,6 +19,9 @@ namespace Game.Enemy
         private Engine.Component.Physics phys;
         private int lookingDirection = 1;
 
+        private Engine.GameObject.GameObject checkLeft;
+        private Engine.GameObject.GameObject checkRight;
+
         private AnimatedSprite spriteWalking;
 
         /// <summary>
@@ -40,6 +43,8 @@ namespace Game.Enemy
                 Engine.Renderer.Tile.Tilesheet walkingSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Enemy.zombie_walking.png", 80, 110);
                 this.spriteWalking = new AnimatedSprite(walkingSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
             }
+            this.checkLeft = new Engine.GameObject.GameObject(this.MinX - 0.3f, this.MinY - 0.3f, 0.2f, 0.1f, this.Sprite);
+            this.checkRight = new Engine.GameObject.GameObject(this.MinX + this.SizeX + 0.1f, this.MinY - 0.3f, 0.2f, 0.1f, this.Sprite);
         }
 
         /// <inheritdoc/>
@@ -59,8 +64,11 @@ namespace Game.Enemy
 
         private void CheckLedge()
         {
-            Engine.GameObject.GameObject checkLeft = new Engine.GameObject.GameObject(this.MinX - 0.3f, this.MinY - 0.3f, 0.2f, 0.1f, this.Sprite);
-            Engine.GameObject.GameObject checkRight = new Engine.GameObject.GameObject(this.MinX + this.SizeX + 0.1f, this.MinY - 0.3f, 0.2f, 0.1f, this.Sprite);
+            this.checkLeft.MinX = this.MinX - 0.3f;
+            this.checkLeft.MinY = this.MinY - 0.3f;
+            this.checkRight.MinX = this.MinX + this.SizeX + 0.1f;
+            this.checkRight.MinY = this.MinY - 0.3f;
+
             bool hasFloorLeft = false;
             bool hasFloorRight = false;
 
