@@ -238,11 +238,10 @@
             Loader Class to initialize the whole UI of the Game. (hopefully).
             </summary>
         </member>
-        <member name="M:Game.UI.UILoader.Initialize_UI(Engine.Engine)">
+        <member name="M:Game.UI.UILoader.Initialize_UI">
             <summary>
             Initializes the UI.
             </summary>
-            <param name="engine">reference to engine for adding the renderes.</param>
         </member>
     </members>
 </doc>
