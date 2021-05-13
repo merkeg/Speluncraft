@@ -36,7 +36,16 @@ namespace Engine.Service
             this.collision = new Dictionary<GameObject.GameObject, List<GameObject.IRectangle>>();
             foreach (GameObject.GameObject g in Engine.GameObjects)
             {
-                if (g.GetComponent<Component.CollisionResponse>() != null)
+                bool hasSubbed = false;
+                foreach (GameObject.IComponent c in g.GetComponents())
+                {
+                    if (c is ICollosionServiceSubscriber)
+                    {
+                        hasSubbed = true;
+                    }
+                }
+
+                if (hasSubbed)
                 {
                     List<GameObject.IRectangle> collisionThisGameObjectHas = new List<GameObject.IRectangle>();
                     foreach (GameObject.IRectangle r in Engine.Colliders)
