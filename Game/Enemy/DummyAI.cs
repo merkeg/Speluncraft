@@ -13,7 +13,7 @@ namespace Game.Enemy
     /// <summary>
     /// Lets the enemy walk from one side of the platform to the other side.
     /// </summary>
-    public class DummyAI : Enemy, Gun.ILookDirection
+    public class DummyAI : Enemy, Player.ILookDirection
     {
         private readonly float movementSpeed = 2;
         private Engine.Component.Physics phys;
@@ -86,14 +86,14 @@ namespace Game.Enemy
             if (!hasFloorRight)
             {
                 this.phys.SetVelocity(-this.movementSpeed, 0);
-                this.lookingDirection = Gun.ILookDirection.Left;
+                this.lookingDirection = Player.ILookDirection.Left;
                 return;
             }
 
             if (!hasFloorLeft)
             {
                 this.phys.SetVelocity(this.movementSpeed, 0);
-                this.lookingDirection = Gun.ILookDirection.Right;
+                this.lookingDirection = Player.ILookDirection.Right;
                 return;
             }
 
@@ -107,17 +107,17 @@ namespace Game.Enemy
         {
             if (this.phys.GetVelocity().X == 0 && this.phys.GetVelocity().Y == 0)
             {
-                if (this.lookingDirection == Gun.ILookDirection.Left)
+                if (this.lookingDirection == Player.ILookDirection.Left)
                 {
                     this.phys.SetVelocity(this.movementSpeed, 0);
-                    this.lookingDirection = Gun.ILookDirection.Right;
+                    this.lookingDirection = Player.ILookDirection.Right;
                     return;
                 }
 
-                if (this.lookingDirection == Gun.ILookDirection.Right)
+                if (this.lookingDirection == Player.ILookDirection.Right)
                 {
                     this.phys.SetVelocity(-this.movementSpeed, 0);
-                    this.lookingDirection = Gun.ILookDirection.Left;
+                    this.lookingDirection = Player.ILookDirection.Left;
                     return;
                 }
             }

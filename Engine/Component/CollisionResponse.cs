@@ -11,7 +11,7 @@ namespace Engine.Component
     /// <summary>
     /// Interface that Components must implemen, in order to get info about with what they collid.
     /// </summary>
-    public abstract class CollisionResponse : Component, Service.ICollosionServiceSubscriber
+    public abstract class CollisionResponse : Component
     {
     }
 }

@@ -575,13 +575,13 @@
             <param name="rectangle">The other element to check at.</param>
             <returns>the value if the other element intersects with the gameobject.</returns>
         </member>
-        <member name="M:Engine.GameObject.GameObject.AddComponent(Engine.GameObject.IComponent)">
+        <member name="M:Engine.GameObject.GameObject.AddComponent(Engine.Component.Component)">
             <summary>
             Adds a component from the GameObject.
             </summary>
             <param name="component">The component to add.</param>
         </member>
-        <member name="M:Engine.GameObject.GameObject.RemoveComponent(Engine.GameObject.IComponent)">
+        <member name="M:Engine.GameObject.GameObject.RemoveComponent(Engine.Component.Component)">
             <summary>
             Removes a component from the GameObject.
             </summary>
@@ -593,12 +593,6 @@
             </summary>
             <typeparam name="T">Component.</typeparam>
             <returns>The component or null if not existant.</returns>
-        </member>
-        <member name="M:Engine.GameObject.GameObject.GetComponents">
-            <summary>
-            Get all components.
-            </summary>
-            <returns>All Componts of this GameObject, as a List.</returns>
         </member>
         <member name="M:Engine.GameObject.GameObject.OnUpdatableCreate">
             <summary>
@@ -612,33 +606,6 @@
             <param name="frameTime">Time between the frame.</param>
         </member>
         <member name="M:Engine.GameObject.GameObject.OnUpdatableDestroy">
-            <summary>
-            Called if the GameObject is destroyed.
-            </summary>
-        </member>
-        <member name="T:Engine.GameObject.IComponent">
-            <summary>
-            Interface for GameObjects, to use Components.
-            </summary>
-        </member>
-        <member name="M:Engine.GameObject.IComponent.SetGameObject(Engine.GameObject.GameObject)">
-            <summary>
-            The internal function to set the parent.
-            </summary>
-            <param name="gameObject">The parent GameObject.</param>
-        </member>
-        <member name="M:Engine.GameObject.IComponent.OnCreated">
-            <summary>
-            Called if the GameObject is created.
-            </summary>
-        </member>
-        <member name="M:Engine.GameObject.IComponent.OnUpdate(System.Single)">
-            <summary>
-            Called every gametick.
-            </summary>
-            <param name="frameTime">Time between the frame.</param>
-        </member>
-        <member name="M:Engine.GameObject.IComponent.OnDestroy">
             <summary>
             Called if the GameObject is destroyed.
             </summary>
@@ -1408,12 +1375,7 @@
         </member>
         <member name="P:Engine.Renderer.Tile.Tilesheet.Tiles">
             <summary>
-            Gets the Tiles with tex coordinates.
-            </summary>
-        </member>
-        <member name="P:Engine.Renderer.Tile.Tilesheet.CustomSprites">
-            <summary>
-            Gets or sets custom sprites.
+            Gets or sets the Tiles with tex coordinates.
             </summary>
         </member>
         <member name="P:Engine.Renderer.Tile.Tilesheet.TileTexSizeX">
@@ -1735,22 +1697,6 @@
         </member>
         <member name="M:Engine.Service.CollisionService.OnUpdatableCreate">
             <inheritdoc/>
-        </member>
-        <member name="T:Engine.Service.ICollosionServiceSubscriber">
-            <summary>
-            Componts that want to get Collosions checked for, need to implement this interface.
-            </summary>
-        </member>
-        <member name="T:Engine.Service.IPhysicsServiceSubscriber">
-            <summary>
-            Componts must implemt this to get Updates from Physics Service.
-            </summary>
-        </member>
-        <member name="M:Engine.Service.IPhysicsServiceSubscriber.UpdateForService(System.Single)">
-            <summary>
-            Methode the PhysicsService calls, to update the positon of the GameObject.
-            </summary>
-            <param name="frameTime">Time since last frame.</param>
         </member>
         <member name="T:Engine.Service.IService">
             <summary>
