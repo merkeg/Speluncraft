@@ -77,9 +77,9 @@ namespace Game.Gun
             OpenTK.Windowing.GraphicsLibraryFramework.KeyboardState keyboardState = Engine.Engine.GameWindow.KeyboardState;
             Engine.Component.Physics physics = this.GetComponent<Engine.Component.Physics>();
 
-            walk(frameTime, keyboardState, physics);
+            this.Walk(frameTime, keyboardState, physics);
 
-            shoot(keyboardState);
+            this.Shoot(keyboardState);
 
             base.OnUpdate(frameTime);
             this.UpdateAnimations();
@@ -105,7 +105,7 @@ namespace Game.Gun
             }
         }
 
-        private void shoot(KeyboardState keyboardState)
+        private void Shoot(KeyboardState keyboardState)
         {
             if (keyboardState.IsKeyDown(Keys.W))
             {
@@ -113,7 +113,7 @@ namespace Game.Gun
             }
         }
 
-        private void walkLeft(float frameTime, Engine.Component.Physics physics)
+        private void WalkLeft(float frameTime, Engine.Component.Physics physics)
         {
             this.isFaceing = Gun.ILookDirection.Left;
             if (physics.GetVelocity().X > 0)
@@ -124,7 +124,7 @@ namespace Game.Gun
             physics.AddVelocityX(-this.accelaration * frameTime);
         }
 
-        private void walkRight(float frameTime, Engine.Component.Physics physics)
+        private void WalkRight(float frameTime, Engine.Component.Physics physics)
         {
             this.isFaceing = Gun.ILookDirection.Right;
             if (physics.GetVelocity().X < 0)
@@ -135,7 +135,7 @@ namespace Game.Gun
             physics.AddVelocityX(this.accelaration * frameTime);
         }
 
-        private void idle(float frameTime, Engine.Component.Physics physics)
+        private void Idle(float frameTime, Engine.Component.Physics physics)
         {
             this.Sprite = this.spriteIdle;
             if (physics.GetVelocity().X > 0)
@@ -153,19 +153,19 @@ namespace Game.Gun
             }
         }
 
-        private void walk(float frameTime, KeyboardState keyboardState, Engine.Component.Physics physics)
+        private void Walk(float frameTime, KeyboardState keyboardState, Engine.Component.Physics physics)
         {
             if (keyboardState.IsKeyDown(Keys.A))
             { // Player wants to go left
-                walkLeft(frameTime, physics);
+                this.WalkLeft(frameTime, physics);
             }
             else if (keyboardState.IsKeyDown(Keys.D))
             { // Player wants to go right
-                walkRight(frameTime, physics);
+                this.WalkRight(frameTime, physics);
             }
             else
             { // Player is not breaking or accelerating
-                idle(frameTime, physics);
+                this.Idle(frameTime, physics);
             }
         }
 
