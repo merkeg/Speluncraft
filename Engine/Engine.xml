@@ -1741,6 +1741,17 @@
             Componts that want to get Collosions checked for, need to implement this interface.
             </summary>
         </member>
+        <member name="T:Engine.Service.IPhysicsServiceSubscriber">
+            <summary>
+            Componts must implemt this to get Updates from Physics Service.
+            </summary>
+        </member>
+        <member name="M:Engine.Service.IPhysicsServiceSubscriber.UpdateForService(System.Single)">
+            <summary>
+            Methode the PhysicsService calls, to update the positon of the GameObject.
+            </summary>
+            <param name="frameTime">Time since last frame.</param>
+        </member>
         <member name="T:Engine.Service.IService">
             <summary>
             IService class.
