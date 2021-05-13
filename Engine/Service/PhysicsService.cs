@@ -35,9 +35,14 @@ namespace Engine.Service
         {
             foreach (GameObject.GameObject g in Engine.GameObjects)
             {
-                if (g.GetComponent<Component.Physics>() != null)
+                foreach (Component.Component c in g.GetComponents())
                 {
-                    g.GetComponent<Component.Physics>().UpdateForService(frameTime);
+                    if (c is IPhysicsServiceSubscriber)
+                    {
+                        IPhysicsServiceSubscriber c1 = (IPhysicsServiceSubscriber)c;
+                        c1.UpdateForService(frameTime);
+                        continue;
+                    }
                 }
             }
         }
