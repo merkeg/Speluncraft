@@ -2,7 +2,7 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
-namespace Game.Player
+namespace Game.Gun
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace Game.Player
     /// <summary>
     /// The thing the Player COntrolls.
     /// </summary>
-    public class Player : GameObject, ILookDirection
+    public class Player : GameObject, Gun.ILookDirection
     {
         private int jumpcounter;
         private int jumpCounterMax = 1;
@@ -78,7 +78,7 @@ namespace Game.Player
             Engine.Component.Physics physics = this.GetComponent<Engine.Component.Physics>();
             if (keyboardState.IsKeyDown(Keys.A))
             { // Player wants to go left
-                this.isFaceing = ILookDirection.Left;
+                this.isFaceing = Gun.ILookDirection.Left;
                 if (physics.GetVelocity().X > 0)
                 { // Player is breaking since he is going right
                     physics.AddVelocityX(-this.activeBreacking * frameTime);
@@ -88,7 +88,7 @@ namespace Game.Player
             }
             else if (keyboardState.IsKeyDown(Keys.D))
             { // Player wants to go right
-                this.isFaceing = ILookDirection.Right;
+                this.isFaceing = Gun.ILookDirection.Right;
                 if (physics.GetVelocity().X < 0)
                 { // Player is breaking since he going left
                     physics.AddVelocityX(this.activeBreacking * frameTime);

@@ -17,7 +17,7 @@ namespace Game
     using Engine.Renderer.UI;
     using Engine.Service;
     using Game.Enemy;
-    using Game.Player;
+    using Game.Gun;
     using Game.UI;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
@@ -71,7 +71,7 @@ namespace Game
             Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheetMC.png", 32, 32);
             Sprite sprite = new Sprite("Game.Resources.Player.adventurer_idle.png", false);
 
-            Player.Player player = new Player.Player(96, -33, 1, 1.375f, sprite);
+            Gun.Player player = new Gun.Player(96, -33, 1, 1.375f, sprite);
             player.AddComponent(new CameraTrackingComponent());
             Engine.Engine.AddGameObject(player);
 
