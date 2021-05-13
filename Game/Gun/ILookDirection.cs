@@ -9,22 +9,22 @@ namespace Game.Gun
     using System.Text;
 
     /// <summary>
-    /// Interfaces that lets you get the direction an GameObject is faceing.
+    /// Interfaces that lets you get the direction an GameObject is facing.
     /// </summary>
     public interface ILookDirection
     {
         /// <summary>
-        /// The value getDirection must return, when GameObject is faceing left.
+        /// The value getDirection must return, when GameObject is facing left.
         /// </summary>
         public static readonly int Left = -1;
 
         /// <summary>
-        /// The value getDirection must return, when GameObject is faceing right.
+        /// The value getDirection must return, when GameObject is facing right.
         /// </summary>
         public static readonly int Right = 1;
 
         /// <summary>
-        /// Get the direction the GameObject is faceing.
+        /// Get the direction the GameObject is facing.
         /// </summary>
         /// <returns>-1 for left, 1 for right.</returns>
         public int GetDirection();
