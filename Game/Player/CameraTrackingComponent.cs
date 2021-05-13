@@ -2,7 +2,7 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
-namespace Game.Gun
+namespace Game.Player
 {
     using Engine.Camera;
     using Engine.Component;

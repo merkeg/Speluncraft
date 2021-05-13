@@ -12,7 +12,7 @@ namespace Engine.Component
     /// <summary>
     /// The physics component.
     /// </summary>
-    public class Physics : Component, Service.IPhysicsServiceSubscriber
+    public class Physics : Component
     {
         /// <summary>
         /// Gets or sets The Velocity at wich the Object will move OnUpdate.

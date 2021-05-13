@@ -8,7 +8,7 @@ namespace Game.UI
     using Engine.Component;
     using Engine.GameObject;
     using Engine.Renderer;
-    using Game.Gun;
+    using Game.Player;
     using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;

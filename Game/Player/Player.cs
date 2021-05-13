@@ -2,7 +2,7 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
-namespace Game.Gun
+namespace Game.Player
 {
     using System;
     using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace Game.Gun
     /// <summary>
     /// The thing the Player COntrolls.
     /// </summary>
-    public class Player : GameObject, Gun.ILookDirection
+    public class Player : GameObject, ILookDirection
     {
         private int jumpcounter;
         private int jumpCounterMax = 1;
@@ -76,96 +76,69 @@ namespace Game.Gun
         {
             OpenTK.Windowing.GraphicsLibraryFramework.KeyboardState keyboardState = Engine.Engine.GameWindow.KeyboardState;
             Engine.Component.Physics physics = this.GetComponent<Engine.Component.Physics>();
+            if (keyboardState.IsKeyDown(Keys.A))
+            { // Player wants to go left
+                this.isFaceing = ILookDirection.Left;
+                if (physics.GetVelocity().X > 0)
+                { // Player is breaking since he is going right
+                    physics.AddVelocityX(-this.activeBreacking * frameTime);
+                }
 
-            walk(frameTime, keyboardState, physics);
+                physics.AddVelocityX(-this.accelaration * frameTime);
+            }
+            else if (keyboardState.IsKeyDown(Keys.D))
+            { // Player wants to go right
+                this.isFaceing = ILookDirection.Right;
+                if (physics.GetVelocity().X < 0)
+                { // Player is breaking since he going left
+                    physics.AddVelocityX(this.activeBreacking * frameTime);
+                }
 
-            shoot(keyboardState);
+                physics.AddVelocityX(this.accelaration * frameTime);
+            }
+            else
+            { // Player is not breaking or accelerating
+                this.Sprite = this.spriteIdle;
+                if (physics.GetVelocity().X > 0)
+                { // Player is going right
+                    physics.AddVelocityX(-this.idealBreacking * frameTime);
+                }
+                else
+                {
+                    physics.AddVelocityX(this.idealBreacking * frameTime);
+                }
+
+                if (Math.Abs(physics.GetVelocity().X) <= this.idealBreacking * frameTime)
+                {
+                    physics.SetVelocity(0f, physics.GetVelocity().Y);
+                }
+            }
+
+            if (keyboardState.IsKeyDown(Keys.W))
+            {
+                this.gun.PullTrigger();
+            }
 
             base.OnUpdate(frameTime);
             this.UpdateAnimations();
 
-            // Check death
             if (this.GetComponent<Engine.Component.HealthPoints>().GetIsDeadFlag())
             {
                 Engine.Engine.RemoveGameObject(this);
             }
 
-            // Reset jump counter when ground was touched
             Engine.Component.UndoOverlapCollisionResponse collider = this.GetComponent<Engine.Component.UndoOverlapCollisionResponse>();
             if (collider.GetGroundTouchedFlag())
             {
                 this.jumpcounter = this.jumpCounterMax;
             }
 
-            // Jump
+            // Debug.WriteLine("" + this.jumpcounter);
             if (keyboardState.IsKeyPressed(Keys.Space) && this.jumpcounter > 0)
             {
+                // Debug.WriteLine("JUMP");
                 physics.AddVelocitY(this.jumpPower);
                 this.jumpcounter--;
-            }
-        }
-
-        private void shoot(KeyboardState keyboardState)
-        {
-            if (keyboardState.IsKeyDown(Keys.W))
-            {
-                this.gun.PullTrigger();
-            }
-        }
-
-        private void walkLeft(float frameTime, Engine.Component.Physics physics)
-        {
-            this.isFaceing = Gun.ILookDirection.Left;
-            if (physics.GetVelocity().X > 0)
-            { // Player is breaking since he is going right
-                physics.AddVelocityX(-this.activeBreacking * frameTime);
-            }
-
-            physics.AddVelocityX(-this.accelaration * frameTime);
-        }
-
-        private void walkRight(float frameTime, Engine.Component.Physics physics)
-        {
-            this.isFaceing = Gun.ILookDirection.Right;
-            if (physics.GetVelocity().X < 0)
-            { // Player is breaking since he going left
-                physics.AddVelocityX(this.activeBreacking * frameTime);
-            }
-
-            physics.AddVelocityX(this.accelaration * frameTime);
-        }
-
-        private void idle(float frameTime, Engine.Component.Physics physics)
-        {
-            this.Sprite = this.spriteIdle;
-            if (physics.GetVelocity().X > 0)
-            { // Player is going right
-                physics.AddVelocityX(-this.idealBreacking * frameTime);
-            }
-            else
-            {
-                physics.AddVelocityX(this.idealBreacking * frameTime);
-            }
-
-            if (Math.Abs(physics.GetVelocity().X) <= this.idealBreacking * frameTime)
-            {
-                physics.SetVelocity(0f, physics.GetVelocity().Y);
-            }
-        }
-
-        private void walk(float frameTime, KeyboardState keyboardState, Engine.Component.Physics physics)
-        {
-            if (keyboardState.IsKeyDown(Keys.A))
-            { // Player wants to go left
-                walkLeft(frameTime, physics);
-            }
-            else if (keyboardState.IsKeyDown(Keys.D))
-            { // Player wants to go right
-                walkRight(frameTime, physics);
-            }
-            else
-            { // Player is not breaking or accelerating
-                idle(frameTime, physics);
             }
         }
 

@@ -100,27 +100,6 @@
             </summary>
             <returns>The Gun as a Component.</returns>
         </member>
-        <member name="T:Game.Gun.ILookDirection">
-            <summary>
-            Interfaces that lets you get the direction an GameObject is faceing.
-            </summary>
-        </member>
-        <member name="F:Game.Gun.ILookDirection.Left">
-            <summary>
-            The value getDirection must return, when GameObject is faceing left.
-            </summary>
-        </member>
-        <member name="F:Game.Gun.ILookDirection.Right">
-            <summary>
-            The value getDirection must return, when GameObject is faceing right.
-            </summary>
-        </member>
-        <member name="M:Game.Gun.ILookDirection.GetDirection">
-            <summary>
-            Get the direction the GameObject is faceing.
-            </summary>
-            <returns>-1 for left, 1 for right.</returns>
-        </member>
         <member name="T:Game.Gun.Pistol">
             <summary>
             A Pistol that shoots normal bullets. With Medium DMG and Medium reload time.
@@ -142,22 +121,43 @@
             Fires a Bullet, when trigger is pulled and is reloaded.
             </summary>
         </member>
-        <member name="T:Game.Gun.CameraTrackingComponent">
+        <member name="T:Game.Player.CameraTrackingComponent">
             <summary>
             Camera tracking component class.
             </summary>
         </member>
-        <member name="M:Game.Gun.CameraTrackingComponent.OnUpdate(System.Single)">
+        <member name="M:Game.Player.CameraTrackingComponent.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
-        <member name="T:Game.Gun.Player">
+        <member name="T:Game.Player.ILookDirection">
+            <summary>
+            Interfaces that lets you get the direction an GameObject is faceing.
+            </summary>
+        </member>
+        <member name="F:Game.Player.ILookDirection.Left">
+            <summary>
+            The value getDirection must return, when GameObject is faceing left.
+            </summary>
+        </member>
+        <member name="F:Game.Player.ILookDirection.Right">
+            <summary>
+            The value getDirection must return, when GameObject is faceing right.
+            </summary>
+        </member>
+        <member name="M:Game.Player.ILookDirection.GetDirection">
+            <summary>
+            Get the direction the GameObject is faceing.
+            </summary>
+            <returns>-1 for left, 1 for right.</returns>
+        </member>
+        <member name="T:Game.Player.Player">
             <summary>
             The thing the Player COntrolls.
             </summary>
         </member>
-        <member name="M:Game.Gun.Player.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
+        <member name="M:Game.Player.Player.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
             <summary>
-            Initializes a new instance of the <see cref="T:Game.Gun.Player"/> class.
+            Initializes a new instance of the <see cref="T:Game.Player.Player"/> class.
             </summary>
             <param name="minX">the X-Coordinate of bottom left point, of the Player.</param>
             <param name="minY">the Y-Coordinate of bottom left point, of the Player.</param>
@@ -165,10 +165,10 @@
             <param name="sizeY">Player height.</param>
             <param name="sprite">Player sprite.</param>
         </member>
-        <member name="M:Game.Gun.Player.GetDirection">
+        <member name="M:Game.Player.Player.GetDirection">
             <inheritdoc/>
         </member>
-        <member name="M:Game.Gun.Player.OnUpdate(System.Single)">
+        <member name="M:Game.Player.Player.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
         <member name="T:Game.Program">

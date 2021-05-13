@@ -57,16 +57,16 @@ namespace Game.Gun
         {
             if (this.reloadCoolDown <= 0)
             {
-                if (this.GameObject is ILookDirection)
+                if (this.GameObject is Player.ILookDirection)
                 {
-                    ILookDirection d = (ILookDirection)this.GameObject;
-                    if (d.GetDirection() == ILookDirection.Left)
+                    Player.ILookDirection d = (Player.ILookDirection)this.GameObject;
+                    if (d.GetDirection() == Player.ILookDirection.Left)
                     {
                         Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, -this.bulletVelocity, this.GameObject.MinX - this.bulletLenght - this.bufferDistance, this.GameObject.MinY + 0.5f, this.bulletLenght, this.bulletHeight, this.bulletSprite);
                         Engine.Engine.AddGameObject(b);
                     }
 
-                    if (d.GetDirection() == ILookDirection.Right)
+                    if (d.GetDirection() == Player.ILookDirection.Right)
                     {
                         Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, this.bulletVelocity, this.GameObject.MinX + this.GameObject.SizeX + this.bufferDistance, this.GameObject.MinY + 0.5f, this.bulletLenght, this.bulletHeight, this.bulletSprite);
                         Engine.Engine.AddGameObject(b);
