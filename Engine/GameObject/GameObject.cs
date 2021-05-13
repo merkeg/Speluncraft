@@ -31,7 +31,7 @@ namespace Engine.GameObject
             this.MinY = minY;
             this.SizeX = sizeX;
             this.SizeY = sizeY;
-            this.Components = new List<Component.Component>();
+            this.Components = new List<IComponent>();
             this.sprite = sprite;
         }
 
@@ -68,7 +68,7 @@ namespace Engine.GameObject
         /// <summary>
         /// Gets or sets the Components.
         /// </summary>
-        public List<Component.Component> Components { get; protected set; }
+        public List<IComponent> Components { get; protected set; }
 
         /// <summary>
         /// Gets or sets the Sprite of the GameObject.
@@ -119,7 +119,7 @@ namespace Engine.GameObject
         /// Adds a component from the GameObject.
         /// </summary>
         /// <param name="component">The component to add.</param>
-        public void AddComponent(Component.Component component)
+        public void AddComponent(IComponent component)
         {
             this.Components.Add(component);
             component.SetGameObject(this);
@@ -129,7 +129,7 @@ namespace Engine.GameObject
         /// Removes a component from the GameObject.
         /// </summary>
         /// <param name="component">The component to remove.</param>
-        public void RemoveComponent(Component.Component component)
+        public void RemoveComponent(IComponent component)
         {
             this.Components.Remove(component);
             component.SetGameObject(null);
@@ -152,6 +152,15 @@ namespace Engine.GameObject
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Get all components.
+        /// </summary>
+        /// <returns>All Componts of this GameObject, as a List.</returns>
+        public List<IComponent> GetComponents()
+        {
+            return this.Components;
         }
 
         /// <summary>
