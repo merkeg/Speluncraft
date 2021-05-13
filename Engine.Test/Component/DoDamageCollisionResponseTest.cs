@@ -28,10 +28,14 @@ namespace EngineTest.Component
             takeingDMG.OnUpdate(0.1f);
 
             Assert.IsTrue(takeingDMG.GetComponent<Engine.Component.HealthPoints>().GetCurrHP() == 90, "Got:"+ takeingDMG.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
+            Assert.IsTrue(doingDMG.GetComponent<Engine.Component.DoDamageCollisionResponse>().GetDidDMGthisFrame());
+            Assert.IsTrue(doingDMG.GetComponent<Engine.Component.DoDamageCollisionResponse>().GetDidDmgToThose().Contains(takeingDMG));
 
             doingDMG.OnUpdate(0.1f);
             takeingDMG.OnUpdate(0.1f);
             Assert.IsTrue(takeingDMG.GetComponent<Engine.Component.HealthPoints>().GetCurrHP() == 90, "Got:" + takeingDMG.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
+            Assert.IsFalse(doingDMG.GetComponent<Engine.Component.DoDamageCollisionResponse>().GetDidDMGthisFrame());
+            Assert.IsFalse(doingDMG.GetComponent<Engine.Component.DoDamageCollisionResponse>().GetDidDmgToThose().Contains(takeingDMG));
         }
 
         [TestMethod]
@@ -54,7 +58,9 @@ namespace EngineTest.Component
             doingDMG.OnUpdate(0.1f);
             takeingDMG.OnUpdate(0.1f);
 
+            Assert.IsTrue(doingDMG.GetComponent<Engine.Component.DoDamageCollisionResponse>().GetDidDMGthisFrame());
             Assert.IsTrue(takeingDMG.GetComponent<Engine.Component.HealthPoints>().GetCurrHP() == 90, "Got:" + takeingDMG.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
+            Assert.IsTrue(doingDMG.GetComponent<Engine.Component.DoDamageCollisionResponse>().GetDidDmgToThose().Contains(takeingDMG));
         }
 
         [TestMethod]
@@ -80,10 +86,14 @@ namespace EngineTest.Component
             Engine.Engine.GetService<Engine.Service.CollisionService>().OnUpdate(0.1f);
             doingDMG.OnUpdate(0.1f);
             takeingDMG.OnUpdate(0.1f);
+            Assert.IsTrue(doingDMG.GetComponent<Engine.Component.DoDamageCollisionResponse>().GetDidDMGthisFrame());
+            Assert.IsTrue(takeingDMG.GetComponent<Engine.Component.DoDamageCollisionResponse>().GetDidDMGthisFrame());
             Assert.IsTrue(takeingDMG.GetComponent<Engine.Component.DoDamageCollisionResponse>().GetIsCollided());
             Assert.IsTrue(doingDMG.GetComponent<Engine.Component.DoDamageCollisionResponse>().GetIsCollided());
             Assert.IsTrue(takeingDMG.GetComponent<Engine.Component.HealthPoints>().GetCurrHP() == 90);
             Assert.IsTrue(doingDMG.GetComponent<Engine.Component.HealthPoints>().GetCurrHP() == 90);
+            Assert.IsTrue(doingDMG.GetComponent<Engine.Component.DoDamageCollisionResponse>().GetDidDmgToThose().Contains(takeingDMG));
+            Assert.IsTrue(takeingDMG.GetComponent<Engine.Component.DoDamageCollisionResponse>().GetDidDmgToThose().Contains(doingDMG));
         }
     }
 }

@@ -36,7 +36,8 @@ namespace Game.Enemy
 
             this.AddComponent(new Engine.Component.HealthPoints(100, 100));
 
-            this.AddComponent(new Engine.Component.DoDamageCollisionResponse(damage, 1));
+            // this.AddComponent(new Engine.Component.DoDamageCollisionResponse(damage, 1));
+            this.AddComponent(new Engine.Component.DoDamageWithKnockbackCollisionResponse(damage, 1, 10, 5));
 
             // HitBox of Enemy needs to be in CollideList.
             Engine.Engine.Colliders.Add(this);

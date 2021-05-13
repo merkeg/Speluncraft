@@ -18,6 +18,8 @@ namespace Engine.Component
         private int dmg;
         private float dmgCooldown;
         private float dmgCooldownCounter = 0;
+        private bool didDMGthisFrame = false;
+        private List<GameObject.GameObject> didDmgOnThose = new List<GameObject.GameObject>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DoDamageCollisionResponse"/> class.
@@ -39,9 +41,29 @@ namespace Engine.Component
             return this.collided;
         }
 
+        /// <summary>
+        /// Get if this did dmg this frame.
+        /// </summary>
+        /// <returns>True if this did dmg this frame.</returns>
+        public bool GetDidDMGthisFrame()
+        {
+            return this.didDMGthisFrame;
+        }
+
+        /// <summary>
+        /// Get a List of GameObject we did DMG on those.
+        /// </summary>
+        /// <returns>A List with GameObjects we did DMG on.</returns>
+        public List<GameObject.GameObject> GetDidDmgToThose()
+        {
+            return this.didDmgOnThose;
+        }
+
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
+            this.didDMGthisFrame = false;
+            this.didDmgOnThose.Clear();
             this.dmgCooldownCounter -= frameTime;
             if (this.dmgCooldownCounter > 0)
             {
@@ -57,6 +79,8 @@ namespace Engine.Component
                     if (g.GetComponent<HealthPoints>() != null)
                     {
                         g.GetComponent<HealthPoints>().AddHP(-this.dmg);
+                        this.didDMGthisFrame = true;
+                        this.didDmgOnThose.Add(g);
                         this.dmgCooldownCounter = this.dmgCooldown;
                     }
                 }

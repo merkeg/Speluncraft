@@ -102,22 +102,22 @@
         </member>
         <member name="T:Game.Gun.ILookDirection">
             <summary>
-            Interfaces that lets you get the direction an GameObject is faceing.
+            Interfaces that lets you get the direction an GameObject is facing.
             </summary>
         </member>
         <member name="F:Game.Gun.ILookDirection.Left">
             <summary>
-            The value getDirection must return, when GameObject is faceing left.
+            The value getDirection must return, when GameObject is facing left.
             </summary>
         </member>
         <member name="F:Game.Gun.ILookDirection.Right">
             <summary>
-            The value getDirection must return, when GameObject is faceing right.
+            The value getDirection must return, when GameObject is facing right.
             </summary>
         </member>
         <member name="M:Game.Gun.ILookDirection.GetDirection">
             <summary>
-            Get the direction the GameObject is faceing.
+            Get the direction the GameObject is facing.
             </summary>
             <returns>-1 for left, 1 for right.</returns>
         </member>
