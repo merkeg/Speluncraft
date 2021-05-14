@@ -190,7 +190,36 @@
             </summary>
             <returns>If we allready Collided with something.</returns>
         </member>
+        <member name="M:Engine.Component.DoDamageCollisionResponse.GetDidDMGthisFrame">
+            <summary>
+            Get if this did dmg this frame.
+            </summary>
+            <returns>True if this did dmg this frame.</returns>
+        </member>
+        <member name="M:Engine.Component.DoDamageCollisionResponse.GetDidDmgToThose">
+            <summary>
+            Get a List of GameObject we did DMG on those.
+            </summary>
+            <returns>A List with GameObjects we did DMG on.</returns>
+        </member>
         <member name="M:Engine.Component.DoDamageCollisionResponse.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Engine.Component.DoDamageWithKnockbackCollisionResponse">
+            <summary>
+            DoDamageWithKnockbackCollisionResponse.
+            </summary>
+        </member>
+        <member name="M:Engine.Component.DoDamageWithKnockbackCollisionResponse.#ctor(System.Int32,System.Single,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Component.DoDamageWithKnockbackCollisionResponse"/> class.
+            </summary>
+            <param name="dmg">How much DMG is dealed on hit.</param>
+            <param name="dmgCD">How long we have to wait, to do dmg again.</param>
+            <param name="knockbackX">X Velocity to add for knockback ( will be inverted, if we yeet to the left ).</param>
+            <param name="knockbackY">Y Velocity to add for knockback ( Will not be inverted).</param>
+        </member>
+        <member name="M:Engine.Component.DoDamageWithKnockbackCollisionResponse.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Component.HealthPoints">

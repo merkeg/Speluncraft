@@ -59,8 +59,7 @@ namespace Game.Gun
             Engine.Engine.Colliders.Add(this);
 
             // For Demo 2.0
-            this.AddComponent(new Engine.Component.DoDamageCollisionResponse(10, 1));
-
+            // this.AddComponent(new Engine.Component.DoDamageCollisionResponse(10, 1));
             this.gun = new Gun.Pistol();
             this.AddComponent(this.gun.GetAsComponent());
         }
