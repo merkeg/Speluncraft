@@ -43,6 +43,7 @@ namespace Game.Enemy
                 Engine.Renderer.Tile.Tilesheet walkingSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Enemy.zombie_walking.png", 80, 110);
                 this.spriteWalking = new AnimatedSprite(walkingSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
             }
+
             this.checkLeft = new Engine.GameObject.GameObject(this.MinX - 0.3f, this.MinY - 0.3f, 0.2f, 0.1f, this.Sprite);
             this.checkRight = new Engine.GameObject.GameObject(this.MinX + this.SizeX + 0.1f, this.MinY - 0.3f, 0.2f, 0.1f, this.Sprite);
         }
@@ -74,12 +75,12 @@ namespace Game.Enemy
 
             foreach (Engine.GameObject.IRectangle r in Engine.Engine.Colliders)
             {
-                if (checkLeft.Intersects(r))
+                if (this.checkLeft.Intersects(r))
                 {
                     hasFloorLeft = true;
                 }
 
-                if (checkRight.Intersects(r))
+                if (this.checkRight.Intersects(r))
                 {
                     hasFloorRight = true;
                 }
