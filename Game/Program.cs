@@ -99,6 +99,12 @@ namespace Game
             Engine.Engine.AddGameObject(new DummyAI(42, -35, 1, 1.375f, spriteWalking, 5));
             Engine.Engine.AddGameObject(new DummyAI(81, -56, 1, 1.375f, spriteWalking, 5));
             Engine.Engine.AddGameObject(new DummyAI(81, -73, 1, 1.375f, spriteWalking, 5));
+            Engine.Engine.AddGameObject(new DummyAI(68, -60, 1, 1.375f, spriteWalking, 5));
+            Engine.Engine.AddGameObject(new DummyAI(93, -75, 1, 1.375f, spriteWalking, 5));
+            Engine.Engine.AddGameObject(new DummyAI(77, -88, 1, 1.375f, spriteWalking, 5));
+            Engine.Engine.AddGameObject(new DummyAI(94, -95, 1, 1.375f, spriteWalking, 5));
+            Engine.Engine.AddGameObject(new DummyAI(32, -98, 1, 1.375f, spriteWalking, 5));
+            Engine.Engine.AddGameObject(new DummyAI(31, -108, 1, 1.375f, spriteWalking, 5));
 
             Tilesheet fireTilesheet = new Tilesheet("Game.Resources.Animated.fire.png", 32, 32);
             float delay = 0.041f;
