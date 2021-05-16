@@ -222,7 +222,7 @@
             function to render healthbar background.
             </summary>
         </member>
-        <member name="M:Game.UI.HealthbarPlayer.RenderIndicators(OpenTK.Mathematics.Color4)">
+        <member name="M:Game.UI.HealthbarPlayer.RenderIndicators">
             <summary>
             function to render indicators of healthbar.
             </summary>

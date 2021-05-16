@@ -23,7 +23,7 @@ namespace Game.UI
     public class HealthbarPlayer : IRenderer
     {
         private static int currentHP = 0;
-        private static float uiScale = 1.0f;
+        private static float uiScale = 1.8f;
 
         private static float xOffset = 25;
         private static float yOffset = 25;
@@ -32,6 +32,8 @@ namespace Game.UI
 
         private static int backgroundXSize = 300;
         private static int backgroundYSize = 60;
+        private static int indicatorsXsize = 220;
+        private static int indicatorsYsize = 18; // Height of only one indicator (one heart)
 
         private static HealthbarPlayer instance;
         private static Player player;
@@ -84,51 +86,12 @@ namespace Game.UI
         /// <param name="args">.</param>
         public void Render(FrameEventArgs args)
         {
-
             this.RenderBackground();
 
             currentHP = player.GetComponent<HealthPoints>().GetCurrHP();
             this.hTexX0 = currentHP / 100f;
 
-            // heart outline
-            GL.BindTexture(TextureTarget.Texture2D, this.indicators.Handle);
-            GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
-            GL.Begin(PrimitiveType.Quads);
-
-            GL.TexCoord2(0, 1f / 20f);
-            GL.Vertex2(xOffset, yOffset);
-
-            GL.TexCoord2(1, 1f / 20f);
-            GL.Vertex2(xOffset + (220 * uiScale), yOffset);
-
-            GL.TexCoord2(1, 1f / 20f * 2f);
-            GL.Vertex2(xOffset + (220 * uiScale), yOffset + (18 * uiScale));
-
-            GL.TexCoord2(0, 1f / 20f * 2f);
-            GL.Vertex2(xOffset, yOffset + (18 * uiScale));
-
-            GL.End();
-
-            // heart inlay
-            GL.BindTexture(TextureTarget.Texture2D, this.indicators.Handle);
-            GL.Color4(new Color4(1.0f, 0f, 0f, 1.0f)); // change color of inlay here
-            GL.Begin(PrimitiveType.Quads);
-
-            GL.TexCoord2(0, 0);
-            GL.Vertex2(xOffset, yOffset);
-
-            GL.TexCoord2(this.hTexX0, 0);
-            GL.Vertex2(xOffset + ((220 * uiScale) * this.hTexX0), yOffset);
-
-            GL.TexCoord2(this.hTexX0, 1f / 20f);
-            GL.Vertex2(xOffset + ((220 * uiScale) * this.hTexX0), yOffset + (18 * uiScale));
-
-            GL.TexCoord2(0, 1f / 20f);
-            GL.Vertex2(xOffset, yOffset + (18 * uiScale));
-
-            GL.End();
-
-            // Debug.WriteLine("Y0: " + this.hTexY0 + "hTexY1: " + this.hTexY1);
+            this.RenderIndicators();
         }
 
         /// <summary>
@@ -142,10 +105,10 @@ namespace Game.UI
             GL.Begin(PrimitiveType.Quads);
 
             GL.TexCoord2(0, 0);
-            GL.Vertex2(xOffset * uiScale, screenY - yOffset - (60 * uiScale));
+            GL.Vertex2(xOffset, screenY - yOffset - (backgroundYSize * uiScale));
 
             GL.TexCoord2(1, 0);
-            GL.Vertex2(backgroundXSize * uiScale, screenY - yOffset - (60 * uiScale));
+            GL.Vertex2(backgroundXSize * uiScale, screenY - yOffset - (backgroundYSize * uiScale));
 
             GL.TexCoord2(1, 1);
             GL.Vertex2(backgroundXSize * uiScale, screenY - yOffset);
@@ -159,23 +122,85 @@ namespace Game.UI
         /// <summary>
         /// function to render indicators of healthbar.
         /// </summary>
-        public void RenderIndicators(Color4 color)
+        public void RenderIndicators() // needs cleanup or shortening for code metrics.
         {
+            float relpos = 32 * uiScale;
+
+            // outline
             GL.BindTexture(TextureTarget.Texture2D, this.indicators.Handle);
-            GL.Color4(color);
+            GL.Color4(new Color4(1.0f / 255 * 95, 1.0f / 255 * 84, 1.0f / 255 * 68, 1.0f));
             GL.Begin(PrimitiveType.Quads);
 
             GL.TexCoord2(0, 1f / 20f);
-            GL.Vertex2(xOffset, yOffset);
+            GL.Vertex2(xOffset + 10, screenY - yOffset - (indicatorsYsize * uiScale) - relpos);
 
             GL.TexCoord2(1, 1f / 20f);
-            GL.Vertex2(xOffset + (220 * uiScale), yOffset);
+            GL.Vertex2(xOffset + 10 + (indicatorsXsize * uiScale), screenY - yOffset - (indicatorsYsize * uiScale) - relpos);
 
             GL.TexCoord2(1, 1f / 20f * 2f);
-            GL.Vertex2(xOffset + (220 * uiScale), yOffset + (18 * uiScale));
+            GL.Vertex2(xOffset + 10 + (indicatorsXsize * uiScale), screenY - yOffset - relpos);
 
             GL.TexCoord2(0, 1f / 20f * 2f);
-            GL.Vertex2(xOffset, yOffset + (18 * uiScale));
+            GL.Vertex2(xOffset + 10, screenY - yOffset - relpos);
+
+            GL.End();
+
+            // inlay
+            GL.BindTexture(TextureTarget.Texture2D, this.indicators.Handle);
+            GL.Color4(new Color4(1.0f / 255 * 200, 0.0f, 0.0f, 1.0f));
+            GL.Begin(PrimitiveType.Quads);
+
+            GL.TexCoord2(0, 0);
+            GL.Vertex2(xOffset + 10, screenY - yOffset - (indicatorsYsize * uiScale) - relpos);
+
+            GL.TexCoord2(this.hTexX0, 0);
+            GL.Vertex2(xOffset + 10 + (indicatorsXsize * this.hTexX0 * uiScale), screenY - yOffset - (indicatorsYsize * uiScale) - relpos);
+
+            GL.TexCoord2(this.hTexX0, 1f / 20f);
+            GL.Vertex2(xOffset + 10 + (indicatorsXsize * this.hTexX0 * uiScale), screenY - yOffset - relpos);
+
+            GL.TexCoord2(0, 1f / 20f);
+            GL.Vertex2(xOffset + 10, screenY - yOffset - relpos);
+
+            GL.End();
+
+            relpos = 15 + (15 * (float)(uiScale * 0.07)); // set offset for next indicatorbar
+
+            // outline
+            GL.BindTexture(TextureTarget.Texture2D, this.indicators.Handle);
+            GL.Color4(new Color4(1.0f / 255 * 95, 1.0f / 255 * 84, 1.0f / 255 * 68, 1.0f));
+            GL.Begin(PrimitiveType.Quads);
+
+            GL.TexCoord2(0, 1f / 20f * 3f);
+            GL.Vertex2(xOffset + 10, screenY - yOffset - (indicatorsYsize * uiScale) - relpos);
+
+            GL.TexCoord2(1, 1f / 20f * 3f);
+            GL.Vertex2(xOffset + 10 + (indicatorsXsize * uiScale), screenY - yOffset - (indicatorsYsize * uiScale) - relpos);
+
+            GL.TexCoord2(1, 1f / 20f * 4f);
+            GL.Vertex2(xOffset + 10 + (indicatorsXsize * uiScale), screenY - yOffset - relpos);
+
+            GL.TexCoord2(0, 1f / 20f * 4f);
+            GL.Vertex2(xOffset + 10, screenY - yOffset - relpos);
+
+            GL.End();
+
+            // inlay
+            GL.BindTexture(TextureTarget.Texture2D, this.indicators.Handle);
+            GL.Color4(new Color4(1.0f / 255 * 104, 1.0f / 255 * 167, 1.0f / 255 * 220, 1.0f));
+            GL.Begin(PrimitiveType.Quads);
+
+            GL.TexCoord2(0, 1f / 20f * 2f);
+            GL.Vertex2(xOffset + 10, screenY - yOffset - (indicatorsYsize * uiScale) - relpos);
+
+            GL.TexCoord2(1, 1f / 20f * 2f);
+            GL.Vertex2(xOffset + 10 + (indicatorsXsize * 1 * uiScale), screenY - yOffset - (indicatorsYsize * uiScale) - relpos);
+
+            GL.TexCoord2(1, 1f / 20f * 3f);
+            GL.Vertex2(xOffset + 10 + (indicatorsXsize * 1 * uiScale), screenY - yOffset - relpos);
+
+            GL.TexCoord2(0, 1f / 20f * 3f);
+            GL.Vertex2(xOffset + 10, screenY - yOffset - relpos);
 
             GL.End();
         }
@@ -189,6 +214,7 @@ namespace Game.UI
             // Debug.WriteLine(args.Size);
             screenX = args.Size.X;
             screenY = args.Size.Y;
+
             return;
         }
 
