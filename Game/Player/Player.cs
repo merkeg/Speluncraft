@@ -111,7 +111,7 @@ namespace Game.Gun
                 this.isFaceing = Gun.ILookDirection.Left;
                 this.gun.PullTrigger();
             }
-            else if(keyboardState.IsKeyDown(Keys.Right))
+            else if (keyboardState.IsKeyDown(Keys.Right))
             {
                 this.isFaceing = Gun.ILookDirection.Right;
                 this.gun.PullTrigger();
