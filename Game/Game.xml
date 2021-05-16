@@ -228,11 +228,6 @@
             OnCreate function.
             </summary>
         </member>
-        <member name="T:Game.UI.InventoryPlayer">
-            <summary>
-            Class for Inventory management.
-            </summary>
-        </member>
         <member name="T:Game.UI.UILoader">
             <summary>
             Loader Class to initialize the whole UI of the Game. (hopefully).
