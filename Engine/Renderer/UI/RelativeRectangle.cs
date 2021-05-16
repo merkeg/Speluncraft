@@ -11,7 +11,7 @@ namespace Engine.Renderer.UI
     /// </summary>
     public class RelativeRectangle : Rectangle
     {
-        private readonly Rectangle absolute;
+        private readonly IRectangle absolute;
         private float relX;
         private float relY;
         private float relSizeX;
@@ -25,7 +25,7 @@ namespace Engine.Renderer.UI
         /// <param name="minY">Relative miny.</param>
         /// <param name="sizeX">Relative sizex.</param>
         /// <param name="sizeY">Relative sizey.</param>
-        public RelativeRectangle(Rectangle absolute, float minX, float minY, float sizeX, float sizeY)
+        public RelativeRectangle(IRectangle absolute, float minX, float minY, float sizeX, float sizeY)
             : base(minX, minY, sizeX, sizeY)
         {
             this.absolute = absolute;

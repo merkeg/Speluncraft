@@ -114,6 +114,7 @@ namespace Engine
 
             // Services
             Engine.AddService(new TilemapService());
+            Engine.AddService(new ParticleService());
 
             // OpenGL capabilities
             GL.Enable(EnableCap.Blend);

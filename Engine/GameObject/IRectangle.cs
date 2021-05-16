@@ -14,14 +14,14 @@ namespace Engine.GameObject
     public interface IRectangle : IMirrorable
     {
         /// <summary>
-        /// Gets X-Coordinate of the left bottom point, of the Rectangle.
+        /// Gets or sets X-Coordinate of the left bottom point, of the Rectangle.
         /// </summary>
-        public float MinX { get; }
+        public float MinX { get; set; }
 
         /// <summary>
-        /// Gets Y-Coordinate of the left bottom point, of the Rectangle.
+        /// Gets or sets Y-Coordinate of the left bottom point, of the Rectangle.
         /// </summary>
-        public float MinY { get; }
+        public float MinY { get; set; }
 
         /// <summary>
         /// Gets the X-Coordinate of the top right point, of the Rectangle.
