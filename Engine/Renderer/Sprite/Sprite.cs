@@ -56,7 +56,7 @@ namespace Engine.Renderer.Sprite
             this.TexY0 = 0;
             this.TexY1 = 1;
 
-            this.BuildSprite(true);
+            this.BuildSprite(flip);
         }
 
         /// <summary>

@@ -76,9 +76,8 @@ namespace Game
             player.AddComponent(new CameraTrackingComponent());
             Engine.Engine.AddGameObject(player);
 
-            // make sure to initialize healthbar after the player
-            HealthbarPlayer playerhealthbar = new HealthbarPlayer();
-            Engine.Engine.AddRenderer(playerhealthbar, RenderLayer.UI);
+            // make sure to initialize UI after the player
+            UILoader.Initialize_UI();
 
             FontModel fontModel = FontModel.Parse("Game.Resources.Font.hack.font.fnt");
             Sprite fontSprite = new Sprite("Game.Resources.Font.hack.font.png");
@@ -96,21 +95,15 @@ namespace Game
 
         private void AddEnemies()
         {
-            Tilesheet walkingSheet = new Tilesheet("Game.Resources.Enemy.zombie_walking.png", 80, 110);
-            AnimatedSprite spriteWalking = new AnimatedSprite(walkingSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
-            EnemyPistol enemyWithPistol = new EnemyPistol(81, -43, 1, 1.375f, spriteWalking, 5);
-            Engine.Engine.AddGameObject(enemyWithPistol);
+            using Stream enemyStream = this.assembly.GetManifestResourceStream("Game.Resources.enemy.png");
+            Sprite enemySprite = new Sprite(enemyStream);
+            DummyAI testEnemy = new DummyAI(75, -25, 1, 1, enemySprite, 10);
 
-            // Spam map with Enemys (TEMPORARY)
-            Engine.Engine.AddGameObject(new DummyAI(42, -35, 1, 1.375f, spriteWalking, 5));
-            Engine.Engine.AddGameObject(new DummyAI(81, -56, 1, 1.375f, spriteWalking, 5));
-            Engine.Engine.AddGameObject(new DummyAI(81, -73, 1, 1.375f, spriteWalking, 5));
-            Engine.Engine.AddGameObject(new DummyAI(68, -60, 1, 1.375f, spriteWalking, 5));
-            Engine.Engine.AddGameObject(new DummyAI(93, -75, 1, 1.375f, spriteWalking, 5));
-            Engine.Engine.AddGameObject(new DummyAI(77, -88, 1, 1.375f, spriteWalking, 5));
-            Engine.Engine.AddGameObject(new DummyAI(94, -95, 1, 1.375f, spriteWalking, 5));
-            Engine.Engine.AddGameObject(new DummyAI(32, -98, 1, 1.375f, spriteWalking, 5));
-            Engine.Engine.AddGameObject(new DummyAI(31, -108, 1, 1.375f, spriteWalking, 5));
+            // Engine.Engine.AddGameObject(testEnemy);
+            using Stream enemyGunSpriteStream = this.assembly.GetManifestResourceStream("Game.Resources.enemyGun.png");
+            Sprite enemyGunSprite = new Sprite(enemyGunSpriteStream);
+            EnemyPistol enemyWithPistol = new EnemyPistol(81, -43, 1, 1, enemyGunSprite, 5);
+            Engine.Engine.AddGameObject(enemyWithPistol);
 
             Tilesheet fireTilesheet = new Tilesheet("Game.Resources.Animated.fire.png", 32, 32);
             float delay = 0.041f;

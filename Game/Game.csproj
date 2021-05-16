@@ -38,6 +38,14 @@
     <None Remove="Resources\Player\adventurer_jump.png" />
     <None Remove="Resources\Player\adventurer_walking.png" />
     <None Remove="Resources\rotation.json" />
+    <None Remove="Resources\Sprite\UI\Healthbar\10_hearts.png" />
+    <None Remove="Resources\Sprite\UI\Healthbar\background.png" />
+    <None Remove="Resources\Sprite\UI\Healthbar\background2.png" />
+    <None Remove="Resources\Sprite\UI\Healthbar\halfheart.png" />
+    <None Remove="Resources\Sprite\UI\Healthbar\heartsheet_new.png" />
+    <None Remove="Resources\Sprite\UI\Healthbar\heart_sheet.png" />
+    <None Remove="Resources\Sprite\UI\Healthbar\heart_sheet_emptyt.png" />
+    <None Remove="Resources\Sprite\UI\Healthbar\ui_background.png" />
     <None Remove="Resources\Sprite\bullet.png" />
     <None Remove="Resources\Sprite\tilesheetMC.png" />
     <None Remove="Resources\testmap.json" />
@@ -143,6 +151,12 @@
     <None Remove="Resources\Font\hack\font.png" />
     <ApplicationDefinition Include="Resources\Player\adventurer_fall.png" />
     <EmbeddedResource Include="Resources\Font\hack\font.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Sprite\UI\Healthbar\background2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Sprite\UI\Healthbar\heartsheet_new.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>

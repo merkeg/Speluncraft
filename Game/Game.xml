@@ -217,6 +217,16 @@
             </summary>
             <param name="args">.</param>
         </member>
+        <member name="M:Game.UI.HealthbarPlayer.RenderBackground">
+            <summary>
+            function to render healthbar background.
+            </summary>
+        </member>
+        <member name="M:Game.UI.HealthbarPlayer.RenderIndicators">
+            <summary>
+            function to render indicators of healthbar.
+            </summary>
+        </member>
         <member name="M:Game.UI.HealthbarPlayer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <summary>
             Resize function.
@@ -226,6 +236,16 @@
         <member name="M:Game.UI.HealthbarPlayer.OnRendererCreate">
             <summary>
             OnCreate function.
+            </summary>
+        </member>
+        <member name="T:Game.UI.UILoader">
+            <summary>
+            Loader Class to initialize the whole UI of the Game. (hopefully).
+            </summary>
+        </member>
+        <member name="M:Game.UI.UILoader.Initialize_UI">
+            <summary>
+            Initializes the UI.
             </summary>
         </member>
     </members>
