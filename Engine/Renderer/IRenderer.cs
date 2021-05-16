@@ -17,6 +17,11 @@ namespace Engine.Renderer
         GAME,
 
         /// <summary>
+        /// Particles.
+        /// </summary>
+        PARTICLE,
+
+        /// <summary>
         /// UI elements.
         /// </summary>
         UI,
