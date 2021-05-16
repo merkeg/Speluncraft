@@ -9,6 +9,7 @@ namespace Game
     using Engine.Camera;
     using Engine.GameObject;
     using Engine.Renderer;
+    using Engine.Renderer.Particle;
     using Engine.Renderer.Sprite;
     using Engine.Renderer.Text;
     using Engine.Renderer.Text.Parser;
@@ -17,7 +18,7 @@ namespace Game
     using Engine.Renderer.UI;
     using Engine.Service;
     using Game.Enemy;
-    using Game.Player;
+    using Game.Gun;
     using Game.UI;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
@@ -71,9 +72,8 @@ namespace Game
             Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheetMC.png", 32, 32);
             Sprite sprite = new Sprite("Game.Resources.Player.adventurer_idle.png", false);
 
-            Player.Player player = new Player.Player(96, -33, 1, 1.375f, sprite);
+            Gun.Player player = new Gun.Player(96, -33, 1, 1.375f, sprite);
             player.AddComponent(new CameraTrackingComponent());
-            player.Mirrored = true;
             Engine.Engine.AddGameObject(player);
 
             // make sure to initialize UI after the player
@@ -85,6 +85,12 @@ namespace Game
 
             DebugRenderer debugRenderer = new DebugRenderer(new Rectangle(5, 5, 300, 325), new Color4(0, 0, 0, 0.3f), font, player, UiAlignment.Right);
             Engine.Engine.AddRenderer(debugRenderer, RenderLayer.UI);
+            Engine.Engine.GetService<TilemapService>().SetOptimizationPoint(player);
+
+            ParticleEmitter emitter = new ParticleEmitter();
+            emitter.Colours.Add(Color4.Aqua);
+            emitter.Colours.Add(Color4.Red);
+            Engine.Engine.GetService<ParticleService>().Emit(emitter, new RelativeRectangle(player, .5f, 1, 1, 1), 0);
         }
 
         private void AddEnemies()

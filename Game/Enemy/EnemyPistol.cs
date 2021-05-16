@@ -25,7 +25,7 @@ namespace Game.Enemy
         /// <param name="sizeY">sizeY.</param>
         /// <param name="sprite">sprite.</param>
         /// <param name="damage">Damage dealt by touching the enemy.</param>
-        public EnemyPistol(float minX, float minY, float sizeX, float sizeY, Sprite sprite, int damage)
+        public EnemyPistol(float minX, float minY, float sizeX, float sizeY, ISprite sprite, int damage)
             : base(minX, minY, sizeX, sizeY, sprite, damage)
         {
             this.pistol = new Gun.Pistol();

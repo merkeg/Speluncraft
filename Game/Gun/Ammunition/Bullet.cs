@@ -26,7 +26,7 @@ namespace Game.Gun.Ammunition
         public Bullet(int dmg, float velocityX, float minX, float minY, float sizeX, float sizeY, Engine.Renderer.Sprite.ISprite sprite)
             : base(minX, minY, sizeX, sizeY, sprite)
         {
-            this.AddComponent(new Engine.Component.DamageCollider(dmg, 10));
+            this.AddComponent(new Engine.Component.DoDamageCollisionResponse(dmg, 10));
             Engine.Component.Physics p = new Engine.Component.Physics();
             p.SetVelocity(velocityX, 0);
             p.SetMaxVelocity(Math.Abs(velocityX), 0);
@@ -38,7 +38,7 @@ namespace Game.Gun.Ammunition
         public override void OnUpdate(float frameTime)
         {
             base.OnUpdate(frameTime);
-            if (this.GetComponent<Engine.Component.DamageCollider>().GetIsCollided())
+            if (this.GetComponent<Engine.Component.DoDamageCollisionResponse>().GetIsCollided())
             {
                 Engine.Engine.RemoveGameObject(this);
             }

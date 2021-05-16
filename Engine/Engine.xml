@@ -123,60 +123,10 @@
             <param name="transformation">the transformation to apply.</param>
             <returns>Matrix.</returns>
         </member>
-        <member name="T:Engine.Component.Collider">
+        <member name="T:Engine.Component.CollisionResponse">
             <summary>
-            Adds a Collider to a GameObject that undoes overlaps with other Colliders.
+            Interface that Components must implemen, in order to get info about with what they collid.
             </summary>
-        </member>
-        <member name="F:Engine.Component.Collider.Up">
-            <summary>
-            0 = Up in distance array.
-            </summary>
-        </member>
-        <member name="F:Engine.Component.Collider.Down">
-            <summary>
-            1 = Down in distance array.
-            </summary>
-        </member>
-        <member name="F:Engine.Component.Collider.Left">
-            <summary>
-            2 = Down in distance array.
-            </summary>
-        </member>
-        <member name="F:Engine.Component.Collider.Right">
-            <summary>
-            3 = Down in distance array.
-            </summary>
-        </member>
-        <member name="F:Engine.Component.Collider.X">
-            <summary>
-            Const for X Axsis.
-            </summary>
-        </member>
-        <member name="F:Engine.Component.Collider.Y">
-            <summary>
-            Const for Y Axsis.
-            </summary>
-        </member>
-        <member name="F:Engine.Component.Collider.touchedGround">
-            <summary>
-            Flag is set, when Groud was touched, needed for player jump reset.
-            </summary>
-        </member>
-        <member name="M:Engine.Component.Collider.GetGroundTouchedFlag">
-            <summary>
-            Get the Flag, if ground was touched on a collsion.
-            </summary>
-            <returns>The Flag if ground was touced.</returns>
-        </member>
-        <member name="M:Engine.Component.Collider.GetCollided">
-            <summary>
-            Get the a List of every Rectanlge we collided with this frame.
-            </summary>
-            <returns>The List.</returns>
-        </member>
-        <member name="M:Engine.Component.Collider.OnUpdate(System.Single)">
-            <inheritdoc/>
         </member>
         <member name="T:Engine.Component.Component">
             <summary>
@@ -221,32 +171,55 @@
             Yeet this away.
             </summary>
         </member>
-        <member name="T:Engine.Component.DamageCollider">
+        <member name="T:Engine.Component.DoDamageCollisionResponse">
             <summary>
             A Kind of Collider, that Checks, if it Intersects with anything in Engine.Colliders. If yes it will deal DMG, if there is an HP Component.
             But it wont deal DMG to the GameObject it belongs to.
             </summary>
         </member>
-        <member name="M:Engine.Component.DamageCollider.#ctor(System.Int32,System.Single)">
+        <member name="M:Engine.Component.DoDamageCollisionResponse.#ctor(System.Int32,System.Single)">
             <summary>
-            Initializes a new instance of the <see cref="T:Engine.Component.DamageCollider"/> class.
+            Initializes a new instance of the <see cref="T:Engine.Component.DoDamageCollisionResponse"/> class.
             </summary>
             <param name="dmg">How Much DMG it will deal on Contact.</param>
             <param name="dmgCD">How long before this can deal dmg again.</param>
         </member>
-        <member name="M:Engine.Component.DamageCollider.AddToCollisionList(Engine.GameObject.IRectangle)">
-            <summary>
-            Add a Collision that was undone, but still needs to be checked for DMG.
-            </summary>
-            <param name="r">The Rectangle we collided with.</param>
-        </member>
-        <member name="M:Engine.Component.DamageCollider.GetIsCollided">
+        <member name="M:Engine.Component.DoDamageCollisionResponse.GetIsCollided">
             <summary>
             Returns, if the DMG Collider already collided once. Usefull for bullets.
             </summary>
             <returns>If we allready Collided with something.</returns>
         </member>
-        <member name="M:Engine.Component.DamageCollider.OnUpdate(System.Single)">
+        <member name="M:Engine.Component.DoDamageCollisionResponse.GetDidDMGthisFrame">
+            <summary>
+            Get if this did dmg this frame.
+            </summary>
+            <returns>True if this did dmg this frame.</returns>
+        </member>
+        <member name="M:Engine.Component.DoDamageCollisionResponse.GetDidDmgToThose">
+            <summary>
+            Get a List of GameObject we did DMG on those.
+            </summary>
+            <returns>A List with GameObjects we did DMG on.</returns>
+        </member>
+        <member name="M:Engine.Component.DoDamageCollisionResponse.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Engine.Component.DoDamageWithKnockbackCollisionResponse">
+            <summary>
+            DoDamageWithKnockbackCollisionResponse.
+            </summary>
+        </member>
+        <member name="M:Engine.Component.DoDamageWithKnockbackCollisionResponse.#ctor(System.Int32,System.Single,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Component.DoDamageWithKnockbackCollisionResponse"/> class.
+            </summary>
+            <param name="dmg">How much DMG is dealed on hit.</param>
+            <param name="dmgCD">How long we have to wait, to do dmg again.</param>
+            <param name="knockbackX">X Velocity to add for knockback ( will be inverted, if we yeet to the left ).</param>
+            <param name="knockbackY">Y Velocity to add for knockback ( Will not be inverted).</param>
+        </member>
+        <member name="M:Engine.Component.DoDamageWithKnockbackCollisionResponse.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Component.HealthPoints">
@@ -391,6 +364,61 @@
         <member name="M:Engine.Component.Physics.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="M:Engine.Component.Physics.UpdateForService(System.Single)">
+            <summary>
+            Update which get called by the PhysicsService, to move this GameObject.
+            </summary>
+            <param name="frameTime">Time pased since last Frame.</param>
+        </member>
+        <member name="T:Engine.Component.UndoOverlapCollisionResponse">
+            <summary>
+            Adds a Collider to a GameObject that undoes overlaps with other Colliders.
+            </summary>
+        </member>
+        <member name="F:Engine.Component.UndoOverlapCollisionResponse.Up">
+            <summary>
+            0 = Up in distance array.
+            </summary>
+        </member>
+        <member name="F:Engine.Component.UndoOverlapCollisionResponse.Down">
+            <summary>
+            1 = Down in distance array.
+            </summary>
+        </member>
+        <member name="F:Engine.Component.UndoOverlapCollisionResponse.Left">
+            <summary>
+            2 = Down in distance array.
+            </summary>
+        </member>
+        <member name="F:Engine.Component.UndoOverlapCollisionResponse.Right">
+            <summary>
+            3 = Down in distance array.
+            </summary>
+        </member>
+        <member name="F:Engine.Component.UndoOverlapCollisionResponse.X">
+            <summary>
+            Const for X Axsis.
+            </summary>
+        </member>
+        <member name="F:Engine.Component.UndoOverlapCollisionResponse.Y">
+            <summary>
+            Const for Y Axsis.
+            </summary>
+        </member>
+        <member name="F:Engine.Component.UndoOverlapCollisionResponse.touchedGround">
+            <summary>
+            Flag is set, when Groud was touched, needed for player jump reset.
+            </summary>
+        </member>
+        <member name="M:Engine.Component.UndoOverlapCollisionResponse.GetGroundTouchedFlag">
+            <summary>
+            Get the Flag, if ground was touched on a collsion.
+            </summary>
+            <returns>The Flag if ground was touced.</returns>
+        </member>
+        <member name="M:Engine.Component.UndoOverlapCollisionResponse.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
         <member name="T:Engine.Engine">
             <summary>
             The Engine instance to bind with OpenGL.
@@ -468,6 +496,12 @@
             </summary>
             <param name="service">the service.</param>
         </member>
+        <member name="M:Engine.Engine.ImplementGameObject(Engine.GameObject.GameObject)">
+            <summary>
+            Adds an GameObject to the list.
+            </summary>
+            <param name="gameObject">The GameObject to add.</param>
+        </member>
         <member name="M:Engine.Engine.GetService(System.String)">
             <summary>
             Gets a service by name.
@@ -488,12 +522,6 @@
             Also checks if there are Colliders from it and delets it.
             </summary>
             <param name="gameObject">The GameObject to Destroy.</param>
-        </member>
-        <member name="M:Engine.Engine.ImplementGameObject(Engine.GameObject.GameObject)">
-            <summary>
-            Adds an GameObject to the list.
-            </summary>
-            <param name="gameObject">The GameObject to add.</param>
         </member>
         <member name="M:Engine.Engine.RemoveRenderer(Engine.Renderer.IRenderer,Engine.Renderer.RenderLayer)">
             <summary>
@@ -576,13 +604,13 @@
             <param name="rectangle">The other element to check at.</param>
             <returns>the value if the other element intersects with the gameobject.</returns>
         </member>
-        <member name="M:Engine.GameObject.GameObject.AddComponent(Engine.Component.Component)">
+        <member name="M:Engine.GameObject.GameObject.AddComponent(Engine.GameObject.IComponent)">
             <summary>
             Adds a component from the GameObject.
             </summary>
             <param name="component">The component to add.</param>
         </member>
-        <member name="M:Engine.GameObject.GameObject.RemoveComponent(Engine.Component.Component)">
+        <member name="M:Engine.GameObject.GameObject.RemoveComponent(Engine.GameObject.IComponent)">
             <summary>
             Removes a component from the GameObject.
             </summary>
@@ -594,6 +622,12 @@
             </summary>
             <typeparam name="T">Component.</typeparam>
             <returns>The component or null if not existant.</returns>
+        </member>
+        <member name="M:Engine.GameObject.GameObject.GetComponents">
+            <summary>
+            Get all components.
+            </summary>
+            <returns>All Componts of this GameObject, as a List.</returns>
         </member>
         <member name="M:Engine.GameObject.GameObject.OnUpdatableCreate">
             <summary>
@@ -607,6 +641,33 @@
             <param name="frameTime">Time between the frame.</param>
         </member>
         <member name="M:Engine.GameObject.GameObject.OnUpdatableDestroy">
+            <summary>
+            Called if the GameObject is destroyed.
+            </summary>
+        </member>
+        <member name="T:Engine.GameObject.IComponent">
+            <summary>
+            Interface for GameObjects, to use Components.
+            </summary>
+        </member>
+        <member name="M:Engine.GameObject.IComponent.SetGameObject(Engine.GameObject.GameObject)">
+            <summary>
+            The internal function to set the parent.
+            </summary>
+            <param name="gameObject">The parent GameObject.</param>
+        </member>
+        <member name="M:Engine.GameObject.IComponent.OnCreated">
+            <summary>
+            Called if the GameObject is created.
+            </summary>
+        </member>
+        <member name="M:Engine.GameObject.IComponent.OnUpdate(System.Single)">
+            <summary>
+            Called every gametick.
+            </summary>
+            <param name="frameTime">Time between the frame.</param>
+        </member>
+        <member name="M:Engine.GameObject.IComponent.OnDestroy">
             <summary>
             Called if the GameObject is destroyed.
             </summary>
@@ -1376,7 +1437,12 @@
         </member>
         <member name="P:Engine.Renderer.Tile.Tilesheet.Tiles">
             <summary>
-            Gets or sets the Tiles with tex coordinates.
+            Gets the Tiles with tex coordinates.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.Tilesheet.CustomSprites">
+            <summary>
+            Gets or sets custom sprites.
             </summary>
         </member>
         <member name="P:Engine.Renderer.Tile.Tilesheet.TileTexSizeX">
@@ -1669,10 +1735,79 @@
             <param name="textScale">Scale of text.</param>
             <returns>Text renderer object.</returns>
         </member>
+        <member name="T:Engine.Service.CollisionService">
+            <summary>
+            TestService class.
+            </summary>
+        </member>
+        <member name="M:Engine.Service.CollisionService.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.CollisionService.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.CollisionService.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.CollisionService.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.CollisionService.GetCollosions(Engine.GameObject.GameObject)">
+            <summary>
+            Get all the IRectangle a GameObject collided with, this frame.
+            </summary>
+            <param name="gameObject">The GameObject, you want the collisions for.</param>
+            <returns>A List of the Collisions.</returns>
+        </member>
+        <member name="M:Engine.Service.CollisionService.OnUpdatableDestroy">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.CollisionService.OnUpdatableCreate">
+            <inheritdoc/>
+        </member>
+        <member name="T:Engine.Service.ICollosionServiceSubscriber">
+            <summary>
+            Componts that want to get Collosions checked for, need to implement this interface.
+            </summary>
+        </member>
+        <member name="T:Engine.Service.IPhysicsServiceSubscriber">
+            <summary>
+            Componts must implemt this to get Updates from Physics Service.
+            </summary>
+        </member>
+        <member name="M:Engine.Service.IPhysicsServiceSubscriber.UpdateForService(System.Single)">
+            <summary>
+            Methode the PhysicsService calls, to update the positon of the GameObject.
+            </summary>
+            <param name="frameTime">Time since last frame.</param>
+        </member>
         <member name="T:Engine.Service.IService">
             <summary>
             IService class.
             </summary>
+        </member>
+        <member name="T:Engine.Service.PhysicsService">
+            <summary>
+            Moves every Component with a phsics Component.
+            </summary>
+        </member>
+        <member name="M:Engine.Service.PhysicsService.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.PhysicsService.OnUpdatableCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.PhysicsService.OnUpdatableDestroy">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.PhysicsService.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.PhysicsService.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.PhysicsService.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
         </member>
         <member name="T:Engine.Service.ServiceInfo">
             <summary>
@@ -1695,29 +1830,6 @@
             <summary>
             Gets the Render layer the service wants to render on.
             </summary>
-        </member>
-        <member name="T:Engine.Service.TestService">
-            <summary>
-            TestService class.
-            </summary>
-        </member>
-        <member name="M:Engine.Service.TestService.Render(OpenTK.Windowing.Common.FrameEventArgs)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Service.TestService.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Service.TestService.OnRendererCreate">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Service.TestService.OnUpdate(System.Single)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Service.TestService.OnUpdatableDestroy">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Service.TestService.OnUpdatableCreate">
-            <inheritdoc/>
         </member>
         <member name="T:Engine.Service.TilemapService">
             <summary>
@@ -1753,6 +1865,12 @@
             </summary>
             <param name="tilemap">Tilemap.</param>
             <param name="offset">Offset.</param>
+        </member>
+        <member name="M:Engine.Service.TilemapService.SetOptimizationPoint(Engine.GameObject.IRectangle)">
+            <summary>
+            Sets the optimization point.
+            </summary>
+            <param name="rectangle">optimization point.</param>
         </member>
     </members>
 </doc>

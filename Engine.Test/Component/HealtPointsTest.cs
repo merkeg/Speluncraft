@@ -33,6 +33,41 @@ namespace EngineTest.Component
             Assert.IsTrue(hp.GetCurrHP() == 10);
             Assert.IsTrue(hp.GetMaxHP() == 60);
 
+            hp.AddHP(100);
+            Assert.IsFalse(hp.GetIsDeadFlag());
+            Assert.IsTrue(hp.GetCurrHP() == 60);
+            Assert.IsTrue(hp.GetMaxHP() == 60);
+
+            hp.AddHP(-60);
+            Assert.IsTrue(hp.GetIsDeadFlag());
+            Assert.IsTrue(hp.GetCurrHP() == 0);
+            Assert.IsTrue(hp.GetMaxHP() == 60);
+
+            hp = new HealthPoints(100, 300);
+            Assert.IsFalse(hp.GetIsDeadFlag());
+            Assert.IsTrue(hp.GetCurrHP() == 100);
+            Assert.IsTrue(hp.GetMaxHP() == 100);
+
+            hp.SetHP(300);
+            Assert.IsFalse(hp.GetIsDeadFlag());
+            Assert.IsTrue(hp.GetCurrHP() == 100);
+            Assert.IsTrue(hp.GetMaxHP() == 100);
+
+            hp.SetHP(-10);
+            Assert.IsTrue(hp.GetIsDeadFlag());
+            Assert.IsTrue(hp.GetCurrHP() == 0);
+            Assert.IsTrue(hp.GetMaxHP() == 100);
+
+            hp = new HealthPoints(100, 100);
+            hp.SetMaxHP(-10);
+            Assert.IsTrue(hp.GetIsDeadFlag());
+            Assert.IsTrue(hp.GetCurrHP() == 0);
+            Assert.IsTrue(hp.GetMaxHP() == 0);
+
+            hp = new HealthPoints(0, 100);
+            Assert.IsTrue(hp.GetIsDeadFlag());
+            Assert.IsTrue(hp.GetCurrHP() == 0);
+            Assert.IsTrue(hp.GetMaxHP() == 0);
         }
     }
 }
