@@ -106,8 +106,14 @@ namespace Game.Gun
 
         private void Shoot(KeyboardState keyboardState)
         {
-            if (keyboardState.IsKeyDown(Keys.W))
+            if (keyboardState.IsKeyDown(Keys.Left))
             {
+                this.isFaceing = Gun.ILookDirection.Left;
+                this.gun.PullTrigger();
+            }
+            else if(keyboardState.IsKeyDown(Keys.Right))
+            {
+                this.isFaceing = Gun.ILookDirection.Right;
                 this.gun.PullTrigger();
             }
         }

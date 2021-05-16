@@ -689,12 +689,12 @@
         </member>
         <member name="P:Engine.GameObject.IRectangle.MinX">
             <summary>
-            Gets X-Coordinate of the left bottom point, of the Rectangle.
+            Gets or sets X-Coordinate of the left bottom point, of the Rectangle.
             </summary>
         </member>
         <member name="P:Engine.GameObject.IRectangle.MinY">
             <summary>
-            Gets Y-Coordinate of the left bottom point, of the Rectangle.
+            Gets or sets Y-Coordinate of the left bottom point, of the Rectangle.
             </summary>
         </member>
         <member name="P:Engine.GameObject.IRectangle.MaxX">
@@ -820,6 +820,11 @@
             Game Elements.
             </summary>
         </member>
+        <member name="F:Engine.Renderer.RenderLayer.PARTICLE">
+            <summary>
+            Particles.
+            </summary>
+        </member>
         <member name="F:Engine.Renderer.RenderLayer.UI">
             <summary>
             UI elements.
@@ -845,6 +850,192 @@
         <member name="M:Engine.Renderer.IRenderer.OnRendererCreate">
             <summary>
             Run when the renderer is added.
+            </summary>
+        </member>
+        <member name="T:Engine.Renderer.Particle.Particle">
+            <summary>
+            The particle struct.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Particle.Particle.#ctor(System.Single,OpenTK.Mathematics.Vector2,Engine.GameObject.IRectangle,Engine.Renderer.Sprite.ISprite,OpenTK.Mathematics.Color4)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Particle.Particle"/> class.
+            </summary>
+            <param name="lifetime">Lifetime of particle.</param>
+            <param name="velocity">Velocity of particle.</param>
+            <param name="bounds">Bounds of particle.</param>
+            <param name="sprite">Sprite of particle.</param>
+            <param name="color">Color of the particle.</param>
+        </member>
+        <member name="P:Engine.Renderer.Particle.Particle.Lived">
+            <summary>
+            Gets or sets the time already lived.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.Particle.Lifetime">
+            <summary>
+            Gets or sets the lifetime
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.Particle.Velocity">
+            <summary>
+            Gets or sets the velocity.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.Particle.Bounds">
+            <summary>
+            Gets or sets the bounds
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.Particle.Sprite">
+            <summary>
+            Gets or sets the Sprite.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.Particle.Color">
+            <summary>
+            Gets or sets the Color.
+            </summary>
+        </member>
+        <member name="T:Engine.Renderer.Particle.ParticleEmitter">
+            <summary>
+            Particle emitter class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Particle.ParticleEmitter.#ctor(System.Single,System.Single,System.UInt32,System.UInt32,OpenTK.Mathematics.Vector2,OpenTK.Mathematics.Vector2,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Particle.ParticleEmitter"/> class.
+            </summary>
+            <param name="particleLifetimeMin">min lifetime.</param>
+            <param name="particleLifetimeMax">max lifetime.</param>
+            <param name="spawnAmountMin">spawn min.</param>
+            <param name="spawnAmountMax">spawn max.</param>
+            <param name="velocityMin">vel min.</param>
+            <param name="velocityMax">vel max.</param>
+            <param name="spawnCooldown">cooldown.</param>
+            <param name="particleSizeMin">Size min.</param>
+            <param name="particleSizeMax">Size max.</param>
+            <param name="gravity">Gravity in y axis.</param>
+        </member>
+        <member name="M:Engine.Renderer.Particle.ParticleEmitter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Particle.ParticleEmitter"/> class.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitter.Sprites">
+            <summary>
+            Gets or sets the Sprites to use.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitter.Colours">
+            <summary>
+            Gets or sets the colours to use.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitter.ParticleLifetimeMin">
+            <summary>
+            Gets or sets the min lifetime of the particle.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitter.ParticleLifetimeMax">
+            <summary>
+            Gets or sets the max lifetime of the particle.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitter.Gravity">
+            <summary>
+            Gets or sets the gravity in y axis.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitter.VelocityMin">
+            <summary>
+            Gets or sets the min velocity.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitter.VelocityMax">
+            <summary>
+            Gets or sets the max velocity.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitter.SpawnCooldown">
+            <summary>
+            Gets or sets the cooldown between Particle spawns.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitter.SpawnAmountMin">
+            <summary>
+            Gets or sets the min spawn amount.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitter.SpawnAmountMax">
+            <summary>
+            Gets or sets the max spawn amount.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitter.ParticleSizeMin">
+            <summary>
+            Gets or sets the particle size min.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitter.ParticleSizeMax">
+            <summary>
+            Gets or sets the particle size max.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Particle.ParticleEmitter.GetRandomSprite">
+            <summary>
+            Gets an random sprite from the list.
+            </summary>
+            <returns>Random sprite.</returns>
+        </member>
+        <member name="M:Engine.Renderer.Particle.ParticleEmitter.GetRandomColour">
+            <summary>
+            Gets a random colour from the list or defaults to white.
+            </summary>
+            <returns>Random color.</returns>
+        </member>
+        <member name="M:Engine.Renderer.Particle.ParticleEmitter.NewParticle(Engine.GameObject.IRectangle)">
+            <summary>
+            Generates a new particle.
+            </summary>
+            <param name="position">Position of the spawn point</param>
+            <returns>new Particle.</returns>
+        </member>
+        <member name="T:Engine.Renderer.Particle.ParticleEmitterData">
+            <summary>
+            Data class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Particle.ParticleEmitterData.#ctor(Engine.GameObject.IRectangle,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Particle.ParticleEmitterData"/> class.
+            </summary>
+            <param name="position">Position.</param>
+            <param name="emitterLifetime">Lifetime of the emitter.</param>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitterData.Particles">
+            <summary>
+            Gets or sets the list of particles.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitterData.EmitterLifetime">
+            <summary>
+            Gets or sets the Emitter lifetime.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitterData.EmitterLived">
+            <summary>
+            Gets or sets the lived time.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitterData.EmitterCooldown">
+            <summary>
+            Gets or sets the cooldown.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitterData.Position">
+            <summary>
+            Gets or sets position.
             </summary>
         </member>
         <member name="T:Engine.Renderer.Sprite.AnimatedSprite">
@@ -1603,7 +1794,7 @@
             Relative rectangle class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.UI.RelativeRectangle.#ctor(Engine.GameObject.Rectangle,System.Single,System.Single,System.Single,System.Single)">
+        <member name="M:Engine.Renderer.UI.RelativeRectangle.#ctor(Engine.GameObject.IRectangle,System.Single,System.Single,System.Single,System.Single)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.UI.RelativeRectangle"/> class.
             </summary>
@@ -1785,6 +1976,47 @@
             <summary>
             IService class.
             </summary>
+        </member>
+        <member name="T:Engine.Service.ParticleService">
+            <summary>
+            Particle service.
+            </summary>
+        </member>
+        <member name="M:Engine.Service.ParticleService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Service.ParticleService"/> class.
+            </summary>
+        </member>
+        <member name="P:Engine.Service.ParticleService.Emitters">
+            <summary>
+            Gets the emitters.
+            </summary>
+        </member>
+        <member name="M:Engine.Service.ParticleService.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.ParticleService.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.ParticleService.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.ParticleService.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.ParticleService.OnUpdatableDestroy">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.ParticleService.OnUpdatableCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.ParticleService.Emit(Engine.Renderer.Particle.ParticleEmitter,Engine.GameObject.IRectangle,System.Single)">
+            <summary>
+            Add an emitter.
+            </summary>
+            <param name="emitter">The emitter.</param>
+            <param name="position">Position.</param>
+            <param name="lifetime">The lifetime of the emitter. Set to 0 to disable deletion.</param>
         </member>
         <member name="T:Engine.Service.PhysicsService">
             <summary>
