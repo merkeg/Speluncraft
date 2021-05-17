@@ -25,21 +25,22 @@ namespace Game.Enemy
         /// <param name="sizeY">Size in Y axsis.</param>
         /// <param name="sprite">Enemy Sprite.</param>
         /// <param name="damage">Damage dealt by touching the enemy.</param>
-        public Enemy(float minX, float minY, float sizeX, float sizeY, Sprite sprite, int damage)
+        public Enemy(float minX, float minY, float sizeX, float sizeY, ISprite sprite, int damage)
             : base(minX, minY, sizeX, sizeY, sprite)
         {
             Engine.Component.Physics physics = new Engine.Component.Physics();
             physics.SetIsAffectedByGravity(true);
             physics.SetGravityMultiplier(3);
             this.AddComponent(physics);
-            this.AddComponent(new Engine.Component.Collider());
+            this.AddComponent(new Engine.Component.UndoOverlapCollisionResponse());
 
             this.AddComponent(new Engine.Component.HealthPoints(100, 100));
 
-            this.AddComponent(new Engine.Component.DamageCollider(damage, 1));
+            // this.AddComponent(new Engine.Component.DoDamageCollisionResponse(damage, 1));
+            this.AddComponent(new Engine.Component.DoDamageWithKnockbackCollisionResponse(damage, 1, 10, 5));
 
             // HitBox of Enemy needs to be in CollideList.
-            Engine.Engine.Instance().Colliders.Add(this);
+            Engine.Engine.Colliders.Add(this);
         }
 
         /// <inheritdoc/>
@@ -48,7 +49,7 @@ namespace Game.Enemy
             base.OnUpdate(frameTime);
             if (this.GetComponent<Engine.Component.HealthPoints>().GetIsDeadFlag())
             {
-                Engine.Engine.Instance().GameObjectsToRemove.Add(this);
+                Engine.Engine.RemoveGameObject(this);
             }
 
             // Console.WriteLine("Enemy: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());

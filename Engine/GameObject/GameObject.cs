@@ -10,12 +10,12 @@ namespace Engine.GameObject
     /// <summary>
     /// The GameObject class which active game elements are deriving from.
     /// </summary>
-    public class GameObject : IRectangle, IDisposable
+    public class GameObject : IRectangle, IUpdatable
     {
         /// <summary>
         /// The sprite the GameObject is drawn with.
         /// </summary>
-        private Sprite sprite;
+        private ISprite sprite;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GameObject"/> class.
@@ -25,13 +25,13 @@ namespace Engine.GameObject
         /// <param name="sizeX">the width of the GameObject.</param>
         /// <param name="sizeY">the height of the GameObject.</param>
         /// /// <param name="sprite">The sprite.</param>
-        public GameObject(float minX, float minY, float sizeX, float sizeY, Sprite sprite)
+        public GameObject(float minX, float minY, float sizeX, float sizeY, ISprite sprite)
         {
             this.MinX = minX;
             this.MinY = minY;
             this.SizeX = sizeX;
             this.SizeY = sizeY;
-            this.Components = new List<Component.Component>();
+            this.Components = new List<IComponent>();
             this.sprite = sprite;
         }
 
@@ -68,17 +68,14 @@ namespace Engine.GameObject
         /// <summary>
         /// Gets or sets the Components.
         /// </summary>
-        public List<Component.Component> Components { get; protected set; }
+        public List<IComponent> Components { get; protected set; }
 
         /// <summary>
         /// Gets or sets the Sprite of the GameObject.
         /// </summary>
-        public Sprite Sprite
+        public ISprite Sprite
         {
-        get
-            {
-                return this.sprite;
-            }
+        get => this.sprite;
 
         set
             {
@@ -90,6 +87,9 @@ namespace Engine.GameObject
                 this.sprite = value;
             }
         }
+
+        /// <inheritdoc/>
+        public bool Mirrored { get; set; }
 
         /// <summary>
         /// Gets or sets the Sprite renderer.
@@ -119,7 +119,7 @@ namespace Engine.GameObject
         /// Adds a component from the GameObject.
         /// </summary>
         /// <param name="component">The component to add.</param>
-        public void AddComponent(Component.Component component)
+        public void AddComponent(IComponent component)
         {
             this.Components.Add(component);
             component.SetGameObject(this);
@@ -129,7 +129,7 @@ namespace Engine.GameObject
         /// Removes a component from the GameObject.
         /// </summary>
         /// <param name="component">The component to remove.</param>
-        public void RemoveComponent(Component.Component component)
+        public void RemoveComponent(IComponent component)
         {
             this.Components.Remove(component);
             component.SetGameObject(null);
@@ -155,9 +155,18 @@ namespace Engine.GameObject
         }
 
         /// <summary>
+        /// Get all components.
+        /// </summary>
+        /// <returns>All Componts of this GameObject, as a List.</returns>
+        public List<IComponent> GetComponents()
+        {
+            return this.Components;
+        }
+
+        /// <summary>
         /// Called if the GameObject is created.
         /// </summary>
-        public virtual void OnCreated()
+        public virtual void OnUpdatableCreate()
         {
             this.Components.ForEach(component => component.OnCreated());
         }
@@ -174,19 +183,9 @@ namespace Engine.GameObject
         /// <summary>
         /// Called if the GameObject is destroyed.
         /// </summary>
-        public virtual void OnDestroy()
+        public virtual void OnUpdatableDestroy()
         {
             this.Components.ForEach(component => component.OnDestroy());
-            this.Dispose();
-        }
-
-        /// <summary>
-        /// Yeet this away.
-        /// </summary>
-        public void Dispose()
-        {
-            this.Components.ForEach(component => component.Dispose());
-            GC.SuppressFinalize(this);
         }
 
         // OnUpdateCleanUp wird nach dem Update in jeden Frame ausgeführt.

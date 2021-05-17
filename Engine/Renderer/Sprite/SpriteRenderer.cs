@@ -15,14 +15,14 @@ namespace Engine.Renderer.Sprite
     /// <summary>
     /// The SpriteRenderer class.
     /// </summary>
-    public class SpriteRenderer : IRenderer, IDisposable
+    public class SpriteRenderer : IRenderer
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SpriteRenderer"/> class.
         /// </summary>
         /// <param name="sprite">The sprite to render.</param>
         /// <param name="position">The position to render the sprite.</param>
-        public SpriteRenderer(Sprite sprite, IRectangle position)
+        public SpriteRenderer(ISprite sprite, IRectangle position)
         {
             this.Position = position;
             this.Sprite = sprite;
@@ -36,18 +36,10 @@ namespace Engine.Renderer.Sprite
         /// <summary>
         /// Gets the sprite to render.
         /// </summary>
-        public Sprite Sprite { get; internal set; }
-
-        /// <summary>
-        /// Yeet it away.
-        /// </summary>
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
-        }
+        public ISprite Sprite { get; internal set; }
 
         /// <inheritdoc/>
-        public void OnCreate()
+        public void OnRendererCreate()
         {
             return;
         }
@@ -55,21 +47,39 @@ namespace Engine.Renderer.Sprite
         /// <inheritdoc/>
         public void Render(FrameEventArgs args)
         {
+            this.Sprite.TimeElapsed((float)args.Time);
             GL.BindTexture(TextureTarget.Texture2D, this.Sprite.Handle);
             GL.Color3(Color.White);
             GL.Begin(PrimitiveType.Quads);
 
-            GL.TexCoord2(0, 0);
-            GL.Vertex2(this.Position.MinX, this.Position.MinY);
+            if (this.Position.Mirrored)
+            {
+                GL.TexCoord2(this.Sprite.TexX1, this.Sprite.TexY0);
+                GL.Vertex2(this.Position.MinX, this.Position.MinY);
 
-            GL.TexCoord2(1, 0);
-            GL.Vertex2(this.Position.MaxX, this.Position.MinY);
+                GL.TexCoord2(this.Sprite.TexX0, this.Sprite.TexY0);
+                GL.Vertex2(this.Position.MaxX, this.Position.MinY);
 
-            GL.TexCoord2(1, 1);
-            GL.Vertex2(this.Position.MaxX, this.Position.MaxY);
+                GL.TexCoord2(this.Sprite.TexX0, this.Sprite.TexY1);
+                GL.Vertex2(this.Position.MaxX, this.Position.MaxY);
 
-            GL.TexCoord2(0, 1);
-            GL.Vertex2(this.Position.MinX, this.Position.MaxY);
+                GL.TexCoord2(this.Sprite.TexX1, this.Sprite.TexY1);
+                GL.Vertex2(this.Position.MinX, this.Position.MaxY);
+            }
+            else
+            {
+                GL.TexCoord2(this.Sprite.TexX0, this.Sprite.TexY0);
+                GL.Vertex2(this.Position.MinX, this.Position.MinY);
+
+                GL.TexCoord2(this.Sprite.TexX1, this.Sprite.TexY0);
+                GL.Vertex2(this.Position.MaxX, this.Position.MinY);
+
+                GL.TexCoord2(this.Sprite.TexX1, this.Sprite.TexY1);
+                GL.Vertex2(this.Position.MaxX, this.Position.MaxY);
+
+                GL.TexCoord2(this.Sprite.TexX0, this.Sprite.TexY1);
+                GL.Vertex2(this.Position.MinX, this.Position.MaxY);
+            }
 
             GL.End();
         }

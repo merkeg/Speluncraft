@@ -12,7 +12,7 @@ namespace Engine.Component
     /// <summary>
     /// The physics component.
     /// </summary>
-    public class Physics : Component
+    public class Physics : Component, Service.IPhysicsServiceSubscriber
     {
         /// <summary>
         /// Gets or sets The Velocity at wich the Object will move OnUpdate.
@@ -130,6 +130,14 @@ namespace Engine.Component
 
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
+        {
+        }
+
+        /// <summary>
+        /// Update which get called by the PhysicsService, to move this GameObject.
+        /// </summary>
+        /// <param name="frameTime">Time pased since last Frame.</param>
+        public void UpdateForService(float frameTime)
         {
             this.AddGravity(frameTime);
 

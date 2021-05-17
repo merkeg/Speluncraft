@@ -14,11 +14,11 @@ namespace Engine.Renderer.Tile
         /// <summary>
         /// Initializes a new instance of the <see cref="TilemapLayer"/> class.
         /// </summary>
-        /// <param name="tileset"> The tileset the tilemap is using.</param>
+        /// <param name="tilesheet"> The tileset the tilemap is using.</param>
         /// <param name="model"> The model the tilemap bases on.</param>
-        public TilemapLayer(Tileset tileset, TilemapLayerModel model)
+        public TilemapLayer(Tilesheet tilesheet, TilemapLayerModel model)
         {
-            this.Tileset = tileset;
+            this.Tilesheet = tilesheet;
             this.TilemapModel = model;
             this.Tiles = model.data;
         }
@@ -53,7 +53,7 @@ namespace Engine.Renderer.Tile
         /// <summary>
         /// Gets or sets the tileset.
         /// </summary>
-        public Tileset Tileset { get; set; }
+        public Tilesheet Tilesheet { get; set; }
 
         /// <summary>
         /// Gets the Tilemap model.
@@ -61,37 +61,14 @@ namespace Engine.Renderer.Tile
         public TilemapLayerModel TilemapModel { get; private set; }
 
         /// <summary>
-        /// Gets the tile size.
-        /// </summary>
-        public int TileSize
-        {
-            get
-            {
-                return this.Tileset.TileSize;
-            }
-        }
-
-        /// <summary>
         /// Gets the Tile texture size X.
         /// </summary>
-        public float TileTexSizeX
-        {
-            get
-            {
-                return 1f / this.Tileset.AmountTileWidth;
-            }
-        }
+        public float TileTexSizeX => 1f / this.Tilesheet.AmountTileWidth;
 
         /// <summary>
         /// Gets the Tile texture size Y.
         /// </summary>
-        public float TileTexSizeY
-        {
-            get
-            {
-                return 1f / this.Tileset.AmountTileHeight;
-            }
-        }
+        public float TileTexSizeY => 1f / this.Tilesheet.AmountTileHeight;
 
         /// <summary>
         /// Makes content accessible.

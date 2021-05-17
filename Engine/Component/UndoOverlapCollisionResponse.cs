@@ -1,4 +1,4 @@
-﻿// <copyright file="Collider.cs" company="RWUwU">
+﻿// <copyright file="UndoOverlapCollisionResponse.cs" company="RWUwU">
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
@@ -11,7 +11,7 @@ namespace Engine.Component
     /// <summary>
     /// Adds a Collider to a GameObject that undoes overlaps with other Colliders.
     /// </summary>
-    public class Collider : Component
+    public class UndoOverlapCollisionResponse : CollisionResponse
     {
         /// <summary>
         /// 0 = Up in distance array.
@@ -48,8 +48,6 @@ namespace Engine.Component
         /// </summary>
         private bool touchedGround;
 
-        private List<GameObject.IRectangle> collidedList = new List<GameObject.IRectangle>();
-
         /// <summary>
         /// Get the Flag, if ground was touched on a collsion.
         /// </summary>
@@ -59,39 +57,18 @@ namespace Engine.Component
             return this.touchedGround;
         }
 
-        /// <summary>
-        /// Get the a List of every Rectanlge we collided with this frame.
-        /// </summary>
-        /// <returns>The List.</returns>
-        public List<GameObject.IRectangle> GetCollided()
-        {
-            return this.collidedList;
-        }
-
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
             this.touchedGround = false;
-            this.collidedList = new List<GameObject.IRectangle>();
 
             List<GameObject.IRectangle> sideCollisionRight = new List<GameObject.IRectangle>(); // Those overlaps will only be undone after up and down collisions.
             List<GameObject.IRectangle> sideCollisionsLeft = new List<GameObject.IRectangle>();
 
-            foreach (GameObject.IRectangle r in Engine.Instance().Colliders)
+            foreach (GameObject.IRectangle r in Engine.GetService<Service.CollisionService>().GetCollosions(this.GameObject))
             {
                 if (this.GameObject.Intersects(r))
                 {
-                    this.collidedList.Add(r);
-
-                    if (r is GameObject.GameObject)
-                    {
-                        GameObject.GameObject g = (GameObject.GameObject)r;
-                        if (g.GetComponent<DamageCollider>() != null)
-                        {
-                            g.GetComponent<DamageCollider>().AddToCollisionList(this.GetGameObject());
-                        }
-                    }
-
                     float[] distance = new float[4];
                     distance[Up] = Math.Abs(r.MaxY - this.GameObject.MinY);
                     distance[Down] = Math.Abs(r.MinY - this.GameObject.MaxY);

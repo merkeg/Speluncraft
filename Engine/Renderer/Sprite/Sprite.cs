@@ -4,21 +4,42 @@
 
 namespace Engine.Renderer.Sprite
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Reflection;
+    using System.Text;
     using OpenTK.Graphics.OpenGL;
     using SixLabors.ImageSharp;
     using SixLabors.ImageSharp.PixelFormats;
     using SixLabors.ImageSharp.Processing;
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Text;
 
     /// <summary>
     /// The Sprite class.
     /// </summary>
-    public class Sprite
+    public class Sprite : ISprite
     {
         private readonly Stream resource;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Sprite"/> class.
+        /// </summary>
+        /// <param name="resource">The resource to bind as sprite.</param>
+        /// <param name="flip">Set if flipped.</param>
+        public Sprite(string resource, bool flip = true)
+        {
+            Assembly asm = Assembly.GetEntryAssembly();
+
+            this.resource = asm.GetManifestResourceStream(resource);
+            this.Handle = GL.GenTexture();
+
+            this.TexX0 = 0;
+            this.TexX1 = 1;
+            this.TexY0 = 0;
+            this.TexY1 = 1;
+
+            this.BuildSprite(true);
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Sprite"/> class.
@@ -30,7 +51,12 @@ namespace Engine.Renderer.Sprite
             this.resource = resource;
             this.Handle = GL.GenTexture();
 
-            this.BuildSprite(true);
+            this.TexX0 = 0;
+            this.TexX1 = 1;
+            this.TexY0 = 0;
+            this.TexY1 = 1;
+
+            this.BuildSprite(flip);
         }
 
         /// <summary>
@@ -47,6 +73,23 @@ namespace Engine.Renderer.Sprite
         /// Gets the sprite height.
         /// </summary>
         public int Height { get; private set; }
+
+        /// <inheritdoc/>
+        public float TexX0 { get; private set; }
+
+        /// <inheritdoc/>
+        public float TexX1 { get; private set; }
+
+        /// <inheritdoc/>
+        public float TexY0 { get; private set; }
+
+        /// <inheritdoc/>
+        public float TexY1 { get; private set; }
+
+        /// <inheritdoc/>
+        public void TimeElapsed(float time)
+        {
+        }
 
         private void BuildSprite(bool flip)
         {

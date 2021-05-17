@@ -12,7 +12,7 @@ namespace EngineTest.Renderer.UI
         {
         }
 
-        public override void OnCreate()
+        public override void OnRendererCreate()
         {
         }
 

@@ -9,16 +9,17 @@ namespace Game
     using Engine.Camera;
     using Engine.GameObject;
     using Engine.Renderer;
+    using Engine.Renderer.Particle;
     using Engine.Renderer.Sprite;
     using Engine.Renderer.Text;
     using Engine.Renderer.Text.Parser;
     using Engine.Renderer.Tile;
     using Engine.Renderer.Tile.Parser;
     using Engine.Renderer.UI;
+    using Engine.Service;
     using Game.Enemy;
-    using Game.Player;
+    using Game.Gun;
     using Game.UI;
-    using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
     using OpenTK.Windowing.Desktop;
@@ -28,7 +29,6 @@ namespace Game
     /// </summary>
     internal class Program
     {
-        private Engine.Engine engine;
         private Assembly assembly;
 
         /// <summary>
@@ -41,15 +41,14 @@ namespace Game
 
             window.Size = new Vector2i(1280, 720);
             window.VSync = VSyncMode.Adaptive;
-            this.engine = Engine.Engine.Instance();
-            this.engine.StartEngine(window);
+            window.Title = "Speluncraft";
+            Engine.Engine.StartEngine(window);
             this.assembly = Assembly.GetExecutingAssembly();
-
             this.InitializeRenderers();
             this.AddPlayer();
             this.AddEnemies();
 
-            Camera cam = this.engine.Camera;
+            Camera cam = Engine.Engine.Camera;
             cam.Scale = 5f;
             window.Run();
         }
@@ -61,50 +60,74 @@ namespace Game
 
         private void InitializeRenderers()
         {
-            using Stream tilesheet = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.tilesheet.png");
-            using Stream tilemapStream = this.assembly.GetManifestResourceStream("Game.Resources.Level.getUp.json");
-
-            Tileset tileset = new Tileset(tilesheet, 16);
-            TilemapModel model = TilemapParser.ParseTilemap(tilemapStream);
-            Tilemap tilemap = new Tilemap(tileset, model);
-
-            TilemapRenderer renderer = new TilemapRenderer(tilemap, 0, 0);
-            this.engine.AddRenderer(renderer);
+            Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheetMC.png", 32, 32);
+            TilemapModel model = TilemapParser.ParseTilemap("Game.Resources.Level.mapalla.json");
+            Tilemap tilemap = new Tilemap(tilesheet, model);
+            this.AnimateTiles(tilesheet);
+            Engine.Engine.GetService<TilemapService>().AddTilemap(tilemap, Vector2i.Zero);
         }
 
         private void AddPlayer()
         {
-            using Stream spriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Floppa.png");
-            Sprite sprite = new Sprite(spriteStream);
-            Player.Player player = new Player.Player(7, -27, 1, 1, sprite);
+            Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheetMC.png", 32, 32);
+            Sprite sprite = new Sprite("Game.Resources.Player.adventurer_idle.png", false);
+
+            Gun.Player player = new Gun.Player(96, -33, 1, 1.375f, sprite);
             player.AddComponent(new CameraTrackingComponent());
-            this.engine.AddGameObject(player);
+            Engine.Engine.AddGameObject(player);
 
-            // make sure to initialize healthbar after the player
-            HealthbarPlayer playerhealthbar = new HealthbarPlayer();
-            this.engine.AddRenderer(playerhealthbar, RenderLayer.UI);
+            // make sure to initialize UI after the player
+            UILoader.Initialize_UI();
 
-            using Stream fontModelStream = this.assembly.GetManifestResourceStream("Game.Resources.Font.hack.font.fnt");
-            using Stream fontStream = this.assembly.GetManifestResourceStream("Game.Resources.Font.hack.font.png");
-            FontModel fontModel = FontModel.Parse(fontModelStream);
-            Sprite fontSprite = new Sprite(fontStream);
+            FontModel fontModel = FontModel.Parse("Game.Resources.Font.hack.font.fnt");
+            Sprite fontSprite = new Sprite("Game.Resources.Font.hack.font.png");
             Font font = new Font(fontModel, fontSprite);
 
             DebugRenderer debugRenderer = new DebugRenderer(new Rectangle(5, 5, 300, 325), new Color4(0, 0, 0, 0.3f), font, player, UiAlignment.Right);
-            this.engine.AddRenderer(debugRenderer, RenderLayer.UI);
+            Engine.Engine.AddRenderer(debugRenderer, RenderLayer.UI);
+            Engine.Engine.GetService<TilemapService>().SetOptimizationPoint(player);
+
+            ParticleEmitter emitter = new ParticleEmitter();
+            emitter.Colours.Add(Color4.Aqua);
+            emitter.Colours.Add(Color4.Red);
+            Engine.Engine.GetService<ParticleService>().Emit(emitter, new RelativeRectangle(player, .5f, 1, 1, 1), 0);
         }
 
         private void AddEnemies()
         {
             using Stream enemyStream = this.assembly.GetManifestResourceStream("Game.Resources.enemy.png");
             Sprite enemySprite = new Sprite(enemyStream);
-            DummyAI testEnemy = new DummyAI(2, -25, 1, 1, enemySprite, 10);
-            this.engine.AddGameObject(testEnemy);
+            DummyAI testEnemy = new DummyAI(75, -25, 1, 1, enemySprite, 10);
 
+            // Engine.Engine.AddGameObject(testEnemy);
             using Stream enemyGunSpriteStream = this.assembly.GetManifestResourceStream("Game.Resources.enemyGun.png");
             Sprite enemyGunSprite = new Sprite(enemyGunSpriteStream);
-            EnemyPistol enemyWithPistol = new EnemyPistol(5, -20, 1, 1, enemyGunSprite, 5);
-            this.engine.AddGameObject(enemyWithPistol);
+            EnemyPistol enemyWithPistol = new EnemyPistol(81, -43, 1, 1, enemyGunSprite, 5);
+            Engine.Engine.AddGameObject(enemyWithPistol);
+
+            Tilesheet fireTilesheet = new Tilesheet("Game.Resources.Animated.fire.png", 32, 32);
+            float delay = 0.041f;
+            ISprite fireSprite = new AnimatedSprite(fireTilesheet, Keyframe.RangeY(0, 0, 23, delay));
+            Enemy.Enemy fire = new Enemy.Enemy(100, -44, 1, 1, fireSprite, 25);
+            Engine.Engine.AddGameObject(fire);
+        }
+
+        private void AnimateTiles(Tilesheet sheet)
+        {
+            AnimatedSprite netherPortal = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.nether_portal.png", 32, 32), Keyframe.RangeY(0, 0, 31, 0.03f));
+            sheet.SetCustomSprite(36, netherPortal);
+            AnimatedSprite waterFlow = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.water_flow.png", 32, 32), Keyframe.RangeY(0, 0, 35, 0.1f));
+            sheet.SetCustomSprite(81, waterFlow);
+            AnimatedSprite waterStill = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.water_still.png", 32, 32), Keyframe.RangeY(0, 0, 50, 0.05f));
+            sheet.SetCustomSprite(91, waterStill);
+            AnimatedSprite waterCut = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.water_still_cut.png", 32, 32), Keyframe.RangeY(0, 0, 50, 0.05f));
+            sheet.SetCustomSprite(92, waterCut);
+            AnimatedSprite lavaFlow = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.lava_flow.png", 32, 32), Keyframe.RangeY(0, 0, 245, 0.03f));
+            sheet.SetCustomSprite(83, lavaFlow);
+            AnimatedSprite lavaStill = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.lava_still.png", 32, 32), Keyframe.RangeY(0, 0, 122, 0.03f));
+            sheet.SetCustomSprite(93, lavaStill);
+            AnimatedSprite lavaCut = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.lava_still_cut.png", 32, 32), Keyframe.RangeY(0, 0, 122, 0.03f));
+            sheet.SetCustomSprite(94, lavaCut);
         }
     }
 }

@@ -4,6 +4,7 @@
 
 namespace Engine.Renderer.Tile
 {
+    using System;
     using System.Drawing;
     using global::Engine.Renderer.Tile;
     using global::Engine.Renderer.Tile.Parser;
@@ -13,6 +14,7 @@ namespace Engine.Renderer.Tile
     /// <summary>
     /// The Tilemap renderer.
     /// </summary>
+    [Obsolete]
     public class TilemapRenderer : IRenderer
     {
         private const uint BitFlippedHorizontal = 0x80000000;
@@ -48,7 +50,7 @@ namespace Engine.Renderer.Tile
         public int OriginY { get; private set; }
 
         /// <inheritdoc/>
-        public void OnCreate()
+        public void OnRendererCreate()
         {
             foreach (TilemapLayer layer in this.Tilemap.Layers)
             {
@@ -63,7 +65,7 @@ namespace Engine.Renderer.Tile
                     {
                         if (((bool)prop.value) == true)
                         {
-                            Engine.Instance().Colliders.AddRange(TilemapParser.GenerateCollisionMap(layer.TilemapModel, this.OriginX, this.OriginY));
+                            Engine.Colliders.AddRange(TilemapParser.GenerateCollisionMap(layer.TilemapModel, this.OriginX, this.OriginY));
                         }
 
                         break;
@@ -75,7 +77,7 @@ namespace Engine.Renderer.Tile
         /// <inheritdoc/>
         public void Render(FrameEventArgs args)
         {
-            GL.BindTexture(TextureTarget.Texture2D, this.Tilemap.Tileset.Handle);
+            GL.BindTexture(TextureTarget.Texture2D, this.Tilemap.Tilesheet.Handle);
             GL.Color3(Color.White);
             foreach (TilemapLayer tilemap in this.Tilemap.Layers)
             {
@@ -97,8 +99,8 @@ namespace Engine.Renderer.Tile
                         tile &= ~(BitFlippedHorizontal | BitFlippedVertical | BitFlippedDiagonal);
                         tile--;
 
-                        float tileTexCoordX0 = (tile % this.Tilemap.Tileset.AmountTileWidth) * tilemap.TileTexSizeX;
-                        float tileTexCoordY0 = tile / this.Tilemap.Tileset.AmountTileWidth * tilemap.TileTexSizeY;
+                        float tileTexCoordX0 = (tile % this.Tilemap.Tilesheet.AmountTileWidth) * tilemap.TileTexSizeX;
+                        float tileTexCoordY0 = tile / this.Tilemap.Tilesheet.AmountTileWidth * tilemap.TileTexSizeY;
                         float tileTexCoordX1 = tileTexCoordX0 + tilemap.TileTexSizeX;
                         float tileTexCoordY1 = tileTexCoordY0 + tilemap.TileTexSizeY;
 
@@ -118,42 +120,42 @@ namespace Engine.Renderer.Tile
                         if (!flipped_diagonal)
                         {
                             GL.TexCoord2(tileTexCoordX0, tileTexCoordY0);
-                            GL.Vertex2(this.OriginX + x - 0.01, this.OriginY - y - 0.01);
+                            GL.Vertex2(this.OriginX + x - 0.0001, this.OriginY - y - 0.0001);
 
                             GL.TexCoord2(tileTexCoordX1, tileTexCoordY0);
-                            GL.Vertex2(this.OriginX + x + 1 + 0.01, this.OriginY - y - 0.01);
+                            GL.Vertex2(this.OriginX + x + 1 + 0.0001, this.OriginY - y - 0.0001);
 
                             GL.TexCoord2(tileTexCoordX0, tileTexCoordY1);
-                            GL.Vertex2(this.OriginX + x - 0.01, this.OriginY - y + 1 + 0.01);
+                            GL.Vertex2(this.OriginX + x - 0.0001, this.OriginY - y + 1 + 0.0001);
 
                             GL.TexCoord2(tileTexCoordX1, tileTexCoordY0);
-                            GL.Vertex2(this.OriginX + x + 1 + 0.01, this.OriginY - y - 0.01);
+                            GL.Vertex2(this.OriginX + x + 1 + 0.0001, this.OriginY - y - 0.0001);
 
                             GL.TexCoord2(tileTexCoordX0, tileTexCoordY1);
-                            GL.Vertex2(this.OriginX + x - 0.01, this.OriginY - y + 1 + 0.01);
+                            GL.Vertex2(this.OriginX + x - 0.0001, this.OriginY - y + 1 + 0.0001);
 
                             GL.TexCoord2(tileTexCoordX1, tileTexCoordY1);
-                            GL.Vertex2(this.OriginX + x + 1 + 0.01, this.OriginY - y + 1 + 0.01);
+                            GL.Vertex2(this.OriginX + x + 1 + 0.0001, this.OriginY - y + 1 + 0.0001);
                         }
                         else
                         {
                             GL.TexCoord2(tileTexCoordX1, tileTexCoordY1);
-                            GL.Vertex2(this.OriginX + x - 0.01, this.OriginY - y - 0.01);
+                            GL.Vertex2(this.OriginX + x - 0.0001, this.OriginY - y - 0.0001);
 
                             GL.TexCoord2(tileTexCoordX1, tileTexCoordY0);
-                            GL.Vertex2(this.OriginX + x + 1 + 0.01, this.OriginY - y - 0.01);
+                            GL.Vertex2(this.OriginX + x + 1 + 0.0001, this.OriginY - y - 0.0001);
 
                             GL.TexCoord2(tileTexCoordX0, tileTexCoordY1);
-                            GL.Vertex2(this.OriginX + x - 0.01, this.OriginY - y + 1 + 0.01);
+                            GL.Vertex2(this.OriginX + x - 0.0001, this.OriginY - y + 1 + 0.0001);
 
                             GL.TexCoord2(tileTexCoordX1, tileTexCoordY0);
-                            GL.Vertex2(this.OriginX + x + 1 + 0.01, this.OriginY - y - 0.01);
+                            GL.Vertex2(this.OriginX + x + 1 + 0.0001, this.OriginY - y - 0.0001);
 
                             GL.TexCoord2(tileTexCoordX0, tileTexCoordY1);
-                            GL.Vertex2(this.OriginX + x - 0.01, this.OriginY - y + 1 + 0.01);
+                            GL.Vertex2(this.OriginX + x - 0.0001, this.OriginY - y + 1 + 0.0001);
 
                             GL.TexCoord2(tileTexCoordX0, tileTexCoordY0);
-                            GL.Vertex2(this.OriginX + x + 1 + 0.01, this.OriginY - y + 1 + 0.01);
+                            GL.Vertex2(this.OriginX + x + 1 + 0.0001, this.OriginY - y + 1 + 0.0001);
                         }
 
                         GL.End();

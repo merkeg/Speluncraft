@@ -15,7 +15,7 @@ namespace Engine.Renderer
     public class CollisionRenderer : IRenderer
     {
         /// <inheritdoc/>
-        public void OnCreate()
+        public void OnRendererCreate()
         {
             return;
         }
@@ -26,7 +26,7 @@ namespace Engine.Renderer
             GL.BindTexture(TextureTarget.Texture2D, 0);
             GL.LineWidth(2);
             GL.Color3(System.Drawing.Color.Cyan);
-            foreach (IRectangle rec in Engine.Instance().Colliders)
+            foreach (IRectangle rec in Engine.Colliders)
             {
                 GL.Begin(PrimitiveType.LineLoop);
                 GL.Vertex2(rec.MinX, rec.MinY);

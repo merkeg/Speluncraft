@@ -53,5 +53,8 @@ namespace Engine.GameObject
         /// Gets or sets the Y-Coordinate of bottom left point.
         /// </summary>
         public virtual float MinY { get; set; }
+
+        /// <inheritdoc/>
+        public bool Mirrored { get; set; }
     }
 }
