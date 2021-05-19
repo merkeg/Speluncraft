@@ -6,6 +6,7 @@ namespace Game.Player.Items
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
     using Engine.Renderer.Sprite;
 
@@ -34,7 +35,7 @@ namespace Game.Player.Items
         /// <inheritdoc/>
         public override void OnPickUp()
         {
-            foreach (Engine.GameObject.GameObject g in Engine.Engine.GameObjects)
+            foreach (Engine.GameObject.GameObject g in Engine.Engine.GameObjects.ToList())
             {
                 if (g is Player)
                 {
