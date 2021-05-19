@@ -72,7 +72,7 @@ namespace Game
             Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheetMC.png", 32, 32);
             Sprite sprite = new Sprite("Game.Resources.Player.adventurer_idle.png", false);
 
-            Gun.Player player = new Gun.Player(96, -33, 1, 1.375f, sprite);
+            Player.Player player = new Player.Player(96, -33, 1, 1.375f, sprite);
             player.AddComponent(new CameraTrackingComponent());
             Engine.Engine.AddGameObject(player);
 
@@ -97,12 +97,12 @@ namespace Game
         {
             using Stream enemyStream = this.assembly.GetManifestResourceStream("Game.Resources.enemy.png");
             Sprite enemySprite = new Sprite(enemyStream);
-            DummyAI testEnemy = new DummyAI(75, -25, 1, 1, enemySprite, 10);
+            DummyAI testEnemy = new DummyAI(75, -25, 1, 1.25f, enemySprite, 10);
 
             // Engine.Engine.AddGameObject(testEnemy);
             using Stream enemyGunSpriteStream = this.assembly.GetManifestResourceStream("Game.Resources.enemyGun.png");
             Sprite enemyGunSprite = new Sprite(enemyGunSpriteStream);
-            EnemyPistol enemyWithPistol = new EnemyPistol(81, -43, 1, 1, enemyGunSprite, 5);
+            EnemyPistol enemyWithPistol = new EnemyPistol(81, -43, 1, 1.25f, enemyGunSprite, 5);
             Engine.Engine.AddGameObject(enemyWithPistol);
 
             Tilesheet fireTilesheet = new Tilesheet("Game.Resources.Animated.fire.png", 32, 32);
