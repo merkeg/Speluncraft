@@ -2,11 +2,9 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
-using System;
-using OpenTK.Windowing.GraphicsLibraryFramework;
-
 namespace Game
 {
+    using System;
     using System.IO;
     using System.Reflection;
     using Engine.Camera;
@@ -26,6 +24,7 @@ namespace Game
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
     using OpenTK.Windowing.Desktop;
+    using OpenTK.Windowing.GraphicsLibraryFramework;
 
     /// <summary>
     /// The Main class of the game.
@@ -99,18 +98,13 @@ namespace Game
 
             Engine.Engine.GetService<TilemapService>().SetOptimizationPoint(player);
 
-            // ParticleEmitter emitter = new ParticleEmitter();
-            // emitter.Colours.Add(Color4.Aqua);
-            // emitter.Colours.Add(Color4.Red);
-            // Engine.Engine.GetService<ParticleService>().Emit(emitter, new RelativeRectangle(player, .5f, 1, 1, 1), 0);
-
-            InteractableElement el = new InteractableElement(96, -30, 0.3f, 0.3f, font, "Press [A] and [D] to walk.", Color4.White, Color4.White);
+            InteractableElement el = new InteractableElement(96, -30, 0.3f, 0.3f, font, "Press [A] and [D] to walk.", Color4.White, Color4.White, 4, false);
             Engine.Engine.AddGameObject(el);
             el.Interact += () => Console.WriteLine("Test");
 
-            Engine.Engine.AddGameObject(new InteractableElement(84, -32, 0.3f, 0.3f, font, "Press [Left] and [Right] to shoot.", Color4.White, Color4.White, 6));
-            Engine.Engine.AddGameObject(new InteractableElement(74, -42, 0.3f, 0.3f, font, "Press [Space] to jump.", Color4.White, Color4.White, 6));
-            Engine.Engine.AddGameObject(new InteractableElement(50, -34, 0.3f, 0.3f, font, "Lava will kill you", Color4.Coral, Color4.Coral));
+            Engine.Engine.AddGameObject(new InteractableElement(84, -32, 0.3f, 0.3f, font, "Press [Left] and [Right] to shoot.", Color4.White, Color4.White, 6, false));
+            Engine.Engine.AddGameObject(new InteractableElement(74, -42, 0.3f, 0.3f, font, "Press [Space] to jump.", Color4.White, Color4.White, 6, false));
+            Engine.Engine.AddGameObject(new InteractableElement(50, -34, 0.3f, 0.3f, font, "Lava will kill you", Color4.Coral, Color4.Coral, 6, false));
         }
 
         private void AddEnemies()

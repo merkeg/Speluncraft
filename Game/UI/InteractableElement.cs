@@ -1,4 +1,6 @@
-﻿using OpenTK.Windowing.GraphicsLibraryFramework;
+﻿// <copyright file="InteractableElement.cs" company="RWUwU">
+// Copyright (c) RWUwU. All rights reserved.
+// </copyright>
 
 namespace Game.UI
 {
@@ -12,8 +14,12 @@ namespace Game.UI
     using Engine.Renderer.UI;
     using Engine.Service;
     using OpenTK.Mathematics;
+    using OpenTK.Windowing.GraphicsLibraryFramework;
 
-    public class InteractableElement: GameObject
+    /// <summary>
+    /// Element class.
+    /// </summary>
+    public class InteractableElement : GameObject
     {
         private static Tilesheet tilesheet;
 

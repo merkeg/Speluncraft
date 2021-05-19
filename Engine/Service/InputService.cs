@@ -1,4 +1,8 @@
-﻿namespace Engine.Service
+﻿// <copyright file="InputService.cs" company="RWUwU">
+// Copyright (c) RWUwU. All rights reserved.
+// </copyright>
+
+namespace Engine.Service
 {
     using System;
     using System.Collections.Generic;
