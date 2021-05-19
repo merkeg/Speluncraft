@@ -6,6 +6,7 @@ namespace Engine
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using global::Engine.GameObject;
     using global::Engine.Renderer;
     using global::Engine.Renderer.Sprite;
@@ -23,8 +24,6 @@ namespace Engine
         {
             Engine.GameObjects = new List<GameObject.GameObject>();
             Engine.Colliders = new List<IRectangle>();
-            Engine.GameObjectsToRemove = new List<GameObject.GameObject>();
-            Engine.GameObjectsToAdd = new List<GameObject.GameObject>();
             Engine.Renderers = new Dictionary<RenderLayer, List<IRenderer>>();
             Engine.Services = new Dictionary<string, IService>();
 
@@ -68,22 +67,21 @@ namespace Engine
         public static Dictionary<string, IService> Services { get; private set; }
 
         /// <summary>
-        /// Gets or sets Here you can add GameObjects that should be removed Engine frame.
-        /// </summary>
-        private static List<GameObject.GameObject> GameObjectsToRemove { get; set; }
-
-        /// <summary>
-        /// Gets or sets Here you can add GameObjects that should be added next frame.
-        /// </summary>
-        private static List<GameObject.GameObject> GameObjectsToAdd { get; set; }
-
-        /// <summary>
         /// Adds an GameObject to the list.
         /// </summary>
         /// <param name="gameObject">The GameObject to add.</param>
         public static void AddGameObject(GameObject.GameObject gameObject)
         {
-            Engine.GameObjectsToAdd.Add(gameObject);
+            Engine.GameObjects.Add(gameObject);
+
+            if (gameObject.Sprite != null)
+            {
+                SpriteRenderer renderer = new SpriteRenderer(gameObject.Sprite, gameObject);
+                gameObject.SpriteRenderer = renderer;
+                Engine.AddRenderer(renderer);
+            }
+
+            gameObject.OnUpdatableCreate();
         }
 
         /// <summary>
@@ -115,6 +113,7 @@ namespace Engine
             // Services
             Engine.AddService(new TilemapService());
             Engine.AddService(new ParticleService());
+            Engine.AddService(new InputService());
 
             // OpenGL capabilities
             GL.Enable(EnableCap.Blend);
@@ -129,7 +128,13 @@ namespace Engine
         /// <param name="gameObject">The GameObject to Destroy.</param>
         public static void RemoveGameObject(GameObject.GameObject gameObject)
         {
-            Engine.GameObjectsToRemove.Add(gameObject);
+            Engine.RemoveRenderer(gameObject.SpriteRenderer);
+            gameObject.OnUpdatableDestroy();
+            Engine.GameObjects.Remove(gameObject);
+            if (Engine.Colliders.Contains(gameObject))
+            {
+                Engine.Colliders.Remove(gameObject);
+            }
         }
 
         /// <summary>
@@ -142,24 +147,6 @@ namespace Engine
             Engine.Services.Add(serviceInfo.Name, service);
             service.OnUpdatableCreate();
             Engine.AddRenderer(service, serviceInfo.RenderLayer);
-        }
-
-        /// <summary>
-        /// Adds an GameObject to the list.
-        /// </summary>
-        /// <param name="gameObject">The GameObject to add.</param>
-        public static void ImplementGameObject(GameObject.GameObject gameObject)
-        {
-            Engine.GameObjects.Add(gameObject);
-
-            if (gameObject.Sprite != null)
-            {
-                SpriteRenderer renderer = new SpriteRenderer(gameObject.Sprite, gameObject);
-                gameObject.SpriteRenderer = renderer;
-                Engine.AddRenderer(renderer);
-            }
-
-            gameObject.OnUpdatableCreate();
         }
 
         /// <summary>
@@ -185,28 +172,11 @@ namespace Engine
         }
 
         /// <summary>
-        /// Removes an GameObject from the World and Calls it OnDestroy() func.
-        /// Also checks if there are Colliders from it and delets it.
-        /// </summary>
-        /// <param name="gameObject">The GameObject to Destroy.</param>
-        private static void ExcludeGameObject(GameObject.GameObject gameObject)
-        {
-            Engine.RemoveRenderer(gameObject.SpriteRenderer);
-            gameObject.OnUpdatableDestroy();
-            Engine.GameObjects.Remove(gameObject);
-            if (Engine.Colliders.Contains(gameObject))
-            {
-                Engine.Colliders.Remove(gameObject);
-            }
-
-            // GC.Collect();
-        }
-
-        /// <summary>
         /// Removes an rendere.
         /// </summary>
         /// <param name="renderer">The rendere to Remove.</param>
-        private static void RemoveRenderer(IRenderer renderer, RenderLayer layer = RenderLayer.GAME)
+        /// <param name="layer">Render layer.</param>
+        public static void RemoveRenderer(IRenderer renderer, RenderLayer layer = RenderLayer.GAME)
         {
             Engine.Renderers[layer].Remove(renderer);
         }
@@ -214,29 +184,15 @@ namespace Engine
         private static void Update(FrameEventArgs args)
         {
             float elapsed = (float)MathHelper.Clamp(args.Time, 0, 0.02);
-            foreach (IService service in Engine.Services.Values)
+            foreach (IService service in Engine.Services.Values.ToList())
             {
                 service.OnUpdate(elapsed);
             }
 
-            foreach (GameObject.GameObject gameObject in Engine.GameObjects)
+            foreach (GameObject.GameObject gameObject in Engine.GameObjects.ToList())
             {
                 gameObject.OnUpdate(elapsed);
             }
-
-            foreach (GameObject.GameObject g in Engine.GameObjectsToRemove)
-            {
-                Engine.ExcludeGameObject(g);
-            }
-
-            Engine.GameObjectsToRemove.Clear();
-
-            foreach (GameObject.GameObject g in Engine.GameObjectsToAdd)
-            {
-                Engine.ImplementGameObject(g);
-            }
-
-            Engine.GameObjectsToAdd.Clear();
         }
 
         private static void Resize(ResizeEventArgs args)

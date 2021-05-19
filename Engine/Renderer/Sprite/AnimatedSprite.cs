@@ -5,6 +5,7 @@
 namespace Engine.Renderer.Sprite
 {
     using global::Engine.Renderer.Tile;
+    using OpenTK.Mathematics;
 
     /// <summary>
     /// Animated sprite class.
@@ -25,6 +26,7 @@ namespace Engine.Renderer.Sprite
         {
             this.tilesheet = tilesheet;
             this.keyframes = keyframes;
+            this.Paused = false;
         }
 
         /// <inheritdoc/>
@@ -48,6 +50,19 @@ namespace Engine.Renderer.Sprite
         /// <inheritdoc/>
         public float TexY1 => this.TexY0 + this.tilesheet.TileTexSizeY;
 
+        /// <inheritdoc/>
+        public Color4? Color { get; set; }
+
+        /// <summary>
+        /// Gets the current state of the animation.
+        /// </summary>
+        public int State => this.currentIndex;
+
+        /// <summary>
+        /// Gets or sets a value indicating whether gets or sets if paused.
+        /// </summary>
+        public bool Paused { get; set; }
+
         /// <summary>
         /// Reference to this.
         /// </summary>
@@ -57,12 +72,27 @@ namespace Engine.Renderer.Sprite
         /// <inheritdoc/>
         public void TimeElapsed(float time)
         {
+            if (this.Paused)
+            {
+                return;
+            }
+
             this.elapsed += time;
             if (this.elapsed >= this[this.currentIndex].Time)
             {
                 this.elapsed = 0;
                 this.currentIndex = ++this.currentIndex % this.keyframes.Length;
             }
+        }
+
+        /// <summary>
+        /// Sets the animation state.
+        /// </summary>
+        /// <param name="index">index state.</param>
+        public void SetState(int index)
+        {
+            this.elapsed = 0;
+            this.currentIndex = index % this.keyframes.Length;
         }
     }
 }

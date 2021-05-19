@@ -158,6 +158,8 @@
     <EmbeddedResource Include="Resources\Sprite\UI\Healthbar\heartsheet_new.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Remove="Resources\UI\interaction_dot.png" />
+    <EmbeddedResource Include="Resources\UI\interaction_dot.png" />
   </ItemGroup>
 
   <ItemGroup>

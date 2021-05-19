@@ -4,6 +4,8 @@
 
 namespace Engine.Renderer.Sprite
 {
+    using OpenTK.Mathematics;
+
     /// <summary>
     /// ISprite class.
     /// </summary>
@@ -43,6 +45,11 @@ namespace Engine.Renderer.Sprite
         /// Gets the texture y1 position.
         /// </summary>
         public float TexY1 { get; }
+
+        /// <summary>
+        /// Gets or sets the Color.
+        /// </summary>
+        public Color4? Color { get; set; }
 
         /// <summary>
         /// Before rendering the renderer runs this with the time attached.

@@ -10,6 +10,7 @@ namespace Engine.Renderer.Sprite
     using System.Reflection;
     using System.Text;
     using OpenTK.Graphics.OpenGL;
+    using OpenTK.Mathematics;
     using SixLabors.ImageSharp;
     using SixLabors.ImageSharp.PixelFormats;
     using SixLabors.ImageSharp.Processing;
@@ -85,6 +86,9 @@ namespace Engine.Renderer.Sprite
 
         /// <inheritdoc/>
         public float TexY1 { get; private set; }
+
+        /// <inheritdoc/>
+        public Color4? Color { get; set; }
 
         /// <inheritdoc/>
         public void TimeElapsed(float time)

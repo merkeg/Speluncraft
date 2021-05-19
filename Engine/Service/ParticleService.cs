@@ -141,5 +141,14 @@ namespace Engine.Service
         {
             this.Emitters.Add(emitter, new ParticleEmitterData(position, lifetime));
         }
+
+        /// <summary>
+        /// Remove an emitter.
+        /// </summary>
+        /// <param name="emitter">The emitter.</param>
+        public void Remove(ParticleEmitter emitter)
+        {
+            this.Emitters.Remove(emitter);
+        }
     }
 }

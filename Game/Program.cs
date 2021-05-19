@@ -2,6 +2,9 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
+using System;
+using OpenTK.Windowing.GraphicsLibraryFramework;
+
 namespace Game
 {
     using System.IO;
@@ -53,6 +56,11 @@ namespace Game
             window.Run();
         }
 
+        /// <summary>
+        /// Gets or sets the player.
+        /// </summary>
+        public static Player Player { get; set; }
+
         private static void Main()
         {
             new Program();
@@ -75,6 +83,7 @@ namespace Game
             Gun.Player player = new Gun.Player(96, -33, 1, 1.375f, sprite);
             player.AddComponent(new CameraTrackingComponent());
             Engine.Engine.AddGameObject(player);
+            Program.Player = player;
 
             // make sure to initialize UI after the player
             UILoader.Initialize_UI();
@@ -84,13 +93,24 @@ namespace Game
             Font font = new Font(fontModel, fontSprite);
 
             DebugRenderer debugRenderer = new DebugRenderer(new Rectangle(5, 5, 300, 325), new Color4(0, 0, 0, 0.3f), font, player, UiAlignment.Right);
+            debugRenderer.Hidden = true;
             Engine.Engine.AddRenderer(debugRenderer, RenderLayer.UI);
+            Engine.Engine.GetService<InputService>().Subscribe(Keys.F3, () => debugRenderer.Hidden = !debugRenderer.Hidden);
+
             Engine.Engine.GetService<TilemapService>().SetOptimizationPoint(player);
 
-            ParticleEmitter emitter = new ParticleEmitter();
-            emitter.Colours.Add(Color4.Aqua);
-            emitter.Colours.Add(Color4.Red);
-            Engine.Engine.GetService<ParticleService>().Emit(emitter, new RelativeRectangle(player, .5f, 1, 1, 1), 0);
+            // ParticleEmitter emitter = new ParticleEmitter();
+            // emitter.Colours.Add(Color4.Aqua);
+            // emitter.Colours.Add(Color4.Red);
+            // Engine.Engine.GetService<ParticleService>().Emit(emitter, new RelativeRectangle(player, .5f, 1, 1, 1), 0);
+
+            InteractableElement el = new InteractableElement(96, -30, 0.3f, 0.3f, font, "Press [A] and [D] to walk.", Color4.White, Color4.White);
+            Engine.Engine.AddGameObject(el);
+            el.Interact += () => Console.WriteLine("Test");
+
+            Engine.Engine.AddGameObject(new InteractableElement(84, -32, 0.3f, 0.3f, font, "Press [Left] and [Right] to shoot.", Color4.White, Color4.White, 6));
+            Engine.Engine.AddGameObject(new InteractableElement(74, -42, 0.3f, 0.3f, font, "Press [Space] to jump.", Color4.White, Color4.White, 6));
+            Engine.Engine.AddGameObject(new InteractableElement(50, -34, 0.3f, 0.3f, font, "Lava will kill you", Color4.Coral, Color4.Coral));
         }
 
         private void AddEnemies()

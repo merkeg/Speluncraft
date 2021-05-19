@@ -93,6 +93,7 @@ namespace Engine.Service
                             tile &= ~(BitFlippedHorizontal | BitFlippedVertical | BitFlippedDiagonal);
                             tile--;
                             ISprite sprite = tilemap.Tilesheet.Tiles[tile];
+                            GL.Color4(sprite.Color ?? Color4.White);
 
                             tileTexCoordX0 = sprite.TexX0;
                             tileTexCoordY0 = sprite.TexY0;
