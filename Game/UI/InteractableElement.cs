@@ -22,8 +22,8 @@ namespace Game.UI
     /// </summary>
     public class InteractableElement : GameObject
     {
-        private Player.Player player;
         private static Tilesheet tilesheet;
+        private Player.Player player;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InteractableElement"/> class.
