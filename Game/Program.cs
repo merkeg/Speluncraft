@@ -103,6 +103,7 @@ namespace Game
             using Stream enemyGunSpriteStream = this.assembly.GetManifestResourceStream("Game.Resources.enemyGun.png");
             Sprite enemyGunSprite = new Sprite(enemyGunSpriteStream);
             EnemyPistol enemyWithPistol = new EnemyPistol(81, -43, 1, 1.25f, enemyGunSprite, 5);
+            Engine.Engine.AddGameObject(new Player.Items.HealthPickUp(81, -43, 1, 1, enemySprite, 30));
             Engine.Engine.AddGameObject(enemyWithPistol);
 
             Tilesheet fireTilesheet = new Tilesheet("Game.Resources.Animated.fire.png", 32, 32);

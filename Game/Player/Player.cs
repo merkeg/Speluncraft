@@ -62,8 +62,6 @@ namespace Game.Player
             // this.AddComponent(new Engine.Component.DoDamageCollisionResponse(10, 1));
             this.gun = new Gun.Pistol();
             this.AddComponent(this.gun.GetAsComponent());
-
-
         }
 
         /// <inheritdoc/>

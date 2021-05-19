@@ -150,6 +150,53 @@
         <member name="M:Game.Gun.CameraTrackingComponent.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="T:Game.Player.Items.HealthPickUp">
+            <summary>
+            Item that can be picked up and restores hp to the Player.
+            </summary>
+        </member>
+        <member name="M:Game.Player.Items.HealthPickUp.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Player.Items.HealthPickUp"/> class.
+            </summary>
+            <param name="minX">the X-Coordinate of bottom left point, of the GameObject.</param>
+            <param name="minY">the Y-Coordinate of bottom left point, of the GameObject.</param>
+            <param name="sizeX">the width of the GameObject.</param>
+            <param name="sizeY">the height of the GameObject.</param>
+            /// <param name="sprite">The sprite.</param>
+            <param name="heal">The amount this pickup will heal the Player.</param>
+        </member>
+        <member name="M:Game.Player.Items.HealthPickUp.OnPickUp">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Player.Items.Item">
+            <summary>
+            Items that the Player can Pick Up.
+            </summary>
+        </member>
+        <member name="M:Game.Player.Items.Item.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Player.Items.Item"/> class.
+            </summary>
+            <param name="minX">the X-Coordinate of bottom left point, of the GameObject.</param>
+            <param name="minY">the Y-Coordinate of bottom left point, of the GameObject.</param>
+            <param name="sizeX">the width of the GameObject.</param>
+            <param name="sizeY">the height of the GameObject.</param>
+            /// <param name="sprite">The sprite.</param>
+        </member>
+        <member name="M:Game.Player.Items.Item.OnPickUp">
+            <summary>
+            Gets called when Player collids.
+            </summary>
+        </member>
+        <member name="T:Game.Player.Items.PickUp">
+            <summary>
+            PickUp Componet will only work on Items.
+            </summary>
+        </member>
+        <member name="M:Game.Player.Items.PickUp.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Player.Player">
             <summary>
             The thing the Player COntrolls.
