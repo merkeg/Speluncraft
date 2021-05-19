@@ -113,7 +113,7 @@ namespace Game.UI
         public override void OnUpdate(float frameTime)
         {
             base.OnUpdate(frameTime);
-            float distance = this.Distance(this, Program.Player);
+            float distance = this.Distance(this, Program.GamePlayer);
             if (distance > this.Range && this.InRange)
             {
                 this.InRange = false;
