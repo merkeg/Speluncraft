@@ -13,6 +13,7 @@ namespace Game.UI
     using Engine.Renderer.Tile;
     using Engine.Renderer.UI;
     using Engine.Service;
+    using Game.Gun;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.GraphicsLibraryFramework;
 
@@ -21,6 +22,7 @@ namespace Game.UI
     /// </summary>
     public class InteractableElement : GameObject
     {
+        private Player player;
         private static Tilesheet tilesheet;
 
         /// <summary>
@@ -74,6 +76,7 @@ namespace Game.UI
             {
                 this.Interact += this.Destroy;
             }
+            this.player = (Player)Engine.Engine.GameObjects.Find(go => go is Player);
         }
 
         /// <summary>
@@ -113,7 +116,7 @@ namespace Game.UI
         public override void OnUpdate(float frameTime)
         {
             base.OnUpdate(frameTime);
-            float distance = this.Distance(this, Program.GamePlayer);
+            float distance = this.Distance(this, this.player);
             if (distance > this.Range && this.InRange)
             {
                 this.InRange = false;

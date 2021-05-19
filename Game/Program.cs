@@ -55,11 +55,6 @@ namespace Game
             window.Run();
         }
 
-        /// <summary>
-        /// Gets or sets the player.
-        /// </summary>
-        public static Gun.Player GamePlayer { get; set; }
-
         private static void Main()
         {
             new Program();
@@ -82,7 +77,6 @@ namespace Game
             Gun.Player player = new Gun.Player(96, -33, 1, 1.375f, sprite);
             player.AddComponent(new CameraTrackingComponent());
             Engine.Engine.AddGameObject(player);
-            Program.GamePlayer = player;
 
             // make sure to initialize UI after the player
             UILoader.Initialize_UI();
