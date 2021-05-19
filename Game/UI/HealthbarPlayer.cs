@@ -36,7 +36,7 @@ namespace Game.UI
         private static int indicatorsYsize = 18; // Height of only one indicator (one heart)
 
         private static HealthbarPlayer instance;
-        private static Player player;
+        private static Game.Player.Player player;
         private Assembly assembly;
         private Sprite indicators;
         private Sprite background;
@@ -51,10 +51,10 @@ namespace Game.UI
 
             foreach (IRectangle r in Engine.Colliders)
             {
-                if (r is Player)
+                if (r is Player.Player)
                 {
                     GameObject g = (GameObject)r;
-                    player = (Player)g;
+                    player = (Player.Player)g;
                 }
             }
 
