@@ -49,6 +49,7 @@ namespace Engine.Renderer.UI
             this.Font = font;
             this.BackgroundColor = backgroundColor;
             this.Bounds = bounds;
+            this.Hidden = false;
             if (alignment == UiAlignment.Left)
             {
                 this.AbsoluteBounds = new Rectangle(0, 0, 1, 1);
@@ -66,6 +67,11 @@ namespace Engine.Renderer.UI
         /// Gets the Renderers.
         /// </summary>
         public List<IRenderer> Renderers { get; private set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether hidden.
+        /// </summary>
+        public bool Hidden { get; set; }
 
         /// <summary>
         /// Gets the absolute bounds.
@@ -90,6 +96,11 @@ namespace Engine.Renderer.UI
         /// <inheritdoc/>
         public void Render(FrameEventArgs args)
         {
+            if (this.Hidden)
+            {
+                return;
+            }
+
             this.OnRender(args);
             this.Renderers.ForEach(renderer => renderer.Render(args));
         }

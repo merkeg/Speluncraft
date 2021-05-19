@@ -4,13 +4,14 @@
 
 namespace Engine.Renderer.Sprite
 {
-    using global::Engine.GameObject;
-    using OpenTK.Graphics.OpenGL;
-    using OpenTK.Windowing.Common;
     using System;
     using System.Collections.Generic;
     using System.Drawing;
     using System.Text;
+    using global::Engine.GameObject;
+    using OpenTK.Graphics.OpenGL;
+    using OpenTK.Mathematics;
+    using OpenTK.Windowing.Common;
 
     /// <summary>
     /// The SpriteRenderer class.
@@ -49,7 +50,7 @@ namespace Engine.Renderer.Sprite
         {
             this.Sprite.TimeElapsed((float)args.Time);
             GL.BindTexture(TextureTarget.Texture2D, this.Sprite.Handle);
-            GL.Color3(Color.White);
+            GL.Color4(this.Sprite.Color ?? Color4.White);
             GL.Begin(PrimitiveType.Quads);
 
             if (this.Position.Mirrored)
