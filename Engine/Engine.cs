@@ -197,9 +197,9 @@ namespace Engine
 
         private static void Resize(ResizeEventArgs args)
         {
-            foreach (KeyValuePair<RenderLayer, List<IRenderer>> item in Engine.Renderers)
+            foreach (List<IRenderer> renderers in Engine.Renderers.Values.ToList())
             {
-                item.Value.ForEach(renderer => renderer.Resize(args));
+                renderers.ForEach(renderer => renderer.Resize(args));
             }
         }
 
@@ -207,9 +207,9 @@ namespace Engine
         {
             Engine.GameWindow.SwapBuffers();
             GL.Clear(ClearBufferMask.ColorBufferBit);
-            foreach (KeyValuePair<RenderLayer, List<IRenderer>> item in Engine.Renderers)
+            foreach (List<IRenderer> renderers in Engine.Renderers.Values.ToList())
             {
-                item.Value.ForEach(renderer => renderer.Render(args));
+                renderers.ForEach(renderer => renderer.Render(args));
             }
         }
     }

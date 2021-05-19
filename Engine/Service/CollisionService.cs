@@ -5,6 +5,7 @@
 namespace Engine.Service
 {
     using System.Collections.Generic;
+    using System.Linq;
     using OpenTK.Windowing.Common;
 
     /// <summary>
@@ -37,7 +38,7 @@ namespace Engine.Service
             foreach (GameObject.GameObject g in Engine.GameObjects)
             {
                 bool hasSubbed = false;
-                foreach (GameObject.IComponent c in g.GetComponents())
+                foreach (GameObject.IComponent c in g.GetComponents().ToList())
                 {
                     if (c is ICollosionServiceSubscriber)
                     {
@@ -48,7 +49,7 @@ namespace Engine.Service
                 if (hasSubbed)
                 {
                     List<GameObject.IRectangle> collisionThisGameObjectHas = new List<GameObject.IRectangle>();
-                    foreach (GameObject.IRectangle r in Engine.Colliders)
+                    foreach (GameObject.IRectangle r in Engine.Colliders.ToList())
                     {
                         if (g.Intersects(r))
                         {
