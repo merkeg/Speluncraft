@@ -11,9 +11,7 @@ namespace Game.Player.Items
         {
         }
 
-        public abstract void OnPickUp()
-        {
+        public abstract void OnPickUp();
 
-        }
     }
 }
