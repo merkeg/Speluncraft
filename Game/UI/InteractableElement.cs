@@ -22,7 +22,7 @@ namespace Game.UI
     /// </summary>
     public class InteractableElement : GameObject
     {
-        private Player player;
+        private Player.Player player;
         private static Tilesheet tilesheet;
 
         /// <summary>
@@ -76,7 +76,8 @@ namespace Game.UI
             {
                 this.Interact += this.Destroy;
             }
-            this.player = (Player)Engine.Engine.GameObjects.Find(go => go is Player);
+
+            this.player = (Player.Player)Engine.Engine.GameObjects.Find(go => go is Player.Player);
         }
 
         /// <summary>
