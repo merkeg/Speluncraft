@@ -285,6 +285,76 @@
             OnCreate function.
             </summary>
         </member>
+        <member name="T:Game.UI.InteractableElement">
+            <summary>
+            Element class.
+            </summary>
+        </member>
+        <member name="M:Game.UI.InteractableElement.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Text.Font,System.String,OpenTK.Mathematics.Color4,OpenTK.Mathematics.Color4,System.Single,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.UI.InteractableElement"/> class.
+            </summary>
+            <param name="minX">mX.</param>
+            <param name="minY">mY.</param>
+            <param name="sizeX">X.</param>
+            <param name="sizeY">Y.</param>
+            <param name="font">Font.</param>
+            <param name="text">Info text.</param>
+            <param name="colorText">Color of text.</param>
+            <param name="range">The view range.</param>
+            <param name="colorSprite">Color of sprite.</param>
+            <param name="closeOnInteract">Destroy Element on interact.</param>
+        </member>
+        <member name="E:Game.UI.InteractableElement.Interact">
+            <summary>
+            Event handler if interacted with.
+            </summary>
+        </member>
+        <member name="P:Game.UI.InteractableElement.Text">
+            <summary>
+            Gets the text.
+            </summary>
+        </member>
+        <member name="P:Game.UI.InteractableElement.Particle">
+            <summary>
+            Gets the Particle.
+            </summary>
+        </member>
+        <member name="P:Game.UI.InteractableElement.Range">
+            <summary>
+            Gets or sets the view range.
+            </summary>
+        </member>
+        <member name="P:Game.UI.InteractableElement.InRange">
+            <summary>
+            Gets or sets a value indicating whether in range.
+            </summary>
+        </member>
+        <member name="M:Game.UI.InteractableElement.OnUpdatableCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.InteractableElement.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.InteractableElement.Destroy">
+            <summary>
+            Destroy the element.
+            </summary>
+        </member>
+        <member name="T:Game.UI.ItemShop">
+            <summary>
+            Class for Item Shop ingame.
+            </summary>
+        </member>
+        <member name="M:Game.UI.ItemShop.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.ItemShop.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.ItemShop.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.UI.UILoader">
             <summary>
             Loader Class to initialize the whole UI of the Game. (hopefully).

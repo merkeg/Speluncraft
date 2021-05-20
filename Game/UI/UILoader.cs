@@ -22,6 +22,9 @@ namespace Game.UI
         {
             HealthbarPlayer playerhealthbar = new HealthbarPlayer();
             Engine.AddRenderer(playerhealthbar, RenderLayer.UI);
+
+            ItemShop itemShop = new ItemShop();
+            Engine.AddRenderer(itemShop, RenderLayer.UI);
         }
     }
 }

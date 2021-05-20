@@ -16,6 +16,7 @@ namespace Game.UI
     using Engine.Renderer.UI;
     using Engine.Service;
     using Game.Gun;
+    using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
     using OpenTK.Windowing.GraphicsLibraryFramework;
@@ -23,42 +24,47 @@ namespace Game.UI
     /// <summary>
     /// Class for Item Shop ingame.
     /// </summary>
-    public class ItemShop : IUpdatable, IRenderer
+    public class ItemShop : IRenderer
     {
+        private static bool shopActive = true;
+        private static Vector2 screenCenter;
+
         /// <inheritdoc/>
         public void OnRendererCreate()
         {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public void OnUpdatableCreate()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public void OnUpdatableDestroy()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <inheritdoc/>
-        public void OnUpdate(float frameTime)
-        {
-            throw new NotImplementedException();
+            return;
         }
 
         /// <inheritdoc/>
         public void Render(FrameEventArgs args)
         {
-            throw new NotImplementedException();
+            // render shop
+            if (shopActive)
+            {
+                GL.BindTexture(TextureTarget.Texture2D, 0);
+                GL.Color4(new Color4(1.0f / 255 * 104, 1.0f / 255 * 167, 1.0f / 255 * 220, 0.5f));
+                GL.Begin(PrimitiveType.Quads);
+
+                GL.Vertex2(screenCenter.X - (250 / 2), screenCenter.Y - (250 / 2));
+                GL.Vertex2(screenCenter.X + (250 / 2), screenCenter.Y - (250 / 2));
+                GL.Vertex2(screenCenter.X + (250 / 2), screenCenter.Y + (250 / 2));
+                GL.Vertex2(screenCenter.X - (250 / 2), screenCenter.Y + (250 / 2));
+
+                GL.End();
+                return;
+            }
+            else
+            {
+                return;
+            }
         }
 
         /// <inheritdoc/>
         public void Resize(ResizeEventArgs args)
         {
-            throw new NotImplementedException();
+            screenCenter.X = args.Size.X / 2f;
+            screenCenter.Y = args.Size.Y / 2f;
+            return;
         }
     }
 }
