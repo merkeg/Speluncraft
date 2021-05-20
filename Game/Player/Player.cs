@@ -26,6 +26,7 @@ namespace Game.Player
         private float jumpPower = 10f;
 
         private AnimatedSprite spriteWalking;
+        private AnimatedSprite spriteHurt;
         private Sprite spriteIdle;
         private Sprite spriteJump;
         private Sprite spriteFall;
@@ -272,7 +273,7 @@ namespace Game.Player
             // Took Damage
             if (this.GetComponent<Engine.Component.HealthPoints>().GetTookDmgThisFrame())
             {
-                this.animationScheduler.AddAnimation(20, 0.3f, this.spriteFall, this.Mirrored);
+                this.animationScheduler.AddAnimation(20, 0.3f, this.spriteHurt, this.Mirrored);
             }
 
             // Shooting
@@ -286,6 +287,8 @@ namespace Game.Player
         {
             Engine.Renderer.Tile.Tilesheet walkingSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Player.adventurer_walking.png", 80, 110);
             this.spriteWalking = new AnimatedSprite(walkingSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
+            Engine.Renderer.Tile.Tilesheet hurtSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Player.adventurer_hurt.png", 80, 110);
+            this.spriteHurt = new AnimatedSprite(hurtSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
 
             this.spriteIdle = new Sprite("Game.Resources.Player.adventurer_idle.png", false);
             this.spriteJump = new Sprite("Game.Resources.Player.adventurer_jump.png", false);
