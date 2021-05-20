@@ -278,7 +278,7 @@ namespace Game.Player
             // Shooting
             if (this.gun.ShotFired())
             {
-                this.animationScheduler.AddAnimation(15, 0.3f, this.spriteGun, this.Mirrored);
+                this.animationScheduler.AddAnimation(15, 0.2f, this.spriteGun, this.Mirrored);
             }
         }
 
