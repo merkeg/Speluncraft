@@ -70,11 +70,11 @@ namespace Engine.Service
         public List<GameObject.IRectangle> GetCollosions(GameObject.GameObject gameObject)
         {
             List<GameObject.IRectangle> output;
-            try
+            if (this.collision.ContainsKey(gameObject))
             {
-               output = this.collision[gameObject];
+                output = this.collision[gameObject];
             }
-            catch
+            else
             {
                 output = new List<GameObject.IRectangle>();
             }
