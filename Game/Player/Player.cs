@@ -29,6 +29,7 @@ namespace Game.Player
         private Sprite spriteIdle;
         private Sprite spriteJump;
         private Sprite spriteFall;
+        private Sprite spriteBack;
 
         private int isFaceing;
         private Gun.IGun gun;
@@ -203,6 +204,11 @@ namespace Game.Player
                 this.animationScheduler.AddAnimation(50, 0.001f, this.spriteIdle);
                 this.Idle(frameTime, physics);
             }
+
+            if (keyboardState.IsKeyDown(Keys.W))
+            {
+                this.animationScheduler.AddAnimation(50, 0.03f, this.spriteBack);
+            }
         }
 
         private void UpdateAnimations()
@@ -236,6 +242,7 @@ namespace Game.Player
             this.spriteIdle = new Sprite("Game.Resources.Player.adventurer_idle.png", false);
             this.spriteJump = new Sprite("Game.Resources.Player.adventurer_jump.png", false);
             this.spriteFall = new Sprite("Game.Resources.Player.adventurer_fall.png", false);
+            this.spriteBack = new Sprite("Game.Resources.Player.adventurer_back.png", false);
         }
     }
 }

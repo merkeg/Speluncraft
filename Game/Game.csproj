@@ -31,6 +31,7 @@
     <None Remove="Resources\Level\mapalla.json" />
     <None Remove="Resources\lol.json" />
     <None Remove="Resources\player.png" />
+    <None Remove="Resources\Player\adventurer_back.png" />
     <None Remove="Resources\Player\adventurer_fall.png" />
     <None Remove="Resources\Player\adventurer_hurt.png" />
     <None Remove="Resources\Player\adventurer_idle.png" />
@@ -102,6 +103,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Animated\bullet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Player\adventurer_back.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Player\adventurer_hurt.png">

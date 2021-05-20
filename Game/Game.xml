@@ -89,7 +89,7 @@
             <summary>
             Initializes a new instance of the <see cref="T:Game.GameComponents.AnimationWithTimeAndPrio"/> class.
             </summary>
-            <param name="prio">Prio of the animation. (Lower means better)</param>
+            <param name="prio">Prio of the animation. (Lower means better).</param>
             <param name="time">How long to play the animation.</param>
             <param name="animation">The animation.</param>
         </member>

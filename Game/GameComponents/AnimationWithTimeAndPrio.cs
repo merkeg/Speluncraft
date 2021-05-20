@@ -18,7 +18,7 @@ namespace Game.GameComponents
         /// <summary>
         /// Initializes a new instance of the <see cref="AnimationWithTimeAndPrio"/> class.
         /// </summary>
-        /// <param name="prio">Prio of the animation. (Lower means better)</param>
+        /// <param name="prio">Prio of the animation. (Lower means better).</param>
         /// <param name="time">How long to play the animation.</param>
         /// <param name="animation">The animation.</param>
         public AnimationWithTimeAndPrio(int prio, float time, ISprite animation)
