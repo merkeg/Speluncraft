@@ -30,6 +30,7 @@ namespace Game.Player
         private Sprite spriteJump;
         private Sprite spriteFall;
         private Sprite spriteBack;
+        private Sprite spriteGun;
 
         private int isFaceing;
         private Gun.IGun gun;
@@ -236,7 +237,7 @@ namespace Game.Player
             // Shooting
             if (this.gun.ShotFired())
             {
-                this.animationScheduler.AddAnimation(15, 0.2f, this.spriteBack);
+                this.animationScheduler.AddAnimation(15, 0.3f, this.spriteGun);
             }
         }
 
@@ -249,6 +250,7 @@ namespace Game.Player
             this.spriteJump = new Sprite("Game.Resources.Player.adventurer_jump.png", false);
             this.spriteFall = new Sprite("Game.Resources.Player.adventurer_fall.png", false);
             this.spriteBack = new Sprite("Game.Resources.Player.adventurer_back.png", false);
+            this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_sniper.png", false);
         }
     }
 }

@@ -37,6 +37,11 @@
     <None Remove="Resources\Player\adventurer_idle.png" />
     <None Remove="Resources\Player\adventurer_jump.png" />
     <None Remove="Resources\Player\adventurer_walking.png" />
+    <None Remove="Resources\Player\adventurer_weapon_grenadelauncher.png" />
+    <None Remove="Resources\Player\adventurer_weapon_machinegun.png" />
+    <None Remove="Resources\Player\adventurer_weapon_pistol.png" />
+    <None Remove="Resources\Player\adventurer_weapon_shotgun.png" />
+    <None Remove="Resources\Player\adventurer_weapon_sniper.png" />
     <None Remove="Resources\rotation.json" />
     <None Remove="Resources\Sprite\UI\Healthbar\10_hearts.png" />
     <None Remove="Resources\Sprite\UI\Healthbar\background.png" />
@@ -121,6 +126,21 @@
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </EmbeddedResource>
     <EmbeddedResource Include="Resources\Player\adventurer_walking.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Player\adventurer_weapon_grenadelauncher.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Player\adventurer_weapon_machinegun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Player\adventurer_weapon_pistol.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Player\adventurer_weapon_shotgun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Player\adventurer_weapon_sniper.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Sprite\player.png">
