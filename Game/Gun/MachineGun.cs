@@ -1,4 +1,4 @@
-﻿// <copyright file="Pistol.cs" company="RWUwU">
+﻿// <copyright file="MachineGun.cs" company="RWUwU">
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
@@ -15,7 +15,7 @@ namespace Game.Gun
     /// <summary>
     /// A Pistol that shoots normal bullets. With Medium DMG and Medium reload time.
     /// </summary>
-    public class Pistol : Engine.Component.Component, IGun
+    public class MachineGun : Engine.Component.Component, IGun
     {
         private readonly float bulletLenght = 0.5f;
         private readonly float bulletHeight = 0.5f;
@@ -23,17 +23,17 @@ namespace Game.Gun
 
         private readonly int damageDelayFrames = 1;
 
-        private readonly float bulletVelocity = 10;
-        private int dmg = 10;
-        private float reloadTime = 0.5f;
+        private readonly float bulletVelocity = 12;
+        private int dmg = 7;
+        private float reloadTime = 0.25f;
         private float reloadCoolDown = 0;
 
         private ISprite bulletSprite;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Pistol"/> class.
+        /// Initializes a new instance of the <see cref="MachineGun"/> class.
         /// </summary>
-        public Pistol()
+        public MachineGun()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
             Engine.Renderer.Tile.Tilesheet animatedBullet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Animated.bullet.png", 32, 32);

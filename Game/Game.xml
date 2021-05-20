@@ -69,20 +69,64 @@
             A bullet that flies straight untill it hits something, then does DMG and despwans.
             </summary>
         </member>
-        <member name="M:Game.Gun.Ammunition.Bullet.#ctor(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
+        <member name="M:Game.Gun.Ammunition.Bullet.#ctor(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.Gun.Ammunition.Bullet"/> class.
             </summary>
             <param name="dmg">How much dmg it will do on impact.</param>
-            <param name="velocityX">How fast it is flying.</param>
+            <param name="velocityX">How fast it is flying straight.</param>
+            <param name="velocityY">How fast it is flying up.</param>
             <param name="minX">Where it will spawn on X-Axsis.</param>
             <param name="minY">Where it will spawn on Y-Axsis.</param>
             <param name="sizeX">Size X.</param>
             <param name="sizeY">Size Y.</param>
             <param name="sprite">Its sprite.</param>
+            <param name="damageDelayFrames">How many frames to wait, before this bullet will do Damage.</param>
         </member>
         <member name="M:Game.Gun.Ammunition.Bullet.OnUpdate(System.Single)">
             <inheritdoc/>
+        </member>
+        <member name="T:Game.Gun.Ammunition.Grenade">
+            <summary>
+            A Grenade that explodes on Impact.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.Ammunition.Grenade.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.Ammunition.Grenade"/> class.
+            </summary>
+            <param name="velocityX">How fast it is flying straight.</param>
+            <param name="velocityY">How fast it is flying up.</param>
+            <param name="minX">Where it will spawn on X-Axsis.</param>
+            <param name="minY">Where it will spawn on Y-Axsis.</param>
+            <param name="sizeX">Size X.</param>
+            <param name="sizeY">Size Y.</param>
+            <param name="sprite">Its sprite.</param>
+            <param name="damageDelayFrames">How many frames to wait, before this bullet will do Damage.</param>
+        </member>
+        <member name="M:Game.Gun.Ammunition.Grenade.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Gun.GrenadeLauncher">
+            <summary>
+            Launches Grenades.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.GrenadeLauncher.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.GrenadeLauncher"/> class.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.GrenadeLauncher.GetAsComponent">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.GrenadeLauncher.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.GrenadeLauncher.PullTrigger">
+            <summary>
+            Fires a Bullet, when trigger is pulled and is reloaded.
+            </summary>
         </member>
         <member name="T:Game.Gun.IGun">
             <summary>
@@ -121,6 +165,27 @@
             </summary>
             <returns>-1 for left, 1 for right.</returns>
         </member>
+        <member name="T:Game.Gun.MachineGun">
+            <summary>
+            A Pistol that shoots normal bullets. With Medium DMG and Medium reload time.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.MachineGun.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.MachineGun"/> class.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.MachineGun.GetAsComponent">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.MachineGun.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.MachineGun.PullTrigger">
+            <summary>
+            Fires a Bullet, when trigger is pulled and is reloaded.
+            </summary>
+        </member>
         <member name="T:Game.Gun.Pistol">
             <summary>
             A Pistol that shoots normal bullets. With Medium DMG and Medium reload time.
@@ -138,6 +203,48 @@
             <inheritdoc/>
         </member>
         <member name="M:Game.Gun.Pistol.PullTrigger">
+            <summary>
+            Fires a Bullet, when trigger is pulled and is reloaded.
+            </summary>
+        </member>
+        <member name="T:Game.Gun.ShotGun">
+            <summary>
+            A shotgun.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.ShotGun.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.ShotGun"/> class.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.ShotGun.GetAsComponent">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.ShotGun.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.ShotGun.PullTrigger">
+            <summary>
+            Fires a Bullet, when trigger is pulled and is reloaded.
+            </summary>
+        </member>
+        <member name="T:Game.Gun.Sniper">
+            <summary>
+            A Sniper with high damage but a long reload time.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.Sniper.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.Sniper"/> class.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.Sniper.GetAsComponent">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.Sniper.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.Sniper.PullTrigger">
             <summary>
             Fires a Bullet, when trigger is pulled and is reloaded.
             </summary>
@@ -212,6 +319,12 @@
             <param name="sizeY">Player height.</param>
             <param name="sprite">Player sprite.</param>
         </member>
+        <member name="M:Game.Player.Player.ChangeGun(Game.Gun.IGun)">
+            <summary>
+            Change the Gun of the Player ( the old Gun will be deleted ).
+            </summary>
+            <param name="gun">The new Gun.</param>
+        </member>
         <member name="M:Game.Player.Player.GetDirection">
             <inheritdoc/>
         </member>
@@ -283,6 +396,62 @@
         <member name="M:Game.UI.HealthbarPlayer.OnRendererCreate">
             <summary>
             OnCreate function.
+            </summary>
+        </member>
+        <member name="T:Game.UI.InteractableElement">
+            <summary>
+            Element class.
+            </summary>
+        </member>
+        <member name="M:Game.UI.InteractableElement.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Text.Font,System.String,OpenTK.Mathematics.Color4,OpenTK.Mathematics.Color4,System.Single,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.UI.InteractableElement"/> class.
+            </summary>
+            <param name="minX">mX.</param>
+            <param name="minY">mY.</param>
+            <param name="sizeX">X.</param>
+            <param name="sizeY">Y.</param>
+            <param name="font">Font.</param>
+            <param name="text">Info text.</param>
+            <param name="colorText">Color of text.</param>
+            <param name="range">The view range.</param>
+            <param name="colorSprite">Color of sprite.</param>
+            <param name="closeOnInteract">Destroy Element on interact.</param>
+        </member>
+        <member name="E:Game.UI.InteractableElement.Interact">
+            <summary>
+            Event handler if interacted with.
+            </summary>
+        </member>
+        <member name="P:Game.UI.InteractableElement.Text">
+            <summary>
+            Gets the text.
+            </summary>
+        </member>
+        <member name="P:Game.UI.InteractableElement.Particle">
+            <summary>
+            Gets the Particle.
+            </summary>
+        </member>
+        <member name="P:Game.UI.InteractableElement.Range">
+            <summary>
+            Gets or sets the view range.
+            </summary>
+        </member>
+        <member name="P:Game.UI.InteractableElement.InRange">
+            <summary>
+            Gets or sets a value indicating whether in range.
+            </summary>
+        </member>
+        <member name="M:Game.UI.InteractableElement.OnUpdatableCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.InteractableElement.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.InteractableElement.Destroy">
+            <summary>
+            Destroy the element.
             </summary>
         </member>
         <member name="T:Game.UI.UILoader">

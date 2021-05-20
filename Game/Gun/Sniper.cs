@@ -1,4 +1,4 @@
-﻿// <copyright file="Pistol.cs" company="RWUwU">
+﻿// <copyright file="Sniper.cs" company="RWUwU">
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
@@ -6,34 +6,33 @@ namespace Game.Gun
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Reflection;
     using System.Text;
     using Engine.Component;
     using Engine.Renderer.Sprite;
 
     /// <summary>
-    /// A Pistol that shoots normal bullets. With Medium DMG and Medium reload time.
+    /// A Sniper with high damage but a long reload time.
     /// </summary>
-    public class Pistol : Engine.Component.Component, IGun
+    public class Sniper : Engine.Component.Component, IGun
     {
-        private readonly float bulletLenght = 0.5f;
+        private readonly float bulletLenght = 0.7f;
         private readonly float bulletHeight = 0.5f;
         private readonly float bufferDistance = 0f;
 
         private readonly int damageDelayFrames = 1;
 
-        private readonly float bulletVelocity = 10;
-        private int dmg = 10;
-        private float reloadTime = 0.5f;
+        private readonly float bulletVelocity = 15;
+        private int dmg = 50;
+        private float reloadTime = 1.2f;
         private float reloadCoolDown = 0;
 
         private ISprite bulletSprite;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Pistol"/> class.
+        /// Initializes a new instance of the <see cref="Sniper"/> class.
         /// </summary>
-        public Pistol()
+        public Sniper()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
             Engine.Renderer.Tile.Tilesheet animatedBullet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Animated.bullet.png", 32, 32);

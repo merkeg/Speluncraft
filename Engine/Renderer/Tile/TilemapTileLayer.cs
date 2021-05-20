@@ -1,4 +1,4 @@
-﻿// <copyright file="TilemapLayer.cs" company="RWUwU">
+﻿// <copyright file="TilemapTileLayer.cs" company="RWUwU">
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
@@ -9,14 +9,14 @@ namespace Engine.Renderer.Tile
     /// <summary>
     /// The Tilemap class.
     /// </summary>
-    public class TilemapLayer
+    public class TilemapTileLayer
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TilemapLayer"/> class.
+        /// Initializes a new instance of the <see cref="TilemapTileLayer"/> class.
         /// </summary>
         /// <param name="tilesheet"> The tileset the tilemap is using.</param>
         /// <param name="model"> The model the tilemap bases on.</param>
-        public TilemapLayer(Tilesheet tilesheet, TilemapLayerModel model)
+        public TilemapTileLayer(Tilesheet tilesheet, TilemapLayerModel model)
         {
             this.Tilesheet = tilesheet;
             this.TilemapModel = model;
