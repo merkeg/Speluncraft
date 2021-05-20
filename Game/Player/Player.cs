@@ -60,7 +60,7 @@ namespace Game.Player
 
             // For Demo 2.0
             // this.AddComponent(new Engine.Component.DoDamageCollisionResponse(10, 1));
-            this.gun = new Gun.ShotGun();
+            this.gun = new Gun.Sniper();
             this.AddComponent(this.gun.GetAsComponent());
         }
 

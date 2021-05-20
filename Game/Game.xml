@@ -165,6 +165,27 @@
             Fires a Bullet, when trigger is pulled and is reloaded.
             </summary>
         </member>
+        <member name="T:Game.Gun.Sniper">
+            <summary>
+            A Sniper with high damage but a long reload time.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.Sniper.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.Sniper"/> class.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.Sniper.GetAsComponent">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.Sniper.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.Sniper.PullTrigger">
+            <summary>
+            Fires a Bullet, when trigger is pulled and is reloaded.
+            </summary>
+        </member>
         <member name="T:Game.Gun.CameraTrackingComponent">
             <summary>
             Camera tracking component class.

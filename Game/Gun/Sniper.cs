@@ -1,0 +1,81 @@
+﻿// <copyright file="Sniper.cs" company="RWUwU">
+// Copyright (c) RWUwU. All rights reserved.
+// </copyright>
+
+namespace Game.Gun
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+    using System.Text;
+    using Engine.Component;
+    using Engine.Renderer.Sprite;
+
+    /// <summary>
+    /// A Sniper with high damage but a long reload time.
+    /// </summary>
+    public class Sniper : Engine.Component.Component, IGun
+    {
+        private readonly float bulletLenght = 0.7f;
+        private readonly float bulletHeight = 0.5f;
+        private readonly float bufferDistance = 0f;
+
+        private readonly int damageDelayFrames = 1;
+
+        private readonly float bulletVelocity = 15;
+        private int dmg = 50;
+        private float reloadTime = 1.2f;
+        private float reloadCoolDown = 0;
+
+        private ISprite bulletSprite;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Sniper"/> class.
+        /// </summary>
+        public Sniper()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            Engine.Renderer.Tile.Tilesheet animatedBullet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Animated.bullet.png", 32, 32);
+            this.bulletSprite = new AnimatedSprite(animatedBullet, new[] { new Keyframe(0, 0, 0.5f), new Keyframe(0, 1, 0.5f) });
+        }
+
+        /// <inheritdoc/>
+        public Component GetAsComponent()
+        {
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public override void OnUpdate(float frameTime)
+        {
+            this.reloadCoolDown -= frameTime;
+        }
+
+        /// <summary>
+        /// Fires a Bullet, when trigger is pulled and is reloaded.
+        /// </summary>
+        public void PullTrigger()
+        {
+            if (this.reloadCoolDown <= 0)
+            {
+                if (this.GameObject is ILookDirection)
+                {
+                    ILookDirection d = (ILookDirection)this.GameObject;
+                    if (d.GetDirection() == ILookDirection.Left)
+                    {
+                        Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, -this.bulletVelocity, 0, this.GameObject.MinX - this.bulletLenght - this.bufferDistance, this.GameObject.MinY + 0.5f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
+                        Engine.Engine.AddGameObject(b);
+                    }
+
+                    if (d.GetDirection() == ILookDirection.Right)
+                    {
+                        Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, this.bulletVelocity, 0, this.GameObject.MinX + this.GameObject.SizeX + this.bufferDistance, this.GameObject.MinY + 0.5f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
+                        Engine.Engine.AddGameObject(b);
+                    }
+                }
+
+                this.reloadCoolDown = this.reloadTime;
+            }
+        }
+    }
+}
