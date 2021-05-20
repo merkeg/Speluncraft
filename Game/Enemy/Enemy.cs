@@ -34,7 +34,7 @@ namespace Game.Enemy
             this.AddComponent(physics);
             this.AddComponent(new Engine.Component.UndoOverlapCollisionResponse());
 
-            this.AddComponent(new Engine.Component.HealthPoints(100, 100));
+            this.AddComponent(new Engine.Component.HealthPoints(50, 50));
 
             // this.AddComponent(new Engine.Component.DoDamageCollisionResponse(damage, 1));
             this.AddComponent(new Engine.Component.DoDamageWithKnockbackCollisionResponse(damage, 1, 10, 5));
