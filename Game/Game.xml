@@ -69,29 +69,37 @@
             Used for Schedueling Animations.
             </summary>
         </member>
+        <member name="M:Game.GameComponents.AnimationScheduler.GetIfMustBeMirrored">
+            <summary>
+            Get if the Frame must be mirroed or not.
+            </summary>
+            <returns>if the Frame must be mirroed or not.</returns>
+        </member>
         <member name="M:Game.GameComponents.AnimationScheduler.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
-        <member name="M:Game.GameComponents.AnimationScheduler.AddAnimation(System.Int32,System.Single,Engine.Renderer.Sprite.ISprite)">
+        <member name="M:Game.GameComponents.AnimationScheduler.AddAnimation(System.Int32,System.Single,Engine.Renderer.Sprite.ISprite,System.Boolean)">
             <summary>
             Add a new Animation.
             </summary>
             <param name="prio">The Prio this animation has. ( Lower means better).</param>
             <param name="time">How long to play this animation.</param>
             <param name="animation">The Animation to be played.</param>
+            <param name="mirrored">If the Sprite must be mirrored.</param>
         </member>
         <member name="T:Game.GameComponents.AnimationWithTimeAndPrio">
             <summary>
             Wraper class, that says how long which animation should be played.
             </summary>
         </member>
-        <member name="M:Game.GameComponents.AnimationWithTimeAndPrio.#ctor(System.Int32,System.Single,Engine.Renderer.Sprite.ISprite)">
+        <member name="M:Game.GameComponents.AnimationWithTimeAndPrio.#ctor(System.Int32,System.Single,Engine.Renderer.Sprite.ISprite,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.GameComponents.AnimationWithTimeAndPrio"/> class.
             </summary>
             <param name="prio">Prio of the animation. (Lower means better).</param>
             <param name="time">How long to play the animation.</param>
             <param name="animation">The animation.</param>
+            <param name="mirrored">If the Sprite must be mirrored.</param>
         </member>
         <member name="P:Game.GameComponents.AnimationWithTimeAndPrio.Animation">
             <summary>
@@ -106,6 +114,11 @@
         <member name="P:Game.GameComponents.AnimationWithTimeAndPrio.Prio">
             <summary>
             Gets or sets the Prio of this Animation.
+            </summary>
+        </member>
+        <member name="P:Game.GameComponents.AnimationWithTimeAndPrio.Mirrored">
+            <summary>
+            Gets or sets a value indicating whether the Sprite must be Mirrored.
             </summary>
         </member>
         <member name="M:Game.GameComponents.AnimationWithTimeAndPrio.CompareTo(System.Object)">

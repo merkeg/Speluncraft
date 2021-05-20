@@ -21,11 +21,13 @@ namespace Game.GameComponents
         /// <param name="prio">Prio of the animation. (Lower means better).</param>
         /// <param name="time">How long to play the animation.</param>
         /// <param name="animation">The animation.</param>
-        public AnimationWithTimeAndPrio(int prio, float time, ISprite animation)
+        /// <param name="mirrored">If the Sprite must be mirrored.</param>
+        public AnimationWithTimeAndPrio(int prio, float time, ISprite animation, bool mirrored)
         {
             this.Prio = prio;
             this.TimeLeft = time;
             this.Animation = animation;
+            this.Mirrored = mirrored;
         }
 
         /// <summary>
@@ -42,6 +44,11 @@ namespace Game.GameComponents
         /// Gets or sets the Prio of this Animation.
         /// </summary>
         public int Prio { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the Sprite must be Mirrored.
+        /// </summary>
+        public bool Mirrored { get; set; }
 
         /// <inheritdoc/>
         public int CompareTo(object obj)

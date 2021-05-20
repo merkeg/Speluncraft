@@ -15,12 +15,23 @@ namespace Game.GameComponents
     public class AnimationScheduler : Engine.Component.Component
     {
         private List<AnimationWithTimeAndPrio> animationQueue = new List<AnimationWithTimeAndPrio>();
+        private bool mirrored;
+
+        /// <summary>
+        /// Get if the Frame must be mirroed or not.
+        /// </summary>
+        /// <returns>if the Frame must be mirroed or not.</returns>
+        public bool GetIfMustBeMirrored()
+        {
+            return this.mirrored;
+        }
 
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
             this.animationQueue.Sort();
             this.GameObject.Sprite = this.animationQueue[0].Animation;
+            this.mirrored = this.animationQueue[0].Mirrored;
 
             List<AnimationWithTimeAndPrio> toBeRemoved = new List<AnimationWithTimeAndPrio>();
 
@@ -45,9 +56,10 @@ namespace Game.GameComponents
         /// <param name="prio">The Prio this animation has. ( Lower means better).</param>
         /// <param name="time">How long to play this animation.</param>
         /// <param name="animation">The Animation to be played.</param>
-        public void AddAnimation(int prio, float time, ISprite animation)
+        /// <param name="mirrored">If the Sprite must be mirrored.</param>
+        public void AddAnimation(int prio, float time, ISprite animation, bool mirrored)
         {
-            this.animationQueue.Add(new AnimationWithTimeAndPrio(prio, time, animation));
+            this.animationQueue.Add(new AnimationWithTimeAndPrio(prio, time, animation, mirrored));
         }
     }
 }

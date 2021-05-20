@@ -65,9 +65,10 @@ namespace Game.Player
 
             // For Demo 2.0
             // this.AddComponent(new Engine.Component.DoDamageCollisionResponse(10, 1));
-            this.gun = new Gun.GrenadeLauncher();
+            this.gun = new Gun.Pistol();
             this.AddComponent(this.gun.GetAsComponent());
             this.ChangeGun(new Gun.MachineGun());
+            this.ChangeGun(new Gun.ShotGun());
         }
 
         /// <summary>
@@ -92,6 +93,8 @@ namespace Game.Player
             {
                 this.AddComponent((Engine.Component.Component)gun);
             }
+
+            this.SetGunSprite(gun);
         }
 
         /// <inheritdoc/>
@@ -131,6 +134,8 @@ namespace Game.Player
                 physics.AddVelocitY(this.jumpPower);
                 this.jumpcounter--;
             }
+
+            this.Mirrored = this.animationScheduler.GetIfMustBeMirrored();
         }
 
         private void Shoot(KeyboardState keyboardState)
@@ -139,11 +144,47 @@ namespace Game.Player
             {
                 this.isFaceing = Gun.ILookDirection.Left;
                 this.gun.PullTrigger();
+                if (this.gun.ShotFired())
+                {
+                    this.Mirrored = true;
+                }
             }
             else if (keyboardState.IsKeyDown(Keys.Right))
             {
                 this.isFaceing = Gun.ILookDirection.Right;
                 this.gun.PullTrigger();
+                if (this.gun.ShotFired())
+                {
+                    this.Mirrored = false;
+                }
+            }
+        }
+
+        private void SetGunSprite(Gun.IGun gun)
+        {
+            if (gun is Gun.GrenadeLauncher)
+            {
+                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_grenadelauncher.png", false);
+            }
+
+            if (gun is Gun.MachineGun)
+            {
+                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_machinegun.png", false);
+            }
+
+            if (gun is Gun.Pistol)
+            {
+                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_pistol.png", false);
+            }
+
+            if (gun is Gun.ShotGun)
+            {
+                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_shotgun.png", false);
+            }
+
+            if (gun is Gun.Sniper)
+            {
+                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_sniper.png", false);
             }
         }
 
@@ -190,25 +231,25 @@ namespace Game.Player
         {
             if (keyboardState.IsKeyDown(Keys.A))
             { // Player wants to go left
-                this.animationScheduler.AddAnimation(49, 0.03f, this.spriteWalking);
+                this.animationScheduler.AddAnimation(49, 0.03f, this.spriteWalking, true);
                 this.Mirrored = true;
                 this.WalkLeft(frameTime, physics);
             }
             else if (keyboardState.IsKeyDown(Keys.D))
             { // Player wants to go right
-                this.animationScheduler.AddAnimation(49, 0.03f, this.spriteWalking);
+                this.animationScheduler.AddAnimation(49, 0.03f, this.spriteWalking, false);
                 this.Mirrored = false;
                 this.WalkRight(frameTime, physics);
             }
             else
             { // Player is not breaking or accelerating
-                this.animationScheduler.AddAnimation(51, 0.001f, this.spriteIdle);
+                this.animationScheduler.AddAnimation(51, 0.001f, this.spriteIdle, this.Mirrored);
                 this.Idle(frameTime, physics);
             }
 
             if (keyboardState.IsKeyDown(Keys.W))
             {
-                this.animationScheduler.AddAnimation(50, 0.03f, this.spriteBack);
+                this.animationScheduler.AddAnimation(50, 0.03f, this.spriteBack, this.Mirrored);
             }
         }
 
@@ -219,25 +260,25 @@ namespace Game.Player
             // Falling
             if (phys.GetVelocity().Y < 0)
             {
-                this.animationScheduler.AddAnimation(40, 0.001f, this.spriteFall);
+                this.animationScheduler.AddAnimation(40, 0.001f, this.spriteFall, this.Mirrored);
             }
 
             // Jumping
             if (phys.GetVelocity().Y > 0 && this.jumpcounter < this.jumpCounterMax)
             {
-                this.animationScheduler.AddAnimation(35, 0.0001f, this.spriteJump);
+                this.animationScheduler.AddAnimation(35, 0.0001f, this.spriteJump, this.Mirrored);
             }
 
             // Took Damage
             if (this.GetComponent<Engine.Component.HealthPoints>().GetTookDmgThisFrame())
             {
-                this.animationScheduler.AddAnimation(20, 0.3f, this.spriteFall);
+                this.animationScheduler.AddAnimation(20, 0.3f, this.spriteFall, this.Mirrored);
             }
 
             // Shooting
             if (this.gun.ShotFired())
             {
-                this.animationScheduler.AddAnimation(15, 0.3f, this.spriteGun);
+                this.animationScheduler.AddAnimation(15, 0.3f, this.spriteGun, this.Mirrored);
             }
         }
 
@@ -250,7 +291,7 @@ namespace Game.Player
             this.spriteJump = new Sprite("Game.Resources.Player.adventurer_jump.png", false);
             this.spriteFall = new Sprite("Game.Resources.Player.adventurer_fall.png", false);
             this.spriteBack = new Sprite("Game.Resources.Player.adventurer_back.png", false);
-            this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_sniper.png", false);
+            this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_pistol.png", false);
         }
     }
 }
