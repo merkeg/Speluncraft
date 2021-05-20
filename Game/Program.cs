@@ -75,8 +75,8 @@ namespace Game
             Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheetMC.png", 32, 32);
             Sprite sprite = new Sprite("Game.Resources.Player.adventurer_idle.png", false);
 
-            TilemapLayerObject spawnPos = this.tilemap.ObjectLayers[0].FindObjectByName("spawn");
-            Player.Player player = new Player.Player(spawnPos.X, -spawnPos.Y, 1, 1.375f, sprite);
+            TilemapLayerObject spawnPos = this.tilemap.FindObjectByName("spawn");
+            Player.Player player = new Player.Player(spawnPos.X, -spawnPos.Y + 1, 1, 1.375f, sprite);
             player.AddComponent(new CameraTrackingComponent());
             Engine.Engine.AddGameObject(player);
 
@@ -105,21 +105,27 @@ namespace Game
 
         private void AddEnemies()
         {
-            using Stream enemyStream = this.assembly.GetManifestResourceStream("Game.Resources.enemy.png");
-            Sprite enemySprite = new Sprite(enemyStream);
-            DummyAI testEnemy = new DummyAI(75, -25, 1, 1.25f, enemySprite, 10);
-
-            // Engine.Engine.AddGameObject(testEnemy);
+            Sprite enemySprite = new Sprite("Game.Resources.enemy.png");
             Sprite enemyGunSprite = new Sprite("Game.Resources.enemyGun.png");
-            EnemyPistol enemyWithPistol = new EnemyPistol(81, -43, 1, 1.25f, enemyGunSprite, 5);
+
             Engine.Engine.AddGameObject(new Player.Items.HealthPickUp(81, -43, 1, 1, enemySprite, 30));
-            Engine.Engine.AddGameObject(enemyWithPistol);
 
             // Tilesheet fireTilesheet = new Tilesheet("Game.Resources.Animated.fire.png", 32, 32);
             // float delay = 0.041f;
             // ISprite fireSprite = new AnimatedSprite(fireTilesheet, Keyframe.RangeY(0, 0, 23, delay));
             // Enemy.Enemy fire = new Enemy.Enemy(100, -44, 1, 1, fireSprite, 25);
             // Engine.Engine.AddGameObject(fire);
+            this.tilemap.FindObjectsByName("DummyAI").ForEach(obj =>
+            {
+                DummyAI enemy = new DummyAI(obj.X, -obj.Y + 1, 1, 1.25f, enemySprite, 10);
+                Engine.Engine.AddGameObject(enemy);
+            });
+
+            this.tilemap.FindObjectsByName("EnemyPistol").ForEach(obj =>
+            {
+                EnemyPistol enemy = new EnemyPistol(obj.X, -obj.Y + 1, 1, 1.25f, enemyGunSprite, 10);
+                Engine.Engine.AddGameObject(enemy);
+            });
         }
 
         private void AnimateTiles(Tilesheet sheet)

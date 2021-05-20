@@ -36,13 +36,13 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":3049.33333333333,
-                 "y":1069.33333333333
+                 "x":3049.33,
+                 "y":1069.33
                 }, 
                 {
                  "height":0,
                  "id":8,
-                 "name":"enemy",
+                 "name":"DummyAI",
                  "point":true,
                  "rotation":0,
                  "type":"",
