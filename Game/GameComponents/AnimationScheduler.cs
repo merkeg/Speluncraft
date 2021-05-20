@@ -22,13 +22,20 @@ namespace Game.GameComponents
             this.animationQueue.Sort();
             this.GameObject.Sprite = this.animationQueue[0].Animation;
 
+            List<AnimationWithTimeAndPrio> toBeRemoved = new List<AnimationWithTimeAndPrio>();
+
             foreach (AnimationWithTimeAndPrio a in this.animationQueue)
             {
                 a.TimeLeft -= frameTime;
                 if (a.TimeLeft <= 0)
                 {
-                    this.animationQueue.Remove(a);
+                    toBeRemoved.Add(a);
                 }
+            }
+
+            foreach (AnimationWithTimeAndPrio a in toBeRemoved)
+            {
+                this.animationQueue.Remove(a);
             }
         }
 
@@ -38,7 +45,7 @@ namespace Game.GameComponents
         /// <param name="prio">The Prio this animation has. ( Lower means better).</param>
         /// <param name="time">How long to play this animation.</param>
         /// <param name="animation">The Animation to be played.</param>
-        public void AddAnimation(int prio, int time, ISprite animation)
+        public void AddAnimation(int prio, float time, ISprite animation)
         {
             this.animationQueue.Add(new AnimationWithTimeAndPrio(prio, time, animation));
         }

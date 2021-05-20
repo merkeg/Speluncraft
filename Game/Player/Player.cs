@@ -32,6 +32,7 @@ namespace Game.Player
 
         private int isFaceing;
         private Gun.IGun gun;
+        private GameComponents.AnimationScheduler animationScheduler;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Player"/> class.
@@ -55,6 +56,8 @@ namespace Game.Player
             this.jumpcounter = this.jumpCounterMax;
 
             this.InitializeSprites();
+            this.animationScheduler = new GameComponents.AnimationScheduler();
+            this.AddComponent(this.animationScheduler);
 
             Engine.Engine.Colliders.Add(this);
 
@@ -166,7 +169,6 @@ namespace Game.Player
 
         private void Idle(float frameTime, Engine.Component.Physics physics)
         {
-            this.Sprite = this.spriteIdle;
             if (physics.GetVelocity().X > 0)
             { // Player is going right
                 physics.AddVelocityX(-this.idealBreacking * frameTime);
@@ -186,14 +188,19 @@ namespace Game.Player
         {
             if (keyboardState.IsKeyDown(Keys.A))
             { // Player wants to go left
+                this.animationScheduler.AddAnimation(49, 0.001f, this.spriteWalking);
+                this.Mirrored = true;
                 this.WalkLeft(frameTime, physics);
             }
             else if (keyboardState.IsKeyDown(Keys.D))
             { // Player wants to go right
+                this.animationScheduler.AddAnimation(49, 0.001f, this.spriteWalking);
+                this.Mirrored = false;
                 this.WalkRight(frameTime, physics);
             }
             else
             { // Player is not breaking or accelerating
+                this.animationScheduler.AddAnimation(50, 0.001f, this.spriteIdle);
                 this.Idle(frameTime, physics);
             }
         }
@@ -201,27 +208,15 @@ namespace Game.Player
         private void UpdateAnimations()
         {
             Engine.Component.Physics phys = this.GetComponent<Engine.Component.Physics>();
-
-            if (phys.GetVelocity().X < -0.1)
+            if (phys.GetVelocity().Y < 0)
             {
-                this.Sprite = this.spriteWalking;
-                this.Mirrored = true;
+                this.animationScheduler.AddAnimation(40, 0.001f, this.spriteFall);
             }
 
-            if (phys.GetVelocity().X > 0.1)
-            {
-                this.Sprite = this.spriteWalking;
-                this.Mirrored = false;
-            }
-
-            if (phys.GetVelocity().Y < -0.1)
-            {
-                this.Sprite = this.spriteFall;
-            }
-
-            if (phys.GetVelocity().Y > 0.5)
+            if (phys.GetVelocity().Y > 0 && this.jumpcounter < this.jumpCounterMax)
             {
                 this.Sprite = this.spriteJump;
+                this.animationScheduler.AddAnimation(35, 0.0001f, this.spriteJump);
             }
         }
 

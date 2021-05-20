@@ -13,7 +13,7 @@ namespace Game.GameComponents
     /// <summary>
     /// Wraper class, that says how long which animation should be played.
     /// </summary>
-    public class AnimationWithTimeAndPrio : IComparer
+    public class AnimationWithTimeAndPrio : IComparable
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AnimationWithTimeAndPrio"/> class.
@@ -21,7 +21,7 @@ namespace Game.GameComponents
         /// <param name="prio">Prio of the animation. (Lower means better)</param>
         /// <param name="time">How long to play the animation.</param>
         /// <param name="animation">The animation.</param>
-        public AnimationWithTimeAndPrio(int prio, int time, ISprite animation)
+        public AnimationWithTimeAndPrio(int prio, float time, ISprite animation)
         {
             this.Prio = prio;
             this.TimeLeft = time;
@@ -43,17 +43,12 @@ namespace Game.GameComponents
         /// </summary>
         public int Prio { get; set; }
 
-
-
         /// <inheritdoc/>
-        public int Compare(object x, object y)
+        public int CompareTo(object obj)
         {
-            if (x is AnimationWithTimeAndPrio && y is AnimationWithTimeAndPrio)
+            if (obj is AnimationWithTimeAndPrio)
             {
-                x = (AnimationWithTimeAndPrio)x;
-                y = (AnimationWithTimeAndPrio)y;
-
-                return ((AnimationWithTimeAndPrio)x).Prio - ((AnimationWithTimeAndPrio)y).Prio;
+                return this.Prio - ((AnimationWithTimeAndPrio)obj).Prio;
             }
 
             return 0;

@@ -1501,9 +1501,14 @@
             <param name="tilesheet">The tileset the tilemap will use.</param>
             <param name="model">The model which the tilemap will be built.</param>
         </member>
-        <member name="P:Engine.Renderer.Tile.Tilemap.Layers">
+        <member name="P:Engine.Renderer.Tile.Tilemap.TileLayers">
             <summary>
             Gets the Layers.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.Tilemap.ObjectLayers">
+            <summary>
+            Gets the Object layers.
             </summary>
         </member>
         <member name="P:Engine.Renderer.Tile.Tilemap.Tilesheet">
@@ -1518,60 +1523,104 @@
             <param name="layer">The layer to access to.</param>
             <returns>The specified Tilemap layer.</returns>
         </member>
-        <member name="T:Engine.Renderer.Tile.TilemapLayer">
+        <member name="M:Engine.Renderer.Tile.Tilemap.FindObjectByName(System.String)">
             <summary>
-            The Tilemap class.
+            Find Object by name.
+            </summary>
+            <param name="name">Name of the object.</param>
+            <returns>Object or null.</returns>
+        </member>
+        <member name="M:Engine.Renderer.Tile.Tilemap.FindObjectsByName(System.String)">
+            <summary>
+            Find Objects by name.
+            </summary>
+            <param name="name">Name of the objects.</param>
+            <returns>Objects or null.</returns>
+        </member>
+        <member name="T:Engine.Renderer.Tile.TilemapLayerObject">
+            <summary>
+            Tilemap layer object class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.Tile.TilemapLayer.#ctor(Engine.Renderer.Tile.Tilesheet,Engine.Renderer.Tile.Parser.TilemapLayerModel)">
+        <member name="M:Engine.Renderer.Tile.TilemapLayerObject.#ctor(Engine.Renderer.Tile.Parser.TilemapLayerObjectModel,Engine.Renderer.Tile.Tilesheet)">
             <summary>
-            Initializes a new instance of the <see cref="T:Engine.Renderer.Tile.TilemapLayer"/> class.
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Tile.TilemapLayerObject"/> class.
             </summary>
-            <param name="tilesheet"> The tileset the tilemap is using.</param>
-            <param name="model"> The model the tilemap bases on.</param>
+            <param name="model">Model.</param>
+            <param name="sheet">Tilesheet.</param>
         </member>
-        <member name="P:Engine.Renderer.Tile.TilemapLayer.Width">
+        <member name="P:Engine.Renderer.Tile.TilemapLayerObject.X">
             <summary>
-            Gets the tile amount in length.
-            </summary>
-        </member>
-        <member name="P:Engine.Renderer.Tile.TilemapLayer.Height">
-            <summary>
-            Gets the tile amount in height.
+            Gets the X.
             </summary>
         </member>
-        <member name="P:Engine.Renderer.Tile.TilemapLayer.Tiles">
+        <member name="P:Engine.Renderer.Tile.TilemapLayerObject.Y">
             <summary>
-            Gets the tiles.
+            Gets the y.
             </summary>
         </member>
-        <member name="P:Engine.Renderer.Tile.TilemapLayer.Tilesheet">
+        <member name="P:Engine.Renderer.Tile.TilemapLayerObject.Width">
             <summary>
-            Gets or sets the tileset.
+            Gets the width.
             </summary>
         </member>
-        <member name="P:Engine.Renderer.Tile.TilemapLayer.TilemapModel">
+        <member name="P:Engine.Renderer.Tile.TilemapLayerObject.Height">
             <summary>
-            Gets the Tilemap model.
+            Gets the height.
             </summary>
         </member>
-        <member name="P:Engine.Renderer.Tile.TilemapLayer.TileTexSizeX">
+        <member name="P:Engine.Renderer.Tile.TilemapLayerObject.Name">
             <summary>
-            Gets the Tile texture size X.
+            Gets the name.
             </summary>
         </member>
-        <member name="P:Engine.Renderer.Tile.TilemapLayer.TileTexSizeY">
+        <member name="P:Engine.Renderer.Tile.TilemapLayerObject.Properties">
             <summary>
-            Gets the Tile texture size Y.
+            Gets the properties.
             </summary>
         </member>
-        <member name="P:Engine.Renderer.Tile.TilemapLayer.Item(System.Int32,System.Int32)">
+        <member name="P:Engine.Renderer.Tile.TilemapLayerObject.Type">
             <summary>
-            Makes content accessible.
+            Gets the type.
             </summary>
-            <param name="x">x position.</param>
-            <param name="y">y position.</param>
-            <returns>The handle for the tile.</returns>
+        </member>
+        <member name="M:Engine.Renderer.Tile.TilemapLayerObject.GetProperty(System.String)">
+            <summary>
+            Gets a property, returns null if not found.
+            </summary>
+            <param name="name">Property name.</param>
+            <returns>Property or null.</returns>
+        </member>
+        <member name="T:Engine.Renderer.Tile.TilemapObjectLayer">
+            <summary>
+            Tilemap object layer class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Tile.TilemapObjectLayer.#ctor(Engine.Renderer.Tile.Tilesheet,Engine.Renderer.Tile.Parser.TilemapLayerModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Tile.TilemapObjectLayer"/> class.
+            </summary>
+            <param name="tilesheet">The tilesheet.</param>
+            <param name="model">The model.</param>
+        </member>
+        <member name="P:Engine.Renderer.Tile.TilemapObjectLayer.Objects">
+            <summary>
+            Gets layer Objects.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Tile.TilemapObjectLayer.FindObjectByName(System.String)">
+            <summary>
+            Find Object by name.
+            </summary>
+            <param name="name">Name of the object.</param>
+            <returns>Object or null.</returns>
+        </member>
+        <member name="M:Engine.Renderer.Tile.TilemapObjectLayer.FindObjectsByName(System.String)">
+            <summary>
+            Find Objects by name.
+            </summary>
+            <param name="name">Name of the objects.</param>
+            <returns>Objects or null.</returns>
         </member>
         <member name="T:Engine.Renderer.Tile.TilemapRenderer">
             <summary>
@@ -1609,6 +1658,61 @@
         </member>
         <member name="M:Engine.Renderer.Tile.TilemapRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
+        </member>
+        <member name="T:Engine.Renderer.Tile.TilemapTileLayer">
+            <summary>
+            The Tilemap class.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Tile.TilemapTileLayer.#ctor(Engine.Renderer.Tile.Tilesheet,Engine.Renderer.Tile.Parser.TilemapLayerModel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Renderer.Tile.TilemapTileLayer"/> class.
+            </summary>
+            <param name="tilesheet"> The tileset the tilemap is using.</param>
+            <param name="model"> The model the tilemap bases on.</param>
+        </member>
+        <member name="P:Engine.Renderer.Tile.TilemapTileLayer.Width">
+            <summary>
+            Gets the tile amount in length.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.TilemapTileLayer.Height">
+            <summary>
+            Gets the tile amount in height.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.TilemapTileLayer.Tiles">
+            <summary>
+            Gets the tiles.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.TilemapTileLayer.Tilesheet">
+            <summary>
+            Gets or sets the tileset.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.TilemapTileLayer.TilemapModel">
+            <summary>
+            Gets the Tilemap model.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.TilemapTileLayer.TileTexSizeX">
+            <summary>
+            Gets the Tile texture size X.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.TilemapTileLayer.TileTexSizeY">
+            <summary>
+            Gets the Tile texture size Y.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Tile.TilemapTileLayer.Item(System.Int32,System.Int32)">
+            <summary>
+            Makes content accessible.
+            </summary>
+            <param name="x">x position.</param>
+            <param name="y">y position.</param>
+            <returns>The handle for the tile.</returns>
         </member>
         <member name="T:Engine.Renderer.Tile.Tilesheet">
             <summary>
@@ -2143,14 +2247,14 @@
             <summary>
             Tilemap service class.
             </summary>
+            <summary>
+            Tilemap service class.
+            </summary>
         </member>
         <member name="M:Engine.Service.TilemapService.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Service.TilemapService"/> class.
             </summary>
-        </member>
-        <member name="M:Engine.Service.TilemapService.Render(OpenTK.Windowing.Common.FrameEventArgs)">
-            <inheritdoc/>
         </member>
         <member name="M:Engine.Service.TilemapService.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
@@ -2179,6 +2283,9 @@
             Sets the optimization point.
             </summary>
             <param name="rectangle">optimization point.</param>
+        </member>
+        <member name="M:Engine.Service.TilemapService.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
         </member>
     </members>
 </doc>

@@ -64,6 +64,53 @@
         <member name="M:Game.Enemy.EnemyPistol.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="T:Game.GameComponents.AnimationScheduler">
+            <summary>
+            Used for Schedueling Animations.
+            </summary>
+        </member>
+        <member name="M:Game.GameComponents.AnimationScheduler.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.GameComponents.AnimationScheduler.AddAnimation(System.Int32,System.Single,Engine.Renderer.Sprite.ISprite)">
+            <summary>
+            Add a new Animation.
+            </summary>
+            <param name="prio">The Prio this animation has. ( Lower means better).</param>
+            <param name="time">How long to play this animation.</param>
+            <param name="animation">The Animation to be played.</param>
+        </member>
+        <member name="T:Game.GameComponents.AnimationWithTimeAndPrio">
+            <summary>
+            Wraper class, that says how long which animation should be played.
+            </summary>
+        </member>
+        <member name="M:Game.GameComponents.AnimationWithTimeAndPrio.#ctor(System.Int32,System.Single,Engine.Renderer.Sprite.ISprite)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.GameComponents.AnimationWithTimeAndPrio"/> class.
+            </summary>
+            <param name="prio">Prio of the animation. (Lower means better)</param>
+            <param name="time">How long to play the animation.</param>
+            <param name="animation">The animation.</param>
+        </member>
+        <member name="P:Game.GameComponents.AnimationWithTimeAndPrio.Animation">
+            <summary>
+            Gets or sets the Animation.
+            </summary>
+        </member>
+        <member name="P:Game.GameComponents.AnimationWithTimeAndPrio.TimeLeft">
+            <summary>
+            Gets or sets the time Left on this Animation.
+            </summary>
+        </member>
+        <member name="P:Game.GameComponents.AnimationWithTimeAndPrio.Prio">
+            <summary>
+            Gets or sets the Prio of this Animation.
+            </summary>
+        </member>
+        <member name="M:Game.GameComponents.AnimationWithTimeAndPrio.CompareTo(System.Object)">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Gun.Ammunition.Bullet">
             <summary>
             A bullet that flies straight untill it hits something, then does DMG and despwans.
