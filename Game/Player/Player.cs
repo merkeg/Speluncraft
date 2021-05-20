@@ -60,7 +60,7 @@ namespace Game.Player
 
             // For Demo 2.0
             // this.AddComponent(new Engine.Component.DoDamageCollisionResponse(10, 1));
-            this.gun = new Gun.Pistol();
+            this.gun = new Gun.ShotGun();
             this.AddComponent(this.gun.GetAsComponent());
         }
 
@@ -78,9 +78,8 @@ namespace Game.Player
 
             this.Walk(frameTime, keyboardState, physics);
 
-            this.Shoot(keyboardState);
-
             base.OnUpdate(frameTime);
+            this.Shoot(keyboardState);
             this.UpdateAnimations();
 
             // Check death

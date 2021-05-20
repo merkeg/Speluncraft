@@ -144,6 +144,27 @@
             Fires a Bullet, when trigger is pulled and is reloaded.
             </summary>
         </member>
+        <member name="T:Game.Gun.ShotGun">
+            <summary>
+            A shotgun.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.ShotGun.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.ShotGun"/> class.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.ShotGun.GetAsComponent">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.ShotGun.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.ShotGun.PullTrigger">
+            <summary>
+            Fires a Bullet, when trigger is pulled and is reloaded.
+            </summary>
+        </member>
         <member name="T:Game.Gun.CameraTrackingComponent">
             <summary>
             Camera tracking component class.
