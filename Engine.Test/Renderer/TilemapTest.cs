@@ -48,12 +48,12 @@ namespace EngineTest.Renderer
             TilemapModel model = TilemapParser.ParseTilemap(tilemapStream);
             Tilemap tilemap = new Tilemap(null, model);
 
-            Assert.IsTrue(tilemap.Layers.Length == 1, "Tilemap layer count should be 1");
-            TilemapLayer layer = tilemap[0];
-            Assert.IsTrue(layer.Width == 48, "Layer width must be 48");
-            Assert.IsTrue(layer.Height == 22, "Layer height must be 22");
+            Assert.IsTrue(tilemap.TileLayers.Count == 1, "Tilemap layer count should be 1");
+            TilemapTileLayer tileLayer = tilemap[0];
+            Assert.IsTrue(tileLayer.Width == 48, "Layer width must be 48");
+            Assert.IsTrue(tileLayer.Height == 22, "Layer height must be 22");
 
-            Assert.IsTrue(layer[0, 0] == 1, "Wrong tile, " + layer[0, 0]);
+            Assert.IsTrue(tileLayer[0, 0] == 1, "Wrong tile, " + tileLayer[0, 0]);
         }
 
         [TestMethod]
