@@ -4,6 +4,8 @@
 
 namespace Engine.Renderer.Tile
 {
+    using System.Collections.Generic;
+
 #pragma warning disable SA1135 // Using directives should be qualified
     using Tile.Parser;
 #pragma warning restore SA1135 // Using directives should be qualified
@@ -20,19 +22,32 @@ namespace Engine.Renderer.Tile
         /// <param name="model">The model which the tilemap will be built.</param>
         public Tilemap(Tilesheet tilesheet, TilemapModel model)
         {
-            this.Layers = new TilemapLayer[model.layers.Count];
+            this.TileLayers = new List<TilemapTileLayer>();
+            this.ObjectLayers = new List<TilemapObjectLayer>();
             this.Tilesheet = tilesheet;
-            int i = 0;
+
             foreach (TilemapLayerModel layer in model.layers)
             {
-                this.Layers[i++] = new TilemapLayer(tilesheet, layer);
+                if (layer.type == "tilelayer")
+                {
+                    this.TileLayers.Add(new TilemapTileLayer(tilesheet, layer));
+                }
+                else if (layer.type == "objectgroup")
+                {
+                    this.ObjectLayers.Add(new TilemapObjectLayer(tilesheet, layer));
+                }
             }
         }
 
         /// <summary>
         /// Gets the Layers.
         /// </summary>
-        public TilemapLayer[] Layers { get; private set; }
+        public List<TilemapTileLayer> TileLayers { get; private set; }
+
+        /// <summary>
+        /// Gets the Object layers.
+        /// </summary>
+        public List<TilemapObjectLayer> ObjectLayers { get; private set; }
 
         /// <summary>
         /// Gets the Tileset the tilemap is using.
@@ -44,6 +59,6 @@ namespace Engine.Renderer.Tile
         /// </summary>
         /// <param name="layer">The layer to access to.</param>
         /// <returns>The specified Tilemap layer.</returns>
-        public ref TilemapLayer this[int layer] => ref this.Layers[layer];
+        public TilemapTileLayer this[int layer] => this.TileLayers[layer];
     }
 }
