@@ -17,8 +17,8 @@ namespace Game.Gun
     /// </summary>
     public class ShotGun : Engine.Component.Component, IGun
     {
-        private readonly float bulletLenght = 0.5f;
-        private readonly float bulletHeight = 0.5f;
+        private readonly float bulletLenght = 0.3f;
+        private readonly float bulletHeight = 0.3f;
         private readonly float bufferDistance = 0f;
 
         private readonly int damageDelayFrames = 1;
