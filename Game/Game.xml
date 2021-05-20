@@ -69,12 +69,13 @@
             A bullet that flies straight untill it hits something, then does DMG and despwans.
             </summary>
         </member>
-        <member name="M:Game.Gun.Ammunition.Bullet.#ctor(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
+        <member name="M:Game.Gun.Ammunition.Bullet.#ctor(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.Gun.Ammunition.Bullet"/> class.
             </summary>
             <param name="dmg">How much dmg it will do on impact.</param>
-            <param name="velocityX">How fast it is flying.</param>
+            <param name="velocityX">How fast it is flying straight.</param>
+            <param name="velocityY">How fast it is flying up.</param>
             <param name="minX">Where it will spawn on X-Axsis.</param>
             <param name="minY">Where it will spawn on Y-Axsis.</param>
             <param name="sizeX">Size X.</param>
