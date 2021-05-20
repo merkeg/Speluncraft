@@ -123,6 +123,27 @@
             </summary>
             <returns>-1 for left, 1 for right.</returns>
         </member>
+        <member name="T:Game.Gun.MachineGun">
+            <summary>
+            A Pistol that shoots normal bullets. With Medium DMG and Medium reload time.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.MachineGun.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.MachineGun"/> class.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.MachineGun.GetAsComponent">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.MachineGun.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.MachineGun.PullTrigger">
+            <summary>
+            Fires a Bullet, when trigger is pulled and is reloaded.
+            </summary>
+        </member>
         <member name="T:Game.Gun.Pistol">
             <summary>
             A Pistol that shoots normal bullets. With Medium DMG and Medium reload time.
