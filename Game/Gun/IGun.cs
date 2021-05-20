@@ -23,5 +23,11 @@ namespace Game.Gun
         /// </summary>
         /// <returns>The Gun as a Component.</returns>
         public Engine.Component.Component GetAsComponent();
+
+        /// <summary>
+        /// If a shoot was fired this Frame.
+        /// </summary>
+        /// <returns>True if a shoot was fired this Frame.</returns>
+        public bool ShotFired();
     }
 }

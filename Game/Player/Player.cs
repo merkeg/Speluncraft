@@ -201,7 +201,7 @@ namespace Game.Player
             }
             else
             { // Player is not breaking or accelerating
-                this.animationScheduler.AddAnimation(50, 0.001f, this.spriteIdle);
+                this.animationScheduler.AddAnimation(51, 0.001f, this.spriteIdle);
                 this.Idle(frameTime, physics);
             }
 
@@ -231,6 +231,12 @@ namespace Game.Player
             if (this.GetComponent<Engine.Component.HealthPoints>().GetTookDmgThisFrame())
             {
                 this.animationScheduler.AddAnimation(20, 0.3f, this.spriteFall);
+            }
+
+            // Shooting
+            if (this.gun.ShotFired())
+            {
+                this.animationScheduler.AddAnimation(15, 0.2f, this.spriteBack);
             }
         }
 

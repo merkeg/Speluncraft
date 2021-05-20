@@ -31,6 +31,8 @@ namespace Game.Gun
         private float reloadTime = 0.75f;
         private float reloadCoolDown = 0;
 
+        private bool shotFiredThisFrame;
+
         private Random randy;
 
         private ISprite bulletSprite;
@@ -65,6 +67,8 @@ namespace Game.Gun
         {
             if (this.reloadCoolDown <= 0)
             {
+                this.shotFiredThisFrame = true;
+
                 // KnockBack
                 Physics p = this.GameObject.GetComponent<Physics>();
                 if (p != null)
@@ -108,6 +112,16 @@ namespace Game.Gun
 
                 this.reloadCoolDown = this.reloadTime;
             }
+            else
+            {
+                this.shotFiredThisFrame = false;
+            }
+        }
+
+        /// <inheritdoc/>
+        public bool ShotFired()
+        {
+            return this.shotFiredThisFrame;
         }
     }
 }

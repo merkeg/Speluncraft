@@ -28,6 +28,8 @@ namespace Game.Gun
         private float reloadTime = 0.25f;
         private float reloadCoolDown = 0;
 
+        private bool shotFiredThisFrame;
+
         private ISprite bulletSprite;
 
         /// <summary>
@@ -59,6 +61,7 @@ namespace Game.Gun
         {
             if (this.reloadCoolDown <= 0)
             {
+                this.shotFiredThisFrame = true;
                 if (this.GameObject is ILookDirection)
                 {
                     ILookDirection d = (ILookDirection)this.GameObject;
@@ -77,6 +80,16 @@ namespace Game.Gun
 
                 this.reloadCoolDown = this.reloadTime;
             }
+            else
+            {
+                this.shotFiredThisFrame = false;
+            }
+        }
+
+        /// <inheritdoc/>
+        public bool ShotFired()
+        {
+            return this.shotFiredThisFrame;
         }
     }
 }

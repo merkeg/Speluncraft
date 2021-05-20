@@ -175,6 +175,9 @@
             Fires a Bullet, when trigger is pulled and is reloaded.
             </summary>
         </member>
+        <member name="M:Game.Gun.GrenadeLauncher.ShotFired">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Gun.IGun">
             <summary>
             Interface for Guns, provides pullTrigger() Methode.
@@ -190,6 +193,12 @@
             Retunrs the gun as Component.
             </summary>
             <returns>The Gun as a Component.</returns>
+        </member>
+        <member name="M:Game.Gun.IGun.ShotFired">
+            <summary>
+            If a shoot was fired this Frame.
+            </summary>
+            <returns>True if a shoot was fired this Frame.</returns>
         </member>
         <member name="T:Game.Gun.ILookDirection">
             <summary>
@@ -233,6 +242,9 @@
             Fires a Bullet, when trigger is pulled and is reloaded.
             </summary>
         </member>
+        <member name="M:Game.Gun.MachineGun.ShotFired">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Gun.Pistol">
             <summary>
             A Pistol that shoots normal bullets. With Medium DMG and Medium reload time.
@@ -253,6 +265,9 @@
             <summary>
             Fires a Bullet, when trigger is pulled and is reloaded.
             </summary>
+        </member>
+        <member name="M:Game.Gun.Pistol.ShotFired">
+            <inheritdoc/>
         </member>
         <member name="T:Game.Gun.ShotGun">
             <summary>
@@ -275,6 +290,9 @@
             Fires a Bullet, when trigger is pulled and is reloaded.
             </summary>
         </member>
+        <member name="M:Game.Gun.ShotGun.ShotFired">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Gun.Sniper">
             <summary>
             A Sniper with high damage but a long reload time.
@@ -295,6 +313,9 @@
             <summary>
             Fires a Bullet, when trigger is pulled and is reloaded.
             </summary>
+        </member>
+        <member name="M:Game.Gun.Sniper.ShotFired">
+            <inheritdoc/>
         </member>
         <member name="T:Game.Gun.CameraTrackingComponent">
             <summary>
