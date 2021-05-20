@@ -117,13 +117,13 @@ namespace Game
             // Engine.Engine.AddGameObject(fire);
             this.tilemap.FindObjectsByName("DummyAI").ForEach(obj =>
             {
-                DummyAI enemy = new DummyAI(obj.X, -obj.Y + 1, 1, 1.25f, enemySprite, 10);
+                DummyAI enemy = new DummyAI(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10);
                 Engine.Engine.AddGameObject(enemy);
             });
 
             this.tilemap.FindObjectsByName("EnemyPistol").ForEach(obj =>
             {
-                EnemyPistol enemy = new EnemyPistol(obj.X, -obj.Y + 1, 1, 1.25f, enemyGunSprite, 10);
+                EnemyPistol enemy = new EnemyPistol(obj.X, -obj.Y + 1, 1, 1.375f, enemyGunSprite, 10);
                 Engine.Engine.AddGameObject(enemy);
             });
         }
