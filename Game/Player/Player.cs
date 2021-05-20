@@ -188,13 +188,13 @@ namespace Game.Player
         {
             if (keyboardState.IsKeyDown(Keys.A))
             { // Player wants to go left
-                this.animationScheduler.AddAnimation(49, 0.001f, this.spriteWalking);
+                this.animationScheduler.AddAnimation(49, 0.03f, this.spriteWalking);
                 this.Mirrored = true;
                 this.WalkLeft(frameTime, physics);
             }
             else if (keyboardState.IsKeyDown(Keys.D))
             { // Player wants to go right
-                this.animationScheduler.AddAnimation(49, 0.001f, this.spriteWalking);
+                this.animationScheduler.AddAnimation(49, 0.03f, this.spriteWalking);
                 this.Mirrored = false;
                 this.WalkRight(frameTime, physics);
             }
@@ -208,15 +208,23 @@ namespace Game.Player
         private void UpdateAnimations()
         {
             Engine.Component.Physics phys = this.GetComponent<Engine.Component.Physics>();
+
+            // Falling
             if (phys.GetVelocity().Y < 0)
             {
                 this.animationScheduler.AddAnimation(40, 0.001f, this.spriteFall);
             }
 
+            // Jumping
             if (phys.GetVelocity().Y > 0 && this.jumpcounter < this.jumpCounterMax)
             {
-                this.Sprite = this.spriteJump;
                 this.animationScheduler.AddAnimation(35, 0.0001f, this.spriteJump);
+            }
+
+            // Took Damage
+            if (this.GetComponent<Engine.Component.HealthPoints>().GetTookDmgThisFrame())
+            {
+                this.animationScheduler.AddAnimation(20, 0.3f, this.spriteFall);
             }
         }
 

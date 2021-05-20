@@ -273,6 +273,12 @@
             <param name="hp">HP to be added.</param>
             <returns>The isDeadFlag.</returns>
         </member>
+        <member name="M:Engine.Component.HealthPoints.GetTookDmgThisFrame">
+            <summary>
+            Get the tookDmgThisFrame flag.
+            </summary>
+            <returns>The tookDmgThisFrame flag.</returns>
+        </member>
         <member name="M:Engine.Component.HealthPoints.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
