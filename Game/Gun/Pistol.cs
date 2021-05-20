@@ -19,7 +19,9 @@ namespace Game.Gun
     {
         private readonly float bulletLenght = 0.5f;
         private readonly float bulletHeight = 0.5f;
-        private readonly float bufferDistance = 0.2f;
+        private readonly float bufferDistance = 0f;
+
+        private readonly int damageDelayFrames = 1;
 
         private readonly float bulletVelocity = 10;
         private int dmg = 10;
@@ -62,13 +64,13 @@ namespace Game.Gun
                     ILookDirection d = (ILookDirection)this.GameObject;
                     if (d.GetDirection() == ILookDirection.Left)
                     {
-                        Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, -this.bulletVelocity, this.GameObject.MinX - this.bulletLenght - this.bufferDistance, this.GameObject.MinY + 0.5f, this.bulletLenght, this.bulletHeight, this.bulletSprite);
+                        Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, -this.bulletVelocity, this.GameObject.MinX - this.bulletLenght - this.bufferDistance, this.GameObject.MinY + 0.5f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
                         Engine.Engine.AddGameObject(b);
                     }
 
                     if (d.GetDirection() == ILookDirection.Right)
                     {
-                        Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, this.bulletVelocity, this.GameObject.MinX + this.GameObject.SizeX + this.bufferDistance, this.GameObject.MinY + 0.5f, this.bulletLenght, this.bulletHeight, this.bulletSprite);
+                        Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, this.bulletVelocity, this.GameObject.MinX + this.GameObject.SizeX + this.bufferDistance, this.GameObject.MinY + 0.5f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
                         Engine.Engine.AddGameObject(b);
                     }
                 }

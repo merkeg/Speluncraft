@@ -69,7 +69,7 @@
             A bullet that flies straight untill it hits something, then does DMG and despwans.
             </summary>
         </member>
-        <member name="M:Game.Gun.Ammunition.Bullet.#ctor(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
+        <member name="M:Game.Gun.Ammunition.Bullet.#ctor(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.Gun.Ammunition.Bullet"/> class.
             </summary>
@@ -80,6 +80,7 @@
             <param name="sizeX">Size X.</param>
             <param name="sizeY">Size Y.</param>
             <param name="sprite">Its sprite.</param>
+            <param name="damageDelayFrames">How many frames to wait, before this bullet will do Damage.</param>
         </member>
         <member name="M:Game.Gun.Ammunition.Bullet.OnUpdate(System.Single)">
             <inheritdoc/>
@@ -283,6 +284,62 @@
         <member name="M:Game.UI.HealthbarPlayer.OnRendererCreate">
             <summary>
             OnCreate function.
+            </summary>
+        </member>
+        <member name="T:Game.UI.InteractableElement">
+            <summary>
+            Element class.
+            </summary>
+        </member>
+        <member name="M:Game.UI.InteractableElement.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Text.Font,System.String,OpenTK.Mathematics.Color4,OpenTK.Mathematics.Color4,System.Single,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.UI.InteractableElement"/> class.
+            </summary>
+            <param name="minX">mX.</param>
+            <param name="minY">mY.</param>
+            <param name="sizeX">X.</param>
+            <param name="sizeY">Y.</param>
+            <param name="font">Font.</param>
+            <param name="text">Info text.</param>
+            <param name="colorText">Color of text.</param>
+            <param name="range">The view range.</param>
+            <param name="colorSprite">Color of sprite.</param>
+            <param name="closeOnInteract">Destroy Element on interact.</param>
+        </member>
+        <member name="E:Game.UI.InteractableElement.Interact">
+            <summary>
+            Event handler if interacted with.
+            </summary>
+        </member>
+        <member name="P:Game.UI.InteractableElement.Text">
+            <summary>
+            Gets the text.
+            </summary>
+        </member>
+        <member name="P:Game.UI.InteractableElement.Particle">
+            <summary>
+            Gets the Particle.
+            </summary>
+        </member>
+        <member name="P:Game.UI.InteractableElement.Range">
+            <summary>
+            Gets or sets the view range.
+            </summary>
+        </member>
+        <member name="P:Game.UI.InteractableElement.InRange">
+            <summary>
+            Gets or sets a value indicating whether in range.
+            </summary>
+        </member>
+        <member name="M:Game.UI.InteractableElement.OnUpdatableCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.InteractableElement.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.InteractableElement.Destroy">
+            <summary>
+            Destroy the element.
             </summary>
         </member>
         <member name="T:Game.UI.UILoader">
