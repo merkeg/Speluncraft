@@ -319,6 +319,12 @@
             <param name="sizeY">Player height.</param>
             <param name="sprite">Player sprite.</param>
         </member>
+        <member name="M:Game.Player.Player.ChangeGun(Game.Gun.IGun)">
+            <summary>
+            Change the Gun of the Player ( the old Gun will be deleted ).
+            </summary>
+            <param name="gun">The new Gun.</param>
+        </member>
         <member name="M:Game.Player.Player.GetDirection">
             <inheritdoc/>
         </member>

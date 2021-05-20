@@ -62,6 +62,31 @@ namespace Game.Player
             // this.AddComponent(new Engine.Component.DoDamageCollisionResponse(10, 1));
             this.gun = new Gun.GrenadeLauncher();
             this.AddComponent(this.gun.GetAsComponent());
+            this.ChangeGun(new Gun.MachineGun());
+        }
+
+        /// <summary>
+        /// Change the Gun of the Player ( the old Gun will be deleted ).
+        /// </summary>
+        /// <param name="gun">The new Gun.</param>
+        public void ChangeGun(Gun.IGun gun)
+        {
+            Engine.Component.Component oldGun = null;
+            foreach (Engine.Component.Component c in this.GetComponents())
+            {
+                if (c is Gun.IGun)
+                {
+                    oldGun = c;
+                }
+            }
+
+            this.RemoveComponent(oldGun);
+
+            this.gun = gun;
+            if (gun is Engine.Component.Component)
+            {
+                this.AddComponent((Engine.Component.Component)gun);
+            }
         }
 
         /// <inheritdoc/>
