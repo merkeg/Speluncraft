@@ -36,7 +36,7 @@ namespace Engine.Renderer.Particle
         public float Lived { get; set; }
 
         /// <summary>
-        /// Gets or sets the lifetime
+        /// Gets or sets the lifetime.
         /// </summary>
         public float Lifetime { get; set; }
 
@@ -46,7 +46,7 @@ namespace Engine.Renderer.Particle
         public Vector2 Velocity { get; set; }
 
         /// <summary>
-        /// Gets or sets the bounds
+        /// Gets or sets the bounds.
         /// </summary>
         public IRectangle Bounds { get; set; }
 

@@ -169,7 +169,7 @@ namespace Engine.Renderer.Particle
         /// <summary>
         /// Generates a new particle.
         /// </summary>
-        /// <param name="position">Position of the spawn point</param>
+        /// <param name="position">Position of the spawn point.</param>
         /// <returns>new Particle.</returns>
         public Particle NewParticle(IRectangle position)
         {

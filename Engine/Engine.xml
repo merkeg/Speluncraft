@@ -423,15 +423,14 @@
             <summary>
             The Engine instance to bind with OpenGL.
             </summary>
-        </member>
-        <member name="P:Engine.Engine.GameObjects">
             <summary>
-            Gets a list of GameObjects in the game.
+            The Engine instance to bind with OpenGL.
             </summary>
-        </member>
-        <member name="P:Engine.Engine.Renderers">
             <summary>
-            Gets the renderers.
+            The Engine instance to bind with OpenGL.
+            </summary>
+            <summary>
+            The Engine instance to bind with OpenGL.
             </summary>
         </member>
         <member name="P:Engine.Engine.Colliders">
@@ -449,19 +448,15 @@
             Gets the game Camera.
             </summary>
         </member>
-        <member name="P:Engine.Engine.Services">
+        <member name="M:Engine.Engine.StartEngine(OpenTK.Windowing.Desktop.GameWindow)">
             <summary>
-            Gets the services.
+            Start the engine ticks.
             </summary>
+            <param name="window">The GameWindow the engine will be run on.</param>
         </member>
-        <member name="P:Engine.Engine.GameObjectsToRemove">
+        <member name="P:Engine.Engine.GameObjects">
             <summary>
-            Gets or sets Here you can add GameObjects that should be removed Engine frame.
-            </summary>
-        </member>
-        <member name="P:Engine.Engine.GameObjectsToAdd">
-            <summary>
-            Gets or sets Here you can add GameObjects that should be added next frame.
+            Gets a list of GameObjects in the game.
             </summary>
         </member>
         <member name="M:Engine.Engine.AddGameObject(Engine.GameObject.GameObject)">
@@ -470,19 +465,6 @@
             </summary>
             <param name="gameObject">The GameObject to add.</param>
         </member>
-        <member name="M:Engine.Engine.AddRenderer(Engine.Renderer.IRenderer,Engine.Renderer.RenderLayer)">
-            <summary>
-            Adds an renderer to the list.
-            </summary>
-            <param name="renderer">The renderer to add.</param>
-            <param name="layer">The render order.</param>
-        </member>
-        <member name="M:Engine.Engine.StartEngine(OpenTK.Windowing.Desktop.GameWindow)">
-            <summary>
-            Start the engine ticks.
-            </summary>
-            <param name="window">The GameWindow the engine will be run on.</param>
-        </member>
         <member name="M:Engine.Engine.RemoveGameObject(Engine.GameObject.GameObject)">
             <summary>
             Removes an GameObject from the World and Calls it OnDestroy() func.
@@ -490,17 +472,35 @@
             </summary>
             <param name="gameObject">The GameObject to Destroy.</param>
         </member>
+        <member name="P:Engine.Engine.Renderers">
+            <summary>
+            Gets the renderers.
+            </summary>
+        </member>
+        <member name="M:Engine.Engine.AddRenderer(Engine.Renderer.IRenderer,Engine.Renderer.RenderLayer)">
+            <summary>
+            Adds an renderer to the list.
+            </summary>
+            <param name="renderer">The renderer to add.</param>
+            <param name="layer">The render order.</param>
+        </member>
+        <member name="M:Engine.Engine.RemoveRenderer(Engine.Renderer.IRenderer,Engine.Renderer.RenderLayer)">
+            <summary>
+            Removes an rendere.
+            </summary>
+            <param name="renderer">The rendere to Remove.</param>
+            <param name="layer">Render layer.</param>
+        </member>
+        <member name="P:Engine.Engine.Services">
+            <summary>
+            Gets the services.
+            </summary>
+        </member>
         <member name="M:Engine.Engine.AddService(Engine.Service.IService)">
             <summary>
             Adds an service to the engine.
             </summary>
             <param name="service">the service.</param>
-        </member>
-        <member name="M:Engine.Engine.ImplementGameObject(Engine.GameObject.GameObject)">
-            <summary>
-            Adds an GameObject to the list.
-            </summary>
-            <param name="gameObject">The GameObject to add.</param>
         </member>
         <member name="M:Engine.Engine.GetService(System.String)">
             <summary>
@@ -515,19 +515,6 @@
             </summary>
             <typeparam name="T">the type.</typeparam>
             <returns>the service.</returns>
-        </member>
-        <member name="M:Engine.Engine.ExcludeGameObject(Engine.GameObject.GameObject)">
-            <summary>
-            Removes an GameObject from the World and Calls it OnDestroy() func.
-            Also checks if there are Colliders from it and delets it.
-            </summary>
-            <param name="gameObject">The GameObject to Destroy.</param>
-        </member>
-        <member name="M:Engine.Engine.RemoveRenderer(Engine.Renderer.IRenderer,Engine.Renderer.RenderLayer)">
-            <summary>
-            Removes an rendere.
-            </summary>
-            <param name="renderer">The rendere to Remove.</param>
         </member>
         <member name="T:Engine.GameObject.GameObject">
             <summary>
@@ -874,7 +861,7 @@
         </member>
         <member name="P:Engine.Renderer.Particle.Particle.Lifetime">
             <summary>
-            Gets or sets the lifetime
+            Gets or sets the lifetime.
             </summary>
         </member>
         <member name="P:Engine.Renderer.Particle.Particle.Velocity">
@@ -884,7 +871,7 @@
         </member>
         <member name="P:Engine.Renderer.Particle.Particle.Bounds">
             <summary>
-            Gets or sets the bounds
+            Gets or sets the bounds.
             </summary>
         </member>
         <member name="P:Engine.Renderer.Particle.Particle.Sprite">
@@ -998,7 +985,7 @@
             <summary>
             Generates a new particle.
             </summary>
-            <param name="position">Position of the spawn point</param>
+            <param name="position">Position of the spawn point.</param>
             <returns>new Particle.</returns>
         </member>
         <member name="T:Engine.Renderer.Particle.ParticleEmitterData">
@@ -1071,6 +1058,19 @@
         <member name="P:Engine.Renderer.Sprite.AnimatedSprite.TexY1">
             <inheritdoc/>
         </member>
+        <member name="P:Engine.Renderer.Sprite.AnimatedSprite.Color">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.AnimatedSprite.State">
+            <summary>
+            Gets the current state of the animation.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.AnimatedSprite.Paused">
+            <summary>
+            Gets or sets a value indicating whether gets or sets if paused.
+            </summary>
+        </member>
         <member name="P:Engine.Renderer.Sprite.AnimatedSprite.Item(System.Int32)">
             <summary>
             Reference to this.
@@ -1079,6 +1079,12 @@
         </member>
         <member name="M:Engine.Renderer.Sprite.AnimatedSprite.TimeElapsed(System.Single)">
             <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.Sprite.AnimatedSprite.SetState(System.Int32)">
+            <summary>
+            Sets the animation state.
+            </summary>
+            <param name="index">index state.</param>
         </member>
         <member name="T:Engine.Renderer.Sprite.ISprite">
             <summary>
@@ -1118,6 +1124,11 @@
         <member name="P:Engine.Renderer.Sprite.ISprite.TexY1">
             <summary>
             Gets the texture y1 position.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.ISprite.Color">
+            <summary>
+            Gets or sets the Color.
             </summary>
         </member>
         <member name="M:Engine.Renderer.Sprite.ISprite.TimeElapsed(System.Single)">
@@ -1218,6 +1229,9 @@
             <inheritdoc/>
         </member>
         <member name="P:Engine.Renderer.Sprite.Sprite.TexY1">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Sprite.Sprite.Color">
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.Sprite.Sprite.TimeElapsed(System.Single)">
@@ -1357,7 +1371,7 @@
             The text renderer class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.Text.TextRenderer.#ctor(System.String,Engine.Renderer.Text.Font,OpenTK.Mathematics.Color4,Engine.GameObject.Rectangle,System.Single)">
+        <member name="M:Engine.Renderer.Text.TextRenderer.#ctor(System.String,Engine.Renderer.Text.Font,OpenTK.Mathematics.Color4,Engine.GameObject.IRectangle,System.Single,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.Text.TextRenderer"/> class.
             </summary>
@@ -1366,6 +1380,7 @@
             <param name="color">The color to render it with.</param>
             <param name="position">Position of the text.</param>
             <param name="fontScale">Scale of the text.</param>
+            <param name="worldCoordinates">Use world coordinates instead of absolute.</param>
         </member>
         <member name="P:Engine.Renderer.Text.TextRenderer.Text">
             <summary>
@@ -1390,6 +1405,11 @@
         <member name="P:Engine.Renderer.Text.TextRenderer.FontScale">
             <summary>
             Gets or sets the font scale.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Text.TextRenderer.Hidden">
+            <summary>
+            Gets or sets a value indicating whether if hidden.
             </summary>
         </member>
         <member name="M:Engine.Renderer.Text.TextRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
@@ -1687,6 +1707,9 @@
         <member name="P:Engine.Renderer.Tile.TileSprite.TexY1">
             <inheritdoc/>
         </member>
+        <member name="P:Engine.Renderer.Tile.TileSprite.Color">
+            <inheritdoc/>
+        </member>
         <member name="M:Engine.Renderer.Tile.TileSprite.TimeElapsed(System.Single)">
             <inheritdoc/>
         </member>
@@ -1856,6 +1879,11 @@
             Gets the Renderers.
             </summary>
         </member>
+        <member name="P:Engine.Renderer.UI.UiElement.Hidden">
+            <summary>
+            Gets or sets a value indicating whether hidden.
+            </summary>
+        </member>
         <member name="P:Engine.Renderer.UI.UiElement.AbsoluteBounds">
             <summary>
             Gets the absolute bounds.
@@ -1961,6 +1989,48 @@
             Componts that want to get Collosions checked for, need to implement this interface.
             </summary>
         </member>
+        <member name="T:Engine.Service.InputService">
+            <summary>
+            Input service class.
+            </summary>
+        </member>
+        <member name="T:Engine.Service.InputService.Handler">
+            <summary>
+            The handler.
+            </summary>
+        </member>
+        <member name="M:Engine.Service.InputService.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.InputService.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.InputService.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.InputService.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.InputService.OnUpdatableDestroy">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.InputService.OnUpdatableCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.InputService.Subscribe(OpenTK.Windowing.GraphicsLibraryFramework.Keys,Engine.Service.InputService.Handler)">
+            <summary>
+            Subscribe to an keydown event.
+            </summary>
+            <param name="key">key.</param>
+            <param name="action">action.</param>
+        </member>
+        <member name="M:Engine.Service.InputService.Unsubscribe(OpenTK.Windowing.GraphicsLibraryFramework.Keys,Engine.Service.InputService.Handler)">
+            <summary>
+            Unsubscribe from an keydown event.
+            </summary>
+            <param name="key">key.</param>
+            <param name="action">action.</param>
+        </member>
         <member name="T:Engine.Service.IPhysicsServiceSubscriber">
             <summary>
             Componts must implemt this to get Updates from Physics Service.
@@ -2017,6 +2087,12 @@
             <param name="emitter">The emitter.</param>
             <param name="position">Position.</param>
             <param name="lifetime">The lifetime of the emitter. Set to 0 to disable deletion.</param>
+        </member>
+        <member name="M:Engine.Service.ParticleService.Remove(Engine.Renderer.Particle.ParticleEmitter)">
+            <summary>
+            Remove an emitter.
+            </summary>
+            <param name="emitter">The emitter.</param>
         </member>
         <member name="T:Engine.Service.PhysicsService">
             <summary>
