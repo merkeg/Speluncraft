@@ -108,7 +108,8 @@ namespace Game
             Sprite enemySprite = new Sprite("Game.Resources.enemy.png");
             Sprite enemyGunSprite = new Sprite("Game.Resources.enemyGun.png");
 
-            Engine.Engine.AddGameObject(new Player.Items.HealthPickUp(81, -43, 1, 1, enemySprite, 30));
+            AnimatedSprite heart = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.heart.png", 16, 16), Keyframe.RangeX(0, 23, 0, 0.1f));
+            Engine.Engine.AddGameObject(new Player.Items.HealthPickUp(81, -43, 1, 1, heart, 30));
 
             // Tilesheet fireTilesheet = new Tilesheet("Game.Resources.Animated.fire.png", 32, 32);
             // float delay = 0.041f;
