@@ -346,6 +346,18 @@
             Class for Item Shop ingame.
             </summary>
         </member>
+        <member name="M:Game.UI.ItemShop.MouseMove(OpenTK.Windowing.Common.MouseMoveEventArgs)">
+            <summary>
+            Gets called when Mouse is Moved.
+            </summary>
+            <param name="args">MouseMove Args</param>
+        </member>
+        <member name="M:Game.UI.ItemShop.MouseDown(OpenTK.Windowing.Common.MouseButtonEventArgs)">
+            <summary>
+            Gets Called if some Mousebutton is pressed down.
+            </summary>
+            <param name="args">MouseDown Args</param>
+        </member>
         <member name="M:Game.UI.ItemShop.OnRendererCreate">
             <inheritdoc/>
         </member>

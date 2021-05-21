@@ -6,6 +6,7 @@ namespace Game.UI
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Text;
     using Engine.GameObject;
     using Engine.Renderer;
@@ -19,7 +20,6 @@ namespace Game.UI
     using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
-    using OpenTK.Windowing.GraphicsLibraryFramework;
 
     /// <summary>
     /// Class for Item Shop ingame.
@@ -29,9 +29,35 @@ namespace Game.UI
         private static bool shopActive = true;
         private static Vector2 screenCenter;
 
+        // Button1 = LeftClick, Button2 = RightClick, Middle = MiddleClick.
+        private static Vector2 windowsMousePosition;
+
+
+        /// <summary>
+        /// Gets called when Mouse is Moved.
+        /// </summary>
+        /// <param name="args">MouseMove Args</param>
+        public void MouseMove(MouseMoveEventArgs args)
+        {
+            windowsMousePosition.X = args.X;
+            windowsMousePosition.Y = args.Y;
+            return;
+        }
+
+        /// <summary>
+        /// Gets Called if some Mousebutton is pressed down.
+        /// </summary>
+        /// <param name="args">MouseDown Args</param>
+        public void MouseDown(MouseButtonEventArgs args)
+        {
+            Debug.WriteLine(args.Button);
+        }
+
         /// <inheritdoc/>
         public void OnRendererCreate()
         {
+            Engine.Engine.GameWindow.MouseMove += this.MouseMove;
+            Engine.Engine.GameWindow.MouseDown += this.MouseDown;
             return;
         }
 
@@ -51,6 +77,7 @@ namespace Game.UI
                 GL.Vertex2(screenCenter.X - (250 / 2), screenCenter.Y + (250 / 2));
 
                 GL.End();
+
                 return;
             }
             else
