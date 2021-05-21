@@ -47,6 +47,7 @@
     <None Remove="Resources\Sprite\UI\Healthbar\ui_background.png" />
     <None Remove="Resources\Sprite\bullet.png" />
     <None Remove="Resources\Sprite\tilesheetMC.png" />
+    <None Remove="Resources\Sprite\UI\ItemShop\itemshop.png" />
     <None Remove="Resources\testmap.json" />
     <None Remove="Resources\tilesheet.png" />
 	<None Remove="Resources\tilesheetMC.png" />
@@ -159,6 +160,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Remove="Resources\UI\interaction_dot.png" />
+    <EmbeddedResource Include="Resources\Sprite\UI\ItemShop\itemshop.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\UI\interaction_dot.png" />
   </ItemGroup>
 
