@@ -23,6 +23,8 @@ namespace Game.Enemy
         private Engine.GameObject.GameObject checkRight;
 
         private AnimatedSprite spriteWalking;
+        private AnimatedSprite spriteHurt;
+        private AnimatedSprite spriteAttack;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DummyAI"/> class.
@@ -47,6 +49,8 @@ namespace Game.Enemy
             {
                 this.spriteWalking = (AnimatedSprite)sprite;
             }
+
+            this.InitializeSprites();
 
             this.checkLeft = new Engine.GameObject.GameObject(this.MinX - 0.3f, this.MinY - 0.3f, 0.2f, 0.1f, this.Sprite);
             this.checkRight = new Engine.GameObject.GameObject(this.MinX + this.SizeX + 0.1f, this.MinY - 0.3f, 0.2f, 0.1f, this.Sprite);
@@ -151,6 +155,14 @@ namespace Game.Enemy
                 this.Sprite = this.spriteWalking;
                 this.Mirrored = false;
             }
+        }
+
+        private void InitializeSprites()
+        {
+            Engine.Renderer.Tile.Tilesheet attackSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Enemy.zombie_hit.png", 80, 110);
+            this.spriteAttack = new AnimatedSprite(attackSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
+            Engine.Renderer.Tile.Tilesheet hurtSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Enemy.zombie_hurt.png", 80, 110);
+            this.spriteHurt = new AnimatedSprite(hurtSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
         }
     }
 }
