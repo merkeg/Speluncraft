@@ -69,6 +69,7 @@ namespace Game.Player
             this.gun = new Gun.Pistol();
             this.AddComponent(this.gun.GetAsComponent());
             this.ChangeGun(new Gun.MachineGun());
+            this.ChangeGun(new Gun.ShotGun());
             this.ChangeGun(new Gun.GrenadeLauncher());
         }
 
