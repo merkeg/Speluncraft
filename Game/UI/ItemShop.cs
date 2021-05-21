@@ -28,17 +28,36 @@ namespace Game.UI
     /// </summary>
     public class ItemShop : IRenderer
     {
-        private static bool shopActive = true;
-
         private static Vector3 shopSpriteAspect = new Vector3(1280, 720, 720f / 1280f); // width, height and original aspect-ratio (I hate scaling :()
         private static Vector2 screenCenter;
         private static Vector2 screenSize;
+        private static float shopWidth;
         private static float shopWindowBorderIndent = 300;
+        private static Vector2 shopOrigin;
 
         private static Vector2 windowsMousePosition; // Button1 = LeftClick, Button2 = RightClick, Middle = MiddleClick.
 
         private static Assembly assembly;
         private static Sprite shopBackground;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ItemShop"/> class.
+        /// </summary>
+        /// <param name="itemcount">Amount of items in shop.</param>
+        public ItemShop(int itemcount = 4)
+        {
+            this.ItemCount = itemcount;
+        }
+
+        /// <summary>
+        /// Gets or Sets a value indicating whether ItemShop should be rendered or not.
+        /// </summary>
+        public bool ShopActive { get; set; }
+
+        /// <summary>
+        /// Gets or Sets avalue indicating whether many Items should be in the Shop.
+        /// </summary>
+        public int ItemCount { get; set; }
 
         /// <summary>
         /// Gets called when Mouse is Moved.
@@ -58,12 +77,12 @@ namespace Game.UI
         public void MouseDown(MouseButtonEventArgs args)
         {
             Debug.WriteLine(args.Button);
-            Debug.WriteLine(shopSpriteAspect.Z);
         }
 
         /// <inheritdoc/>
         public void OnRendererCreate()
         {
+            this.ShopActive = true; // remove after done
             Engine.Engine.GameWindow.MouseMove += this.MouseMove;
             Engine.Engine.GameWindow.MouseDown += this.MouseDown;
 
@@ -76,26 +95,28 @@ namespace Game.UI
         /// <inheritdoc/>
         public void Render(FrameEventArgs args)
         {
-            // render shop
-            if (shopActive)
+            if (this.ShopActive)
             {
+                // render shop background
                 GL.BindTexture(TextureTarget.Texture2D, shopBackground.Handle);
                 GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
                 GL.Begin(PrimitiveType.Quads);
 
                 GL.TexCoord2(0, 1);
-                GL.Vertex2(screenCenter.X - (screenSize.X / 2f), screenCenter.Y - (shopSpriteAspect.Z * screenSize.X / 2));
+                GL.Vertex2(screenCenter.X - (shopWidth / 2f), screenCenter.Y - (shopSpriteAspect.Z * shopWidth / 2));
 
                 GL.TexCoord2(1, 1);
-                GL.Vertex2(screenCenter.X + (screenSize.X / 2f), screenCenter.Y - (shopSpriteAspect.Z * screenSize.X / 2));
+                GL.Vertex2(screenCenter.X + (shopWidth / 2f), screenCenter.Y - (shopSpriteAspect.Z * shopWidth / 2));
 
                 GL.TexCoord2(1, 0);
-                GL.Vertex2(screenCenter.X + (screenSize.X / 2f), screenCenter.Y + (shopSpriteAspect.Z * screenSize.X / 2));
+                GL.Vertex2(screenCenter.X + (shopWidth / 2f), screenCenter.Y + (shopSpriteAspect.Z * shopWidth / 2));
 
                 GL.TexCoord2(0, 0);
-                GL.Vertex2(screenCenter.X - (screenSize.X / 2f), screenCenter.Y + (shopSpriteAspect.Z * screenSize.X / 2));
+                GL.Vertex2(screenCenter.X - (shopWidth / 2f), screenCenter.Y + (shopSpriteAspect.Z * shopWidth / 2));
 
                 GL.End();
+
+                this.RenderItems(args);
 
                 return;
             }
@@ -112,8 +133,39 @@ namespace Game.UI
             screenCenter.Y = args.Size.Y / 2f;
             screenSize.X = args.Size.X;
             screenSize.Y = args.Size.Y;
-            screenSize.X = screenSize.X - shopWindowBorderIndent;
+            shopWidth = screenSize.X - shopWindowBorderIndent;
+
+            shopOrigin.X = screenCenter.X - (shopWidth / 2f);
+            shopOrigin.Y = screenCenter.Y - (shopSpriteAspect.Z * shopWidth / 2);
             return;
+        }
+
+        /// <summary>
+        /// render itemslots onto shopbackground.
+        /// </summary>
+        private void RenderItems(FrameEventArgs args)
+        {
+            for (int i = 1; i <= this.ItemCount; i++)
+            {
+                // render itemslots
+                GL.BindTexture(TextureTarget.Texture2D, 0);
+                GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
+                GL.Begin(PrimitiveType.Quads);
+
+                // GL.TexCoord2(0, 1);
+                GL.Vertex2(shopOrigin.X, shopOrigin.Y);
+
+                // GL.TexCoord2(1, 1);
+                GL.Vertex2(shopOrigin.X + (50 * i), shopOrigin.Y);
+
+                // GL.TexCoord2(1, 0);
+                GL.Vertex2(shopOrigin.X + (50 * i), shopOrigin.Y + 50);
+
+                // GL.TexCoord2(0, 0);
+                GL.Vertex2(shopOrigin.X, shopOrigin.Y + 50);
+
+                GL.End();
+            }
         }
     }
 }

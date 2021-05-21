@@ -346,6 +346,22 @@
             Class for Item Shop ingame.
             </summary>
         </member>
+        <member name="M:Game.UI.ItemShop.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.UI.ItemShop"/> class.
+            </summary>
+            <param name="itemcount">Amount of items in shop.</param>
+        </member>
+        <member name="P:Game.UI.ItemShop.ShopActive">
+            <summary>
+            Gets or Sets a value indicating whether ItemShop should be rendered or not.
+            </summary>
+        </member>
+        <member name="P:Game.UI.ItemShop.ItemCount">
+            <summary>
+            Gets or Sets avalue indicating whether many Items should be in the Shop.
+            </summary>
+        </member>
         <member name="M:Game.UI.ItemShop.MouseMove(OpenTK.Windowing.Common.MouseMoveEventArgs)">
             <summary>
             Gets called when Mouse is Moved.
@@ -366,6 +382,11 @@
         </member>
         <member name="M:Game.UI.ItemShop.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.ItemShop.RenderItems(OpenTK.Windowing.Common.FrameEventArgs)">
+            <summary>
+            render itemslots onto shopbackground.
+            </summary>
         </member>
         <member name="T:Game.UI.UILoader">
             <summary>
