@@ -22,6 +22,8 @@ namespace Game.Enemy
         private Engine.GameObject.GameObject checkLeft;
         private Engine.GameObject.GameObject checkRight;
 
+        private GameComponents.AnimationScheduler animationScheduler;
+
         private AnimatedSprite spriteWalking;
         private AnimatedSprite spriteHurt;
         private AnimatedSprite spriteAttack;
@@ -54,6 +56,9 @@ namespace Game.Enemy
 
             this.checkLeft = new Engine.GameObject.GameObject(this.MinX - 0.3f, this.MinY - 0.3f, 0.2f, 0.1f, this.Sprite);
             this.checkRight = new Engine.GameObject.GameObject(this.MinX + this.SizeX + 0.1f, this.MinY - 0.3f, 0.2f, 0.1f, this.Sprite);
+
+            this.animationScheduler = new GameComponents.AnimationScheduler();
+            this.AddComponent(this.animationScheduler);
         }
 
         /// <inheritdoc/>
@@ -66,9 +71,9 @@ namespace Game.Enemy
         public override void OnUpdate(float frameTime)
         {
             this.CheckLedge();
+            this.UpdateAnimations();
             base.OnUpdate(frameTime);
             this.CheckWall();
-            this.UpdateAnimations();
         }
 
         private void CheckLedge()
@@ -146,14 +151,24 @@ namespace Game.Enemy
 
             if (phys.GetVelocity().X < -0.1)
             {
-                this.Sprite = this.spriteWalking;
+                this.animationScheduler.AddAnimation(10, 0.0001f, this.spriteWalking, true);
                 this.Mirrored = true;
             }
 
             if (phys.GetVelocity().X > 0.1)
             {
-                this.Sprite = this.spriteWalking;
+                this.animationScheduler.AddAnimation(10, 0.0001f, this.spriteWalking, false);
                 this.Mirrored = false;
+            }
+
+            if (this.GetComponent<Engine.Component.HealthPoints>().GetTookDmgThisFrame())
+            {
+                this.animationScheduler.AddAnimation(7, 0.3f, this.spriteHurt, this.Mirrored);
+            }
+
+            if (this.GetComponent<Engine.Component.DoDamageWithKnockbackCollisionResponse>().GetDidDMGthisFrame())
+            {
+                this.animationScheduler.AddAnimation(4, 0.3f, this.spriteAttack, this.Mirrored);
             }
         }
 

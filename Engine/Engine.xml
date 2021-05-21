@@ -219,6 +219,12 @@
             <param name="knockbackX">X Velocity to add for knockback ( will be inverted, if we yeet to the left ).</param>
             <param name="knockbackY">Y Velocity to add for knockback ( Will not be inverted).</param>
         </member>
+        <member name="M:Engine.Component.DoDamageWithKnockbackCollisionResponse.GetDidDmgThisGrame">
+            <summary>
+            If we did dmg this frame.
+            </summary>
+            <returns>If we have done dmg this frame.</returns>
+        </member>
         <member name="M:Engine.Component.DoDamageWithKnockbackCollisionResponse.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
