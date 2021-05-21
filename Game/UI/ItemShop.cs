@@ -33,7 +33,7 @@ namespace Game.UI
         private static Vector3 shopSpriteAspect = new Vector3(1280, 720, 720f / 1280f); // width, height and original aspect-ratio (I hate scaling :()
         private static Vector2 screenCenter;
         private static Vector2 screenSize;
-        private static float shopWindowBorderIndent = 350;
+        private static float shopWindowBorderIndent = 300;
 
         private static Vector2 windowsMousePosition; // Button1 = LeftClick, Button2 = RightClick, Middle = MiddleClick.
 
@@ -83,16 +83,16 @@ namespace Game.UI
                 GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
                 GL.Begin(PrimitiveType.Quads);
 
-                GL.TexCoord2(0, 0);
+                GL.TexCoord2(0, 1);
                 GL.Vertex2(screenCenter.X - (screenSize.X / 2f), screenCenter.Y - (shopSpriteAspect.Z * screenSize.X / 2));
 
-                GL.TexCoord2(0, 1);
+                GL.TexCoord2(1, 1);
                 GL.Vertex2(screenCenter.X + (screenSize.X / 2f), screenCenter.Y - (shopSpriteAspect.Z * screenSize.X / 2));
 
-                GL.TexCoord2(1, 1);
+                GL.TexCoord2(1, 0);
                 GL.Vertex2(screenCenter.X + (screenSize.X / 2f), screenCenter.Y + (shopSpriteAspect.Z * screenSize.X / 2));
 
-                GL.TexCoord2(1, 0);
+                GL.TexCoord2(0, 0);
                 GL.Vertex2(screenCenter.X - (screenSize.X / 2f), screenCenter.Y + (shopSpriteAspect.Z * screenSize.X / 2));
 
                 GL.End();
