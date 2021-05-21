@@ -13,7 +13,9 @@
 
   <ItemGroup>
     <None Remove="Resources\all.json" />
+    <None Remove="Resources\Animated\explosion.png" />
     <None Remove="Resources\Animated\fire.png" />
+    <None Remove="Resources\Animated\heart.png" />
     <None Remove="Resources\Animated\lava_flow.png" />
     <None Remove="Resources\Animated\lava_still.png" />
     <None Remove="Resources\Animated\lava_still_cut.png" />
@@ -64,9 +66,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Animated\explosion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Animated\fire.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+	  <EmbeddedResource Include="Resources\Animated\heart.png">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </EmbeddedResource>
     <EmbeddedResource Include="Resources\Animated\lava_flow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>

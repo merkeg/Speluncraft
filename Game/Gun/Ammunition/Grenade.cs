@@ -84,8 +84,9 @@ namespace Game.Gun.Ammunition
 
         private void Explode()
         {
-            Sprite sprite = new Sprite("Game.Resources.Floppa.png", false);
-            this.ex = new Engine.GameObject.GameObject(this.MinX - this.exRadiusX, this.MinY - this.exRadiusY, this.SizeX + (2 * this.exRadiusX), this.SizeY + (2 * this.exRadiusY), sprite);
+            Engine.Renderer.Tile.Tilesheet walkingSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Animated.explosion.png", 635, 635);
+            AnimatedSprite explosionSprite = new AnimatedSprite(walkingSheet, Keyframe.RangeX(0, 8, 0, 0.001f));
+            this.ex = new Engine.GameObject.GameObject(this.MinX - this.exRadiusX, this.MinY - this.exRadiusY, this.SizeX + (2 * this.exRadiusX), this.SizeY + (2 * this.exRadiusY), explosionSprite);
             this.ex.AddComponent(new Engine.Component.DoDamageWithKnockbackCollisionResponse(99, 10, 20, 5));
             Engine.Engine.AddGameObject(this.ex);
         }
