@@ -87,6 +87,8 @@ namespace Game
             Sprite fontSprite = new Sprite("Game.Resources.Font.hack.font.png");
             Font font = new Font(fontModel, fontSprite);
 
+            Menu.StartMenu startMenu = new Menu.StartMenu(new Rectangle(0, 0, 1280 ,720), Color4.Salmon, font);
+            Engine.Engine.AddRenderer(startMenu, RenderLayer.UI);
             DebugRenderer debugRenderer = new DebugRenderer(new Rectangle(5, 5, 300, 325), new Color4(0, 0, 0, 0.3f), font, player, UiAlignment.Right);
             debugRenderer.Hidden = true;
             Engine.Engine.AddRenderer(debugRenderer, RenderLayer.UI);

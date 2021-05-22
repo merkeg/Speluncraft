@@ -1000,15 +1000,22 @@
             <param name="position">Position of the spawn point.</param>
             <returns>new Particle.</returns>
         </member>
+        <member name="M:Engine.Renderer.Particle.ParticleEmitter.Clone">
+            <summary>
+            Clone Object
+            </summary>
+            <returns>The clone.</returns>
+        </member>
         <member name="T:Engine.Renderer.Particle.ParticleEmitterData">
             <summary>
             Data class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.Particle.ParticleEmitterData.#ctor(Engine.GameObject.IRectangle,System.Single)">
+        <member name="M:Engine.Renderer.Particle.ParticleEmitterData.#ctor(Engine.Renderer.Particle.ParticleEmitter,Engine.GameObject.IRectangle,System.Single)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.Particle.ParticleEmitterData"/> class.
             </summary>
+            <param name="emitter">Particle emitter.</param>
             <param name="position">Position.</param>
             <param name="emitterLifetime">Lifetime of the emitter.</param>
         </member>
@@ -1035,6 +1042,11 @@
         <member name="P:Engine.Renderer.Particle.ParticleEmitterData.Position">
             <summary>
             Gets or sets position.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitterData.Emitter">
+            <summary>
+            Gets or sets the Data.
             </summary>
         </member>
         <member name="T:Engine.Renderer.Sprite.AnimatedSprite">
@@ -1876,7 +1888,7 @@
             Graph renderer class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.#ctor(System.String,Engine.Renderer.Text.Font,Engine.GameObject.Rectangle,System.Single,System.Single)">
+        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.#ctor(System.String,Engine.Renderer.Text.Font,Engine.GameObject.IRectangle,System.Single,System.Single)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.UI.Graph.GraphRenderer"/> class.
             </summary>
@@ -2041,7 +2053,7 @@
             </summary>
             <param name="renderer">Renderer element.</param>
         </member>
-        <member name="M:Engine.Renderer.UI.UiElement.AddQuad(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,System.Boolean)">
+        <member name="M:Engine.Renderer.UI.UiElement.AddQuad(Engine.GameObject.IRectangle,OpenTK.Mathematics.Color4,System.Boolean)">
             <summary>
             Adds an quad to the ui element.
             </summary>
@@ -2050,7 +2062,7 @@
             <param name="filled">Quad filled.</param>
             <returns>The Quad element.</returns>
         </member>
-        <member name="M:Engine.Renderer.UI.UiElement.AddGraph(System.String,Engine.GameObject.Rectangle,System.Single,System.Single)">
+        <member name="M:Engine.Renderer.UI.UiElement.AddGraph(System.String,Engine.GameObject.IRectangle,System.Single,System.Single)">
             <summary>
             Adds a graph to the ui element.
             </summary>
@@ -2060,7 +2072,7 @@
             <param name="max">Max.</param>
             <returns>Graph renderer object.</returns>
         </member>
-        <member name="M:Engine.Renderer.UI.UiElement.AddText(System.String,OpenTK.Mathematics.Color4,Engine.GameObject.Rectangle,System.Single)">
+        <member name="M:Engine.Renderer.UI.UiElement.AddText(System.String,OpenTK.Mathematics.Color4,Engine.GameObject.IRectangle,System.Single)">
             <summary>
             Add text to ui element.
             </summary>
@@ -2069,6 +2081,14 @@
             <param name="position">Position of text.</param>
             <param name="textScale">Scale of text.</param>
             <returns>Text renderer object.</returns>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.AddSprite(Engine.Renderer.Sprite.ISprite,Engine.GameObject.IRectangle)">
+            <summary>
+            Adds a new sprite to the renderer.
+            </summary>
+            <param name="sprite">Sprite to render.</param>
+            <param name="bounds">Bounds set to.</param>
+            <returns>The renderer.</returns>
         </member>
         <member name="T:Engine.Service.CollisionService">
             <summary>
@@ -2203,12 +2223,13 @@
             <param name="emitter">The emitter.</param>
             <param name="position">Position.</param>
             <param name="lifetime">The lifetime of the emitter. Set to 0 to disable deletion.</param>
+            <returns>ParticleEmitterData</returns>
         </member>
-        <member name="M:Engine.Service.ParticleService.Remove(Engine.Renderer.Particle.ParticleEmitter)">
+        <member name="M:Engine.Service.ParticleService.Remove(Engine.Renderer.Particle.ParticleEmitterData)">
             <summary>
             Remove an emitter.
             </summary>
-            <param name="emitter">The emitter.</param>
+            <param name="data">The data you got from the emit method.</param>
         </member>
         <member name="T:Engine.Service.PhysicsService">
             <summary>
