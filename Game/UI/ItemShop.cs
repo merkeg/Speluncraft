@@ -85,9 +85,18 @@ namespace Game.UI
         {
             Debug.WriteLine(args.Button + " | " + windowMousePosition.X + " | " + windowMousePosition.Y);
 
+            // check if mouse is clicked inside of itemFrame
+            int index = 0; // poormans index enumerable too dumb and lazy to di it right at the moment.
             foreach (Vector4 hitbox in itemHitboxList)
             {
                 Debug.WriteLine(hitbox.X + " | " + hitbox.Y + " | " + hitbox.Z + " | " + hitbox.W);
+                if (windowMousePosition.X > hitbox.X && windowMousePosition.X < hitbox.Z && windowMousePosition.Y > hitbox.Y && windowMousePosition.Y < hitbox.W)
+                {
+                    Debug.WriteLine("you hit item Nr. " + index);
+                    return;
+                }
+
+                index++;
             }
         }
 
