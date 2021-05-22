@@ -23,6 +23,9 @@ namespace Game.Enemy
         private float leapingBreakSpeedX = 5;
 
         private Sprite leapingSpirite = new Sprite("Game.Resources.Floppa.png");
+        private Sprite slidingSprite = new Sprite("Game.Resources.enemy.png");
+
+        private Game.GameComponents.AnimationScheduler animationScheduler;
 
         private Engine.Component.Physics physics;
 
@@ -39,14 +42,20 @@ namespace Game.Enemy
             : base(minX, minY, sizeX, sizeY, sprite, damage)
         {
             this.physics = this.GetComponent<Engine.Component.Physics>();
+            this.animationScheduler = this.GetComponent<Game.GameComponents.AnimationScheduler>();
         }
 
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
             // Are we leaping?
-            if (Math.Abs(this.GetMoveSpeed()) < Math.Abs(this.physics.GetVelocity().X) && this.physics.GetVelocity().X != 0)
+            if (Math.Abs(this.GetMoveSpeed()) < Math.Abs(this.physics.GetVelocity().X))
             {
+                if (Math.Abs(this.physics.GetVelocity().Y) < 1f)
+                {
+                    this.animationScheduler.AddAnimation(9, 0.2f, this.slidingSprite, this.Mirrored);
+                }
+
                 if (this.GetDirection() == Gun.ILookDirection.Right)
                 {
                     this.physics.AddVelocityX(-frameTime * this.leapingBreakSpeedX);
@@ -63,6 +72,11 @@ namespace Game.Enemy
                 base.OnUpdate(frameTime);
             }
 
+            if (this.GetComponent<Engine.Component.DoDamageWithKnockbackCollisionResponse>().GetDidDMGthisFrame())
+            {
+                this.physics.SetVelocity(0, this.physics.GetVelocity().Y);
+            }
+
             this.leapCoolDownCounter -= frameTime;
         }
 
@@ -71,8 +85,7 @@ namespace Game.Enemy
         {
             if (this.leapCoolDownCounter <= 0)
             {
-                this.GetComponent<Game.GameComponents.AnimationScheduler>().AddAnimation(11, 10, this.leapingSpirite, this.Mirrored);
-
+                this.animationScheduler.AddAnimation(20, 5f, this.leapingSpirite, this.Mirrored);
                 if (this.GetDirection() == Gun.ILookDirection.Right)
                 {
                     this.physics.SetMaxVelocity(this.leapSpeedX, this.physics.GetMaxVelocity().Y);
