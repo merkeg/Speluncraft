@@ -48,6 +48,7 @@
     <None Remove="Resources\Sprite\bullet.png" />
     <None Remove="Resources\Sprite\tilesheetMC.png" />
     <None Remove="Resources\Sprite\UI\ItemShop\itemshop.png" />
+    <None Remove="Resources\Sprite\UI\ItemShop\item_frame_front.png" />
     <None Remove="Resources\testmap.json" />
     <None Remove="Resources\tilesheet.png" />
 	<None Remove="Resources\tilesheetMC.png" />
@@ -161,6 +162,9 @@
     </EmbeddedResource>
     <None Remove="Resources\UI\interaction_dot.png" />
     <EmbeddedResource Include="Resources\Sprite\UI\ItemShop\itemshop.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Sprite\UI\ItemShop\item_frame_front.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\UI\interaction_dot.png" />

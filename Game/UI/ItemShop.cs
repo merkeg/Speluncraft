@@ -35,10 +35,15 @@ namespace Game.UI
         private static float shopWindowBorderIndent = 300;
         private static Vector2 shopOrigin;
 
-        private static Vector2 windowsMousePosition; // Button1 = LeftClick, Button2 = RightClick, Middle = MiddleClick.
+        private static float itemSpacing;
+        private static float itemFrameSize = 128;
+        private static Vector4[] itemHitboxList;
+
+        private static Vector2 windowMousePosition; // Button1 = LeftClick, Button2 = RightClick, Middle = MiddleClick.
 
         private static Assembly assembly;
         private static Sprite shopBackground;
+        private static Sprite shopItemFrame;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ItemShop"/> class.
@@ -47,6 +52,8 @@ namespace Game.UI
         public ItemShop(int itemcount = 4)
         {
             this.ItemCount = itemcount;
+            this.ShopActive = true; // remove after done
+            itemHitboxList = new Vector4[this.ItemCount];
         }
 
         /// <summary>
@@ -65,8 +72,8 @@ namespace Game.UI
         /// <param name="args">MouseMove Args.</param>
         public void MouseMove(MouseMoveEventArgs args)
         {
-            windowsMousePosition.X = args.X;
-            windowsMousePosition.Y = args.Y;
+            windowMousePosition.X = args.X;
+            windowMousePosition.Y = args.Y;
             return;
         }
 
@@ -76,19 +83,27 @@ namespace Game.UI
         /// <param name="args">MouseDown Args.</param>
         public void MouseDown(MouseButtonEventArgs args)
         {
-            Debug.WriteLine(args.Button);
+            Debug.WriteLine(args.Button + " | " + windowMousePosition.X + " | " + windowMousePosition.Y);
+
+            foreach (Vector4 hitbox in itemHitboxList)
+            {
+                Debug.WriteLine(hitbox.X + " | " + hitbox.Y + " | " + hitbox.Z + " | " + hitbox.W);
+            }
         }
 
         /// <inheritdoc/>
         public void OnRendererCreate()
         {
-            this.ShopActive = true; // remove after done
             Engine.Engine.GameWindow.MouseMove += this.MouseMove;
             Engine.Engine.GameWindow.MouseDown += this.MouseDown;
 
             assembly = Assembly.GetExecutingAssembly();
             using Stream shopBackgroundSpriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.itemshop.png");
-            shopBackground = new Sprite(shopBackgroundSpriteStream, false);
+            shopBackground = new Sprite(shopBackgroundSpriteStream, true);
+
+            using Stream shopItemFrameSpriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.item_frame_front.png");
+            shopItemFrame = new Sprite(shopItemFrameSpriteStream, true);
+
             return;
         }
 
@@ -137,6 +152,8 @@ namespace Game.UI
 
             shopOrigin.X = screenCenter.X - (shopWidth / 2f);
             shopOrigin.Y = screenCenter.Y - (shopSpriteAspect.Z * shopWidth / 2);
+
+            itemSpacing = shopWidth / 5; // maybe automate if more items
             return;
         }
 
@@ -148,21 +165,29 @@ namespace Game.UI
             for (int i = 1; i <= this.ItemCount; i++)
             {
                 // render itemslots
-                GL.BindTexture(TextureTarget.Texture2D, 0);
+                GL.BindTexture(TextureTarget.Texture2D, shopItemFrame.Handle);
                 GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
                 GL.Begin(PrimitiveType.Quads);
 
-                // GL.TexCoord2(0, 1);
-                GL.Vertex2(shopOrigin.X, shopOrigin.Y);
+                GL.TexCoord2(0, 1);
+                GL.Vertex2((itemSpacing * i) + shopOrigin.X - (itemFrameSize / 2), shopOrigin.Y + 70);
 
-                // GL.TexCoord2(1, 1);
-                GL.Vertex2(shopOrigin.X + (50 * i), shopOrigin.Y);
+                // top left corner
+                itemHitboxList[i - 1].X = (itemSpacing * i) + shopOrigin.X - (itemFrameSize / 2);
+                itemHitboxList[i - 1].Y = shopOrigin.Y + 70;
 
-                // GL.TexCoord2(1, 0);
-                GL.Vertex2(shopOrigin.X + (50 * i), shopOrigin.Y + 50);
+                GL.TexCoord2(1, 1);
+                GL.Vertex2((itemSpacing * i) + shopOrigin.X + (itemFrameSize / 2), shopOrigin.Y + 70);
 
-                // GL.TexCoord2(0, 0);
-                GL.Vertex2(shopOrigin.X, shopOrigin.Y + 50);
+                GL.TexCoord2(1, 0);
+                GL.Vertex2((itemSpacing * i) + shopOrigin.X + (itemFrameSize / 2), shopOrigin.Y + 70 + itemFrameSize);
+
+                // bottom right corner
+                itemHitboxList[i - 1].Z = (itemSpacing * i) + shopOrigin.X + (itemFrameSize / 2);
+                itemHitboxList[i - 1].W = shopOrigin.Y + 70 + itemFrameSize;
+
+                GL.TexCoord2(0, 0);
+                GL.Vertex2((itemSpacing * i) + shopOrigin.X - (itemFrameSize / 2), shopOrigin.Y + 70 + itemFrameSize);
 
                 GL.End();
             }
