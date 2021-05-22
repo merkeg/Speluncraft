@@ -47,6 +47,7 @@
     <None Remove="Resources\Player\adventurer_weapon_shotgun.png" />
     <None Remove="Resources\Player\adventurer_weapon_sniper.png" />
     <None Remove="Resources\rotation.json" />
+    <None Remove="Resources\Sprite\startmenu.png" />
     <None Remove="Resources\Sprite\UI\Healthbar\10_hearts.png" />
     <None Remove="Resources\Sprite\UI\Healthbar\background.png" />
     <None Remove="Resources\Sprite\UI\Healthbar\background2.png" />
@@ -162,6 +163,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Level\rotation.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Sprite\startmenu.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Sprite\tilesheet.png">

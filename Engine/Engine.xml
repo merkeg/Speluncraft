@@ -550,22 +550,22 @@
         </member>
         <member name="P:Engine.GameObject.GameObject.SizeX">
             <summary>
-            Gets the width of the GameObject.
+            Gets or sets the width of the GameObject.
             </summary>
         </member>
         <member name="P:Engine.GameObject.GameObject.SizeY">
             <summary>
-            Gets the hieght of the GameObject.
+            Gets or sets the height of the GameObject.
             </summary>
         </member>
         <member name="P:Engine.GameObject.GameObject.MaxX">
             <summary>
-            Gets the X-Coordinate of the top right point, of the GameObject.
+            Gets or sets the X-Coordinate of the top right point.
             </summary>
         </member>
         <member name="P:Engine.GameObject.GameObject.MaxY">
             <summary>
-            Gets the Y-Coordinate of the top right point, of the GameObject.
+            Gets or sets the Y-Coordinate of the top right point.
             </summary>
         </member>
         <member name="P:Engine.GameObject.GameObject.MinX">
@@ -698,12 +698,12 @@
         </member>
         <member name="P:Engine.GameObject.IRectangle.MaxX">
             <summary>
-            Gets the X-Coordinate of the top right point, of the Rectangle.
+            Gets or sets the X-Coordinate of the top right point, of the Rectangle.
             </summary>
         </member>
         <member name="P:Engine.GameObject.IRectangle.MaxY">
             <summary>
-            Gets the X-Coordinate of the top right point, of the Rectangle.
+            Gets or sets the X-Coordinate of the top right point, of the Rectangle.
             </summary>
         </member>
         <member name="T:Engine.GameObject.IUpdatable">
@@ -743,22 +743,22 @@
         </member>
         <member name="P:Engine.GameObject.Rectangle.SizeX">
             <summary>
-            Gets the width of the Rectangle.
+            Gets or sets the width of the Rectangle.
             </summary>
         </member>
         <member name="P:Engine.GameObject.Rectangle.SizeY">
             <summary>
-            Gets the height of the Rectangle.
+            Gets or sets the height of the Rectangle.
             </summary>
         </member>
         <member name="P:Engine.GameObject.Rectangle.MaxX">
             <summary>
-            Gets the X-Coordinate of the top right point.
+            Gets or sets the X-Coordinate of the top right point.
             </summary>
         </member>
         <member name="P:Engine.GameObject.Rectangle.MaxY">
             <summary>
-            Gets the Y-Coordinate of the top right point.
+            Gets or sets the Y-Coordinate of the top right point.
             </summary>
         </member>
         <member name="P:Engine.GameObject.Rectangle.MinX">
@@ -1940,12 +1940,32 @@
         <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
+        <member name="F:Engine.Renderer.UI.RelativeRectangleXAlignment.Left">
+            <summary>
+            Left alignment.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.UI.RelativeRectangleXAlignment.Right">
+            <summary>
+            Right alignment.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.UI.RelativeRectangleYAlignment.Top">
+            <summary>
+            Top alignment.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.UI.RelativeRectangleYAlignment.Bottom">
+            <summary>
+            Bottom alignment.
+            </summary>
+        </member>
         <member name="T:Engine.Renderer.UI.RelativeRectangle">
             <summary>
             Relative rectangle class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.UI.RelativeRectangle.#ctor(Engine.GameObject.IRectangle,System.Single,System.Single,System.Single,System.Single)">
+        <member name="M:Engine.Renderer.UI.RelativeRectangle.#ctor(Engine.GameObject.IRectangle,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.UI.RelativeRectangleXAlignment,Engine.Renderer.UI.RelativeRectangleYAlignment)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.UI.RelativeRectangle"/> class.
             </summary>
@@ -1954,6 +1974,8 @@
             <param name="minY">Relative miny.</param>
             <param name="sizeX">Relative sizex.</param>
             <param name="sizeY">Relative sizey.</param>
+            <param name="xAlignment">X Alignment of the Rectangle to the parent.</param>
+            <param name="yAlignment">Y Alignment of the Rectangle to the parent.</param>
         </member>
         <member name="P:Engine.Renderer.UI.RelativeRectangle.SizeX">
             <inheritdoc/>
@@ -1993,7 +2015,7 @@
             UI element class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.UI.UiElement.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.Renderer.UI.UiAlignment)">
+        <member name="M:Engine.Renderer.UI.UiElement.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.Renderer.UI.UiAlignment,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.UI.UiElement"/> class.
             </summary>
@@ -2001,6 +2023,7 @@
             <param name="backgroundColor">Background color.</param>
             <param name="font">Font.</param>
             <param name="alignment">Alignment.</param>
+            <param name="fitToViewport">Set if content should fit to viewport.</param>
         </member>
         <member name="P:Engine.Renderer.UI.UiElement.Renderers">
             <summary>

@@ -343,7 +343,7 @@
             Contains the Starmenu. Some call it Main Menu.
             </summary>
         </member>
-        <member name="M:Game.Menu.StartMenu.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.Renderer.UI.UiAlignment)">
+        <member name="M:Game.Menu.StartMenu.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.Renderer.UI.UiAlignment,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.Menu.StartMenu"/> class.
             Constructor.
@@ -352,6 +352,7 @@
             <param name="backgroundColor">backgroundColor.</param>
             <param name="font">font.</param>
             <param name="alignment">alignment.</param>
+            <param name="fitToViewport">Set if fit to viewport.</param>
         </member>
         <member name="M:Game.Menu.StartMenu.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
             <inheritdoc/>

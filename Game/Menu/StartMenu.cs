@@ -26,7 +26,7 @@ namespace Game.Menu
         /// <param name="backgroundColor">backgroundColor.</param>
         /// <param name="font">font.</param>
         /// <param name="alignment">alignment.</param>
-        /// <param name="fitToViewport">Set if fit to viewport</param>
+        /// <param name="fitToViewport">Set if fit to viewport.</param>
         public StartMenu(Rectangle bounds, Color4 backgroundColor, Font font, UiAlignment alignment = UiAlignment.Left, bool fitToViewport = false)
             : base(bounds, backgroundColor, font, alignment, fitToViewport)
         {
@@ -40,8 +40,9 @@ namespace Game.Menu
         /// <inheritdoc/>
         public override void OnRendererCreate()
         {
-            this.AddText("Start", Color4.Azure, new RelativeRectangle(this.AbsoluteBounds, 20, -200, 0, 0, RelativeRectangleXAlignment.Left, RelativeRectangleYAlignment.Bottom), 1.25f);
-            this.AddText("Quit", Color4.Azure, new RelativeRectangle(this.AbsoluteBounds, 20, -80, 0, 0, RelativeRectangleXAlignment.Left, RelativeRectangleYAlignment.Bottom), 1.25f);
+            this.AddSprite(new Engine.Renderer.Sprite.Sprite("Game.Resources.Sprite.startmenu.png", false), new RelativeRectangle(this.AbsoluteBounds, 0, 0, 2560, 1057));
+            this.AddText("Start", Color4.Azure, new RelativeRectangle(this.AbsoluteBounds, 100, -250, 0, 0, RelativeRectangleXAlignment.Left, RelativeRectangleYAlignment.Bottom), 1);
+            this.AddText("Quit", Color4.Azure, new RelativeRectangle(this.AbsoluteBounds, 100, -150, 0, 0, RelativeRectangleXAlignment.Left, RelativeRectangleYAlignment.Bottom), 1);
         }
     }
 }

@@ -168,27 +168,27 @@ namespace Game.Player
         {
             if (gun is Gun.GrenadeLauncher)
             {
-                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_grenadelauncher.png", false);
+                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_grenadelauncher.png");
             }
 
             if (gun is Gun.MachineGun)
             {
-                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_machinegun.png", false);
+                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_machinegun.png");
             }
 
             if (gun is Gun.Pistol)
             {
-                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_pistol.png", false);
+                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_pistol.png");
             }
 
             if (gun is Gun.ShotGun)
             {
-                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_shotgun.png", false);
+                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_shotgun.png");
             }
 
             if (gun is Gun.Sniper)
             {
-                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_sniper.png", false);
+                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_sniper.png");
             }
         }
 
@@ -293,11 +293,11 @@ namespace Game.Player
             Engine.Renderer.Tile.Tilesheet hurtSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Player.adventurer_hurt.png", 80, 110);
             this.spriteHurt = new AnimatedSprite(hurtSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
 
-            this.spriteIdle = new Sprite("Game.Resources.Player.adventurer_idle.png", false);
-            this.spriteJump = new Sprite("Game.Resources.Player.adventurer_jump.png", false);
-            this.spriteFall = new Sprite("Game.Resources.Player.adventurer_fall.png", false);
-            this.spriteBack = new Sprite("Game.Resources.Player.adventurer_back.png", false);
-            this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_pistol.png", false);
+            this.spriteIdle = new Sprite("Game.Resources.Player.adventurer_idle.png");
+            this.spriteJump = new Sprite("Game.Resources.Player.adventurer_jump.png");
+            this.spriteFall = new Sprite("Game.Resources.Player.adventurer_fall.png");
+            this.spriteBack = new Sprite("Game.Resources.Player.adventurer_back.png");
+            this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_pistol.png");
         }
     }
 }
