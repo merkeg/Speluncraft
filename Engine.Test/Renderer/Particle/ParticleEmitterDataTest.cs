@@ -13,7 +13,7 @@ namespace EngineTest.Renderer.Particle
         {
             Rectangle pos = new Rectangle(0, 0, 1, 1);
             float lifetime = 1;
-            ParticleEmitterData data = new ParticleEmitterData(pos, lifetime);
+            ParticleEmitterData data = new ParticleEmitterData(null, pos, lifetime);
             
             Assert.IsTrue(data.Particles.Count == 0);
             Assert.IsTrue(data.EmitterLifetime == lifetime);

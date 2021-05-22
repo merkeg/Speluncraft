@@ -14,7 +14,7 @@ namespace Engine.Renderer.Particle
     /// <summary>
     /// Particle emitter class.
     /// </summary>
-    public class ParticleEmitter
+    public class ParticleEmitter : ICloneable
     {
         private Random random;
 
@@ -169,7 +169,7 @@ namespace Engine.Renderer.Particle
         /// <summary>
         /// Generates a new particle.
         /// </summary>
-        /// <param name="position">Position of the spawn point</param>
+        /// <param name="position">Position of the spawn point.</param>
         /// <returns>new Particle.</returns>
         public Particle NewParticle(IRectangle position)
         {
@@ -178,6 +178,15 @@ namespace Engine.Renderer.Particle
             float y = ((this.VelocityMax.Y - this.VelocityMin.Y) * (float)this.random.NextDouble()) + this.VelocityMin.Y;
             float particleSize = ((float)this.random.NextDouble() * (this.ParticleSizeMax - this.ParticleSizeMin)) + this.ParticleSizeMin;
             return new Particle(lifetime, new Vector2(x, y), new Rectangle(position.MinX, position.MinY, particleSize, particleSize), this.GetRandomSprite(), this.GetRandomColour());
+        }
+
+        /// <summary>
+        /// Clone Object
+        /// </summary>
+        /// <returns>The clone.</returns>
+        public object Clone()
+        {
+            return (ParticleEmitter)this.MemberwiseClone();
         }
     }
 }

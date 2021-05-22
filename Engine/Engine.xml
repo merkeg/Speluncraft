@@ -861,7 +861,7 @@
         </member>
         <member name="P:Engine.Renderer.Particle.Particle.Lifetime">
             <summary>
-            Gets or sets the lifetime
+            Gets or sets the lifetime.
             </summary>
         </member>
         <member name="P:Engine.Renderer.Particle.Particle.Velocity">
@@ -871,7 +871,7 @@
         </member>
         <member name="P:Engine.Renderer.Particle.Particle.Bounds">
             <summary>
-            Gets or sets the bounds
+            Gets or sets the bounds.
             </summary>
         </member>
         <member name="P:Engine.Renderer.Particle.Particle.Sprite">
@@ -985,7 +985,7 @@
             <summary>
             Generates a new particle.
             </summary>
-            <param name="position">Position of the spawn point</param>
+            <param name="position">Position of the spawn point.</param>
             <returns>new Particle.</returns>
         </member>
         <member name="T:Engine.Renderer.Particle.ParticleEmitterData">

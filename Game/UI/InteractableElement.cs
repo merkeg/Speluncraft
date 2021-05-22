@@ -24,6 +24,7 @@ namespace Game.UI
     {
         private static Tilesheet tilesheet;
         private Player.Player player;
+        private ParticleEmitterData currentEmitterData;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InteractableElement"/> class.
@@ -110,7 +111,7 @@ namespace Game.UI
         {
             base.OnUpdatableCreate();
             Engine.Engine.AddRenderer(this.Text, RenderLayer.UI);
-            Engine.Engine.GetService<ParticleService>().Emit(this.Particle, new RelativeRectangle(this, .1f, .1f, 1, 1), 0);
+            this.currentEmitterData = Engine.Engine.GetService<ParticleService>().Emit(this.Particle, new RelativeRectangle(this, .1f, .1f, 1, 1), 0);
         }
 
         /// <inheritdoc/>
@@ -146,7 +147,7 @@ namespace Game.UI
         {
             Engine.Engine.RemoveGameObject(this);
             Engine.Engine.RemoveRenderer(this.Text, RenderLayer.UI);
-            Engine.Engine.GetService<ParticleService>().Remove(this.Particle);
+            Engine.Engine.GetService<ParticleService>().Remove(this.currentEmitterData);
             Engine.Engine.GetService<InputService>().Unsubscribe(Keys.W, this.OnPress);
         }
 
