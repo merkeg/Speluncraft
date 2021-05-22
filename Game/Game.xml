@@ -489,11 +489,12 @@
             Class for Item Shop ingame.
             </summary>
         </member>
-        <member name="M:Game.UI.ItemShop.#ctor(System.Int32)">
+        <member name="M:Game.UI.ItemShop.#ctor(Engine.Renderer.Text.Font,System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.UI.ItemShop"/> class.
             </summary>
             <param name="itemcount">Amount of items in shop.</param>
+            <param name="font_">usable font.</param>
         </member>
         <member name="P:Game.UI.ItemShop.ShopActive">
             <summary>
@@ -536,10 +537,11 @@
             Loader Class to initialize the whole UI of the Game. (hopefully).
             </summary>
         </member>
-        <member name="M:Game.UI.UILoader.Initialize_UI">
+        <member name="M:Game.UI.UILoader.Initialize_UI(Engine.Renderer.Text.Font)">
             <summary>
             Initializes the UI.
             </summary>
+            <param name="font">usable font.</param>
         </member>
     </members>
 </doc>

@@ -4,21 +4,15 @@
 
 namespace Game.UI
 {
-    using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
     using System.Reflection;
-    using System.Text;
     using Engine.GameObject;
     using Engine.Renderer;
     using Engine.Renderer.Particle;
     using Engine.Renderer.Sprite;
     using Engine.Renderer.Text;
-    using Engine.Renderer.Tile;
-    using Engine.Renderer.UI;
-    using Engine.Service;
-    using Game.Gun;
+    using Engine.Renderer.Text.Parser;
     using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
@@ -44,12 +38,16 @@ namespace Game.UI
         private static Assembly assembly;
         private static Sprite shopBackground;
         private static Sprite shopItemFrame;
+        private static Sprite shopStartButton;
+        private static Font font;
+        private static TextRenderer text;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ItemShop"/> class.
         /// </summary>
         /// <param name="itemcount">Amount of items in shop.</param>
-        public ItemShop(int itemcount = 5)
+        /// <param name="font_">usable font.</param>
+        public ItemShop(Font font_, int itemcount = 5)
         {
             this.ItemCount = itemcount;
             this.ShopActive = true; // remove after done
@@ -57,6 +55,8 @@ namespace Game.UI
 
             // Fill gunType Array (manually for now).
             GunType.InitGunArray();
+
+            font = font_;
         }
 
         /// <summary>
@@ -116,6 +116,12 @@ namespace Game.UI
             using Stream shopItemFrameSpriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.item_frame_front.png");
             shopItemFrame = new Sprite(shopItemFrameSpriteStream, true);
 
+            using Stream shopStartButtonSpriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.button.png");
+            shopStartButton = new Sprite(shopStartButtonSpriteStream, true);
+
+            text = new TextRenderer(string.Empty, font, new Color4(1.0f, 1.0f, 1.0f, 1.0f), new Rectangle(0, 0, 0, 0), 0.25f, false);
+            Engine.Engine.AddRenderer(text, RenderLayer.UI);
+
             return;
         }
 
@@ -144,6 +150,26 @@ namespace Game.UI
                 GL.End();
 
                 this.RenderItems(args);
+                this.RenderItemStats(args);
+
+                // render start button TODO still ugly
+                GL.BindTexture(TextureTarget.Texture2D, shopStartButton.Handle);
+                GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
+                GL.Begin(PrimitiveType.Quads);
+
+                GL.TexCoord2(0, 1);
+                GL.Vertex2(shopOrigin.X + 50, shopOrigin.Y + (shopSpriteAspect.Z * shopWidth) - 50 - 70);
+
+                GL.TexCoord2(1, 1);
+                GL.Vertex2(shopOrigin.X + shopWidth - 50, shopOrigin.Y + (shopSpriteAspect.Z * shopWidth) - 50 - 70);
+
+                GL.TexCoord2(1, 0);
+                GL.Vertex2(shopOrigin.X + shopWidth - 50, shopOrigin.Y + (shopSpriteAspect.Z * shopWidth) - 50);
+
+                GL.TexCoord2(0, 0);
+                GL.Vertex2(shopOrigin.X + 50, shopOrigin.Y + (shopSpriteAspect.Z * shopWidth) - 50);
+
+                GL.End();
 
                 return;
             }
@@ -221,7 +247,15 @@ namespace Game.UI
                 GL.Vertex2((itemSpacing * i) + shopOrigin.X - (itemFrameSize / 2), shopOrigin.Y + 70 + itemFrameSize);
 
                 GL.End();
+
+                text.Text = "TEst";
+                text.Position = new Rectangle((itemSpacing * i) + shopOrigin.X - (itemFrameSize / 2), shopOrigin.Y + 170, (itemSpacing * i) + shopOrigin.X + (itemFrameSize / 2), shopOrigin.Y + 230);
             }
+        }
+
+        private void RenderItemStats(FrameEventArgs args)
+        {
+            return;
         }
     }
 }

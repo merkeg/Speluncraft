@@ -18,7 +18,6 @@ namespace Game.UI
     public class GunType
     {
         private static Assembly assembly;
-        private static Sprite shopBackground;
 
         private GunType(string gunName, IGun gun, Sprite sprite)
         {

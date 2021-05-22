@@ -47,6 +47,7 @@
     <None Remove="Resources\Sprite\UI\Healthbar\ui_background.png" />
     <None Remove="Resources\Sprite\bullet.png" />
     <None Remove="Resources\Sprite\tilesheetMC.png" />
+    <None Remove="Resources\Sprite\UI\ItemShop\button.png" />
     <None Remove="Resources\Sprite\UI\ItemShop\grenadelauncher.png" />
     <None Remove="Resources\Sprite\UI\ItemShop\itemshop.png" />
     <None Remove="Resources\Sprite\UI\ItemShop\item_frame_front.png" />
@@ -166,6 +167,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Remove="Resources\UI\interaction_dot.png" />
+    <EmbeddedResource Include="Resources\Sprite\UI\ItemShop\button.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Sprite\UI\ItemShop\grenadelauncher.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
