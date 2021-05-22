@@ -42,15 +42,6 @@ namespace Game.Enemy
         {
             this.phys = this.GetComponent<Engine.Component.Physics>();
             this.phys.AddVelocityX(this.movementSpeed);
-            if (sprite == null)
-            {
-                Engine.Renderer.Tile.Tilesheet walkingSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Enemy.zombie_walking.png", 80, 110);
-                this.spriteWalking = new AnimatedSprite(walkingSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
-            }
-            else
-            {
-                this.spriteWalking = (AnimatedSprite)sprite;
-            }
 
             this.InitializeSprites();
 
@@ -178,6 +169,8 @@ namespace Game.Enemy
             this.spriteAttack = new AnimatedSprite(attackSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
             Engine.Renderer.Tile.Tilesheet hurtSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Enemy.zombie_hurt.png", 80, 110);
             this.spriteHurt = new AnimatedSprite(hurtSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
+            Engine.Renderer.Tile.Tilesheet walkingSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Enemy.zombie_walking.png", 80, 110);
+            this.spriteWalking = new AnimatedSprite(walkingSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
         }
     }
 }
