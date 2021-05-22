@@ -6,6 +6,7 @@ namespace Engine.Renderer.UI
 {
     using System.Collections.Generic;
     using global::Engine.GameObject;
+    using global::Engine.Renderer.Sprite;
     using global::Engine.Renderer.Text;
     using global::Engine.Renderer.UI.Graph;
     using global::Engine.Renderer.UI.Primitive;
@@ -139,7 +140,7 @@ namespace Engine.Renderer.UI
         /// <param name="color">Color of the quad.</param>
         /// <param name="filled">Quad filled.</param>
         /// <returns>The Quad element.</returns>
-        public QuadRenderer AddQuad(Rectangle rectangleBounds, Color4 color, bool filled = true)
+        public QuadRenderer AddQuad(IRectangle rectangleBounds, Color4 color, bool filled = true)
         {
             QuadRenderer quadRenderer = new QuadRenderer(rectangleBounds, color, filled);
             this.AddRenderElement(quadRenderer);
@@ -154,7 +155,7 @@ namespace Engine.Renderer.UI
         /// <param name="min">Min.</param>
         /// <param name="max">Max.</param>
         /// <returns>Graph renderer object.</returns>
-        public GraphRenderer AddGraph(string title, Rectangle graphBounds, float min = 0f, float max = 10f)
+        public GraphRenderer AddGraph(string title, IRectangle graphBounds, float min = 0f, float max = 10f)
         {
             GraphRenderer graphRenderer = new GraphRenderer(title, this.Font, graphBounds, min, max);
             this.AddRenderElement(graphRenderer);
@@ -169,11 +170,24 @@ namespace Engine.Renderer.UI
         /// <param name="position">Position of text.</param>
         /// <param name="textScale">Scale of text.</param>
         /// <returns>Text renderer object.</returns>
-        public TextRenderer AddText(string text, Color4 color, Rectangle position, float textScale)
+        public TextRenderer AddText(string text, Color4 color, IRectangle position, float textScale)
         {
             TextRenderer textRenderer = new TextRenderer(text, this.Font, color, position, textScale);
             this.AddRenderElement(textRenderer);
             return textRenderer;
+        }
+
+        /// <summary>
+        /// Adds a new sprite to the renderer.
+        /// </summary>
+        /// <param name="sprite">Sprite to render.</param>
+        /// <param name="bounds">Bounds set to.</param>
+        /// <returns>The renderer.</returns>
+        public SpriteRenderer AddSprite(ISprite sprite, IRectangle bounds)
+        {
+            SpriteRenderer spriteRenderer = new SpriteRenderer(sprite, bounds);
+            this.AddRenderElement(spriteRenderer);
+            return spriteRenderer;
         }
     }
 }
