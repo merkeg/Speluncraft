@@ -43,7 +43,10 @@ namespace Game.Enemy
             this.phys = this.GetComponent<Engine.Component.Physics>();
             this.phys.AddVelocityX(this.movementSpeed);
 
-            this.InitializeSprites();
+            if (sprite != null)
+            {
+                this.InitializeSprites();
+            }
 
             this.checkLeft = new Engine.GameObject.GameObject(this.MinX - 0.3f, this.MinY - 0.3f, 0.2f, 0.1f, this.Sprite);
             this.checkRight = new Engine.GameObject.GameObject(this.MinX + this.SizeX + 0.1f, this.MinY - 0.3f, 0.2f, 0.1f, this.Sprite);
