@@ -22,6 +22,8 @@ namespace Game.UI
     /// </summary>
     public class ItemShop : IRenderer
     {
+        private static Player.Player player;
+
         private static Vector3 shopSpriteAspect = new Vector3(1280, 720, 720f / 1280f); // width, height and original aspect-ratio (I hate scaling :()
         private static Vector2 screenCenter;
         private static Vector2 screenSize;
@@ -40,7 +42,6 @@ namespace Game.UI
         private static Sprite shopItemFrame;
         private static Sprite shopStartButton;
         private static Font font;
-        private static TextRenderer text;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ItemShop"/> class.
@@ -57,6 +58,15 @@ namespace Game.UI
             GunType.InitGunArray();
 
             font = font_;
+
+            foreach (IRectangle r in Engine.Engine.Colliders)
+            {
+                if (r is Player.Player)
+                {
+                    GameObject g = (GameObject)r;
+                    player = (Player.Player)g;
+                }
+            }
         }
 
         /// <summary>
@@ -86,16 +96,20 @@ namespace Game.UI
         /// <param name="args">MouseDown Args.</param>
         public void MouseDown(MouseButtonEventArgs args)
         {
-            Debug.WriteLine(args.Button + " | " + windowMousePosition.X + " | " + windowMousePosition.Y);
+            // Debug.WriteLine(args.Button + " | " + windowMousePosition.X + " | " + windowMousePosition.Y);
 
             // check if mouse is clicked inside of itemFrame
             int index = 0; // poormans index enumerable too dumb and lazy to do it right at the moment.
             foreach (Vector4 hitbox in itemHitboxList)
             {
-                Debug.WriteLine(hitbox.X + " | " + hitbox.Y + " | " + hitbox.Z + " | " + hitbox.W);
+                // Debug.WriteLine(hitbox.X + " | " + hitbox.Y + " | " + hitbox.Z + " | " + hitbox.W);
                 if (windowMousePosition.X > hitbox.X && windowMousePosition.X < hitbox.Z && windowMousePosition.Y > hitbox.Y && windowMousePosition.Y < hitbox.W)
                 {
                     Debug.WriteLine("You Chose: " + GunType.GunTypeArray[index].GunName);
+                    player.ChangeGun(GunType.GunTypeArray[index].Gun);
+
+                    // change this
+                    this.ShopActive = false;
                     return;
                 }
 
@@ -118,9 +132,6 @@ namespace Game.UI
 
             using Stream shopStartButtonSpriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.button.png");
             shopStartButton = new Sprite(shopStartButtonSpriteStream, true);
-
-            text = new TextRenderer(string.Empty, font, new Color4(1.0f, 1.0f, 1.0f, 1.0f), new Rectangle(0, 0, 0, 0), 0.25f, false);
-            Engine.Engine.AddRenderer(text, RenderLayer.UI);
 
             return;
         }
@@ -150,7 +161,6 @@ namespace Game.UI
                 GL.End();
 
                 this.RenderItems(args);
-                this.RenderItemStats(args);
 
                 // render start button TODO still ugly
                 GL.BindTexture(TextureTarget.Texture2D, shopStartButton.Handle);
@@ -247,15 +257,7 @@ namespace Game.UI
                 GL.Vertex2((itemSpacing * i) + shopOrigin.X - (itemFrameSize / 2), shopOrigin.Y + 70 + itemFrameSize);
 
                 GL.End();
-
-                text.Text = "TEst";
-                text.Position = new Rectangle((itemSpacing * i) + shopOrigin.X - (itemFrameSize / 2), shopOrigin.Y + 170, (itemSpacing * i) + shopOrigin.X + (itemFrameSize / 2), shopOrigin.Y + 230);
             }
-        }
-
-        private void RenderItemStats(FrameEventArgs args)
-        {
-            return;
         }
     }
 }
