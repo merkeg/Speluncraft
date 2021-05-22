@@ -34,6 +34,8 @@ namespace Game.Gun
 
         private bool shotFiredThisFrame;
 
+        private int shotDierection;
+
         private ISprite bulletSprite;
 
         /// <summary>
@@ -83,12 +85,16 @@ namespace Game.Gun
             if (this.reloadCoolDown <= 0)
             {
                 this.shotFiredThisFrame = true;
-                this.Shoot();
+                if (this.GameObject is ILookDirection)
+                {
+                    this.shotDierection = ((ILookDirection)this.GameObject).GetDirection();
+                    this.Shoot();
 
-                this.repeatTimeCounter = this.repeatTime;
-                this.secondShot = true;
+                    this.repeatTimeCounter = this.repeatTime;
+                    this.secondShot = true;
 
-                this.reloadCoolDown = this.reloadTime;
+                    this.reloadCoolDown = this.reloadTime;
+                }
             }
             else
             {
@@ -104,23 +110,17 @@ namespace Game.Gun
 
         private void Shoot()
         {
-            if (this.GameObject is ILookDirection)
+            if (this.shotDierection == ILookDirection.Left)
             {
-                ILookDirection d = (ILookDirection)this.GameObject;
-                if (d.GetDirection() == ILookDirection.Left)
-                {
-                    Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, -this.bulletVelocity, 0, this.GameObject.MinX - this.bulletLenght - this.bufferDistance, this.GameObject.MinY + 0.3f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
-                    Engine.Engine.AddGameObject(b);
-                }
+                Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, -this.bulletVelocity, 0, this.GameObject.MinX - this.bulletLenght - this.bufferDistance, this.GameObject.MinY + 0.3f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
+                Engine.Engine.AddGameObject(b);
+            }
 
-                if (d.GetDirection() == ILookDirection.Right)
-                {
-                    Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, this.bulletVelocity, 0, this.GameObject.MinX + this.GameObject.SizeX + this.bufferDistance, this.GameObject.MinY + 0.3f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
-                    Engine.Engine.AddGameObject(b);
-                }
+            if (this.shotDierection == ILookDirection.Right)
+            {
+                Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, this.bulletVelocity, 0, this.GameObject.MinX + this.GameObject.SizeX + this.bufferDistance, this.GameObject.MinY + 0.3f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
+                Engine.Engine.AddGameObject(b);
             }
         }
-
-
     }
 }
