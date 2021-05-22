@@ -49,11 +49,14 @@ namespace Game.UI
         /// Initializes a new instance of the <see cref="ItemShop"/> class.
         /// </summary>
         /// <param name="itemcount">Amount of items in shop.</param>
-        public ItemShop(int itemcount = 4)
+        public ItemShop(int itemcount = 5)
         {
             this.ItemCount = itemcount;
             this.ShopActive = true; // remove after done
             itemHitboxList = new Vector4[this.ItemCount];
+
+            // Fill gunType Array (manually for now).
+            GunType.InitGunArray();
         }
 
         /// <summary>
@@ -86,13 +89,13 @@ namespace Game.UI
             Debug.WriteLine(args.Button + " | " + windowMousePosition.X + " | " + windowMousePosition.Y);
 
             // check if mouse is clicked inside of itemFrame
-            int index = 0; // poormans index enumerable too dumb and lazy to di it right at the moment.
+            int index = 0; // poormans index enumerable too dumb and lazy to do it right at the moment.
             foreach (Vector4 hitbox in itemHitboxList)
             {
                 Debug.WriteLine(hitbox.X + " | " + hitbox.Y + " | " + hitbox.Z + " | " + hitbox.W);
                 if (windowMousePosition.X > hitbox.X && windowMousePosition.X < hitbox.Z && windowMousePosition.Y > hitbox.Y && windowMousePosition.Y < hitbox.W)
                 {
-                    Debug.WriteLine("you hit item Nr. " + index);
+                    Debug.WriteLine("You Chose: " + GunType.GunTypeArray[index].GunName);
                     return;
                 }
 
@@ -162,7 +165,7 @@ namespace Game.UI
             shopOrigin.X = screenCenter.X - (shopWidth / 2f);
             shopOrigin.Y = screenCenter.Y - (shopSpriteAspect.Z * shopWidth / 2);
 
-            itemSpacing = shopWidth / 5; // maybe automate if more items
+            itemSpacing = shopWidth / (this.ItemCount + 1);
             return;
         }
 

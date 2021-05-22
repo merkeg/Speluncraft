@@ -355,6 +355,31 @@
         <member name="M:Game.StresstestComponent.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="T:Game.UI.GunType">
+            <summary>
+            Class for GunTypes and their information.
+            </summary>
+        </member>
+        <member name="P:Game.UI.GunType.GunTypeArray">
+            <summary>
+            Gets and sets an Array where every Gun and additional information about it is saved.
+            </summary>
+        </member>
+        <member name="P:Game.UI.GunType.GunName">
+            <summary>
+            Gets Gunname as a String.
+            </summary>
+        </member>
+        <member name="P:Game.UI.GunType.Gun">
+            <summary>
+            Gets reference to gun instance.
+            </summary>
+        </member>
+        <member name="M:Game.UI.GunType.InitGunArray">
+            <summary>
+            Initialize Array of GunTypes. For now it has to be done manually.
+            </summary>
+        </member>
         <member name="T:Game.UI.HealthbarPlayer">
             <summary>
             The HealthbarPlayer class renders the healthbar UI element.
