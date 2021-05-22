@@ -55,6 +55,15 @@ namespace Game.Enemy
             this.AddComponent(this.animationScheduler);
         }
 
+        /// <summary>
+        /// Gets the Movespeed.
+        /// </summary>
+        /// <returns>The Movespeed.</returns>
+        public float GetMoveSpeed()
+        {
+            return this.movementSpeed;
+        }
+
         /// <inheritdoc/>
         public int GetDirection()
         {

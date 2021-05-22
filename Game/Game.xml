@@ -20,6 +20,12 @@
             <param name="sprite">sprite.</param>
             <param name="damage">Damage dealt by touching the enemy.</param>
         </member>
+        <member name="M:Game.Enemy.DummyAI.GetMoveSpeed">
+            <summary>
+            Gets the Movespeed.
+            </summary>
+            <returns>The Movespeed.</returns>
+        </member>
         <member name="M:Game.Enemy.DummyAI.GetDirection">
             <inheritdoc/>
         </member>
@@ -62,6 +68,49 @@
             <param name="damage">Damage dealt by touching the enemy.</param>
         </member>
         <member name="M:Game.Enemy.EnemyPistol.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer">
+            <summary>
+            Enemy that can do something when he sees the Player. ( Overrider OnSeePlayer ).
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer"/> class.
+            </summary>
+            <param name="minX">minX.</param>
+            <param name="minY">minY.</param>
+            <param name="sizeX">sizeX.</param>
+            <param name="sizeY">sizeY.</param>
+            <param name="sprite">sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
+        </member>
+        <member name="M:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer.SawPlayerThisFrame">
+            <summary>
+            Do something when the player is infront of us.
+            </summary>
+        </member>
+        <member name="T:Game.Enemy.LeaperReaperEnemy">
+            <summary>
+            Enemy that jumps at at Player when he sees him.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.LeaperReaperEnemy.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.LeaperReaperEnemy"/> class.
+            </summary>
+            <param name="minX">minX.</param>
+            <param name="minY">minY.</param>
+            <param name="sizeX">sizeX.</param>
+            <param name="sizeY">sizeY.</param>
+            <param name="sprite">sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
+        </member>
+        <member name="M:Game.Enemy.LeaperReaperEnemy.SawPlayerThisFrame">
             <inheritdoc/>
         </member>
         <member name="T:Game.GameComponents.AnimationScheduler">

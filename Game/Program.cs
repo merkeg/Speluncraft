@@ -116,7 +116,7 @@ namespace Game
 
             this.tilemap.FindObjectsByName("DummyAI").ForEach(obj =>
             {
-                DummyAI enemy = new DummyAI(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10);
+                LeaperReaperEnemy enemy = new LeaperReaperEnemy(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10);
                 Engine.Engine.AddGameObject(enemy);
             });
 
