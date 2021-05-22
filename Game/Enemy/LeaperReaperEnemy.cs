@@ -14,6 +14,18 @@ namespace Game.Enemy
     /// </summary>
     public class LeaperReaperEnemy : EnemyThatWalksWithTriggerOnSeePlayer
     {
+        private float leapCoolDown = 2;
+        private float leapCoolDownCounter;
+
+        private float leapSpeedX = 10;
+        private float leapSpeedY = 7;
+
+        private float leapingBreakSpeedX = 5;
+
+        private Sprite leapingSpirite = new Sprite("Game.Resources.Floppa.png");
+
+        private Engine.Component.Physics physics;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="LeaperReaperEnemy"/> class.
         /// </summary>
@@ -26,12 +38,54 @@ namespace Game.Enemy
         public LeaperReaperEnemy(float minX, float minY, float sizeX, float sizeY, ISprite sprite, int damage)
             : base(minX, minY, sizeX, sizeY, sprite, damage)
         {
+            this.physics = this.GetComponent<Engine.Component.Physics>();
         }
 
         /// <inheritdoc/>
-        public override void SawPlayerThisFrame()
+        public override void OnUpdate(float frameTime)
         {
-            Console.WriteLine("I SEEEEEEEEEEE YOU");
+            // Are we leaping?
+            if (Math.Abs(this.GetMoveSpeed()) < Math.Abs(this.physics.GetVelocity().X) && this.physics.GetVelocity().X != 0)
+            {
+                if (this.GetDirection() == Gun.ILookDirection.Right)
+                {
+                    this.physics.AddVelocityX(-frameTime * this.leapingBreakSpeedX);
+                }
+                else
+                {
+                    this.physics.AddVelocityX(frameTime * this.leapingBreakSpeedX);
+                }
+
+                this.Components.ForEach(component => component.OnUpdate(frameTime));
+            }
+            else
+            {
+                base.OnUpdate(frameTime);
+            }
+
+            this.leapCoolDownCounter -= frameTime;
+        }
+
+        /// <inheritdoc/>
+        public override void SawPlayerThisFrame(float frameTime)
+        {
+            if (this.leapCoolDownCounter <= 0)
+            {
+                this.GetComponent<Game.GameComponents.AnimationScheduler>().AddAnimation(11, 10, this.leapingSpirite, this.Mirrored);
+
+                if (this.GetDirection() == Gun.ILookDirection.Right)
+                {
+                    this.physics.SetMaxVelocity(this.leapSpeedX, this.physics.GetMaxVelocity().Y);
+                    this.physics.SetVelocity(this.leapSpeedX, this.leapSpeedY);
+                }
+                else
+                {
+                    this.physics.SetMaxVelocity(this.leapSpeedX, this.physics.GetMaxVelocity().Y);
+                    this.physics.SetVelocity(-this.leapSpeedX, this.leapSpeedY);
+                }
+
+                this.leapCoolDownCounter = this.leapCoolDown;
+            }
         }
     }
 }

@@ -341,6 +341,12 @@
             </summary>
             <param name="gravity">The paramref name="gravity". Normally a value.</param>
         </member>
+        <member name="M:Engine.Component.Physics.GetMaxVelocity">
+            <summary>
+            Get the MaxVelocity.
+            </summary>
+            <returns>The Max Velocity.</returns>
+        </member>
         <member name="M:Engine.Component.Physics.SetIsAffectedByGravity(System.Boolean)">
             <summary>
             Set if the Object should get Gravity.

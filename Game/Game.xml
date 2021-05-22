@@ -89,10 +89,11 @@
         <member name="M:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
-        <member name="M:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer.SawPlayerThisFrame">
+        <member name="M:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer.SawPlayerThisFrame(System.Single)">
             <summary>
-            Do something when the player is infront of us.
+            Do SOmething when we see the Player
             </summary>
+            <param name="frameTime">Time pased since last frame.</param>
         </member>
         <member name="T:Game.Enemy.LeaperReaperEnemy">
             <summary>
@@ -110,7 +111,10 @@
             <param name="sprite">sprite.</param>
             <param name="damage">Damage dealt by touching the enemy.</param>
         </member>
-        <member name="M:Game.Enemy.LeaperReaperEnemy.SawPlayerThisFrame">
+        <member name="M:Game.Enemy.LeaperReaperEnemy.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Enemy.LeaperReaperEnemy.SawPlayerThisFrame(System.Single)">
             <inheritdoc/>
         </member>
         <member name="T:Game.GameComponents.AnimationScheduler">

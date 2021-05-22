@@ -57,15 +57,16 @@ namespace Game.Enemy
                 {
                     if (g is Game.Player.Player)
                     {
-                        this.SawPlayerThisFrame();
+                        this.SawPlayerThisFrame(frameTime);
                     }
                 }
             }
         }
 
         /// <summary>
-        /// Do something when the player is infront of us.
+        /// Do SOmething when we see the Player
         /// </summary>
-        public abstract void SawPlayerThisFrame();
+        /// <param name="frameTime">Time pased since last frame.</param>
+        public abstract void SawPlayerThisFrame(float frameTime);
     }
 }
