@@ -16,6 +16,8 @@ namespace Engine.Component
         private int currenHealtPoints;
         private int maxHealthPoints;
         private bool isDeadFlag;
+        private int hpLasteFrame;
+        private bool tookDmThisFrame;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HealthPoints"/> class.
@@ -143,10 +145,28 @@ namespace Engine.Component
             return this.isDeadFlag;
         }
 
+        /// <summary>
+        /// Get the tookDmgThisFrame flag.
+        /// </summary>
+        /// <returns>The tookDmgThisFrame flag.</returns>
+        public bool GetTookDmgThisFrame()
+        {
+            return this.tookDmThisFrame;
+        }
+
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
-            return;
+            if (this.hpLasteFrame > this.currenHealtPoints)
+            {
+                this.tookDmThisFrame = true;
+            }
+            else
+            {
+                this.tookDmThisFrame = false;
+            }
+
+            this.hpLasteFrame = this.currenHealtPoints;
         }
     }
 }

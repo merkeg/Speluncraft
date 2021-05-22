@@ -28,6 +28,8 @@ namespace Game.Gun
         private float reloadTime = 0.5f;
         private float reloadCoolDown = 0;
 
+        private bool shotFiredThisFrame;
+
         private ISprite bulletSprite;
 
         /// <summary>
@@ -59,24 +61,35 @@ namespace Game.Gun
         {
             if (this.reloadCoolDown <= 0)
             {
+                this.shotFiredThisFrame = true;
                 if (this.GameObject is ILookDirection)
                 {
                     ILookDirection d = (ILookDirection)this.GameObject;
                     if (d.GetDirection() == ILookDirection.Left)
                     {
-                        Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, -this.bulletVelocity, 0, this.GameObject.MinX - this.bulletLenght - this.bufferDistance, this.GameObject.MinY + 0.5f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
+                        Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, -this.bulletVelocity, 0, this.GameObject.MinX - this.bulletLenght - this.bufferDistance, this.GameObject.MinY + 0.3f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
                         Engine.Engine.AddGameObject(b);
                     }
 
                     if (d.GetDirection() == ILookDirection.Right)
                     {
-                        Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, this.bulletVelocity, 0, this.GameObject.MinX + this.GameObject.SizeX + this.bufferDistance, this.GameObject.MinY + 0.5f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
+                        Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, this.bulletVelocity, 0, this.GameObject.MinX + this.GameObject.SizeX + this.bufferDistance, this.GameObject.MinY + 0.3f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
                         Engine.Engine.AddGameObject(b);
                     }
                 }
 
                 this.reloadCoolDown = this.reloadTime;
             }
+            else
+            {
+                this.shotFiredThisFrame = false;
+            }
+        }
+
+        /// <inheritdoc/>
+        public bool ShotFired()
+        {
+            return this.shotFiredThisFrame;
         }
     }
 }

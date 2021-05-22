@@ -49,7 +49,7 @@ namespace Game
             this.assembly = Assembly.GetExecutingAssembly();
             this.InitializeRenderers();
             this.AddPlayer();
-            this.AddEnemies();
+            this.AddObjects();
 
             Camera cam = Engine.Engine.Camera;
             cam.Scale = 5f;
@@ -103,18 +103,17 @@ namespace Game
             Engine.Engine.AddGameObject(new InteractableElement(50, -34, 0.3f, 0.3f, font, "Lava will kill you", Color4.Coral, Color4.Coral, 6, false));
         }
 
-        private void AddEnemies()
+        private void AddObjects()
         {
-            Sprite enemySprite = new Sprite("Game.Resources.enemy.png");
-            Sprite enemyGunSprite = new Sprite("Game.Resources.enemyGun.png");
+            AnimatedSprite enemySprite = new AnimatedSprite(new Tilesheet("Game.Resources.Enemy.zombie_walking.png", 80, 110), Keyframe.RangeX(0, 1, 0, 0.1f));
+            AnimatedSprite heartSprite = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.heart.png", 16, 16), Keyframe.RangeX(0, 23, 0, 0.1f));
 
-            Engine.Engine.AddGameObject(new Player.Items.HealthPickUp(81, -43, 1, 1, enemySprite, 30));
+            this.tilemap.FindObjectsByName("HealthPickup").ForEach(obj =>
+            {
+                Player.Items.HealthPickUp heart = new Player.Items.HealthPickUp(obj.X, -obj.Y + 1, 1, 1, heartSprite, 30);
+                Engine.Engine.AddGameObject(heart);
+            });
 
-            // Tilesheet fireTilesheet = new Tilesheet("Game.Resources.Animated.fire.png", 32, 32);
-            // float delay = 0.041f;
-            // ISprite fireSprite = new AnimatedSprite(fireTilesheet, Keyframe.RangeY(0, 0, 23, delay));
-            // Enemy.Enemy fire = new Enemy.Enemy(100, -44, 1, 1, fireSprite, 25);
-            // Engine.Engine.AddGameObject(fire);
             this.tilemap.FindObjectsByName("DummyAI").ForEach(obj =>
             {
                 DummyAI enemy = new DummyAI(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10);
@@ -123,7 +122,7 @@ namespace Game
 
             this.tilemap.FindObjectsByName("EnemyPistol").ForEach(obj =>
             {
-                EnemyPistol enemy = new EnemyPistol(obj.X, -obj.Y + 1, 1, 1.375f, enemyGunSprite, 10);
+                EnemyPistol enemy = new EnemyPistol(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10);
                 Engine.Engine.AddGameObject(enemy);
             });
         }
@@ -144,6 +143,8 @@ namespace Game
             sheet.SetCustomSprite(93, lavaStill);
             AnimatedSprite lavaCut = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.lava_still_cut.png", 32, 32), Keyframe.RangeY(0, 0, 122, 0.03f));
             sheet.SetCustomSprite(94, lavaCut);
+            AnimatedSprite fire = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.fire.png", 32, 32), Keyframe.RangeY(0, 0, 23, 0.04f));
+            sheet.SetCustomSprite(85, fire);
         }
     }
 }

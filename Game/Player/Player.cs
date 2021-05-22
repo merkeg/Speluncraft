@@ -26,12 +26,16 @@ namespace Game.Player
         private float jumpPower = 10f;
 
         private AnimatedSprite spriteWalking;
+        private AnimatedSprite spriteHurt;
         private Sprite spriteIdle;
         private Sprite spriteJump;
         private Sprite spriteFall;
+        private Sprite spriteBack;
+        private Sprite spriteGun;
 
         private int isFaceing;
         private Gun.IGun gun;
+        private GameComponents.AnimationScheduler animationScheduler;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Player"/> class.
@@ -55,13 +59,19 @@ namespace Game.Player
             this.jumpcounter = this.jumpCounterMax;
 
             this.InitializeSprites();
+            this.animationScheduler = new GameComponents.AnimationScheduler();
+            this.AddComponent(this.animationScheduler);
 
             Engine.Engine.Colliders.Add(this);
 
             // For Demo 2.0
             // this.AddComponent(new Engine.Component.DoDamageCollisionResponse(10, 1));
-            this.gun = new Gun.GrenadeLauncher();
+            this.gun = new Gun.Pistol();
             this.AddComponent(this.gun.GetAsComponent());
+            this.ChangeGun(new Gun.MachineGun());
+            this.ChangeGun(new Gun.ShotGun());
+            this.ChangeGun(new Gun.GrenadeLauncher());
+            this.ChangeGun(new Gun.Pistol());
             this.ChangeGun(new Gun.MachineGun());
         }
 
@@ -87,6 +97,8 @@ namespace Game.Player
             {
                 this.AddComponent((Engine.Component.Component)gun);
             }
+
+            this.SetGunSprite(gun);
         }
 
         /// <inheritdoc/>
@@ -126,6 +138,8 @@ namespace Game.Player
                 physics.AddVelocitY(this.jumpPower);
                 this.jumpcounter--;
             }
+
+            this.Mirrored = this.animationScheduler.GetIfMustBeMirrored();
         }
 
         private void Shoot(KeyboardState keyboardState)
@@ -134,11 +148,47 @@ namespace Game.Player
             {
                 this.isFaceing = Gun.ILookDirection.Left;
                 this.gun.PullTrigger();
+                if (this.gun.ShotFired())
+                {
+                    this.Mirrored = true;
+                }
             }
             else if (keyboardState.IsKeyDown(Keys.Right))
             {
                 this.isFaceing = Gun.ILookDirection.Right;
                 this.gun.PullTrigger();
+                if (this.gun.ShotFired())
+                {
+                    this.Mirrored = false;
+                }
+            }
+        }
+
+        private void SetGunSprite(Gun.IGun gun)
+        {
+            if (gun is Gun.GrenadeLauncher)
+            {
+                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_grenadelauncher.png", false);
+            }
+
+            if (gun is Gun.MachineGun)
+            {
+                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_machinegun.png", false);
+            }
+
+            if (gun is Gun.Pistol)
+            {
+                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_pistol.png", false);
+            }
+
+            if (gun is Gun.ShotGun)
+            {
+                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_shotgun.png", false);
+            }
+
+            if (gun is Gun.Sniper)
+            {
+                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_sniper.png", false);
             }
         }
 
@@ -166,7 +216,6 @@ namespace Game.Player
 
         private void Idle(float frameTime, Engine.Component.Physics physics)
         {
-            this.Sprite = this.spriteIdle;
             if (physics.GetVelocity().X > 0)
             { // Player is going right
                 physics.AddVelocityX(-this.idealBreacking * frameTime);
@@ -186,15 +235,25 @@ namespace Game.Player
         {
             if (keyboardState.IsKeyDown(Keys.A))
             { // Player wants to go left
+                this.animationScheduler.AddAnimation(49, 0.03f, this.spriteWalking, true);
+                this.Mirrored = true;
                 this.WalkLeft(frameTime, physics);
             }
             else if (keyboardState.IsKeyDown(Keys.D))
             { // Player wants to go right
+                this.animationScheduler.AddAnimation(49, 0.03f, this.spriteWalking, false);
+                this.Mirrored = false;
                 this.WalkRight(frameTime, physics);
             }
             else
             { // Player is not breaking or accelerating
+                this.animationScheduler.AddAnimation(51, 0.001f, this.spriteIdle, this.Mirrored);
                 this.Idle(frameTime, physics);
+            }
+
+            if (keyboardState.IsKeyDown(Keys.W))
+            {
+                this.animationScheduler.AddAnimation(50, 0.03f, this.spriteBack, this.Mirrored);
             }
         }
 
@@ -202,26 +261,28 @@ namespace Game.Player
         {
             Engine.Component.Physics phys = this.GetComponent<Engine.Component.Physics>();
 
-            if (phys.GetVelocity().X < -0.1)
+            // Falling
+            if (phys.GetVelocity().Y < 0)
             {
-                this.Sprite = this.spriteWalking;
-                this.Mirrored = true;
+                this.animationScheduler.AddAnimation(40, 0.001f, this.spriteFall, this.Mirrored);
             }
 
-            if (phys.GetVelocity().X > 0.1)
+            // Jumping
+            if (phys.GetVelocity().Y > 0 && this.jumpcounter < this.jumpCounterMax)
             {
-                this.Sprite = this.spriteWalking;
-                this.Mirrored = false;
+                this.animationScheduler.AddAnimation(35, 0.0001f, this.spriteJump, this.Mirrored);
             }
 
-            if (phys.GetVelocity().Y < -0.1)
+            // Took Damage
+            if (this.GetComponent<Engine.Component.HealthPoints>().GetTookDmgThisFrame())
             {
-                this.Sprite = this.spriteFall;
+                this.animationScheduler.AddAnimation(20, 0.3f, this.spriteHurt, this.Mirrored);
             }
 
-            if (phys.GetVelocity().Y > 0.5)
+            // Shooting
+            if (this.gun.ShotFired())
             {
-                this.Sprite = this.spriteJump;
+                this.animationScheduler.AddAnimation(15, 0.2f, this.spriteGun, this.Mirrored);
             }
         }
 
@@ -229,10 +290,14 @@ namespace Game.Player
         {
             Engine.Renderer.Tile.Tilesheet walkingSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Player.adventurer_walking.png", 80, 110);
             this.spriteWalking = new AnimatedSprite(walkingSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
+            Engine.Renderer.Tile.Tilesheet hurtSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Player.adventurer_hurt.png", 80, 110);
+            this.spriteHurt = new AnimatedSprite(hurtSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
 
             this.spriteIdle = new Sprite("Game.Resources.Player.adventurer_idle.png", false);
             this.spriteJump = new Sprite("Game.Resources.Player.adventurer_jump.png", false);
             this.spriteFall = new Sprite("Game.Resources.Player.adventurer_fall.png", false);
+            this.spriteBack = new Sprite("Game.Resources.Player.adventurer_back.png", false);
+            this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_pistol.png", false);
         }
     }
 }
