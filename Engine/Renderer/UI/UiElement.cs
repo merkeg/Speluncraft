@@ -35,6 +35,7 @@ namespace Engine.Renderer.UI
     public abstract class UiElement : IRenderer
     {
         private UiAlignment alignment;
+        private bool fitToViewport;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UiElement"/> class.
@@ -43,7 +44,8 @@ namespace Engine.Renderer.UI
         /// <param name="backgroundColor">Background color.</param>
         /// <param name="font">Font.</param>
         /// <param name="alignment">Alignment.</param>
-        protected UiElement(Rectangle bounds, Color4 backgroundColor, Font font, UiAlignment alignment = UiAlignment.Left)
+        /// <param name="fitToViewport">Set if content should fit to viewport.</param>
+        protected UiElement(Rectangle bounds, Color4 backgroundColor, Font font, UiAlignment alignment = UiAlignment.Left, bool fitToViewport = false)
         {
             this.alignment = alignment;
             this.Renderers = new List<IRenderer>();
@@ -51,6 +53,7 @@ namespace Engine.Renderer.UI
             this.BackgroundColor = backgroundColor;
             this.Bounds = bounds;
             this.Hidden = false;
+            this.fitToViewport = fitToViewport;
             if (alignment == UiAlignment.Left)
             {
                 this.AbsoluteBounds = new Rectangle(0, 0, 1, 1);
@@ -61,7 +64,7 @@ namespace Engine.Renderer.UI
                 this.AbsoluteBounds = new Rectangle(monitor.X - this.Bounds.MinX - this.Bounds.SizeX, this.Bounds.MinY, this.Bounds.SizeX, this.Bounds.SizeY);
             }
 
-            this.AddQuad(new RelativeRectangle(this.AbsoluteBounds, 0, 0, this.Bounds.SizeX, this.Bounds.SizeY), backgroundColor);
+            this.AddQuad(this.AbsoluteBounds, backgroundColor);
         }
 
         /// <summary>
@@ -112,6 +115,12 @@ namespace Engine.Renderer.UI
             if (this.alignment == UiAlignment.Right)
             {
                 this.AbsoluteBounds.MinX = args.Width - this.Bounds.MinX - this.Bounds.SizeX;
+            }
+
+            if (this.fitToViewport)
+            {
+                this.AbsoluteBounds.MaxX = args.Width;
+                this.AbsoluteBounds.MaxY = args.Height;
             }
         }
 

@@ -6,6 +6,32 @@ namespace Engine.Renderer.UI
 {
     using global::Engine.GameObject;
 
+    public enum RelativeRectangleXAlignment
+    {
+        /// <summary>
+        /// Left alignment.
+        /// </summary>
+        Left,
+
+        /// <summary>
+        /// Right alignment.
+        /// </summary>
+        Right,
+    }
+
+    public enum RelativeRectangleYAlignment
+    {
+        /// <summary>
+        /// Top alignment.
+        /// </summary>
+        Top,
+
+        /// <summary>
+        /// Bottom alignment.
+        /// </summary>
+        Bottom,
+    }
+
     /// <summary>
     /// Relative rectangle class.
     /// </summary>
@@ -16,6 +42,8 @@ namespace Engine.Renderer.UI
         private float relY;
         private float relSizeX;
         private float relSizeY;
+        private RelativeRectangleXAlignment xAlignment;
+        private RelativeRectangleYAlignment yAlignment;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RelativeRectangle"/> class.
@@ -25,7 +53,9 @@ namespace Engine.Renderer.UI
         /// <param name="minY">Relative miny.</param>
         /// <param name="sizeX">Relative sizex.</param>
         /// <param name="sizeY">Relative sizey.</param>
-        public RelativeRectangle(IRectangle absolute, float minX, float minY, float sizeX, float sizeY)
+        /// <param name="xAlignment">X Alignment of the Rectangle to the parent.</param>
+        /// <param name="yAlignment">Y Alignment of the Rectangle to the parent.</param>
+        public RelativeRectangle(IRectangle absolute, float minX, float minY, float sizeX, float sizeY, RelativeRectangleXAlignment xAlignment = RelativeRectangleXAlignment.Left, RelativeRectangleYAlignment yAlignment = RelativeRectangleYAlignment.Top)
             : base(minX, minY, sizeX, sizeY)
         {
             this.absolute = absolute;
@@ -33,6 +63,8 @@ namespace Engine.Renderer.UI
             this.relY = minY;
             this.relSizeX = sizeX;
             this.relSizeY = sizeY;
+            this.xAlignment = xAlignment;
+            this.yAlignment = yAlignment;
         }
 
         /// <inheritdoc/>
@@ -50,14 +82,34 @@ namespace Engine.Renderer.UI
         /// <inheritdoc/>
         public override float MinX
         {
-            get => this.absolute.MinX + this.relX;
+            get
+            {
+                if (this.xAlignment == RelativeRectangleXAlignment.Left)
+                {
+                    return this.absolute.MinX + this.relX;
+                }
+                else
+                {
+                    return this.absolute.MaxX + this.relX;
+                }
+            }
             set => this.relX = value;
         }
 
         /// <inheritdoc/>
         public override float MinY
         {
-            get => this.absolute.MinY + this.relY;
+            get
+            {
+                if (this.yAlignment == RelativeRectangleYAlignment.Top)
+                {
+                    return this.absolute.MinY + this.relY;
+                }
+                else
+                {
+                    return this.absolute.MaxY + this.relY;
+                }
+            }
             set => this.relY = value;
         }
     }
