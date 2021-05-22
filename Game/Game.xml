@@ -375,6 +375,11 @@
             Gets reference to gun instance.
             </summary>
         </member>
+        <member name="P:Game.UI.GunType.GunSprite">
+            <summary>
+            Gets and sets Sprite for gun.
+            </summary>
+        </member>
         <member name="M:Game.UI.GunType.InitGunArray">
             <summary>
             Initialize Array of GunTypes. For now it has to be done manually.

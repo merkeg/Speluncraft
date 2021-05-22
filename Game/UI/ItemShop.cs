@@ -202,6 +202,25 @@ namespace Game.UI
                 GL.Vertex2((itemSpacing * i) + shopOrigin.X - (itemFrameSize / 2), shopOrigin.Y + 70 + itemFrameSize);
 
                 GL.End();
+
+                // render actual item inside itemframe
+                GL.BindTexture(TextureTarget.Texture2D, GunType.GunTypeArray[i - 1].GunSprite.Handle);
+                GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
+                GL.Begin(PrimitiveType.Quads);
+
+                GL.TexCoord2(0, 1);
+                GL.Vertex2((itemSpacing * i) + shopOrigin.X - (itemFrameSize / 2), shopOrigin.Y + 70);
+
+                GL.TexCoord2(1, 1);
+                GL.Vertex2((itemSpacing * i) + shopOrigin.X + (itemFrameSize / 2), shopOrigin.Y + 70);
+
+                GL.TexCoord2(1, 0);
+                GL.Vertex2((itemSpacing * i) + shopOrigin.X + (itemFrameSize / 2), shopOrigin.Y + 70 + itemFrameSize);
+
+                GL.TexCoord2(0, 0);
+                GL.Vertex2((itemSpacing * i) + shopOrigin.X - (itemFrameSize / 2), shopOrigin.Y + 70 + itemFrameSize);
+
+                GL.End();
             }
         }
     }

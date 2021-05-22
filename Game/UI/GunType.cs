@@ -6,7 +6,10 @@ namespace Game.UI
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
+    using System.Reflection;
     using System.Text;
+    using Engine.Renderer.Sprite;
     using Game.Gun;
 
     /// <summary>
@@ -14,10 +17,14 @@ namespace Game.UI
     /// </summary>
     public class GunType
     {
-        private GunType(string gunName, IGun gun)
+        private static Assembly assembly;
+        private static Sprite shopBackground;
+
+        private GunType(string gunName, IGun gun, Sprite sprite)
         {
             this.GunName = gunName;
             this.Gun = gun;
+            this.GunSprite = sprite;
         }
 
         /// <summary>
@@ -36,16 +43,33 @@ namespace Game.UI
         public IGun Gun { get; private set; }
 
         /// <summary>
+        /// Gets and sets Sprite for gun.
+        /// </summary>
+        public Sprite GunSprite { get; private set; }
+
+        /// <summary>
         /// Initialize Array of GunTypes. For now it has to be done manually.
         /// </summary>
         public static void InitGunArray()
         {
+            assembly = Assembly.GetExecutingAssembly();
+
             GunTypeArray = new GunType[5];
-            GunTypeArray[0] = new GunType("Grenade Launcher", new Gun.GrenadeLauncher());
-            GunTypeArray[1] = new GunType("Machine Gun", new Gun.MachineGun());
-            GunTypeArray[2] = new GunType("Pistol", new Gun.Pistol());
-            GunTypeArray[3] = new GunType("Shot Gun", new Gun.ShotGun());
-            GunTypeArray[4] = new GunType("Sniper", new Gun.Sniper());
+
+            Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.grenadelauncher.png");
+            GunTypeArray[0] = new GunType("Grenade Launcher", new Gun.GrenadeLauncher(), new Sprite(spriteStream, true));
+
+            spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.machinegun.png");
+            GunTypeArray[1] = new GunType("Machine Gun", new Gun.MachineGun(), new Sprite(spriteStream, true));
+
+            spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.pistol.png");
+            GunTypeArray[2] = new GunType("Pistol", new Gun.Pistol(), new Sprite(spriteStream, true));
+
+            spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.shotgun.png");
+            GunTypeArray[3] = new GunType("Shot Gun", new Gun.ShotGun(), new Sprite(spriteStream, true));
+
+            spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.sniper.png");
+            GunTypeArray[4] = new GunType("Sniper", new Gun.Sniper(), new Sprite(spriteStream, true));
             return;
         }
     }
