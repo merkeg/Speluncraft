@@ -73,6 +73,7 @@ namespace Game.Player
             this.ChangeGun(new Gun.GrenadeLauncher());
             this.ChangeGun(new Gun.Pistol());
             this.ChangeGun(new Gun.MachineGun());
+            this.ChangeGun(new Gun.StoneThrower());
         }
 
         /// <summary>
