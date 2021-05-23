@@ -32,7 +32,7 @@
         <member name="M:Game.Enemy.DummyAI.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
-        <member name="M:Game.Enemy.DummyAI.JustBaseOnUpdate(System.Single)">
+        <member name="M:Game.Enemy.DummyAI.EnemyOnUpdate(System.Single)">
             <summary>
             Calls the OnUpdate of Enenemy ( without the AI ).
             </summary>
@@ -97,9 +97,32 @@
         </member>
         <member name="M:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer.SawPlayerThisFrame(System.Single)">
             <summary>
-            Do SOmething when we see the Player
+            Do SOmething when we see the Player.
             </summary>
             <param name="frameTime">Time pased since last frame.</param>
+        </member>
+        <member name="T:Game.Enemy.EnemyWithWeapon">
+            <summary>
+            An Enemy that throws rocks when he sees the Player.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.EnemyWithWeapon.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32,Game.Gun.IGun)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.EnemyWithWeapon"/> class.
+            </summary>
+            <param name="minX">minX.</param>
+            <param name="minY">minY.</param>
+            <param name="sizeX">sizeX.</param>
+            <param name="sizeY">sizeY.</param>
+            <param name="sprite">sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
+            <param name="gun">The Gun the Enemy uses.</param>
+        </member>
+        <member name="M:Game.Enemy.EnemyWithWeapon.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Enemy.EnemyWithWeapon.SawPlayerThisFrame(System.Single)">
+            <inheritdoc/>
         </member>
         <member name="T:Game.Enemy.LeaperReaperEnemy">
             <summary>

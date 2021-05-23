@@ -15,7 +15,7 @@ namespace Game.Enemy
     public class EnemyWithWeapon : EnemyThatWalksWithTriggerOnSeePlayer
     {
         private Gun.IGun gun;
-        private Sprite shootingSprite;
+        private Sprite shootingSprite = new Sprite("Game.Resources.Floppa.png");
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EnemyWithWeapon"/> class.
@@ -31,6 +31,10 @@ namespace Game.Enemy
             : base(minX, minY, sizeX, sizeY, sprite, damage)
         {
             this.gun = gun;
+            if (this.gun is Engine.Component.Component)
+            {
+                this.AddComponent((Engine.Component.Component)this.gun);
+            }
         }
 
         /// <inheritdoc/>
@@ -46,6 +50,7 @@ namespace Game.Enemy
         /// <inheritdoc/>
         public override void SawPlayerThisFrame(float frameTime)
         {
+            Console.WriteLine("HI");
             this.gun.PullTrigger();
         }
     }

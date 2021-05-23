@@ -51,15 +51,21 @@ namespace Game.Enemy
                 this.vision.MinY = this.MinY + (this.SizeY / 2);
             }
 
+            bool sawPlayer = false;
             foreach (Engine.GameObject.GameObject g in Engine.Engine.GameObjects)
             {
                 if (this.vision.Intersects(g))
                 {
                     if (g is Game.Player.Player)
                     {
-                        this.SawPlayerThisFrame(frameTime);
+                        sawPlayer = true;
                     }
                 }
+            }
+
+            if (sawPlayer)
+            {
+                this.SawPlayerThisFrame(frameTime);
             }
         }
 

@@ -122,7 +122,7 @@ namespace Game
 
             this.tilemap.FindObjectsByName("EnemyPistol").ForEach(obj =>
             {
-                EnemyPistol enemy = new EnemyPistol(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10);
+                EnemyWithWeapon enemy = new EnemyWithWeapon(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10, new Game.Gun.Pistol());
                 Engine.Engine.AddGameObject(enemy);
             });
         }
