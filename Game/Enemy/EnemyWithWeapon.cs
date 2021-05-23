@@ -50,7 +50,6 @@ namespace Game.Enemy
         /// <inheritdoc/>
         public override void SawPlayerThisFrame(float frameTime)
         {
-            Console.WriteLine("HI");
             this.gun.PullTrigger();
         }
     }
