@@ -65,7 +65,9 @@ namespace Game.Enemy
                     this.physics.AddVelocityX(frameTime * this.leapingBreakSpeedX);
                 }
 
-                this.Components.ForEach(component => component.OnUpdate(frameTime));
+                this.EnemyOnUpdate(frameTime);
+
+                // this.Components.ForEach(component => component.OnUpdate(frameTime));
             }
             else
             {

@@ -32,6 +32,12 @@
         <member name="M:Game.Enemy.DummyAI.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="M:Game.Enemy.DummyAI.JustBaseOnUpdate(System.Single)">
+            <summary>
+            Calls the OnUpdate of Enenemy ( without the AI ).
+            </summary>
+            <param name="frameTime">Time passed since last frame.</param>
+        </member>
         <member name="T:Game.Enemy.Enemy">
             <summary>
             Basic Enemy that can be shot at.

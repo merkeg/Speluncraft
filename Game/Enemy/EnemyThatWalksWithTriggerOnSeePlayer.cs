@@ -64,7 +64,7 @@ namespace Game.Enemy
         }
 
         /// <summary>
-        /// Do SOmething when we see the Player
+        /// Do SOmething when we see the Player.
         /// </summary>
         /// <param name="frameTime">Time pased since last frame.</param>
         public abstract void SawPlayerThisFrame(float frameTime);

@@ -79,6 +79,15 @@ namespace Game.Enemy
             this.CheckWall();
         }
 
+        /// <summary>
+        /// Calls the OnUpdate of Enenemy ( without the AI ).
+        /// </summary>
+        /// <param name="frameTime">Time passed since last frame.</param>
+        public void EnemyOnUpdate(float frameTime)
+        {
+            base.OnUpdate(frameTime);
+        }
+
         private void CheckLedge()
         {
             this.checkLeft.MinX = this.MinX - 0.3f;
