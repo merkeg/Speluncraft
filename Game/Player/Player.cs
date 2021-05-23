@@ -145,7 +145,8 @@ namespace Game.Player
 
         private void Shoot(KeyboardState keyboardState)
         {
-            if (keyboardState.IsKeyDown(Keys.Left))
+            // if (keyboardState.IsKeyDown(Keys.Left))
+            if (keyboardState.IsKeyPressed(Keys.Left))
             {
                 this.isFaceing = Gun.ILookDirection.Left;
                 this.gun.PullTrigger();
@@ -154,7 +155,7 @@ namespace Game.Player
                     this.Mirrored = true;
                 }
             }
-            else if (keyboardState.IsKeyDown(Keys.Right))
+            else if (keyboardState.IsKeyPressed(Keys.Right))
             {
                 this.isFaceing = Gun.ILookDirection.Right;
                 this.gun.PullTrigger();
@@ -283,6 +284,7 @@ namespace Game.Player
             // Shooting
             if (this.gun.ShotFired())
             {
+                Console.WriteLine("Hi");
                 this.animationScheduler.AddAnimation(15, 0.2f, this.spriteGun, this.Mirrored);
             }
         }

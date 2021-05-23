@@ -73,6 +73,7 @@ namespace Game.Gun
                 this.Shoot();
             }
 
+            this.shotFiredThisFrame = false;
             this.reloadCoolDown -= frameTime;
             this.repeatTimeCounter -= frameTime;
         }

@@ -51,6 +51,7 @@ namespace Game.Gun
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
+            this.shotFiredThisFrame = false;
             this.reloadCoolDown -= frameTime;
         }
 
