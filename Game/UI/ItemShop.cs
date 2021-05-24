@@ -78,7 +78,7 @@ namespace Game.UI
                 }
             }
 
-            // replace
+            // TODO replace
             Engine.Engine.GetService<InputService>().Subscribe(Keys.Enter, () => this.HideShop(!this.ShopActive));
         }
 
@@ -171,6 +171,9 @@ namespace Game.UI
         /// <param name="hide">contains if text is hidden or not.</param>
         public void HideShop(bool hide)
         {
+            // pull gun price from Playerhealth. Only from maxhealth. TODO
+            player.GetComponent<Engine.Component.HealthPoints>().SetHP(player.GetComponent<Engine.Component.HealthPoints>().GetMaxHP() - ((int)GunType.GunTypeArray[currentWeaponIndex].GunPrice * 10));
+
             shopHeader.Hidden = !hide;
             weaponDamage.Hidden = !hide;
             weaponInfo.Hidden = !hide;
