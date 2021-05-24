@@ -6,6 +6,9 @@ namespace Engine.Renderer.UI
 {
     using global::Engine.GameObject;
 
+    /// <summary>
+    /// Where the Relative Rectangle gets aligned on the X-axis.
+    /// </summary>
     public enum RelativeRectangleXAlignment
     {
         /// <summary>
@@ -19,6 +22,9 @@ namespace Engine.Renderer.UI
         Right,
     }
 
+    /// <summary>
+    /// Where the Relative Rectangle gets aligned on the Y-axis.
+    /// </summary>
     public enum RelativeRectangleYAlignment
     {
         /// <summary>

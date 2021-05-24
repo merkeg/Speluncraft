@@ -145,6 +145,16 @@
             Gets or sets a value indicating whether a update is called or not.
             </summary>
         </member>
+        <member name="P:Game.GameManager.SceneStart">
+            <summary>
+            Gets the start scene.
+            </summary>
+        </member>
+        <member name="P:Game.GameManager.SceneGame">
+            <summary>
+            Gets the Game scene.
+            </summary>
+        </member>
         <member name="P:Game.GameManager.OnPauseStateChange">
             <summary>
             Gets or sets Handlers on pause.
@@ -153,11 +163,6 @@
         <member name="M:Game.GameManager.Start">
             <summary>
             Starts the game.
-            </summary>
-        </member>
-        <member name="M:Game.GameManager.Stop">
-            <summary>
-            Stops the game.
             </summary>
         </member>
         <member name="T:Game.Gun.Ammunition.Bullet">
@@ -507,6 +512,32 @@
             Initializes a new instance of the <see cref="T:Game.Program"/> class.
             </summary>
         </member>
+        <member name="T:Game.Scenes.GameScene">
+            <summary>
+            Game scene class.
+            </summary>
+        </member>
+        <member name="M:Game.Scenes.GameScene.OnSceneLoad">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Scenes.StartScene">
+            <summary>
+            Start scene class.
+            </summary>
+        </member>
+        <member name="M:Game.Scenes.StartScene.OnSceneLoad">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Scenes.TextureLoader">
+            <summary>
+            Texture loader class.
+            </summary>
+        </member>
+        <member name="M:Game.Scenes.TextureLoader.LoadTextures">
+            <summary>
+            Load textures.
+            </summary>
+        </member>
         <member name="T:Game.StresstestComponent">
             <summary>
             Stresstest component class.
@@ -526,16 +557,11 @@
             The HealthbarPlayer class renders the healthbar UI element.
             </summary>
         </member>
-        <member name="M:Game.UI.HealthbarPlayer.#ctor">
+        <member name="M:Game.UI.HealthbarPlayer.#ctor(Game.Player.Player)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.UI.HealthbarPlayer"/> class.
             </summary>
-        </member>
-        <member name="M:Game.UI.HealthbarPlayer.Instance">
-            <summary>
-            Function so player can retrieve always the same healthbar instance (Singleton).
-            </summary>
-            <returns>HealtbarPlayer instance.</returns>
+            <param name="player">player.</param>
         </member>
         <member name="M:Game.UI.HealthbarPlayer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
             <summary>
@@ -628,10 +654,11 @@
             Loader Class to initialize the whole UI of the Game. (hopefully).
             </summary>
         </member>
-        <member name="M:Game.UI.UILoader.Initialize_UI">
+        <member name="M:Game.UI.UILoader.Initialize_UI(Game.Player.Player)">
             <summary>
             Initializes the UI.
             </summary>
+            /// <param name="player">player.</param>
         </member>
     </members>
 </doc>

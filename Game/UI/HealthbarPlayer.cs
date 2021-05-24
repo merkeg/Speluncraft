@@ -45,6 +45,7 @@ namespace Game.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="HealthbarPlayer"/> class.
         /// </summary>
+        /// <param name="player">player.</param>
         public HealthbarPlayer(Player.Player player)
         {
             this.player = player;

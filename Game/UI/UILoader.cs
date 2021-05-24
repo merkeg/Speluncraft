@@ -18,6 +18,7 @@ namespace Game.UI
         /// <summary>
         /// Initializes the UI.
         /// </summary>
+        /// /// <param name="player">player.</param>
         public static void Initialize_UI(Player.Player player)
         {
             HealthbarPlayer playerhealthbar = new HealthbarPlayer(player);
