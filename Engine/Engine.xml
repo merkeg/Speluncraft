@@ -1584,7 +1584,6 @@
             </summary>
         </member>
         <member name="P:Engine.Renderer.Tile.TilemapLayerObject.Width">
-        <member name="P:Engine.Renderer.Tile.TilemapLayerObject.Width">
             <summary>
             Gets the width.
             </summary>
@@ -1623,44 +1622,6 @@
         </member>
         <member name="M:Engine.Renderer.Tile.TilemapObjectLayer.#ctor(Engine.Renderer.Tile.Tilesheet,Engine.Renderer.Tile.Parser.TilemapLayerModel)">
             <summary>
-            Gets the width.
-            </summary>
-        </member>
-        <member name="P:Engine.Renderer.Tile.TilemapLayerObject.Height">
-            <summary>
-            Gets the height.
-            </summary>
-        </member>
-        <member name="P:Engine.Renderer.Tile.TilemapLayerObject.Name">
-            <summary>
-            Gets the name.
-            </summary>
-        </member>
-        <member name="P:Engine.Renderer.Tile.TilemapLayerObject.Properties">
-            <summary>
-            Gets the properties.
-            </summary>
-        </member>
-        <member name="P:Engine.Renderer.Tile.TilemapLayerObject.Type">
-            <summary>
-            Gets the type.
-            </summary>
-        </member>
-        <member name="M:Engine.Renderer.Tile.TilemapLayerObject.GetProperty(System.String)">
-            <summary>
-            Gets a property, returns null if not found.
-            </summary>
-            <param name="name">Property name.</param>
-            <returns>Property or null.</returns>
-        </member>
-        <member name="T:Engine.Renderer.Tile.TilemapObjectLayer">
-            <summary>
-            Tilemap object layer class.
-            </summary>
-        </member>
-        <member name="M:Engine.Renderer.Tile.TilemapObjectLayer.#ctor(Engine.Renderer.Tile.Tilesheet,Engine.Renderer.Tile.Parser.TilemapLayerModel)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Engine.Renderer.Tile.TilemapObjectLayer"/> class.
             Initializes a new instance of the <see cref="T:Engine.Renderer.Tile.TilemapObjectLayer"/> class.
             </summary>
             <param name="tilesheet">The tilesheet.</param>
