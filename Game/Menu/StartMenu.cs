@@ -8,6 +8,7 @@ namespace Game.Menu
     using System.Collections.Generic;
     using System.Text;
     using Engine.GameObject;
+    using Engine.Renderer;
     using Engine.Renderer.Text;
     using Engine.Renderer.UI;
     using Engine.Renderer.UI.Primitive;
@@ -40,7 +41,7 @@ namespace Game.Menu
             this.selectedMenuStart = new RelativeRectangle(this.AbsoluteBounds, 0, -235, 600, 85, RelativeRectangleXAlignment.Left, RelativeRectangleYAlignment.Bottom);
             this.selectedMenuQuit = new RelativeRectangle(this.AbsoluteBounds, 0, -135, 600, 85, RelativeRectangleXAlignment.Left, RelativeRectangleYAlignment.Bottom);
 
-            this.AddSprite(new Engine.Renderer.Sprite.Sprite("Game.Resources.Sprite.startmenu.png", false), new RelativeRectangle(this.AbsoluteBounds, 0, 0, 2560, 1057));
+            this.AddSprite(TextureAtlas.Sprites["startscreen"], new RelativeRectangle(this.AbsoluteBounds, 0, 0, 2560, 1057));
             this.quadRenderer = this.AddQuad(this.selectedMenuStart, new Color4(80, 80, 80, 0.25f));
             this.AddText("Start", Color4.Azure, new RelativeRectangle(this.AbsoluteBounds, 100, -250, 0, 0, RelativeRectangleXAlignment.Left, RelativeRectangleYAlignment.Bottom), 1);
             this.AddText("Quit", Color4.Azure, new RelativeRectangle(this.AbsoluteBounds, 100, -150, 0, 0, RelativeRectangleXAlignment.Left, RelativeRectangleYAlignment.Bottom), 1);

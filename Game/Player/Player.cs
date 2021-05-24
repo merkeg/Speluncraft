@@ -9,6 +9,7 @@ namespace Game.Player
     using System.Diagnostics;
     using System.Text;
     using Engine.GameObject;
+    using Engine.Renderer;
     using Engine.Renderer.Sprite;
     using OpenTK.Windowing.GraphicsLibraryFramework;
 
@@ -25,13 +26,13 @@ namespace Game.Player
         private float activeBreacking = 20f;
         private float jumpPower = 10f;
 
-        private AnimatedSprite spriteWalking;
-        private AnimatedSprite spriteHurt;
-        private Sprite spriteIdle;
-        private Sprite spriteJump;
-        private Sprite spriteFall;
-        private Sprite spriteBack;
-        private Sprite spriteGun;
+        private ISprite spriteWalking;
+        private ISprite spriteHurt;
+        private ISprite spriteIdle;
+        private ISprite spriteJump;
+        private ISprite spriteFall;
+        private ISprite spriteBack;
+        private ISprite spriteGun;
 
         private int isFaceing;
         private Gun.IGun gun;
@@ -71,8 +72,6 @@ namespace Game.Player
             this.ChangeGun(new Gun.MachineGun());
             this.ChangeGun(new Gun.ShotGun());
             this.ChangeGun(new Gun.GrenadeLauncher());
-            this.ChangeGun(new Gun.Pistol());
-            this.ChangeGun(new Gun.MachineGun());
 
             GameManager.OnPauseStateChange += this.OnPauseStateChange;
         }
@@ -175,27 +174,27 @@ namespace Game.Player
         {
             if (gun is Gun.GrenadeLauncher)
             {
-                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_grenadelauncher.png");
+                this.spriteGun = TextureAtlas.Sprites["adventurer_weapon_grenadelauncher"];
             }
 
             if (gun is Gun.MachineGun)
             {
-                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_machinegun.png");
+                this.spriteGun = TextureAtlas.Sprites["adventurer_weapon_machinegun"];
             }
 
             if (gun is Gun.Pistol)
             {
-                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_pistol.png");
+                this.spriteGun = TextureAtlas.Sprites["adventurer_weapon_pistol"];
             }
 
             if (gun is Gun.ShotGun)
             {
-                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_shotgun.png");
+                this.spriteGun = TextureAtlas.Sprites["adventurer_weapon_shotgun"];
             }
 
             if (gun is Gun.Sniper)
             {
-                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_sniper.png");
+                this.spriteGun = TextureAtlas.Sprites["adventurer_weapon_sniper"];
             }
         }
 
@@ -295,16 +294,13 @@ namespace Game.Player
 
         private void InitializeSprites()
         {
-            Engine.Renderer.Tile.Tilesheet walkingSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Player.adventurer_walking.png", 80, 110);
-            this.spriteWalking = new AnimatedSprite(walkingSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
-            Engine.Renderer.Tile.Tilesheet hurtSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Player.adventurer_hurt.png", 80, 110);
-            this.spriteHurt = new AnimatedSprite(hurtSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
-
-            this.spriteIdle = new Sprite("Game.Resources.Player.adventurer_idle.png");
-            this.spriteJump = new Sprite("Game.Resources.Player.adventurer_jump.png");
-            this.spriteFall = new Sprite("Game.Resources.Player.adventurer_fall.png");
-            this.spriteBack = new Sprite("Game.Resources.Player.adventurer_back.png");
-            this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_pistol.png");
+            this.spriteWalking = TextureAtlas.Sprites["adventurer_walking"];
+            this.spriteHurt = TextureAtlas.Sprites["adventurer_hurt"];
+            this.spriteIdle = TextureAtlas.Sprites["adventurer_idle"];
+            this.spriteJump = TextureAtlas.Sprites["adventurer_jump"];
+            this.spriteFall = TextureAtlas.Sprites["adventurer_fall"];
+            this.spriteBack = TextureAtlas.Sprites["adventurer_back"];
+            this.spriteGun = TextureAtlas.Sprites["adventurer_weapon_pistol"];
         }
 
         private void OnPauseStateChange(bool isPaused)

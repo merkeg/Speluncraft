@@ -5,6 +5,7 @@ namespace Engine.GameObject
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using global::Engine.Renderer.Sprite;
 
     /// <summary>
@@ -185,7 +186,7 @@ namespace Engine.GameObject
         /// <param name="frameTime">Time between the frame.</param>
         public virtual void OnUpdate(float frameTime)
         {
-            this.Components.ForEach(component => component.OnUpdate(frameTime));
+            this.Components.ToList().ForEach(component => component.OnUpdate(frameTime));
         }
 
         /// <summary>

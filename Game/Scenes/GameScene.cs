@@ -40,31 +40,22 @@ namespace Game.Scenes
 
         private void InitializeRenderers()
         {
-            Tilesheet tilesheet = TextureAtlas.Tilesheets["defaultTilesheet"];
-            TilemapModel model = TilemapParser.ParseTilemap("Game.Resources.Level.mapalla.json");
-            this.tilemap = new Tilemap(tilesheet, model);
-            this.AnimateTiles(tilesheet);
+            this.tilemap = TextureAtlas.Tilemaps["level01"];
+            this.AnimateTiles(TextureAtlas.Tilesheets["defaultTilesheet"]);
             Engine.Engine.GetService<TilemapService>().AddTilemap(this.tilemap, Vector2i.Zero);
         }
 
         private void AddPlayer()
         {
-            Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheetMC.png", 32, 32);
-            Sprite sprite = new Sprite("Game.Resources.Player.adventurer_idle.png", false);
-
             TilemapLayerObject spawnPos = this.tilemap.FindObjectByName("spawn");
-            Player.Player player = new Player.Player(spawnPos.X, -spawnPos.Y + 1, 1, 1.375f, sprite);
+            Player.Player player = new Player.Player(spawnPos.X, -spawnPos.Y + 1, 1, 1.375f, TextureAtlas.Sprites["adventurer_idle"]);
             player.AddComponent(new CameraTrackingComponent());
             Engine.Engine.AddGameObject(player);
 
             // make sure to initialize UI after the player
             UILoader.Initialize_UI(player);
 
-            FontModel fontModel = FontModel.Parse("Game.Resources.Font.hack.font.fnt");
-            Sprite fontSprite = new Sprite("Game.Resources.Font.hack.font.png");
-            Font font = new Font(fontModel, fontSprite);
-
-            DebugRenderer debugRenderer = new DebugRenderer(new Rectangle(5, 5, 300, 325), new Color4(0, 0, 0, 0.3f), font, player, UiAlignment.Right);
+            DebugRenderer debugRenderer = new DebugRenderer(new Rectangle(5, 5, 300, 325), new Color4(0, 0, 0, 0.3f), TextureAtlas.Fonts["debugFont"], player, UiAlignment.Right);
             debugRenderer.Hidden = true;
             Engine.Engine.AddRenderer(debugRenderer, RenderLayer.UI);
             Engine.Engine.GetService<InputService>().Subscribe(Keys.F3, () => debugRenderer.Hidden = !debugRenderer.Hidden);
@@ -72,19 +63,19 @@ namespace Game.Scenes
 
             Engine.Engine.GetService<TilemapService>().SetOptimizationPoint(player);
 
-            InteractableElement el = new InteractableElement(96, -30, 0.3f, 0.3f, font, "Press [A] and [D] to walk.", Color4.White, Color4.White, 4, false);
+            InteractableElement el = new InteractableElement(96, -30, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [A] and [D] to walk.", Color4.White, Color4.White, 4, false);
             Engine.Engine.AddGameObject(el);
-            el.Interact += () => Console.WriteLine("Test");
+            el.Interact += () => Console.WriteLine("W pressed GameScene AddPlayer()");
 
-            Engine.Engine.AddGameObject(new InteractableElement(84, -32, 0.3f, 0.3f, font, "Press [Left] and [Right] to shoot.", Color4.White, Color4.White, 6, false));
-            Engine.Engine.AddGameObject(new InteractableElement(74, -42, 0.3f, 0.3f, font, "Press [Space] to jump.", Color4.White, Color4.White, 6, false));
-            Engine.Engine.AddGameObject(new InteractableElement(50, -34, 0.3f, 0.3f, font, "Lava will kill you", Color4.Coral, Color4.Coral, 6, false));
+            Engine.Engine.AddGameObject(new InteractableElement(84, -32, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [Left] and [Right] to shoot.", Color4.White, Color4.White, 6, false));
+            Engine.Engine.AddGameObject(new InteractableElement(74, -42, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [Space] to jump.", Color4.White, Color4.White, 6, false));
+            Engine.Engine.AddGameObject(new InteractableElement(50, -34, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Lava will kill you", Color4.Coral, Color4.Coral, 6, false));
         }
 
         private void AddObjects()
         {
-            AnimatedSprite enemySprite = new AnimatedSprite(new Tilesheet("Game.Resources.Enemy.zombie_walking.png", 80, 110), Keyframe.RangeX(0, 1, 0, 0.1f));
-            AnimatedSprite heartSprite = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.heart.png", 16, 16), Keyframe.RangeX(0, 23, 0, 0.1f));
+            ISprite enemySprite = TextureAtlas.Sprites["zombie_walking"];
+            ISprite heartSprite = TextureAtlas.Sprites["heart"];
 
             this.tilemap.FindObjectsByName("HealthPickup").ForEach(obj =>
             {
@@ -120,22 +111,14 @@ namespace Game.Scenes
 
         private void AnimateTiles(Tilesheet sheet)
         {
-            AnimatedSprite netherPortal = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.nether_portal.png", 32, 32), Keyframe.RangeY(0, 0, 31, 0.03f));
-            sheet.SetCustomSprite(36, netherPortal);
-            AnimatedSprite waterFlow = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.water_flow.png", 32, 32), Keyframe.RangeY(0, 0, 35, 0.1f));
-            sheet.SetCustomSprite(81, waterFlow);
-            AnimatedSprite waterStill = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.water_still.png", 32, 32), Keyframe.RangeY(0, 0, 50, 0.05f));
-            sheet.SetCustomSprite(91, waterStill);
-            AnimatedSprite waterCut = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.water_still_cut.png", 32, 32), Keyframe.RangeY(0, 0, 50, 0.05f));
-            sheet.SetCustomSprite(92, waterCut);
-            AnimatedSprite lavaFlow = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.lava_flow.png", 32, 32), Keyframe.RangeY(0, 0, 245, 0.03f));
-            sheet.SetCustomSprite(83, lavaFlow);
-            AnimatedSprite lavaStill = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.lava_still.png", 32, 32), Keyframe.RangeY(0, 0, 122, 0.03f));
-            sheet.SetCustomSprite(93, lavaStill);
-            AnimatedSprite lavaCut = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.lava_still_cut.png", 32, 32), Keyframe.RangeY(0, 0, 122, 0.03f));
-            sheet.SetCustomSprite(94, lavaCut);
-            AnimatedSprite fire = new AnimatedSprite(new Tilesheet("Game.Resources.Animated.fire.png", 32, 32), Keyframe.RangeY(0, 0, 23, 0.04f));
-            sheet.SetCustomSprite(85, fire);
+            sheet.SetCustomSprite(36, TextureAtlas.Sprites["netherPortal"]);
+            sheet.SetCustomSprite(81, TextureAtlas.Sprites["waterFlow"]);
+            sheet.SetCustomSprite(91, TextureAtlas.Sprites["waterStill"]);
+            sheet.SetCustomSprite(92, TextureAtlas.Sprites["waterCut"]);
+            sheet.SetCustomSprite(83, TextureAtlas.Sprites["lavaFlow"]);
+            sheet.SetCustomSprite(93, TextureAtlas.Sprites["lavaStill"]);
+            sheet.SetCustomSprite(94, TextureAtlas.Sprites["lavaCut"]);
+            sheet.SetCustomSprite(85, TextureAtlas.Sprites["fire"]);
         }
     }
 }

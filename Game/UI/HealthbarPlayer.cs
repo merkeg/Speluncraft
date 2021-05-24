@@ -4,16 +4,9 @@
 
 namespace Game.UI
 {
-    using System;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Reflection;
-    using Engine;
     using Engine.Component;
-    using Engine.GameObject;
     using Engine.Renderer;
     using Engine.Renderer.Sprite;
-    using Game.Gun;
     using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
@@ -37,9 +30,8 @@ namespace Game.UI
         private static int indicatorsYsize = 18; // Height of only one indicator (one heart)
 
         private Player.Player player;
-        private Assembly assembly;
-        private Sprite indicators;
-        private Sprite background;
+        private ISprite indicators;
+        private ISprite background;
         private float hTexX0;
 
         /// <summary>
@@ -50,12 +42,8 @@ namespace Game.UI
         {
             this.player = player;
 
-            this.assembly = Assembly.GetExecutingAssembly();
-            using Stream indicatorSpriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.heartsheet_new.png");
-            this.indicators = new Sprite(indicatorSpriteStream, false);
-
-            using Stream backgroundSpriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.background2.png");
-            this.background = new Sprite(backgroundSpriteStream, false);
+            this.indicators = TextureAtlas.Sprites["healthbar_hearts"];
+            this.background = TextureAtlas.Sprites["healthbar_background"];
         }
 
         /// <summary>

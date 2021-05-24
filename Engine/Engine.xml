@@ -1349,6 +1349,11 @@
             Gets the Tilesheets.
             </summary>
         </member>
+        <member name="P:Engine.Renderer.TextureAtlas.Tilemaps">
+            <summary>
+            Gets the TilemapModels.
+            </summary>
+        </member>
         <member name="M:Engine.Renderer.TextureAtlas.Set(System.String,Engine.Renderer.Text.Font)">
             <summary>
             Add a new Texture.
@@ -1369,6 +1374,13 @@
             </summary>
             <param name="name">Name of the texture.</param>
             <param name="value">Value of the Texture.</param>
+        </member>
+        <member name="M:Engine.Renderer.TextureAtlas.Set(System.String,Engine.Renderer.Tile.Tilemap)">
+            <summary>
+            Add a new Tilemap.
+            </summary>
+            <param name="name">Name of the tilemap.</param>
+            <param name="value">Value of the tilemap.</param>
         </member>
         <member name="T:Engine.Renderer.Text.Font">
             <summary>

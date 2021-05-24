@@ -91,8 +91,8 @@ namespace Game
         /// </summary>
         public static void Start()
         {
-            new GameManager();
             TextureLoader.LoadTextures();
+            new GameManager();
         }
 
         private static void OnSceneChange(Scene from, Scene to)

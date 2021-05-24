@@ -8,6 +8,7 @@ namespace Engine.Renderer
     using global::Engine.Renderer.Sprite;
     using global::Engine.Renderer.Text;
     using global::Engine.Renderer.Tile;
+    using global::Engine.Renderer.Tile.Parser;
 
     /// <summary>
     /// Texture atlas class.
@@ -19,6 +20,7 @@ namespace Engine.Renderer
             Fonts = new Dictionary<string, Font>();
             Sprites = new Dictionary<string, ISprite>();
             Tilesheets = new Dictionary<string, Tilesheet>();
+            Tilemaps = new Dictionary<string, Tilemap>();
         }
 
         /// <summary>
@@ -35,6 +37,11 @@ namespace Engine.Renderer
         /// Gets the Tilesheets.
         /// </summary>
         public static Dictionary<string, Tilesheet> Tilesheets { get; private set; }
+
+        /// <summary>
+        /// Gets the TilemapModels.
+        /// </summary>
+        public static Dictionary<string, Tilemap> Tilemaps { get; private set; }
 
         /// <summary>
         /// Add a new Texture.
@@ -64,6 +71,16 @@ namespace Engine.Renderer
         public static void Set(string name, Tilesheet value)
         {
             Tilesheets.Add(name, value);
+        }
+
+        /// <summary>
+        /// Add a new Tilemap.
+        /// </summary>
+        /// <param name="name">Name of the tilemap.</param>
+        /// <param name="value">Value of the tilemap.</param>
+        public static void Set(string name, Tilemap value)
+        {
+            Tilemaps.Add(name, value);
         }
     }
 }
