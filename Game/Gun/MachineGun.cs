@@ -25,8 +25,16 @@ namespace Game.Gun
 
         private readonly float bulletVelocity = 12;
         private int dmg = 7;
-        private float reloadTime = 0.25f;
+        private float reloadTime = 0.6f;
         private float reloadCoolDown = 0;
+
+        private float repeatTime = 0.1f;
+        private float repeatTimeCounter;
+        private bool secondShot;
+
+        private bool shotFiredThisFrame;
+
+        private int shotDierection;
 
         private ISprite bulletSprite;
 
@@ -49,7 +57,24 @@ namespace Game.Gun
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
+            if (this.repeatTimeCounter <= 0)
+            {
+                if (this.secondShot)
+                {
+                    this.repeatTimeCounter = this.repeatTime;
+                    this.secondShot = false;
+                }
+                else
+                {
+                    // Well after 340282300000000000000000000000000000000 Seconds this will go wrong. ( About 10790280948756976154236428209030 years )
+                    this.repeatTimeCounter = float.MaxValue;
+                }
+
+                this.Shoot();
+            }
+
             this.reloadCoolDown -= frameTime;
+            this.repeatTimeCounter -= frameTime;
         }
 
         /// <summary>
@@ -59,23 +84,42 @@ namespace Game.Gun
         {
             if (this.reloadCoolDown <= 0)
             {
+                this.shotFiredThisFrame = true;
                 if (this.GameObject is ILookDirection)
                 {
-                    ILookDirection d = (ILookDirection)this.GameObject;
-                    if (d.GetDirection() == ILookDirection.Left)
-                    {
-                        Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, -this.bulletVelocity, 0, this.GameObject.MinX - this.bulletLenght - this.bufferDistance, this.GameObject.MinY + 0.5f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
-                        Engine.Engine.AddGameObject(b);
-                    }
+                    this.shotDierection = ((ILookDirection)this.GameObject).GetDirection();
+                    this.Shoot();
 
-                    if (d.GetDirection() == ILookDirection.Right)
-                    {
-                        Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, this.bulletVelocity, 0, this.GameObject.MinX + this.GameObject.SizeX + this.bufferDistance, this.GameObject.MinY + 0.5f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
-                        Engine.Engine.AddGameObject(b);
-                    }
+                    this.repeatTimeCounter = this.repeatTime;
+                    this.secondShot = true;
+
+                    this.reloadCoolDown = this.reloadTime;
                 }
+            }
+            else
+            {
+                this.shotFiredThisFrame = false;
+            }
+        }
 
-                this.reloadCoolDown = this.reloadTime;
+        /// <inheritdoc/>
+        public bool ShotFired()
+        {
+            return this.shotFiredThisFrame;
+        }
+
+        private void Shoot()
+        {
+            if (this.shotDierection == ILookDirection.Left)
+            {
+                Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, -this.bulletVelocity, 0, this.GameObject.MinX - this.bulletLenght - this.bufferDistance, this.GameObject.MinY + 0.3f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
+                Engine.Engine.AddGameObject(b);
+            }
+
+            if (this.shotDierection == ILookDirection.Right)
+            {
+                Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, this.bulletVelocity, 0, this.GameObject.MinX + this.GameObject.SizeX + this.bufferDistance, this.GameObject.MinY + 0.3f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
+                Engine.Engine.AddGameObject(b);
             }
         }
     }

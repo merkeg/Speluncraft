@@ -64,6 +64,66 @@
         <member name="M:Game.Enemy.EnemyPistol.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="T:Game.GameComponents.AnimationScheduler">
+            <summary>
+            Used for Schedueling Animations.
+            </summary>
+        </member>
+        <member name="M:Game.GameComponents.AnimationScheduler.GetIfMustBeMirrored">
+            <summary>
+            Get if the Frame must be mirroed or not.
+            </summary>
+            <returns>if the Frame must be mirroed or not.</returns>
+        </member>
+        <member name="M:Game.GameComponents.AnimationScheduler.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.GameComponents.AnimationScheduler.AddAnimation(System.Int32,System.Single,Engine.Renderer.Sprite.ISprite,System.Boolean)">
+            <summary>
+            Add a new Animation.
+            </summary>
+            <param name="prio">The Prio this animation has. ( Lower means better).</param>
+            <param name="time">How long to play this animation.</param>
+            <param name="animation">The Animation to be played.</param>
+            <param name="mirrored">If the Sprite must be mirrored.</param>
+        </member>
+        <member name="T:Game.GameComponents.AnimationWithTimeAndPrio">
+            <summary>
+            Wraper class, that says how long which animation should be played.
+            </summary>
+        </member>
+        <member name="M:Game.GameComponents.AnimationWithTimeAndPrio.#ctor(System.Int32,System.Single,Engine.Renderer.Sprite.ISprite,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.GameComponents.AnimationWithTimeAndPrio"/> class.
+            </summary>
+            <param name="prio">Prio of the animation. (Lower means better).</param>
+            <param name="time">How long to play the animation.</param>
+            <param name="animation">The animation.</param>
+            <param name="mirrored">If the Sprite must be mirrored.</param>
+        </member>
+        <member name="P:Game.GameComponents.AnimationWithTimeAndPrio.Animation">
+            <summary>
+            Gets or sets the Animation.
+            </summary>
+        </member>
+        <member name="P:Game.GameComponents.AnimationWithTimeAndPrio.TimeLeft">
+            <summary>
+            Gets or sets the time Left on this Animation.
+            </summary>
+        </member>
+        <member name="P:Game.GameComponents.AnimationWithTimeAndPrio.Prio">
+            <summary>
+            Gets or sets the Prio of this Animation.
+            </summary>
+        </member>
+        <member name="P:Game.GameComponents.AnimationWithTimeAndPrio.Mirrored">
+            <summary>
+            Gets or sets a value indicating whether the Sprite must be Mirrored.
+            </summary>
+        </member>
+        <member name="M:Game.GameComponents.AnimationWithTimeAndPrio.CompareTo(System.Object)">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Gun.Ammunition.Bullet">
             <summary>
             A bullet that flies straight untill it hits something, then does DMG and despwans.
@@ -128,6 +188,9 @@
             Fires a Bullet, when trigger is pulled and is reloaded.
             </summary>
         </member>
+        <member name="M:Game.Gun.GrenadeLauncher.ShotFired">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Gun.IGun">
             <summary>
             Interface for Guns, provides pullTrigger() Methode.
@@ -143,6 +206,12 @@
             Retunrs the gun as Component.
             </summary>
             <returns>The Gun as a Component.</returns>
+        </member>
+        <member name="M:Game.Gun.IGun.ShotFired">
+            <summary>
+            If a shoot was fired this Frame.
+            </summary>
+            <returns>True if a shoot was fired this Frame.</returns>
         </member>
         <member name="T:Game.Gun.ILookDirection">
             <summary>
@@ -186,6 +255,9 @@
             Fires a Bullet, when trigger is pulled and is reloaded.
             </summary>
         </member>
+        <member name="M:Game.Gun.MachineGun.ShotFired">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Gun.Pistol">
             <summary>
             A Pistol that shoots normal bullets. With Medium DMG and Medium reload time.
@@ -206,6 +278,9 @@
             <summary>
             Fires a Bullet, when trigger is pulled and is reloaded.
             </summary>
+        </member>
+        <member name="M:Game.Gun.Pistol.ShotFired">
+            <inheritdoc/>
         </member>
         <member name="T:Game.Gun.ShotGun">
             <summary>
@@ -228,6 +303,9 @@
             Fires a Bullet, when trigger is pulled and is reloaded.
             </summary>
         </member>
+        <member name="M:Game.Gun.ShotGun.ShotFired">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Gun.Sniper">
             <summary>
             A Sniper with high damage but a long reload time.
@@ -248,6 +326,9 @@
             <summary>
             Fires a Bullet, when trigger is pulled and is reloaded.
             </summary>
+        </member>
+        <member name="M:Game.Gun.Sniper.ShotFired">
+            <inheritdoc/>
         </member>
         <member name="T:Game.Gun.CameraTrackingComponent">
             <summary>

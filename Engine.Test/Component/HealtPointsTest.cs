@@ -18,6 +18,9 @@ namespace EngineTest.Component
             Assert.IsTrue(hp.GetCurrHP() == 50);
             Assert.IsTrue(hp.GetMaxHP() == 100);
 
+            hp.OnUpdate(0.1f);
+            Assert.IsFalse(hp.GetTookDmgThisFrame());
+
             hp.SetHP(75);
             Assert.IsFalse(hp.GetIsDeadFlag());
             Assert.IsTrue(hp.GetCurrHP() == 75);
@@ -29,6 +32,8 @@ namespace EngineTest.Component
             Assert.IsTrue(hp.GetMaxHP() == 60);
 
             hp.AddHP(-50);
+            hp.OnUpdate(0.1f);
+            Assert.IsTrue(hp.GetTookDmgThisFrame());
             Assert.IsFalse(hp.GetIsDeadFlag());
             Assert.IsTrue(hp.GetCurrHP() == 10);
             Assert.IsTrue(hp.GetMaxHP() == 60);
