@@ -119,7 +119,7 @@ namespace Game.UI
                 // Debug.WriteLine(hitbox.X + " | " + hitbox.Y + " | " + hitbox.Z + " | " + hitbox.W);
                 if (windowMousePosition.X > hitbox.X && windowMousePosition.X < hitbox.Z && windowMousePosition.Y > hitbox.Y && windowMousePosition.Y < hitbox.W)
                 {
-                    Debug.WriteLine("You Chose: " + GunType.GunTypeArray[currentWeaponIndex].GunName);
+                    // Debug.WriteLine("You Chose: " + GunType.GunTypeArray[currentWeaponIndex].GunName);
                     player.ChangeGun(GunType.GunTypeArray[currentWeaponIndex].Gun);
                     return;
                 }
@@ -128,7 +128,6 @@ namespace Game.UI
             }
 
             currentWeaponIndex = oldIndex;
-            Debug.WriteLine("here");
         }
 
         /// <inheritdoc/>

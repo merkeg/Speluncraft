@@ -74,19 +74,19 @@ namespace Game.UI
             GunTypeArray = new GunType[5];
 
             Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.grenadelauncher.png");
-            GunTypeArray[0] = new GunType("Grenade Launcher", new Gun.GrenadeLauncher(), new Sprite(spriteStream, true), 10, 5, "Launches grenades which explode.");
+            GunTypeArray[0] = new GunType("Grenade Launcher", new Gun.GrenadeLauncher(), new Sprite(spriteStream, true), 99, 5, "Launches grenades which explode.");
 
             spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.machinegun.png");
-            GunTypeArray[1] = new GunType("Machine Gun", new Gun.MachineGun(), new Sprite(spriteStream, true), 10, 5, "Fires normal bullets at an astonishing rate.");
+            GunTypeArray[1] = new GunType("Machine Gun", new Gun.MachineGun(), new Sprite(spriteStream, true), 7, 3, "Fires normal bullets at an astonishing rate.");
 
             spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.pistol.png");
             GunTypeArray[2] = new GunType("Pistol", new Gun.Pistol(), new Sprite(spriteStream, true), 10, 0, "Fires normale bullets with normal speed.");
 
             spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.shotgun.png");
-            GunTypeArray[3] = new GunType("Shot Gun", new Gun.ShotGun(), new Sprite(spriteStream, true), 20, 3, "Fires multiple bullets at once.");
+            GunTypeArray[3] = new GunType("Shot Gun", new Gun.ShotGun(), new Sprite(spriteStream, true), 7, 3, "Fires multiple bullets at once.");
 
             spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.sniper.png");
-            GunTypeArray[4] = new GunType("Sniper", new Gun.Sniper(), new Sprite(spriteStream, true), 70, 7, "Fires fast Bullets which. Kills \"oneshots\".");
+            GunTypeArray[4] = new GunType("Sniper", new Gun.Sniper(), new Sprite(spriteStream, true), 50, 7, "Fires fast Bullets. Kills \"oneshot\".");
 
             return;
         }
