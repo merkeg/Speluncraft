@@ -80,12 +80,12 @@ namespace Game
             player.AddComponent(new CameraTrackingComponent());
             Engine.Engine.AddGameObject(player);
 
-            // make sure to initialize UI after the player
-            UILoader.Initialize_UI();
-
             FontModel fontModel = FontModel.Parse("Game.Resources.Font.hack.font.fnt");
             Sprite fontSprite = new Sprite("Game.Resources.Font.hack.font.png");
             Font font = new Font(fontModel, fontSprite);
+
+            // make sure to initialize UI after the player
+            UILoader.Initialize_UI(font);
 
             DebugRenderer debugRenderer = new DebugRenderer(new Rectangle(5, 5, 300, 325), new Color4(0, 0, 0, 0.3f), font, player, UiAlignment.Right);
             debugRenderer.Hidden = true;

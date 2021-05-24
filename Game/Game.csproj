@@ -57,6 +57,14 @@
     <None Remove="Resources\Sprite\UI\Healthbar\ui_background.png" />
     <None Remove="Resources\Sprite\bullet.png" />
     <None Remove="Resources\Sprite\tilesheetMC.png" />
+    <None Remove="Resources\Sprite\UI\ItemShop\button.png" />
+    <None Remove="Resources\Sprite\UI\ItemShop\grenadelauncher.png" />
+    <None Remove="Resources\Sprite\UI\ItemShop\itemshop.png" />
+    <None Remove="Resources\Sprite\UI\ItemShop\item_frame_front.png" />
+    <None Remove="Resources\Sprite\UI\ItemShop\machinegun.png" />
+    <None Remove="Resources\Sprite\UI\ItemShop\pistol.png" />
+    <None Remove="Resources\Sprite\UI\ItemShop\shotgun.png" />
+    <None Remove="Resources\Sprite\UI\ItemShop\sniper.png" />
     <None Remove="Resources\testmap.json" />
     <None Remove="Resources\tilesheet.png" />
 	<None Remove="Resources\tilesheetMC.png" />
@@ -198,6 +206,30 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <None Remove="Resources\UI\interaction_dot.png" />
+    <EmbeddedResource Include="Resources\Sprite\UI\ItemShop\button.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Sprite\UI\ItemShop\grenadelauncher.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Sprite\UI\ItemShop\itemshop.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Sprite\UI\ItemShop\item_frame_front.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Sprite\UI\ItemShop\machinegun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Sprite\UI\ItemShop\pistol.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Sprite\UI\ItemShop\shotgun.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Sprite\UI\ItemShop\sniper.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Enemy\zombie_hurt.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>

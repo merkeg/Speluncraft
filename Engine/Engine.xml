@@ -1000,15 +1000,22 @@
             <param name="position">Position of the spawn point.</param>
             <returns>new Particle.</returns>
         </member>
+        <member name="M:Engine.Renderer.Particle.ParticleEmitter.Clone">
+            <summary>
+            Clone Object
+            </summary>
+            <returns>The clone.</returns>
+        </member>
         <member name="T:Engine.Renderer.Particle.ParticleEmitterData">
             <summary>
             Data class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.Particle.ParticleEmitterData.#ctor(Engine.GameObject.IRectangle,System.Single)">
+        <member name="M:Engine.Renderer.Particle.ParticleEmitterData.#ctor(Engine.Renderer.Particle.ParticleEmitter,Engine.GameObject.IRectangle,System.Single)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.Particle.ParticleEmitterData"/> class.
             </summary>
+            <param name="emitter">Particle emitter.</param>
             <param name="position">Position.</param>
             <param name="emitterLifetime">Lifetime of the emitter.</param>
         </member>
@@ -1035,6 +1042,11 @@
         <member name="P:Engine.Renderer.Particle.ParticleEmitterData.Position">
             <summary>
             Gets or sets position.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Particle.ParticleEmitterData.Emitter">
+            <summary>
+            Gets or sets the Data.
             </summary>
         </member>
         <member name="T:Engine.Renderer.Sprite.AnimatedSprite">
@@ -2203,12 +2215,13 @@
             <param name="emitter">The emitter.</param>
             <param name="position">Position.</param>
             <param name="lifetime">The lifetime of the emitter. Set to 0 to disable deletion.</param>
+            <returns>ParticleEmitterData</returns>
         </member>
-        <member name="M:Engine.Service.ParticleService.Remove(Engine.Renderer.Particle.ParticleEmitter)">
+        <member name="M:Engine.Service.ParticleService.Remove(Engine.Renderer.Particle.ParticleEmitterData)">
             <summary>
             Remove an emitter.
             </summary>
-            <param name="emitter">The emitter.</param>
+            <param name="data">The data you got from the emit method.</param>
         </member>
         <member name="T:Engine.Service.PhysicsService">
             <summary>

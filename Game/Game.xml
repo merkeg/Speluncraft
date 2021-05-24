@@ -436,6 +436,51 @@
         <member name="M:Game.StresstestComponent.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="T:Game.UI.GunType">
+            <summary>
+            Class for GunTypes and their information.
+            </summary>
+        </member>
+        <member name="P:Game.UI.GunType.GunTypeArray">
+            <summary>
+            Gets and sets an Array where every Gun and additional information about it is saved.
+            </summary>
+        </member>
+        <member name="P:Game.UI.GunType.GunName">
+            <summary>
+            Gets Gunname as a String.
+            </summary>
+        </member>
+        <member name="P:Game.UI.GunType.Gun">
+            <summary>
+            Gets reference to gun instance.
+            </summary>
+        </member>
+        <member name="P:Game.UI.GunType.GunSprite">
+            <summary>
+            Gets and sets Sprite for gun.
+            </summary>
+        </member>
+        <member name="P:Game.UI.GunType.GunDMG">
+            <summary>
+            Gets and sets wha damage the gun makes.
+            </summary>
+        </member>
+        <member name="P:Game.UI.GunType.GunPrice">
+            <summary>
+            Gets and sets the price of the gun in hearts.
+            </summary>
+        </member>
+        <member name="P:Game.UI.GunType.GunInfo">
+            <summary>
+            Gets and sets genral info aobut the gun.
+            </summary>
+        </member>
+        <member name="M:Game.UI.GunType.InitGunArray">
+            <summary>
+            Initialize Array of GunTypes. For now it has to be done manually.
+            </summary>
+        </member>
         <member name="T:Game.UI.HealthbarPlayer">
             <summary>
             The HealthbarPlayer class renders the healthbar UI element.
@@ -535,15 +580,81 @@
             Destroy the element.
             </summary>
         </member>
+        <member name="T:Game.UI.ItemShop">
+            <summary>
+            Class for Item Shop ingame.
+            </summary>
+        </member>
+        <member name="M:Game.UI.ItemShop.#ctor(Engine.Renderer.Text.Font,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.UI.ItemShop"/> class.
+            </summary>
+            <param name="itemcount">Amount of items in shop.</param>
+            <param name="font_">usable font.</param>
+        </member>
+        <member name="P:Game.UI.ItemShop.CurrentWeaponIndex">
+            <summary>
+            Gets CurrentWeaponIndex.
+            </summary>
+        </member>
+        <member name="P:Game.UI.ItemShop.ShopActive">
+            <summary>
+            Gets or Sets a value indicating whether ItemShop should be rendered or not.
+            </summary>
+        </member>
+        <member name="P:Game.UI.ItemShop.ItemCount">
+            <summary>
+            Gets or Sets avalue indicating whether many Items should be in the Shop.
+            </summary>
+        </member>
+        <member name="M:Game.UI.ItemShop.MouseMove(OpenTK.Windowing.Common.MouseMoveEventArgs)">
+            <summary>
+            Gets called when Mouse is Moved.
+            </summary>
+            <param name="args">MouseMove Args.</param>
+        </member>
+        <member name="M:Game.UI.ItemShop.MouseDown(OpenTK.Windowing.Common.MouseButtonEventArgs)">
+            <summary>
+            Gets Called if some Mousebutton is pressed down.
+            </summary>
+            <param name="args">MouseDown Args.</param>
+        </member>
+        <member name="M:Game.UI.ItemShop.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.ItemShop.HideShop(System.Boolean)">
+            <summary>
+            sets Text render as visible or not.
+            </summary>
+            <param name="hide">contains if text is hidden or not.</param>
+        </member>
+        <member name="M:Game.UI.ItemShop.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.ItemShop.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.ItemShop.RenderItems(OpenTK.Windowing.Common.FrameEventArgs)">
+            <summary>
+            render itemslots onto shopbackground.
+            </summary>
+        </member>
+        <member name="M:Game.UI.ItemShop.RenderItemStats(OpenTK.Windowing.Common.FrameEventArgs)">
+            <summary>
+            Render stats as text into shop.
+            </summary>
+            <param name="args">FrameEventArgs.</param>
+        </member>
         <member name="T:Game.UI.UILoader">
             <summary>
             Loader Class to initialize the whole UI of the Game. (hopefully).
             </summary>
         </member>
-        <member name="M:Game.UI.UILoader.Initialize_UI">
+        <member name="M:Game.UI.UILoader.Initialize_UI(Engine.Renderer.Text.Font)">
             <summary>
             Initializes the UI.
             </summary>
+            <param name="font">usable font.</param>
         </member>
     </members>
 </doc>
