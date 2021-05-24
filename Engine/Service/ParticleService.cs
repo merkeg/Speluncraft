@@ -132,6 +132,12 @@ namespace Engine.Service
         {
         }
 
+        /// <inheritdoc/>
+        public void SceneChangeCleanup()
+        {
+            this.Emitters.Clear();
+        }
+
         /// <summary>
         /// Add an emitter.
         /// </summary>

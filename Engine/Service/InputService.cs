@@ -71,6 +71,12 @@ namespace Engine.Service
             this.subscribers = new Dictionary<Keys, Handler>();
         }
 
+        /// <inheritdoc/>
+        public void SceneChangeCleanup()
+        {
+            this.subscribers.Clear();
+        }
+
         /// <summary>
         /// Subscribe to an keydown event.
         /// </summary>

@@ -36,8 +36,7 @@ namespace Game.UI
         private static int indicatorsXsize = 220;
         private static int indicatorsYsize = 18; // Height of only one indicator (one heart)
 
-        private static HealthbarPlayer instance;
-        private static Game.Player.Player player;
+        private Player.Player player;
         private Assembly assembly;
         private Sprite indicators;
         private Sprite background;
@@ -46,18 +45,9 @@ namespace Game.UI
         /// <summary>
         /// Initializes a new instance of the <see cref="HealthbarPlayer"/> class.
         /// </summary>
-        public HealthbarPlayer()
+        public HealthbarPlayer(Player.Player player)
         {
-            instance = this;
-
-            foreach (IRectangle r in Engine.Colliders)
-            {
-                if (r is Player.Player)
-                {
-                    GameObject g = (GameObject)r;
-                    player = (Player.Player)g;
-                }
-            }
+            this.player = player;
 
             this.assembly = Assembly.GetExecutingAssembly();
             using Stream indicatorSpriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.heartsheet_new.png");
@@ -65,20 +55,6 @@ namespace Game.UI
 
             using Stream backgroundSpriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.background2.png");
             this.background = new Sprite(backgroundSpriteStream, false);
-        }
-
-        /// <summary>
-        /// Function so player can retrieve always the same healthbar instance (Singleton).
-        /// </summary>
-        /// <returns>HealtbarPlayer instance.</returns>
-        public static HealthbarPlayer Instance()
-        {
-            if (instance == null)
-            {
-                instance = new HealthbarPlayer();
-            }
-
-            return instance;
         }
 
         /// <summary>

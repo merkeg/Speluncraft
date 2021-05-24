@@ -26,6 +26,11 @@ namespace Engine.Service
         }
 
         /// <inheritdoc/>
+        public void SceneChangeCleanup()
+        {
+        }
+
+        /// <inheritdoc/>
         public void OnUpdatableDestroy()
         {
         }

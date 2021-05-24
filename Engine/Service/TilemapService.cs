@@ -70,6 +70,15 @@ namespace Engine.Service
         {
         }
 
+        /// <inheritdoc/>
+        public void SceneChangeCleanup()
+        {
+            this.tilemaps.Clear();
+            this.tilesheets.Clear();
+            this.gameObjects.Clear();
+            this.optimizationPoint = null;
+        }
+
         /// <summary>
         /// Add Tilemap to the renderer.
         /// </summary>

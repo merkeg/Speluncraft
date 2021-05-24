@@ -43,6 +43,7 @@ namespace Engine.Service
                     if (c is ICollosionServiceSubscriber)
                     {
                         hasSubbed = true;
+                        break;
                     }
                 }
 
@@ -90,6 +91,12 @@ namespace Engine.Service
         /// <inheritdoc/>
         public void OnUpdatableCreate()
         {
+        }
+
+        /// <inheritdoc/>
+        public void SceneChangeCleanup()
+        {
+            this.collision = new Dictionary<GameObject.GameObject, List<GameObject.IRectangle>>();
         }
 
         /// <inheritdoc/>

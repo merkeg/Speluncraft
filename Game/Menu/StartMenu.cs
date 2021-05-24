@@ -2,6 +2,8 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
+using Game.Scenes;
+
 namespace Game.Menu
 {
     using System;
@@ -77,9 +79,7 @@ namespace Game.Menu
                 Environment.Exit(0);
             }
 
-            GameManager.Stop();
-            Engine.Engine.RemoveRenderer(this, Engine.Renderer.RenderLayer.UI);
-            GameManager.Start();
+            Engine.Engine.ChangeScene(new GameScene());
         }
     }
 }

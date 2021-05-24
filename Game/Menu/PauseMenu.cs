@@ -71,11 +71,8 @@ namespace Game.Menu
         {
             if (this.quadRenderer.Bounds == this.selectedMenuMainMenu)
             {
-                GameManager.Stop();
-
-                Engine.Engine.AddRenderer(new UiMatrixRenderer(), RenderLayer.UI);
-                StartMenu startMenu = new StartMenu(new Rectangle(0, 0, 0, 0), Color4.Black, new Font(FontModel.Parse("Game.Resources.Font.semicondensed.font.fnt"), new Sprite("Game.Resources.Font.semicondensed.font.png")), UiAlignment.Left, true);
-                Engine.Engine.AddRenderer(startMenu, RenderLayer.UI);
+                GameManager.UpdatesPaused = false;
+                Engine.Engine.ChangeScene(GameManager.SceneStart);
             }
         }
     }

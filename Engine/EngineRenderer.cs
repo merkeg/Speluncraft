@@ -17,10 +17,17 @@ namespace Engine
     /// </summary>
     public partial class Engine
     {
+        private static UiMatrixRenderer uiMatrixRenderer;
+
         /// <summary>
         /// Gets the renderers.
         /// </summary>
-        public static Dictionary<RenderLayer, List<IRenderer>> Renderers { get; private set; }
+        public static Dictionary<RenderLayer, List<IRenderer>> Renderers => Scene.Scene.Current.Renderers;
+
+        /// <summary>
+        /// Gets or sets the scene renderers.
+        /// </summary>
+        public static Dictionary<RenderLayer, List<IRenderer>> ServiceRenderers { get; set; }
 
         /// <summary>
         /// Adds an renderer to the list.
@@ -29,23 +36,17 @@ namespace Engine
         /// <param name="layer">The render order.</param>
         public static void AddRenderer(IRenderer renderer, RenderLayer layer = RenderLayer.GAME)
         {
-            Engine.Renderers[layer].Add(renderer);
-            renderer.OnRendererCreate();
-            if (Engine.GameWindow != null)
-            {
-                renderer.Resize(new ResizeEventArgs(Engine.GameWindow.Size));
-            }
+            Scene.Scene.Current.AddRenderer(renderer, layer);
         }
 
         /// <summary>
         /// Removes an rendere.
         /// </summary>
-        /// <param name="renderer">The rendere to Remove.</param>
+        /// <param name="renderer">The renderer to Remove.</param>
         /// <param name="layer">Render layer.</param>
         public static void RemoveRenderer(IRenderer renderer, RenderLayer layer = RenderLayer.GAME)
         {
-            renderer.OnRendererDelete();
-            Engine.Renderers[layer].Remove(renderer);
+            Scene.Scene.Current.RemoveRenderer(renderer, layer);
         }
 
         private static void Update(FrameEventArgs args)
@@ -64,9 +65,10 @@ namespace Engine
 
         private static void Resize(ResizeEventArgs args)
         {
-            foreach (List<IRenderer> renderers in Engine.Renderers.Values.ToList())
+            foreach (RenderLayer layer in Engine.Renderers.Keys.ToList())
             {
-                renderers.ForEach(renderer => renderer.Resize(args));
+                Engine.ServiceRenderers[layer].ForEach(renderer => renderer.Resize(args));
+                Engine.Renderers[layer].ForEach(renderer => renderer.Resize(args));
             }
         }
 
@@ -74,9 +76,16 @@ namespace Engine
         {
             Engine.GameWindow.SwapBuffers();
             GL.Clear(ClearBufferMask.ColorBufferBit);
-            foreach (List<IRenderer> renderers in Engine.Renderers.Values.ToList())
+
+            foreach (RenderLayer layer in Engine.Renderers.Keys.ToList())
             {
-                renderers.ForEach(renderer => renderer.Render(args));
+                if (layer == RenderLayer.UI)
+                {
+                    Engine.uiMatrixRenderer.Render(args);
+                }
+
+                Engine.ServiceRenderers[layer].ForEach(renderer => renderer.Render(args));
+                Engine.Renderers[layer].ForEach(renderer => renderer.Render(args));
             }
         }
     }
