@@ -11,6 +11,7 @@ namespace Game.Player
     using Engine.GameObject;
     using Engine.Renderer;
     using Engine.Renderer.Sprite;
+    using Game.Scenes;
     using OpenTK.Windowing.GraphicsLibraryFramework;
 
     /// <summary>
@@ -129,10 +130,16 @@ namespace Game.Player
             if (this.GetComponent<Engine.Component.HealthPoints>().GetIsDeadFlag())
             {
                 Engine.Engine.RemoveGameObject(this);
+                Engine.Engine.ChangeScene(GameManager.SceneDeath);
             }
 
             // Reset jump counter when ground was touched
             Engine.Component.UndoOverlapCollisionResponse collider = this.GetComponent<Engine.Component.UndoOverlapCollisionResponse>();
+            if (collider == null)
+            {
+                return;
+            }
+
             if (collider.GetGroundTouchedFlag())
             {
                 this.jumpcounter = this.jumpCounterMax;

@@ -42,6 +42,7 @@ namespace Game
         {
             SceneStart = new StartScene();
             SceneGame = new GameScene();
+            SceneDeath = new DeathScene();
             Engine.Engine.OnSceneChange += OnSceneChange;
             Engine.Engine.ChangeScene(SceneStart);
         }
@@ -80,6 +81,11 @@ namespace Game
         /// Gets the Game scene.
         /// </summary>
         public static Scene SceneGame { get; private set; }
+
+        /// <summary>
+        /// Gets the Death scene.
+        /// </summary>
+        public static Scene SceneDeath { get; private set; }
 
         /// <summary>
         /// Gets or sets Handlers on pause.

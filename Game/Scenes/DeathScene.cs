@@ -1,4 +1,4 @@
-﻿// <copyright file="StartScene.cs" company="RWUwU">
+﻿// <copyright file="DeathScene.cs" company="RWUwU">
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
@@ -16,13 +16,13 @@ namespace Game.Scenes
     /// <summary>
     /// Start scene class.
     /// </summary>
-    public class StartScene : Scene
+    public class DeathScene : Scene
     {
         /// <inheritdoc/>
         public override void OnSceneLoad()
         {
-            Menu.StartMenu startMenu = new Menu.StartMenu(new Rectangle(0, 0, 0, 0), Color4.Black, TextureAtlas.Fonts["defaultFont"], UiAlignment.Left, true);
-            Engine.Engine.AddRenderer(startMenu, RenderLayer.UI);
+            Menu.DeathMenu deathMenu = new Menu.DeathMenu(new Rectangle(0, 0, 0, 0), Color4.Black, TextureAtlas.Fonts["defaultFont"], UiAlignment.Left, true);
+            Engine.Engine.AddRenderer(deathMenu, RenderLayer.UI);
         }
     }
 }

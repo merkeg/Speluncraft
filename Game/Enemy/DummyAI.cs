@@ -143,6 +143,10 @@ namespace Game.Enemy
         private void UpdateAnimations()
         {
             Engine.Component.Physics phys = this.GetComponent<Engine.Component.Physics>();
+            if (phys == null)
+            {
+                return;
+            }
 
             if (phys.GetVelocity().X < -0.1)
             {

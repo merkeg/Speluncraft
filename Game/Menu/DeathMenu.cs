@@ -1,4 +1,4 @@
-﻿// <copyright file="PauseMenu.cs" company="RWUwU">
+﻿// <copyright file="DeathMenu.cs" company="RWUwU">
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
@@ -18,34 +18,39 @@ namespace Game.Menu
     /// <summary>
     /// PauseMenu.
     /// </summary>
-    public class PauseMenu : UiElement
+    public class DeathMenu : UiElement
     {
         private RelativeRectangle selectedMenuResume;
         private RelativeRectangle selectedMenuMainMenu;
         private QuadRenderer quadRenderer;
 
+        private RelativeRectangle gitgud;
         /// <summary>
-        /// Initializes a new instance of the <see cref="PauseMenu"/> class.
+        /// Initializes a new instance of the <see cref="DeathMenu"/> class.
         /// </summary>
         /// <param name="bounds">bounds.</param>
         /// <param name="backgroundColor">backgroundColor.</param>
         /// <param name="font">font.</param>
         /// <param name="alignment">alignment.</param>
         /// <param name="fitToViewport">fitToViewport.</param>
-        public PauseMenu(Rectangle bounds, Color4 backgroundColor, Font font, UiAlignment alignment = UiAlignment.Left, bool fitToViewport = false)
+        public DeathMenu(Rectangle bounds, Color4 backgroundColor, Font font, UiAlignment alignment = UiAlignment.Left, bool fitToViewport = false)
             : base(bounds, backgroundColor, font, alignment, fitToViewport)
         {
             this.selectedMenuResume = new RelativeRectangle(this.AbsoluteBounds, 0, 85, 600, 85);
             this.selectedMenuMainMenu = new RelativeRectangle(this.AbsoluteBounds, 0, 185, 600, 85);
+            this.gitgud = new RelativeRectangle(this.AbsoluteBounds, (Engine.Engine.GameWindow.Size.X / 2) - 477, (Engine.Engine.GameWindow.Size.Y / 2) - 44, 955, 88);
 
             this.quadRenderer = this.AddQuad(this.selectedMenuResume, new Color4(80, 80, 80, 0.25f));
-            this.AddText("Resume", Color4.Azure, new RelativeRectangle(this.AbsoluteBounds, 100, 70, 0, 0), 1);
+            this.AddSprite(TextureAtlas.Sprites["gitgudcasul"], this.gitgud);
+            this.AddText("Respawn", Color4.Azure, new RelativeRectangle(this.AbsoluteBounds, 100, 70, 0, 0), 1);
             this.AddText("Main Menu", Color4.Azure, new RelativeRectangle(this.AbsoluteBounds, 100, 170, 0, 0), 1);
         }
 
         /// <inheritdoc/>
         public override void OnRender(FrameEventArgs args)
         {
+            this.gitgud.MinX = (Engine.Engine.GameWindow.Size.X / 2) - 477;
+            this.gitgud.MinY = (Engine.Engine.GameWindow.Size.Y / 2) - 44;
         }
 
         /// <inheritdoc/>
@@ -77,7 +82,7 @@ namespace Game.Menu
             }
 
             GameManager.UpdatesPaused = false;
-            Engine.Engine.RemoveRenderer(this, RenderLayer.UI);
+            Engine.Engine.ChangeScene(GameManager.SceneGame);
         }
     }
 }

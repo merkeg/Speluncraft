@@ -49,6 +49,7 @@
     <None Remove="Resources\rotation.json" />
     <None Remove="Resources\Sprite\startmenu.png" />
     <None Remove="Resources\Sprite\tilesheet.png" />
+    <None Remove="Resources\UI\gitgud.png" />
     <None Remove="Resources\UI\Healthbar\10_hearts.png" />
     <None Remove="Resources\UI\Healthbar\background.png" />
     <None Remove="Resources\UI\Healthbar\halfheart.png" />
@@ -159,6 +160,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Level\rotation.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\UI\gitgud.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\UI\startmenu.png">

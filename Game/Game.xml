@@ -155,6 +155,11 @@
             Gets the Game scene.
             </summary>
         </member>
+        <member name="P:Game.GameManager.SceneDeath">
+            <summary>
+            Gets the Death scene.
+            </summary>
+        </member>
         <member name="P:Game.GameManager.OnPauseStateChange">
             <summary>
             Gets or sets Handlers on pause.
@@ -379,6 +384,30 @@
         <member name="M:Game.Gun.CameraTrackingComponent.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="T:Game.Menu.DeathMenu">
+            <summary>
+            PauseMenu.
+            </summary>
+        </member>
+        <member name="M:Game.Menu.DeathMenu.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.Renderer.UI.UiAlignment,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Menu.DeathMenu"/> class.
+            </summary>
+            <param name="bounds">bounds.</param>
+            <param name="backgroundColor">backgroundColor.</param>
+            <param name="font">font.</param>
+            <param name="alignment">alignment.</param>
+            <param name="fitToViewport">fitToViewport.</param>
+        </member>
+        <member name="M:Game.Menu.DeathMenu.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.DeathMenu.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.DeathMenu.OnRendererDelete">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Menu.PauseMenu">
             <summary>
             PauseMenu.
@@ -511,6 +540,14 @@
             <summary>
             Initializes a new instance of the <see cref="T:Game.Program"/> class.
             </summary>
+        </member>
+        <member name="T:Game.Scenes.DeathScene">
+            <summary>
+            Start scene class.
+            </summary>
+        </member>
+        <member name="M:Game.Scenes.DeathScene.OnSceneLoad">
+            <inheritdoc/>
         </member>
         <member name="T:Game.Scenes.GameScene">
             <summary>
