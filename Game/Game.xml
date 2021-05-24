@@ -402,6 +402,9 @@
         <member name="M:Game.Menu.DeathMenu.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
             <inheritdoc/>
         </member>
+        <member name="M:Game.Menu.DeathMenu.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
         <member name="M:Game.Menu.DeathMenu.OnRendererCreate">
             <inheritdoc/>
         </member>

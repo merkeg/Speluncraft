@@ -44,7 +44,7 @@ namespace Game
             SceneGame = new GameScene();
             SceneDeath = new DeathScene();
             Engine.Engine.OnSceneChange += OnSceneChange;
-            Engine.Engine.ChangeScene(SceneStart);
+            Engine.Engine.ChangeScene(SceneDeath);
         }
 
         /// <summary>

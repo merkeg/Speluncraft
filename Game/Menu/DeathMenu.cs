@@ -20,11 +20,14 @@ namespace Game.Menu
     /// </summary>
     public class DeathMenu : UiElement
     {
-        private RelativeRectangle selectedMenuResume;
+        private RelativeRectangle selectedMenuRespawn;
         private RelativeRectangle selectedMenuMainMenu;
         private QuadRenderer quadRenderer;
 
-        private RelativeRectangle gitgud;
+        private RelativeRectangle textGitgud;
+        private RelativeRectangle buttonRespawn;
+        private RelativeRectangle buttonMainMenu;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DeathMenu"/> class.
         /// </summary>
@@ -36,21 +39,38 @@ namespace Game.Menu
         public DeathMenu(Rectangle bounds, Color4 backgroundColor, Font font, UiAlignment alignment = UiAlignment.Left, bool fitToViewport = false)
             : base(bounds, backgroundColor, font, alignment, fitToViewport)
         {
-            this.selectedMenuResume = new RelativeRectangle(this.AbsoluteBounds, 0, 85, 600, 85);
-            this.selectedMenuMainMenu = new RelativeRectangle(this.AbsoluteBounds, 0, 185, 600, 85);
-            this.gitgud = new RelativeRectangle(this.AbsoluteBounds, (Engine.Engine.GameWindow.Size.X / 2) - 477, (Engine.Engine.GameWindow.Size.Y / 2) - 44, 955, 88);
+            this.textGitgud = new RelativeRectangle(this.AbsoluteBounds, (Engine.Engine.GameWindow.Size.X / 2) - 477, (Engine.Engine.GameWindow.Size.Y / 2) - 44, 955, 88);
+            this.buttonRespawn = new RelativeRectangle(this.AbsoluteBounds, (Engine.Engine.GameWindow.Size.X / 2) - 294, (Engine.Engine.GameWindow.Size.Y / 2) + 150, 0, 0);
+            this.buttonMainMenu = new RelativeRectangle(this.AbsoluteBounds, (Engine.Engine.GameWindow.Size.X / 2) + 100, (Engine.Engine.GameWindow.Size.Y / 2) + 150, 0, 0);
+            this.selectedMenuRespawn = new RelativeRectangle(this.AbsoluteBounds, (Engine.Engine.GameWindow.Size.X / 2) - 335, (Engine.Engine.GameWindow.Size.Y / 2) + 150, 250, 55);
+            this.selectedMenuMainMenu = new RelativeRectangle(this.AbsoluteBounds, (Engine.Engine.GameWindow.Size.X / 2) + 72, (Engine.Engine.GameWindow.Size.Y / 2) + 150, 250, 55);
 
-            this.quadRenderer = this.AddQuad(this.selectedMenuResume, new Color4(80, 80, 80, 0.25f));
-            this.AddSprite(TextureAtlas.Sprites["gitgudcasul"], this.gitgud);
-            this.AddText("Respawn", Color4.Azure, new RelativeRectangle(this.AbsoluteBounds, 100, 70, 0, 0), 1);
-            this.AddText("Main Menu", Color4.Azure, new RelativeRectangle(this.AbsoluteBounds, 100, 170, 0, 0), 1);
+            this.quadRenderer = this.AddQuad(this.selectedMenuRespawn, new Color4(80, 80, 80, 0.25f));
+            this.AddSprite(TextureAtlas.Sprites["gitgudcasul"], this.textGitgud);
+            this.AddText("Respawn", Color4.DarkGray, this.buttonRespawn, 0.5f);
+            this.AddText("Main Menu", Color4.DarkGray, this.buttonMainMenu, 0.5f);
         }
 
         /// <inheritdoc/>
         public override void OnRender(FrameEventArgs args)
         {
-            this.gitgud.MinX = (Engine.Engine.GameWindow.Size.X / 2) - 477;
-            this.gitgud.MinY = (Engine.Engine.GameWindow.Size.Y / 2) - 44;
+        }
+
+        /// <inheritdoc/>
+        public override void Resize(ResizeEventArgs args)
+        {
+            base.Resize(args);
+            this.textGitgud.MinX = (Engine.Engine.GameWindow.Size.X / 2) - 477;
+            this.textGitgud.MinY = (Engine.Engine.GameWindow.Size.Y / 2) - 44;
+
+            this.buttonRespawn.MinX = (Engine.Engine.GameWindow.Size.X / 2) - 294;
+            this.buttonRespawn.MinY = (Engine.Engine.GameWindow.Size.Y / 2) + 150;
+            this.buttonMainMenu.MinX = (Engine.Engine.GameWindow.Size.X / 2) + 100;
+            this.buttonMainMenu.MinY = (Engine.Engine.GameWindow.Size.Y / 2) + 150;
+            this.selectedMenuRespawn.MinX = (Engine.Engine.GameWindow.Size.X / 2) - 335;
+            this.selectedMenuRespawn.MinY = (Engine.Engine.GameWindow.Size.Y / 2) + 150;
+            this.selectedMenuMainMenu.MinX = (Engine.Engine.GameWindow.Size.X / 2) + 72;
+            this.selectedMenuMainMenu.MinY = (Engine.Engine.GameWindow.Size.Y / 2) + 150;
         }
 
         /// <inheritdoc/>
@@ -69,7 +89,7 @@ namespace Game.Menu
 
         private void ButtonChange()
         {
-            this.quadRenderer.Bounds = this.quadRenderer.Bounds == this.selectedMenuResume ? this.selectedMenuMainMenu : this.selectedMenuResume;
+            this.quadRenderer.Bounds = this.quadRenderer.Bounds == this.selectedMenuRespawn ? this.selectedMenuMainMenu : this.selectedMenuRespawn;
         }
 
         private void ExecuteSelectedMenu()

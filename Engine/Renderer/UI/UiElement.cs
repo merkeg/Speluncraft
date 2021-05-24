@@ -110,7 +110,7 @@ namespace Engine.Renderer.UI
         }
 
         /// <inheritdoc/>
-        public void Resize(ResizeEventArgs args)
+        public virtual void Resize(ResizeEventArgs args)
         {
             if (this.alignment == UiAlignment.Right)
             {
