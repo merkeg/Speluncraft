@@ -2,14 +2,14 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
-using Engine.Renderer;
-using Engine.Renderer.Sprite;
-using Engine.Renderer.Text;
-using Engine.Renderer.Text.Parser;
-using Engine.Renderer.Tile;
-
 namespace Game.Scenes
 {
+    using Engine.Renderer;
+    using Engine.Renderer.Sprite;
+    using Engine.Renderer.Text;
+    using Engine.Renderer.Text.Parser;
+    using Engine.Renderer.Tile;
+
     /// <summary>
     /// Texture loader class.
     /// </summary>
