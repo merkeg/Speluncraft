@@ -9,11 +9,11 @@ namespace Game.UI
     using System.Reflection;
     using Engine.GameObject;
     using Engine.Renderer;
-    using Engine.Service;
     using Engine.Renderer.Particle;
     using Engine.Renderer.Sprite;
     using Engine.Renderer.Text;
     using Engine.Renderer.Text.Parser;
+    using Engine.Service;
     using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
@@ -110,6 +110,7 @@ namespace Game.UI
         public void MouseDown(MouseButtonEventArgs args)
         {
             // Debug.WriteLine(args.Button + " | " + windowMousePosition.X + " | " + windowMousePosition.Y);
+            int oldIndex = currentWeaponIndex; // fix for shop crashing BUG 294
             currentWeaponIndex = 0;
 
             // check if mouse is clicked inside of itemFrame
@@ -125,6 +126,9 @@ namespace Game.UI
 
                 currentWeaponIndex++;
             }
+
+            currentWeaponIndex = oldIndex;
+            Debug.WriteLine("here");
         }
 
         /// <inheritdoc/>
