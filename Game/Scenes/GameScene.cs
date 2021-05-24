@@ -41,7 +41,6 @@ namespace Game.Scenes
         private void InitializeRenderers()
         {
             this.tilemap = TextureAtlas.Tilemaps["level01"];
-            this.AnimateTiles(TextureAtlas.Tilesheets["defaultTilesheet"]);
             Engine.Engine.GetService<TilemapService>().AddTilemap(this.tilemap, Vector2i.Zero);
         }
 
@@ -107,18 +106,6 @@ namespace Game.Scenes
 
             GameManager.UpdatesPaused = true;
             Engine.Engine.AddRenderer(this.pauseMenu, RenderLayer.UI);
-        }
-
-        private void AnimateTiles(Tilesheet sheet)
-        {
-            sheet.SetCustomSprite(36, TextureAtlas.Sprites["netherPortal"]);
-            sheet.SetCustomSprite(81, TextureAtlas.Sprites["waterFlow"]);
-            sheet.SetCustomSprite(91, TextureAtlas.Sprites["waterStill"]);
-            sheet.SetCustomSprite(92, TextureAtlas.Sprites["waterCut"]);
-            sheet.SetCustomSprite(83, TextureAtlas.Sprites["lavaFlow"]);
-            sheet.SetCustomSprite(93, TextureAtlas.Sprites["lavaStill"]);
-            sheet.SetCustomSprite(94, TextureAtlas.Sprites["lavaCut"]);
-            sheet.SetCustomSprite(85, TextureAtlas.Sprites["fire"]);
         }
     }
 }
