@@ -4,29 +4,8 @@
 
 namespace Game
 {
-    using System;
-    using System.IO;
-    using System.Reflection;
-    using Engine.Camera;
-    using Engine.GameObject;
-    using Engine.Renderer;
-    using Engine.Renderer.Particle;
-    using Engine.Renderer.Sprite;
-    using Engine.Renderer.Text;
-    using Engine.Renderer.Text.Parser;
-    using Engine.Renderer.Tile;
-    using Engine.Renderer.Tile.Parser;
-    using Engine.Renderer.UI;
     using Engine.Scene;
-    using Engine.Service;
-    using Game.Enemy;
-    using Game.Gun;
     using Game.Scenes;
-    using Game.UI;
-    using OpenTK.Mathematics;
-    using OpenTK.Windowing.Common;
-    using OpenTK.Windowing.Desktop;
-    using OpenTK.Windowing.GraphicsLibraryFramework;
 
     /// <summary>
     /// Gameclass.

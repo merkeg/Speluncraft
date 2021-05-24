@@ -70,6 +70,17 @@ namespace Game.Scenes
 
             // TilemapModel
             TextureAtlas.Set("level01", new Tilemap(TextureAtlas.Tilesheets["defaultTilesheet"], TilemapParser.ParseTilemap("Game.Resources.Level.level01.json")));
+
+            // Sheet Animations
+            Tilesheet sheet = TextureAtlas.Tilesheets["defaultTilesheet"];
+            sheet.SetCustomSprite(36, TextureAtlas.Sprites["netherPortal"]);
+            sheet.SetCustomSprite(81, TextureAtlas.Sprites["waterFlow"]);
+            sheet.SetCustomSprite(91, TextureAtlas.Sprites["waterStill"]);
+            sheet.SetCustomSprite(92, TextureAtlas.Sprites["waterCut"]);
+            sheet.SetCustomSprite(83, TextureAtlas.Sprites["lavaFlow"]);
+            sheet.SetCustomSprite(93, TextureAtlas.Sprites["lavaStill"]);
+            sheet.SetCustomSprite(94, TextureAtlas.Sprites["lavaCut"]);
+            sheet.SetCustomSprite(85, TextureAtlas.Sprites["fire"]);
         }
     }
 }
