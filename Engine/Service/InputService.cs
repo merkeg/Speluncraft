@@ -52,7 +52,10 @@ namespace Engine.Service
             {
                 if (state.IsKeyDown(key) && !state.WasKeyDown(key))
                 {
-                    this.subscribers[key]();
+                    if (this.subscribers[key] != null)
+                    {
+                        this.subscribers[key]();
+                    }
                 }
             }
         }
@@ -84,6 +87,24 @@ namespace Engine.Service
         }
 
         /// <summary>
+        /// Subscribe to an keydown event. Accepting multiple keys.
+        /// </summary>
+        /// <param name="keys">keys.</param>
+        /// <param name="action">action.</param>
+        public void Subscribe(Keys[] keys, Handler action)
+        {
+            foreach (Keys key in keys)
+            {
+                if (!this.subscribers.ContainsKey(key))
+                {
+                    this.subscribers.Add(key, null);
+                }
+
+                this.subscribers[key] += action;
+            }
+        }
+
+        /// <summary>
         /// Unsubscribe from an keydown event.
         /// </summary>
         /// <param name="key">key.</param>
@@ -91,6 +112,24 @@ namespace Engine.Service
         public void Unsubscribe(Keys key, Handler action)
         {
             this.subscribers[key] -= action;
+        }
+
+        /// <summary>
+        /// Unsubscribe from an keydown event. Accepts multiple keys.
+        /// </summary>
+        /// <param name="keys">keys.</param>
+        /// <param name="action">action.</param>
+        public void Unsubscribe(Keys[] keys, Handler action)
+        {
+            foreach (Keys key in keys)
+            {
+                this.subscribers[key] -= action;
+            }
+        }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
+        {
         }
     }
 }

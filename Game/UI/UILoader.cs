@@ -21,6 +21,7 @@ namespace Game.UI
         public static void Initialize_UI()
         {
             HealthbarPlayer playerhealthbar = new HealthbarPlayer();
+            Console.WriteLine("Hello UILoader");
             Engine.AddRenderer(playerhealthbar, RenderLayer.UI);
         }
     }

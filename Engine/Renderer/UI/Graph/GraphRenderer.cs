@@ -108,5 +108,10 @@ namespace Engine.Renderer.UI.Graph
         {
             this.data.Add(dataSet);
         }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
+        {
+        }
     }
 }

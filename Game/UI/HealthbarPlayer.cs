@@ -4,6 +4,7 @@
 
 namespace Game.UI
 {
+    using System;
     using System.Diagnostics;
     using System.IO;
     using System.Reflection;
@@ -224,6 +225,11 @@ namespace Game.UI
         public void OnRendererCreate()
         {
             return;
+        }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
+        {
         }
     }
 }

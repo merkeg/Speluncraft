@@ -73,6 +73,8 @@ namespace Game.Player
             this.ChangeGun(new Gun.GrenadeLauncher());
             this.ChangeGun(new Gun.Pistol());
             this.ChangeGun(new Gun.MachineGun());
+
+            GameManager.OnPauseStateChange += this.OnPauseStateChange;
         }
 
         /// <summary>
@@ -110,8 +112,13 @@ namespace Game.Player
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
-            OpenTK.Windowing.GraphicsLibraryFramework.KeyboardState keyboardState = Engine.Engine.GameWindow.KeyboardState;
+            KeyboardState keyboardState = Engine.Engine.GameWindow.KeyboardState;
             Engine.Component.Physics physics = this.GetComponent<Engine.Component.Physics>();
+
+            if (GameManager.UpdatesPaused)
+            {
+                return;
+            }
 
             this.Walk(frameTime, keyboardState, physics);
 
@@ -298,6 +305,20 @@ namespace Game.Player
             this.spriteFall = new Sprite("Game.Resources.Player.adventurer_fall.png");
             this.spriteBack = new Sprite("Game.Resources.Player.adventurer_back.png");
             this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_pistol.png");
+        }
+
+        private void OnPauseStateChange(bool isPaused)
+        {
+            Engine.Component.Physics physics = this.GetComponent<Engine.Component.Physics>();
+            if (isPaused)
+            {
+                physics.SetVelocity(0, 0);
+                physics.SetIsAffectedByGravity(false);
+            }
+            else
+            {
+                physics.SetIsAffectedByGravity(true);
+            }
         }
     }
 }

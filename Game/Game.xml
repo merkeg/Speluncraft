@@ -124,6 +124,42 @@
         <member name="M:Game.GameComponents.AnimationWithTimeAndPrio.CompareTo(System.Object)">
             <inheritdoc/>
         </member>
+        <member name="T:Game.GameManager">
+            <summary>
+            Gameclass.
+            </summary>
+        </member>
+        <member name="M:Game.GameManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.GameManager"/> class.
+            </summary>
+        </member>
+        <member name="T:Game.GameManager.PauseHandler">
+            <summary>
+            The handler.
+            </summary>
+            <param name="stateChangeTo">The state it changed to.</param>
+        </member>
+        <member name="P:Game.GameManager.UpdatesPaused">
+            <summary>
+            Gets or sets a value indicating whether a update is called or not.
+            </summary>
+        </member>
+        <member name="P:Game.GameManager.OnPauseStateChange">
+            <summary>
+            Gets or sets Handlers on pause.
+            </summary>
+        </member>
+        <member name="M:Game.GameManager.Start">
+            <summary>
+            Starts the game.
+            </summary>
+        </member>
+        <member name="M:Game.GameManager.Stop">
+            <summary>
+            Stops the game.
+            </summary>
+        </member>
         <member name="T:Game.Gun.Ammunition.Bullet">
             <summary>
             A bullet that flies straight untill it hits something, then does DMG and despwans.
@@ -338,6 +374,30 @@
         <member name="M:Game.Gun.CameraTrackingComponent.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="T:Game.Menu.PauseMenu">
+            <summary>
+            PauseMenu.
+            </summary>
+        </member>
+        <member name="M:Game.Menu.PauseMenu.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.Renderer.UI.UiAlignment,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Menu.PauseMenu"/> class.
+            </summary>
+            <param name="bounds">bounds.</param>
+            <param name="backgroundColor">backgroundColor.</param>
+            <param name="font">font.</param>
+            <param name="alignment">alignment.</param>
+            <param name="fitToViewport">fitToViewport.</param>
+        </member>
+        <member name="M:Game.Menu.PauseMenu.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.PauseMenu.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.PauseMenu.OnRendererDelete">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Menu.StartMenu">
             <summary>
             Contains the Starmenu. Some call it Main Menu.
@@ -358,6 +418,9 @@
             <inheritdoc/>
         </member>
         <member name="M:Game.Menu.StartMenu.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.StartMenu.OnRendererDelete">
             <inheritdoc/>
         </member>
         <member name="T:Game.Player.Items.HealthPickUp">
@@ -500,6 +563,9 @@
             <summary>
             OnCreate function.
             </summary>
+        </member>
+        <member name="M:Game.UI.HealthbarPlayer.OnRendererDelete">
+            <inheritdoc/>
         </member>
         <member name="T:Game.UI.InteractableElement">
             <summary>

@@ -31,6 +31,10 @@ namespace Engine
         {
             Engine.Renderers[layer].Add(renderer);
             renderer.OnRendererCreate();
+            if (Engine.GameWindow != null)
+            {
+                renderer.Resize(new ResizeEventArgs(Engine.GameWindow.Size));
+            }
         }
 
         /// <summary>
@@ -40,6 +44,7 @@ namespace Engine
         /// <param name="layer">Render layer.</param>
         public static void RemoveRenderer(IRenderer renderer, RenderLayer layer = RenderLayer.GAME)
         {
+            renderer.OnRendererDelete();
             Engine.Renderers[layer].Remove(renderer);
         }
 

@@ -198,5 +198,10 @@ namespace Engine.Renderer.UI
             this.AddRenderElement(spriteRenderer);
             return spriteRenderer;
         }
+
+        /// <inheritdoc/>
+        public virtual void OnRendererDelete()
+        {
+        }
     }
 }

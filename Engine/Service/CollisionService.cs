@@ -91,5 +91,10 @@ namespace Engine.Service
         public void OnUpdatableCreate()
         {
         }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
+        {
+        }
     }
 }

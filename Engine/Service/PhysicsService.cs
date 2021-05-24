@@ -56,5 +56,10 @@ namespace Engine.Service
         public void Resize(ResizeEventArgs args)
         {
         }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
+        {
+        }
     }
 }

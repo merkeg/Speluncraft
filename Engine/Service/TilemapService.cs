@@ -128,5 +128,10 @@ namespace Engine.Service
         {
             this.optimizationPoint = rectangle;
         }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
+        {
+        }
     }
 }

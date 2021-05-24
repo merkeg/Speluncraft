@@ -43,6 +43,9 @@
             Gets or sets the camera scale.
             </summary>
         </member>
+        <member name="M:Engine.Camera.Camera.OnRendererDelete">
+            <inheritdoc/>
+        </member>
         <member name="T:Engine.Camera.Transformation2d">
             <summary>
             Helper class for calculating transformations.
@@ -788,6 +791,9 @@
         <member name="M:Engine.Renderer.CollisionRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
+        <member name="M:Engine.Renderer.CollisionRenderer.OnRendererDelete">
+            <inheritdoc/>
+        </member>
         <member name="T:Engine.Renderer.DebugRenderer">
             <summary>
             Debug renderer class.
@@ -849,6 +855,11 @@
         <member name="M:Engine.Renderer.IRenderer.OnRendererCreate">
             <summary>
             Run when the renderer is added.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.IRenderer.OnRendererDelete">
+            <summary>
+            Run when the renderer is removed.
             </summary>
         </member>
         <member name="T:Engine.Renderer.Particle.Particle">
@@ -1292,6 +1303,9 @@
         <member name="M:Engine.Renderer.Sprite.SpriteRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
+        <member name="M:Engine.Renderer.Sprite.SpriteRenderer.OnRendererDelete">
+            <inheritdoc/>
+        </member>
         <member name="T:Engine.Renderer.Text.Font">
             <summary>
             Font class.
@@ -1443,6 +1457,9 @@
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.Text.TextRenderer.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.Text.TextRenderer.OnRendererDelete">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Renderer.Tile.ITilesheet">
@@ -1683,6 +1700,9 @@
         <member name="M:Engine.Renderer.Tile.TilemapRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
+        <member name="M:Engine.Renderer.Tile.TilemapRenderer.OnRendererDelete">
+            <inheritdoc/>
+        </member>
         <member name="T:Engine.Renderer.Tile.TilemapTileLayer">
             <summary>
             The Tilemap class.
@@ -1855,6 +1875,9 @@
         <member name="M:Engine.Renderer.UiMatrixRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
+        <member name="M:Engine.Renderer.UiMatrixRenderer.OnRendererDelete">
+            <inheritdoc/>
+        </member>
         <member name="T:Engine.Renderer.UI.Graph.GraphDataSet">
             <summary>
             Graph data set class.
@@ -1913,6 +1936,9 @@
             </summary>
             <param name="dataSet">Dataset to add.</param>
         </member>
+        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.OnRendererDelete">
+            <inheritdoc/>
+        </member>
         <member name="T:Engine.Renderer.UI.Primitive.QuadRenderer">
             <summary>
             Quad Renderer class.
@@ -1938,6 +1964,9 @@
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.OnRendererDelete">
             <inheritdoc/>
         </member>
         <member name="F:Engine.Renderer.UI.RelativeRectangleXAlignment.Left">
@@ -2113,6 +2142,9 @@
             <param name="bounds">Bounds set to.</param>
             <returns>The renderer.</returns>
         </member>
+        <member name="M:Engine.Renderer.UI.UiElement.OnRendererDelete">
+            <inheritdoc/>
+        </member>
         <member name="T:Engine.Service.CollisionService">
             <summary>
             TestService class.
@@ -2141,6 +2173,9 @@
             <inheritdoc/>
         </member>
         <member name="M:Engine.Service.CollisionService.OnUpdatableCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.CollisionService.OnRendererDelete">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Service.ICollosionServiceSubscriber">
@@ -2183,12 +2218,29 @@
             <param name="key">key.</param>
             <param name="action">action.</param>
         </member>
+        <member name="M:Engine.Service.InputService.Subscribe(OpenTK.Windowing.GraphicsLibraryFramework.Keys[],Engine.Service.InputService.Handler)">
+            <summary>
+            Subscribe to an keydown event. Accepting multiple keys.
+            </summary>
+            <param name="keys">keys.</param>
+            <param name="action">action.</param>
+        </member>
         <member name="M:Engine.Service.InputService.Unsubscribe(OpenTK.Windowing.GraphicsLibraryFramework.Keys,Engine.Service.InputService.Handler)">
             <summary>
             Unsubscribe from an keydown event.
             </summary>
             <param name="key">key.</param>
             <param name="action">action.</param>
+        </member>
+        <member name="M:Engine.Service.InputService.Unsubscribe(OpenTK.Windowing.GraphicsLibraryFramework.Keys[],Engine.Service.InputService.Handler)">
+            <summary>
+            Unsubscribe from an keydown event. Accepts multiple keys.
+            </summary>
+            <param name="keys">keys.</param>
+            <param name="action">action.</param>
+        </member>
+        <member name="M:Engine.Service.InputService.OnRendererDelete">
+            <inheritdoc/>
         </member>
         <member name="T:Engine.Service.IPhysicsServiceSubscriber">
             <summary>
@@ -2246,13 +2298,16 @@
             <param name="emitter">The emitter.</param>
             <param name="position">Position.</param>
             <param name="lifetime">The lifetime of the emitter. Set to 0 to disable deletion.</param>
-            <returns>ParticleEmitterData</returns>
+            <returns>ParticleEmitterData.</returns>
         </member>
         <member name="M:Engine.Service.ParticleService.Remove(Engine.Renderer.Particle.ParticleEmitterData)">
             <summary>
             Remove an emitter.
             </summary>
             <param name="data">The data you got from the emit method.</param>
+        </member>
+        <member name="M:Engine.Service.ParticleService.OnRendererDelete">
+            <inheritdoc/>
         </member>
         <member name="T:Engine.Service.PhysicsService">
             <summary>
@@ -2275,6 +2330,9 @@
             <inheritdoc/>
         </member>
         <member name="M:Engine.Service.PhysicsService.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.PhysicsService.OnRendererDelete">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Service.ServiceInfo">
@@ -2339,6 +2397,9 @@
             Sets the optimization point.
             </summary>
             <param name="rectangle">optimization point.</param>
+        </member>
+        <member name="M:Engine.Service.TilemapService.OnRendererDelete">
+            <inheritdoc/>
         </member>
         <member name="M:Engine.Service.TilemapService.Render(OpenTK.Windowing.Common.FrameEventArgs)">
             <inheritdoc/>
