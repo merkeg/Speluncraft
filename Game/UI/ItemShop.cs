@@ -24,11 +24,11 @@ namespace Game.UI
     {
         private static Player.Player player;
 
-        private static Vector3 shopSpriteAspect = new Vector3(1280, 720, 720f / 1280f); // width, height and original aspect-ratio (I hate scaling :()
+        private static Vector3 shopSpriteAspect = new Vector3(1280, 720, 1280f / 720f); // width, height and original aspect-ratio (I hate scaling :()
         private static Vector2 screenCenter;
         private static Vector2 screenSize;
-        private static float shopWidth;
-        private static float shopWindowBorderIndent = 300;
+        private static float shopHeight;
+        private static float shopWindowBorderIndent = 100;
         private static Vector2 shopOrigin;
 
         private static float itemSpacing;
@@ -40,7 +40,6 @@ namespace Game.UI
         private static Assembly assembly;
         private static Sprite shopBackground;
         private static Sprite shopItemFrame;
-        private static Sprite shopStartButton;
         private static Font font;
 
         /// <summary>
@@ -109,7 +108,7 @@ namespace Game.UI
                     player.ChangeGun(GunType.GunTypeArray[index].Gun);
 
                     // change this
-                    this.ShopActive = false;
+                    //this.ShopActive = false;
                     return;
                 }
 
@@ -130,9 +129,6 @@ namespace Game.UI
             using Stream shopItemFrameSpriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.item_frame_front.png");
             shopItemFrame = new Sprite(shopItemFrameSpriteStream, true);
 
-            using Stream shopStartButtonSpriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.button.png");
-            shopStartButton = new Sprite(shopStartButtonSpriteStream, true);
-
             return;
         }
 
@@ -147,39 +143,20 @@ namespace Game.UI
                 GL.Begin(PrimitiveType.Quads);
 
                 GL.TexCoord2(0, 1);
-                GL.Vertex2(screenCenter.X - (shopWidth / 2f), screenCenter.Y - (shopSpriteAspect.Z * shopWidth / 2));
+                GL.Vertex2(screenCenter.X - (shopSpriteAspect.Z * shopHeight / 2f), screenCenter.Y - (shopHeight / 2));
 
                 GL.TexCoord2(1, 1);
-                GL.Vertex2(screenCenter.X + (shopWidth / 2f), screenCenter.Y - (shopSpriteAspect.Z * shopWidth / 2));
+                GL.Vertex2(screenCenter.X + (shopSpriteAspect.Z * shopHeight / 2f), screenCenter.Y - (shopHeight / 2));
 
                 GL.TexCoord2(1, 0);
-                GL.Vertex2(screenCenter.X + (shopWidth / 2f), screenCenter.Y + (shopSpriteAspect.Z * shopWidth / 2));
+                GL.Vertex2(screenCenter.X + (shopSpriteAspect.Z * shopHeight / 2f), screenCenter.Y + (shopHeight / 2));
 
                 GL.TexCoord2(0, 0);
-                GL.Vertex2(screenCenter.X - (shopWidth / 2f), screenCenter.Y + (shopSpriteAspect.Z * shopWidth / 2));
+                GL.Vertex2(screenCenter.X - (shopSpriteAspect.Z * shopHeight / 2f), screenCenter.Y + (shopHeight / 2));
 
                 GL.End();
 
-                this.RenderItems(args);
-
-                // render start button TODO still ugly
-                GL.BindTexture(TextureTarget.Texture2D, shopStartButton.Handle);
-                GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
-                GL.Begin(PrimitiveType.Quads);
-
-                GL.TexCoord2(0, 1);
-                GL.Vertex2(shopOrigin.X + 50, shopOrigin.Y + (shopSpriteAspect.Z * shopWidth) - 50 - 70);
-
-                GL.TexCoord2(1, 1);
-                GL.Vertex2(shopOrigin.X + shopWidth - 50, shopOrigin.Y + (shopSpriteAspect.Z * shopWidth) - 50 - 70);
-
-                GL.TexCoord2(1, 0);
-                GL.Vertex2(shopOrigin.X + shopWidth - 50, shopOrigin.Y + (shopSpriteAspect.Z * shopWidth) - 50);
-
-                GL.TexCoord2(0, 0);
-                GL.Vertex2(shopOrigin.X + 50, shopOrigin.Y + (shopSpriteAspect.Z * shopWidth) - 50);
-
-                GL.End();
+                //this.RenderItems(args);
 
                 return;
             }
@@ -196,12 +173,12 @@ namespace Game.UI
             screenCenter.Y = args.Size.Y / 2f;
             screenSize.X = args.Size.X;
             screenSize.Y = args.Size.Y;
-            shopWidth = screenSize.X - shopWindowBorderIndent;
+            shopHeight = screenSize.Y - shopWindowBorderIndent;
 
-            shopOrigin.X = screenCenter.X - (shopWidth / 2f);
-            shopOrigin.Y = screenCenter.Y - (shopSpriteAspect.Z * shopWidth / 2);
+            shopOrigin.X = screenCenter.X - (shopHeight / 2f);
+            shopOrigin.Y = screenCenter.Y - (shopSpriteAspect.Z * shopHeight / 2);
 
-            itemSpacing = shopWidth / (this.ItemCount + 1);
+            itemSpacing = shopHeight / (this.ItemCount + 1);
             return;
         }
 
