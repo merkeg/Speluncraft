@@ -65,7 +65,7 @@ namespace Game.UI
         {
             this.RenderBackground();
 
-            currentHP = player.GetComponent<HealthPoints>().GetCurrHP();
+            currentHP = this.player.GetComponent<HealthPoints>().GetCurrHP();
             this.hTexX0 = currentHP / 100f;
 
             this.RenderIndicators();

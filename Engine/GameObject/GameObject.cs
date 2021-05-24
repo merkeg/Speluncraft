@@ -194,6 +194,7 @@ namespace Engine.GameObject
         public virtual void OnUpdatableDestroy()
         {
             this.Components.ForEach(component => component.OnDestroy());
+            this.Components.Clear();
         }
 
         // OnUpdateCleanUp wird nach dem Update in jeden Frame ausgeführt.

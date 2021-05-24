@@ -42,6 +42,7 @@ namespace Game
         {
             SceneStart = new StartScene();
             SceneGame = new GameScene();
+            Engine.Engine.OnSceneChange += OnSceneChange;
             Engine.Engine.ChangeScene(SceneStart);
         }
 
@@ -91,6 +92,12 @@ namespace Game
         public static void Start()
         {
             new GameManager();
+            TextureLoader.LoadTextures();
+        }
+
+        private static void OnSceneChange(Scene from, Scene to)
+        {
+            OnPauseStateChange = null;
         }
     }
 }

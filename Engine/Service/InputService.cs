@@ -74,7 +74,7 @@ namespace Engine.Service
         /// <inheritdoc/>
         public void SceneChangeCleanup()
         {
-            this.subscribers.Clear();
+            this.subscribers = new Dictionary<Keys, Handler>();
         }
 
         /// <summary>

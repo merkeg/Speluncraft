@@ -12,11 +12,10 @@ namespace Game.Gun
     /// </summary>
     public class CameraTrackingComponent : Component
     {
-
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
-            Engine.Engine.Camera.Center = new OpenTK.Mathematics.Vector2(this.GameObject.MinX, this.GameObject.MinY); 
+            Engine.Engine.Camera.Center = new OpenTK.Mathematics.Vector2(this.GameObject.MinX, this.GameObject.MinY);
         }
     }
 }

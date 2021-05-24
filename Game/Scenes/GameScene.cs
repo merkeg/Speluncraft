@@ -32,7 +32,7 @@ namespace Game.Scenes
         /// <inheritdoc/>
         public override void OnSceneLoad()
         {
-            this.pauseMenu = new Menu.PauseMenu(new Rectangle(0, 0, 0, 0), new Color4(0, 0, 0, 0.5f), new Font(FontModel.Parse("Game.Resources.Font.semicondensed.font.fnt"), new Sprite("Game.Resources.Font.semicondensed.font.png")), UiAlignment.Left, true);
+            this.pauseMenu = new Menu.PauseMenu(new Rectangle(0, 0, 0, 0), new Color4(0, 0, 0, 0.5f), TextureAtlas.Fonts["defaultFont"], UiAlignment.Left, true);
             this.InitializeRenderers();
             this.AddPlayer();
             this.AddObjects();
@@ -40,7 +40,7 @@ namespace Game.Scenes
 
         private void InitializeRenderers()
         {
-            Tilesheet tilesheet = new Tilesheet("Game.Resources.Sprite.tilesheetMC.png", 32, 32);
+            Tilesheet tilesheet = TextureAtlas.Tilesheets["defaultTilesheet"];
             TilemapModel model = TilemapParser.ParseTilemap("Game.Resources.Level.mapalla.json");
             this.tilemap = new Tilemap(tilesheet, model);
             this.AnimateTiles(tilesheet);

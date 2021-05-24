@@ -35,6 +35,13 @@ namespace Engine
         }
 
         /// <summary>
+        /// Scene change handler.
+        /// </summary>
+        /// <param name="fromScene">from scene.</param>
+        /// <param name="toScene">to scene.</param>
+        public delegate void SceneChangeHandler(Scene.Scene fromScene, Scene.Scene toScene);
+
+        /// <summary>
         /// Gets a list of the colliders in the game.
         /// </summary>
         public static List<IRectangle> Colliders => Scene.Scene.Current.Colliders;
@@ -48,6 +55,11 @@ namespace Engine
         /// Gets the game Camera.
         /// </summary>
         public static Camera.Camera Camera { get; private set; }
+
+        /// <summary>
+        /// Gets or sets Handlers on pause.
+        /// </summary>
+        public static SceneChangeHandler OnSceneChange { get; set; }
 
         /// <summary>
         /// Start the engine ticks.
@@ -86,9 +98,17 @@ namespace Engine
                 Scene.Scene.Current.OnSceneUnload();
             }
 
+            foreach (IService service in Services.Values)
+            {
+                service.SceneChangeCleanup();
+            }
+
+            OnSceneChange?.Invoke(Scene.Scene.Current, scene);
+
             Scene.Scene.Current = scene;
-            Scene.Scene.Current.OnSceneLoad();
             GC.Collect();
+            GC.WaitForPendingFinalizers();
+            Scene.Scene.Current.OnSceneLoad();
         }
     }
 }
