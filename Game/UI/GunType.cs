@@ -19,11 +19,14 @@ namespace Game.UI
     {
         private static Assembly assembly;
 
-        private GunType(string gunName, IGun gun, Sprite sprite)
+        private GunType(string gunName, IGun gun, Sprite sprite, float dmg, float price, string info)
         {
             this.GunName = gunName;
             this.Gun = gun;
             this.GunSprite = sprite;
+            this.GunDMG = dmg;
+            this.GunPrice = price;
+            this.GunInfo = info;
         }
 
         /// <summary>
@@ -47,6 +50,21 @@ namespace Game.UI
         public Sprite GunSprite { get; private set; }
 
         /// <summary>
+        /// Gets and sets wha damage the gun makes.
+        /// </summary>
+        public float GunDMG { get; private set; }
+
+        /// <summary>
+        /// Gets and sets the price of the gun in hearts.
+        /// </summary>
+        public float GunPrice { get; private set; }
+
+        /// <summary>
+        /// Gets and sets genral info aobut the gun.
+        /// </summary>
+        public string GunInfo { get; private set; }
+
+        /// <summary>
         /// Initialize Array of GunTypes. For now it has to be done manually.
         /// </summary>
         public static void InitGunArray()
@@ -56,19 +74,20 @@ namespace Game.UI
             GunTypeArray = new GunType[5];
 
             Stream spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.grenadelauncher.png");
-            GunTypeArray[0] = new GunType("Grenade Launcher", new Gun.GrenadeLauncher(), new Sprite(spriteStream, true));
+            GunTypeArray[0] = new GunType("Grenade Launcher", new Gun.GrenadeLauncher(), new Sprite(spriteStream, true), 10, 5, "Launches grenades which explode.");
 
             spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.machinegun.png");
-            GunTypeArray[1] = new GunType("Machine Gun", new Gun.MachineGun(), new Sprite(spriteStream, true));
+            GunTypeArray[1] = new GunType("Machine Gun", new Gun.MachineGun(), new Sprite(spriteStream, true), 10, 5, "Fires normal bullets at an astonishing rate.");
 
             spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.pistol.png");
-            GunTypeArray[2] = new GunType("Pistol", new Gun.Pistol(), new Sprite(spriteStream, true));
+            GunTypeArray[2] = new GunType("Pistol", new Gun.Pistol(), new Sprite(spriteStream, true), 10, 0, "Fires normale bullets with normal speed.");
 
             spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.shotgun.png");
-            GunTypeArray[3] = new GunType("Shot Gun", new Gun.ShotGun(), new Sprite(spriteStream, true));
+            GunTypeArray[3] = new GunType("Shot Gun", new Gun.ShotGun(), new Sprite(spriteStream, true), 20, 3, "Fires multiple bullets at once.");
 
             spriteStream = assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.ItemShop.sniper.png");
-            GunTypeArray[4] = new GunType("Sniper", new Gun.Sniper(), new Sprite(spriteStream, true));
+            GunTypeArray[4] = new GunType("Sniper", new Gun.Sniper(), new Sprite(spriteStream, true), 70, 7, "Fires fast Bullets which. Kills \"oneshots\".");
+
             return;
         }
     }
