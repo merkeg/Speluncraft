@@ -511,6 +511,11 @@
             <param name="itemcount">Amount of items in shop.</param>
             <param name="font_">usable font.</param>
         </member>
+        <member name="P:Game.UI.ItemShop.CurrentWeaponIndex">
+            <summary>
+            Gets CurrentWeaponIndex.
+            </summary>
+        </member>
         <member name="P:Game.UI.ItemShop.ShopActive">
             <summary>
             Gets or Sets a value indicating whether ItemShop should be rendered or not.

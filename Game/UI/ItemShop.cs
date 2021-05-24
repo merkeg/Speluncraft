@@ -45,7 +45,6 @@ namespace Game.UI
         private static Sprite shopItemFrame;
         private static Font font;
 
-        private static int currentWeaponIndex = 0;
         private static TextRenderer shopHeader;
         private static TextRenderer weaponName;
         private static TextRenderer weaponPrice;
@@ -63,6 +62,7 @@ namespace Game.UI
             this.ItemCount = itemcount;
             this.ShopActive = true; // remove after done
             itemHitboxList = new Vector4[this.ItemCount];
+            CurrentWeaponIndex = 0;
 
             // Fill gunType Array (manually for now).
             GunType.InitGunArray();
@@ -81,6 +81,11 @@ namespace Game.UI
             // TODO replace
             Engine.Engine.GetService<InputService>().Subscribe(Keys.Enter, () => this.HideShop(!this.ShopActive));
         }
+
+        /// <summary>
+        /// Gets CurrentWeaponIndex.
+        /// </summary>
+        public static int CurrentWeaponIndex { get; private set; }
 
         /// <summary>
         /// Gets or Sets a value indicating whether ItemShop should be rendered or not.
@@ -110,8 +115,8 @@ namespace Game.UI
         public void MouseDown(MouseButtonEventArgs args)
         {
             // Debug.WriteLine(args.Button + " | " + windowMousePosition.X + " | " + windowMousePosition.Y);
-            int oldIndex = currentWeaponIndex; // fix for shop crashing BUG 294
-            currentWeaponIndex = 0;
+            int oldIndex = CurrentWeaponIndex; // fix for shop crashing BUG 294
+            CurrentWeaponIndex = 0;
 
             // check if mouse is clicked inside of itemFrame
             foreach (Vector4 hitbox in itemHitboxList)
@@ -120,14 +125,14 @@ namespace Game.UI
                 if (windowMousePosition.X > hitbox.X && windowMousePosition.X < hitbox.Z && windowMousePosition.Y > hitbox.Y && windowMousePosition.Y < hitbox.W)
                 {
                     // Debug.WriteLine("You Chose: " + GunType.GunTypeArray[currentWeaponIndex].GunName);
-                    player.ChangeGun(GunType.GunTypeArray[currentWeaponIndex].Gun);
+                    player.ChangeGun(GunType.GunTypeArray[CurrentWeaponIndex].Gun);
                     return;
                 }
 
-                currentWeaponIndex++;
+                CurrentWeaponIndex++;
             }
 
-            currentWeaponIndex = oldIndex;
+            CurrentWeaponIndex = oldIndex;
         }
 
         /// <inheritdoc/>
@@ -172,7 +177,7 @@ namespace Game.UI
         public void HideShop(bool hide)
         {
             // pull gun price from Playerhealth. Only from maxhealth. TODO
-            player.GetComponent<Engine.Component.HealthPoints>().SetHP(player.GetComponent<Engine.Component.HealthPoints>().GetMaxHP() - ((int)GunType.GunTypeArray[currentWeaponIndex].GunPrice * 10));
+            player.GetComponent<Engine.Component.HealthPoints>().SetHP(player.GetComponent<Engine.Component.HealthPoints>().GetMaxHP() - ((int)GunType.GunTypeArray[CurrentWeaponIndex].GunPrice * 10));
 
             shopHeader.Hidden = !hide;
             weaponDamage.Hidden = !hide;
@@ -303,10 +308,10 @@ namespace Game.UI
                 GL.LineWidth(2f);
                 GL.Begin(PrimitiveType.LineLoop);
 
-                GL.Vertex2(itemSpacing + (itemSpacing * currentWeaponIndex) + shopOrigin.X - (itemFrameSize / 2), shopOrigin.Y + itemFrameYOffset);
-                GL.Vertex2(itemSpacing + (itemSpacing * currentWeaponIndex) + shopOrigin.X + (itemFrameSize / 2), shopOrigin.Y + itemFrameYOffset);
-                GL.Vertex2(itemSpacing + (itemSpacing * currentWeaponIndex) + shopOrigin.X + (itemFrameSize / 2), shopOrigin.Y + itemFrameYOffset + itemFrameSize);
-                GL.Vertex2(itemSpacing + (itemSpacing * currentWeaponIndex) + shopOrigin.X - (itemFrameSize / 2), shopOrigin.Y + itemFrameYOffset + itemFrameSize);
+                GL.Vertex2(itemSpacing + (itemSpacing * CurrentWeaponIndex) + shopOrigin.X - (itemFrameSize / 2), shopOrigin.Y + itemFrameYOffset);
+                GL.Vertex2(itemSpacing + (itemSpacing * CurrentWeaponIndex) + shopOrigin.X + (itemFrameSize / 2), shopOrigin.Y + itemFrameYOffset);
+                GL.Vertex2(itemSpacing + (itemSpacing * CurrentWeaponIndex) + shopOrigin.X + (itemFrameSize / 2), shopOrigin.Y + itemFrameYOffset + itemFrameSize);
+                GL.Vertex2(itemSpacing + (itemSpacing * CurrentWeaponIndex) + shopOrigin.X - (itemFrameSize / 2), shopOrigin.Y + itemFrameYOffset + itemFrameSize);
 
                 GL.End();
             }
@@ -318,22 +323,22 @@ namespace Game.UI
         /// <param name="args">FrameEventArgs.</param>
         private void RenderItemStats(FrameEventArgs args)
         {
-            weaponName.Text = "Weapon: " + GunType.GunTypeArray[currentWeaponIndex].GunName;
+            weaponName.Text = "Weapon: " + GunType.GunTypeArray[CurrentWeaponIndex].GunName;
             weaponName.Position.MinX = shopOrigin.X + itemSpacing - (itemFrameSize / 2);
             weaponName.Position.MinY = shopOrigin.Y + itemFrameYOffset + itemFrameSize + (50 / (720 - shopWindowBorderIndent) * shopHeight);
             weaponName.FontScale = 0.3f / (720 - shopWindowBorderIndent) * shopHeight;
 
-            weaponDamage.Text = "Damage: " + GunType.GunTypeArray[currentWeaponIndex].GunDMG.ToString() + " Healthpoints";
+            weaponDamage.Text = "Damage: " + GunType.GunTypeArray[CurrentWeaponIndex].GunDMG.ToString() + " Healthpoints";
             weaponDamage.Position.MinX = shopOrigin.X + itemSpacing - (itemFrameSize / 2);
             weaponDamage.Position.MinY = shopOrigin.Y + itemFrameYOffset + itemFrameSize + (100 / (720 - shopWindowBorderIndent) * shopHeight);
             weaponDamage.FontScale = 0.3f / (720 - shopWindowBorderIndent) * shopHeight;
 
-            weaponPrice.Text = "Price: " + GunType.GunTypeArray[currentWeaponIndex].GunPrice.ToString() + " / " + (player.GetComponent<Engine.Component.HealthPoints>().GetMaxHP() / 10).ToString() + " Healthpoints";
+            weaponPrice.Text = "Price: " + GunType.GunTypeArray[CurrentWeaponIndex].GunPrice.ToString() + " / " + (player.GetComponent<Engine.Component.HealthPoints>().GetMaxHP() / 10).ToString() + " Healthpoints";
             weaponPrice.Position.MinX = shopOrigin.X + itemSpacing - (itemFrameSize / 2);
             weaponPrice.Position.MinY = shopOrigin.Y + itemFrameYOffset + itemFrameSize + (150 / (720 - shopWindowBorderIndent) * shopHeight);
             weaponPrice.FontScale = 0.3f / (720 - shopWindowBorderIndent) * shopHeight;
 
-            weaponInfo.Text = "Weapon Info: " + GunType.GunTypeArray[currentWeaponIndex].GunInfo;
+            weaponInfo.Text = "Weapon Info: " + GunType.GunTypeArray[CurrentWeaponIndex].GunInfo;
             weaponInfo.Position.MinX = shopOrigin.X + itemSpacing - (itemFrameSize / 2);
             weaponInfo.Position.MinY = shopOrigin.Y + itemFrameYOffset + itemFrameSize + (200 / (720 - shopWindowBorderIndent) * shopHeight);
             weaponInfo.FontScale = 0.3f / (720 - shopWindowBorderIndent) * shopHeight;
