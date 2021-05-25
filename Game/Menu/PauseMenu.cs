@@ -2,16 +2,11 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
-using System;
-using System.Diagnostics;
-
 namespace Game.Menu
 {
     using Engine.GameObject;
     using Engine.Renderer;
-    using Engine.Renderer.Sprite;
     using Engine.Renderer.Text;
-    using Engine.Renderer.Text.Parser;
     using Engine.Renderer.UI;
     using Engine.Renderer.UI.Primitive;
     using OpenTK.Mathematics;

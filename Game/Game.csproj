@@ -209,6 +209,8 @@
     </EmbeddedResource>
     <None Remove="Resources\UI\interaction_dot.png" />
     <EmbeddedResource Include="Resources\Sprite\Enemy\zombie_hurt.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Sprite\UI\ItemShop\button.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -231,9 +233,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Sprite\UI\ItemShop\sniper.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Enemy\zombie_hurt.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\UI\interaction_dot.png" />

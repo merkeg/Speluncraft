@@ -138,6 +138,7 @@ namespace Game.UI
         /// <inheritdoc/>
         public void OnRendererCreate()
         {
+            GameManager.UpdatesPaused = true;
             Engine.Engine.GameWindow.MouseMove += this.MouseMove;
             Engine.Engine.GameWindow.MouseDown += this.MouseDown;
 
@@ -170,6 +171,11 @@ namespace Game.UI
             return;
         }
 
+        /// <inheritdoc/>
+        public void OnRendererDelete()
+        {
+        }
+
         /// <summary>
         /// sets Text render as visible or not.
         /// </summary>
@@ -187,6 +193,7 @@ namespace Game.UI
             helpText.Hidden = !hide;
 
             this.ShopActive = hide;
+            GameManager.UpdatesPaused = false;
         }
 
         /// <inheritdoc/>

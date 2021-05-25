@@ -25,7 +25,7 @@ namespace Game.UI
             HealthbarPlayer playerhealthbar = new HealthbarPlayer(player);
             Engine.AddRenderer(playerhealthbar, RenderLayer.UI);
 
-            ItemShop itemShop = new ItemShop(font);
+            ItemShop itemShop = new ItemShop(TextureAtlas.Fonts["debugFont"]);
             Engine.AddRenderer(itemShop, RenderLayer.UI);
         }
     }
