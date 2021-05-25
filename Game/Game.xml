@@ -124,6 +124,52 @@
         <member name="M:Game.GameComponents.AnimationWithTimeAndPrio.CompareTo(System.Object)">
             <inheritdoc/>
         </member>
+        <member name="T:Game.GameManager">
+            <summary>
+            Gameclass.
+            </summary>
+        </member>
+        <member name="M:Game.GameManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.GameManager"/> class.
+            </summary>
+        </member>
+        <member name="T:Game.GameManager.PauseHandler">
+            <summary>
+            The handler.
+            </summary>
+            <param name="stateChangeTo">The state it changed to.</param>
+        </member>
+        <member name="P:Game.GameManager.UpdatesPaused">
+            <summary>
+            Gets or sets a value indicating whether a update is called or not.
+            </summary>
+        </member>
+        <member name="P:Game.GameManager.SceneStart">
+            <summary>
+            Gets the start scene.
+            </summary>
+        </member>
+        <member name="P:Game.GameManager.SceneGame">
+            <summary>
+            Gets the Game scene.
+            </summary>
+        </member>
+        <member name="P:Game.GameManager.SceneDeath">
+            <summary>
+            Gets the Death scene.
+            </summary>
+        </member>
+        <member name="P:Game.GameManager.OnPauseStateChange">
+            <summary>
+            Gets or sets Handlers on pause.
+            </summary>
+        </member>
+        <member name="M:Game.GameManager.Start">
+            <summary>
+            Starts the game.
+            </summary>
+        </member>
         <member name="T:Game.Gun.Ammunition.Bullet">
             <summary>
             A bullet that flies straight untill it hits something, then does DMG and despwans.
@@ -338,6 +384,82 @@
         <member name="M:Game.Gun.CameraTrackingComponent.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="T:Game.Menu.DeathMenu">
+            <summary>
+            PauseMenu.
+            </summary>
+        </member>
+        <member name="M:Game.Menu.DeathMenu.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.Renderer.UI.UiAlignment,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Menu.DeathMenu"/> class.
+            </summary>
+            <param name="bounds">bounds.</param>
+            <param name="backgroundColor">backgroundColor.</param>
+            <param name="font">font.</param>
+            <param name="alignment">alignment.</param>
+            <param name="fitToViewport">fitToViewport.</param>
+        </member>
+        <member name="M:Game.Menu.DeathMenu.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.DeathMenu.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.DeathMenu.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.DeathMenu.OnRendererDelete">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Menu.PauseMenu">
+            <summary>
+            PauseMenu.
+            </summary>
+        </member>
+        <member name="M:Game.Menu.PauseMenu.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.Renderer.UI.UiAlignment,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Menu.PauseMenu"/> class.
+            </summary>
+            <param name="bounds">bounds.</param>
+            <param name="backgroundColor">backgroundColor.</param>
+            <param name="font">font.</param>
+            <param name="alignment">alignment.</param>
+            <param name="fitToViewport">fitToViewport.</param>
+        </member>
+        <member name="M:Game.Menu.PauseMenu.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.PauseMenu.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.PauseMenu.OnRendererDelete">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Menu.StartMenu">
+            <summary>
+            Contains the Starmenu. Some call it Main Menu.
+            </summary>
+        </member>
+        <member name="M:Game.Menu.StartMenu.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.Renderer.UI.UiAlignment,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Menu.StartMenu"/> class.
+            Constructor.
+            </summary>
+            <param name="bounds">bounds.</param>
+            <param name="backgroundColor">backgroundColor.</param>
+            <param name="font">font.</param>
+            <param name="alignment">alignment.</param>
+            <param name="fitToViewport">Set if fit to viewport.</param>
+        </member>
+        <member name="M:Game.Menu.StartMenu.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.StartMenu.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.StartMenu.OnRendererDelete">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Player.Items.HealthPickUp">
             <summary>
             Item that can be picked up and restores hp to the Player.
@@ -422,6 +544,40 @@
             Initializes a new instance of the <see cref="T:Game.Program"/> class.
             </summary>
         </member>
+        <member name="T:Game.Scenes.DeathScene">
+            <summary>
+            Start scene class.
+            </summary>
+        </member>
+        <member name="M:Game.Scenes.DeathScene.OnSceneLoad">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Scenes.GameScene">
+            <summary>
+            Game scene class.
+            </summary>
+        </member>
+        <member name="M:Game.Scenes.GameScene.OnSceneLoad">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Scenes.StartScene">
+            <summary>
+            Start scene class.
+            </summary>
+        </member>
+        <member name="M:Game.Scenes.StartScene.OnSceneLoad">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Scenes.TextureLoader">
+            <summary>
+            Texture loader class.
+            </summary>
+        </member>
+        <member name="M:Game.Scenes.TextureLoader.LoadTextures">
+            <summary>
+            Load textures.
+            </summary>
+        </member>
         <member name="T:Game.StresstestComponent">
             <summary>
             Stresstest component class.
@@ -486,16 +642,11 @@
             The HealthbarPlayer class renders the healthbar UI element.
             </summary>
         </member>
-        <member name="M:Game.UI.HealthbarPlayer.#ctor">
+        <member name="M:Game.UI.HealthbarPlayer.#ctor(Game.Player.Player)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.UI.HealthbarPlayer"/> class.
             </summary>
-        </member>
-        <member name="M:Game.UI.HealthbarPlayer.Instance">
-            <summary>
-            Function so player can retrieve always the same healthbar instance (Singleton).
-            </summary>
-            <returns>HealtbarPlayer instance.</returns>
+            <param name="player">player.</param>
         </member>
         <member name="M:Game.UI.HealthbarPlayer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
             <summary>
@@ -523,6 +674,9 @@
             <summary>
             OnCreate function.
             </summary>
+        </member>
+        <member name="M:Game.UI.HealthbarPlayer.OnRendererDelete">
+            <inheritdoc/>
         </member>
         <member name="T:Game.UI.InteractableElement">
             <summary>
@@ -622,6 +776,9 @@
         <member name="M:Game.UI.ItemShop.OnRendererCreate">
             <inheritdoc/>
         </member>
+        <member name="M:Game.UI.ItemShop.OnRendererDelete">
+            <inheritdoc/>
+        </member>
         <member name="M:Game.UI.ItemShop.HideShop(System.Boolean)">
             <summary>
             sets Text render as visible or not.
@@ -650,11 +807,11 @@
             Loader Class to initialize the whole UI of the Game. (hopefully).
             </summary>
         </member>
-        <member name="M:Game.UI.UILoader.Initialize_UI(Engine.Renderer.Text.Font)">
+        <member name="M:Game.UI.UILoader.Initialize_UI(Game.Player.Player)">
             <summary>
             Initializes the UI.
             </summary>
-            <param name="font">usable font.</param>
+            /// <param name="player">player.</param>
         </member>
     </members>
 </doc>

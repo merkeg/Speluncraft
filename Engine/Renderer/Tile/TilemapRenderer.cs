@@ -169,5 +169,10 @@ namespace Engine.Renderer.Tile
         {
             return;
         }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
+        {
+        }
     }
 }

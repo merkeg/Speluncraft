@@ -9,7 +9,9 @@ namespace Game.Player
     using System.Diagnostics;
     using System.Text;
     using Engine.GameObject;
+    using Engine.Renderer;
     using Engine.Renderer.Sprite;
+    using Game.Scenes;
     using OpenTK.Windowing.GraphicsLibraryFramework;
 
     /// <summary>
@@ -25,13 +27,13 @@ namespace Game.Player
         private float activeBreacking = 20f;
         private float jumpPower = 10f;
 
-        private AnimatedSprite spriteWalking;
-        private AnimatedSprite spriteHurt;
-        private Sprite spriteIdle;
-        private Sprite spriteJump;
-        private Sprite spriteFall;
-        private Sprite spriteBack;
-        private Sprite spriteGun;
+        private ISprite spriteWalking;
+        private ISprite spriteHurt;
+        private ISprite spriteIdle;
+        private ISprite spriteJump;
+        private ISprite spriteFall;
+        private ISprite spriteBack;
+        private ISprite spriteGun;
 
         private int isFaceing;
         private Gun.IGun gun;
@@ -69,10 +71,8 @@ namespace Game.Player
             this.gun = new Gun.Pistol();
             this.AddComponent(this.gun.GetAsComponent());
             this.ChangeGun(new Gun.MachineGun());
-            this.ChangeGun(new Gun.ShotGun());
-            this.ChangeGun(new Gun.GrenadeLauncher());
-            this.ChangeGun(new Gun.Pistol());
-            this.ChangeGun(new Gun.MachineGun());
+
+            GameManager.OnPauseStateChange += this.OnPauseStateChange;
         }
 
         /// <summary>
@@ -110,8 +110,13 @@ namespace Game.Player
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
-            OpenTK.Windowing.GraphicsLibraryFramework.KeyboardState keyboardState = Engine.Engine.GameWindow.KeyboardState;
+            KeyboardState keyboardState = Engine.Engine.GameWindow.KeyboardState;
             Engine.Component.Physics physics = this.GetComponent<Engine.Component.Physics>();
+
+            if (GameManager.UpdatesPaused)
+            {
+                return;
+            }
 
             this.Walk(frameTime, keyboardState, physics);
 
@@ -123,10 +128,16 @@ namespace Game.Player
             if (this.GetComponent<Engine.Component.HealthPoints>().GetIsDeadFlag())
             {
                 Engine.Engine.RemoveGameObject(this);
+                Engine.Engine.ChangeScene(GameManager.SceneDeath);
             }
 
             // Reset jump counter when ground was touched
             Engine.Component.UndoOverlapCollisionResponse collider = this.GetComponent<Engine.Component.UndoOverlapCollisionResponse>();
+            if (collider == null)
+            {
+                return;
+            }
+
             if (collider.GetGroundTouchedFlag())
             {
                 this.jumpcounter = this.jumpCounterMax;
@@ -168,27 +179,27 @@ namespace Game.Player
         {
             if (gun is Gun.GrenadeLauncher)
             {
-                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_grenadelauncher.png", false);
+                this.spriteGun = TextureAtlas.Sprites["adventurer_weapon_grenadelauncher"];
             }
 
             if (gun is Gun.MachineGun)
             {
-                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_machinegun.png", false);
+                this.spriteGun = TextureAtlas.Sprites["adventurer_weapon_machinegun"];
             }
 
             if (gun is Gun.Pistol)
             {
-                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_pistol.png", false);
+                this.spriteGun = TextureAtlas.Sprites["adventurer_weapon_pistol"];
             }
 
             if (gun is Gun.ShotGun)
             {
-                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_shotgun.png", false);
+                this.spriteGun = TextureAtlas.Sprites["adventurer_weapon_shotgun"];
             }
 
             if (gun is Gun.Sniper)
             {
-                this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_sniper.png", false);
+                this.spriteGun = TextureAtlas.Sprites["adventurer_weapon_sniper"];
             }
         }
 
@@ -288,16 +299,27 @@ namespace Game.Player
 
         private void InitializeSprites()
         {
-            Engine.Renderer.Tile.Tilesheet walkingSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Player.adventurer_walking.png", 80, 110);
-            this.spriteWalking = new AnimatedSprite(walkingSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
-            Engine.Renderer.Tile.Tilesheet hurtSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Player.adventurer_hurt.png", 80, 110);
-            this.spriteHurt = new AnimatedSprite(hurtSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
+            this.spriteWalking = TextureAtlas.Sprites["adventurer_walking"];
+            this.spriteHurt = TextureAtlas.Sprites["adventurer_hurt"];
+            this.spriteIdle = TextureAtlas.Sprites["adventurer_idle"];
+            this.spriteJump = TextureAtlas.Sprites["adventurer_jump"];
+            this.spriteFall = TextureAtlas.Sprites["adventurer_fall"];
+            this.spriteBack = TextureAtlas.Sprites["adventurer_back"];
+            this.spriteGun = TextureAtlas.Sprites["adventurer_weapon_pistol"];
+        }
 
-            this.spriteIdle = new Sprite("Game.Resources.Player.adventurer_idle.png", false);
-            this.spriteJump = new Sprite("Game.Resources.Player.adventurer_jump.png", false);
-            this.spriteFall = new Sprite("Game.Resources.Player.adventurer_fall.png", false);
-            this.spriteBack = new Sprite("Game.Resources.Player.adventurer_back.png", false);
-            this.spriteGun = new Sprite("Game.Resources.Player.adventurer_weapon_pistol.png", false);
+        private void OnPauseStateChange(bool isPaused)
+        {
+            Engine.Component.Physics physics = this.GetComponent<Engine.Component.Physics>();
+            if (isPaused)
+            {
+                physics.SetVelocity(0, 0);
+                physics.SetIsAffectedByGravity(false);
+            }
+            else
+            {
+                physics.SetIsAffectedByGravity(true);
+            }
         }
     }
 }

@@ -90,5 +90,10 @@ namespace Engine.Renderer.Sprite
         {
             return;
         }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
+        {
+        }
     }
 }

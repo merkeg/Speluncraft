@@ -50,9 +50,12 @@ namespace Game.Gun.Ammunition
 
             if (this.damageDelay < 0)
             {
-                if (this.GetComponent<Engine.Component.DoDamageCollisionResponse>().GetIsCollided())
+                if (this.GetComponent<Engine.Component.DoDamageCollisionResponse>() != null)
                 {
-                    Engine.Engine.RemoveGameObject(this);
+                    if (this.GetComponent<Engine.Component.DoDamageCollisionResponse>().GetIsCollided())
+                    {
+                        Engine.Engine.RemoveGameObject(this);
+                    }
                 }
             }
 

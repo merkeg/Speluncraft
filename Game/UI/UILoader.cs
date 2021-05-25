@@ -19,13 +19,13 @@ namespace Game.UI
         /// <summary>
         /// Initializes the UI.
         /// </summary>
-        /// <param name="font">usable font.</param>
-        public static void Initialize_UI(Font font)
+        /// /// <param name="player">player.</param>
+        public static void Initialize_UI(Player.Player player)
         {
-            HealthbarPlayer playerhealthbar = new HealthbarPlayer();
+            HealthbarPlayer playerhealthbar = new HealthbarPlayer(player);
             Engine.AddRenderer(playerhealthbar, RenderLayer.UI);
 
-            ItemShop itemShop = new ItemShop(font);
+            ItemShop itemShop = new ItemShop(TextureAtlas.Fonts["debugFont"]);
             Engine.AddRenderer(itemShop, RenderLayer.UI);
         }
     }

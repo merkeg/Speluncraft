@@ -11,7 +11,7 @@ namespace Engine.Renderer
     /// <summary>
     /// Internal Renderer.
     /// </summary>
-    internal class UiMatrixRenderer : IRenderer
+    public class UiMatrixRenderer : IRenderer
     {
         /// <inheritdoc/>
         public void Render(FrameEventArgs args)
@@ -29,6 +29,12 @@ namespace Engine.Renderer
         /// <inheritdoc/>
         public void OnRendererCreate()
         {
+        }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

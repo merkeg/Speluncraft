@@ -15,7 +15,7 @@ namespace Engine
         /// <summary>
         /// Gets a list of GameObjects in the game.
         /// </summary>
-        public static List<GameObject.GameObject> GameObjects { get; private set; }
+        public static List<GameObject.GameObject> GameObjects => Scene.Scene.Current.GameObjects;
 
         /// <summary>
         /// Adds an GameObject to the list.
@@ -23,16 +23,7 @@ namespace Engine
         /// <param name="gameObject">The GameObject to add.</param>
         public static void AddGameObject(GameObject.GameObject gameObject)
         {
-            Engine.GameObjects.Add(gameObject);
-
-            if (gameObject.Sprite != null)
-            {
-                SpriteRenderer renderer = new SpriteRenderer(gameObject.Sprite, gameObject);
-                gameObject.SpriteRenderer = renderer;
-                Engine.AddRenderer(renderer);
-            }
-
-            gameObject.OnUpdatableCreate();
+            Scene.Scene.Current.AddGameObject(gameObject);
         }
 
         /// <summary>
@@ -42,13 +33,7 @@ namespace Engine
         /// <param name="gameObject">The GameObject to Destroy.</param>
         public static void RemoveGameObject(GameObject.GameObject gameObject)
         {
-            Engine.RemoveRenderer(gameObject.SpriteRenderer);
-            gameObject.OnUpdatableDestroy();
-            Engine.GameObjects.Remove(gameObject);
-            if (Engine.Colliders.Contains(gameObject))
-            {
-                Engine.Colliders.Remove(gameObject);
-            }
+            Scene.Scene.Current.RemoveGameObject(gameObject);
         }
     }
 }

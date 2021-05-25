@@ -43,6 +43,9 @@
             Gets or sets the camera scale.
             </summary>
         </member>
+        <member name="M:Engine.Camera.Camera.OnRendererDelete">
+            <inheritdoc/>
+        </member>
         <member name="T:Engine.Camera.Transformation2d">
             <summary>
             Helper class for calculating transformations.
@@ -445,6 +448,13 @@
             The Engine instance to bind with OpenGL.
             </summary>
         </member>
+        <member name="T:Engine.Engine.SceneChangeHandler">
+            <summary>
+            Scene change handler.
+            </summary>
+            <param name="fromScene">from scene.</param>
+            <param name="toScene">to scene.</param>
+        </member>
         <member name="P:Engine.Engine.Colliders">
             <summary>
             Gets a list of the colliders in the game.
@@ -460,11 +470,22 @@
             Gets the game Camera.
             </summary>
         </member>
+        <member name="P:Engine.Engine.OnSceneChange">
+            <summary>
+            Gets or sets Handlers on pause.
+            </summary>
+        </member>
         <member name="M:Engine.Engine.StartEngine(OpenTK.Windowing.Desktop.GameWindow)">
             <summary>
             Start the engine ticks.
             </summary>
             <param name="window">The GameWindow the engine will be run on.</param>
+        </member>
+        <member name="M:Engine.Engine.ChangeScene(Engine.Scene.Scene)">
+            <summary>
+            Change the Scene.
+            </summary>
+            <param name="scene">Scene to change to.</param>
         </member>
         <member name="P:Engine.Engine.GameObjects">
             <summary>
@@ -489,6 +510,11 @@
             Gets the renderers.
             </summary>
         </member>
+        <member name="P:Engine.Engine.ServiceRenderers">
+            <summary>
+            Gets or sets the scene renderers.
+            </summary>
+        </member>
         <member name="M:Engine.Engine.AddRenderer(Engine.Renderer.IRenderer,Engine.Renderer.RenderLayer)">
             <summary>
             Adds an renderer to the list.
@@ -500,7 +526,7 @@
             <summary>
             Removes an rendere.
             </summary>
-            <param name="renderer">The rendere to Remove.</param>
+            <param name="renderer">The renderer to Remove.</param>
             <param name="layer">Render layer.</param>
         </member>
         <member name="P:Engine.Engine.Services">
@@ -550,22 +576,22 @@
         </member>
         <member name="P:Engine.GameObject.GameObject.SizeX">
             <summary>
-            Gets the width of the GameObject.
+            Gets or sets the width of the GameObject.
             </summary>
         </member>
         <member name="P:Engine.GameObject.GameObject.SizeY">
             <summary>
-            Gets the hieght of the GameObject.
+            Gets or sets the height of the GameObject.
             </summary>
         </member>
         <member name="P:Engine.GameObject.GameObject.MaxX">
             <summary>
-            Gets the X-Coordinate of the top right point, of the GameObject.
+            Gets or sets the X-Coordinate of the top right point.
             </summary>
         </member>
         <member name="P:Engine.GameObject.GameObject.MaxY">
             <summary>
-            Gets the Y-Coordinate of the top right point, of the GameObject.
+            Gets or sets the Y-Coordinate of the top right point.
             </summary>
         </member>
         <member name="P:Engine.GameObject.GameObject.MinX">
@@ -698,12 +724,12 @@
         </member>
         <member name="P:Engine.GameObject.IRectangle.MaxX">
             <summary>
-            Gets the X-Coordinate of the top right point, of the Rectangle.
+            Gets or sets the X-Coordinate of the top right point, of the Rectangle.
             </summary>
         </member>
         <member name="P:Engine.GameObject.IRectangle.MaxY">
             <summary>
-            Gets the X-Coordinate of the top right point, of the Rectangle.
+            Gets or sets the X-Coordinate of the top right point, of the Rectangle.
             </summary>
         </member>
         <member name="T:Engine.GameObject.IUpdatable">
@@ -743,22 +769,22 @@
         </member>
         <member name="P:Engine.GameObject.Rectangle.SizeX">
             <summary>
-            Gets the width of the Rectangle.
+            Gets or sets the width of the Rectangle.
             </summary>
         </member>
         <member name="P:Engine.GameObject.Rectangle.SizeY">
             <summary>
-            Gets the height of the Rectangle.
+            Gets or sets the height of the Rectangle.
             </summary>
         </member>
         <member name="P:Engine.GameObject.Rectangle.MaxX">
             <summary>
-            Gets the X-Coordinate of the top right point.
+            Gets or sets the X-Coordinate of the top right point.
             </summary>
         </member>
         <member name="P:Engine.GameObject.Rectangle.MaxY">
             <summary>
-            Gets the Y-Coordinate of the top right point.
+            Gets or sets the Y-Coordinate of the top right point.
             </summary>
         </member>
         <member name="P:Engine.GameObject.Rectangle.MinX">
@@ -786,6 +812,9 @@
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.CollisionRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.CollisionRenderer.OnRendererDelete">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Renderer.DebugRenderer">
@@ -849,6 +878,11 @@
         <member name="M:Engine.Renderer.IRenderer.OnRendererCreate">
             <summary>
             Run when the renderer is added.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.IRenderer.OnRendererDelete">
+            <summary>
+            Run when the renderer is removed.
             </summary>
         </member>
         <member name="T:Engine.Renderer.Particle.Particle">
@@ -1002,7 +1036,7 @@
         </member>
         <member name="M:Engine.Renderer.Particle.ParticleEmitter.Clone">
             <summary>
-            Clone Object
+            Clone Object.
             </summary>
             <returns>The clone.</returns>
         </member>
@@ -1292,6 +1326,62 @@
         <member name="M:Engine.Renderer.Sprite.SpriteRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
+        <member name="M:Engine.Renderer.Sprite.SpriteRenderer.OnRendererDelete">
+            <inheritdoc/>
+        </member>
+        <member name="T:Engine.Renderer.TextureAtlas">
+            <summary>
+            Texture atlas class.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.TextureAtlas.Fonts">
+            <summary>
+            Gets the fonts.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.TextureAtlas.Sprites">
+            <summary>
+            Gets the Sprites.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.TextureAtlas.Tilesheets">
+            <summary>
+            Gets the Tilesheets.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.TextureAtlas.Tilemaps">
+            <summary>
+            Gets the TilemapModels.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.TextureAtlas.Set(System.String,Engine.Renderer.Text.Font)">
+            <summary>
+            Add a new Texture.
+            </summary>
+            <param name="name">Name of the texture.</param>
+            <param name="value">Value of the Texture.</param>
+        </member>
+        <member name="M:Engine.Renderer.TextureAtlas.Set(System.String,Engine.Renderer.Sprite.ISprite)">
+            <summary>
+            Add a new Texture.
+            </summary>
+            <param name="name">Name of the texture.</param>
+            <param name="value">Value of the Texture.</param>
+        </member>
+        <member name="M:Engine.Renderer.TextureAtlas.Set(System.String,Engine.Renderer.Tile.Tilesheet)">
+            <summary>
+            Add a new Texture.
+            </summary>
+            <param name="name">Name of the texture.</param>
+            <param name="value">Value of the Texture.</param>
+        </member>
+        <member name="M:Engine.Renderer.TextureAtlas.Set(System.String,Engine.Renderer.Tile.Tilemap)">
+            <summary>
+            Add a new Tilemap.
+            </summary>
+            <param name="name">Name of the tilemap.</param>
+            <param name="value">Value of the tilemap.</param>
+        </member>
         <member name="T:Engine.Renderer.Text.Font">
             <summary>
             Font class.
@@ -1443,6 +1533,9 @@
             <inheritdoc/>
         </member>
         <member name="M:Engine.Renderer.Text.TextRenderer.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.Text.TextRenderer.OnRendererDelete">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Renderer.Tile.ITilesheet">
@@ -1683,6 +1776,9 @@
         <member name="M:Engine.Renderer.Tile.TilemapRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
+        <member name="M:Engine.Renderer.Tile.TilemapRenderer.OnRendererDelete">
+            <inheritdoc/>
+        </member>
         <member name="T:Engine.Renderer.Tile.TilemapTileLayer">
             <summary>
             The Tilemap class.
@@ -1855,6 +1951,9 @@
         <member name="M:Engine.Renderer.UiMatrixRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
+        <member name="M:Engine.Renderer.UiMatrixRenderer.OnRendererDelete">
+            <inheritdoc/>
+        </member>
         <member name="T:Engine.Renderer.UI.Graph.GraphDataSet">
             <summary>
             Graph data set class.
@@ -1888,7 +1987,7 @@
             Graph renderer class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.#ctor(System.String,Engine.Renderer.Text.Font,Engine.GameObject.Rectangle,System.Single,System.Single)">
+        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.#ctor(System.String,Engine.Renderer.Text.Font,Engine.GameObject.IRectangle,System.Single,System.Single)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.UI.Graph.GraphRenderer"/> class.
             </summary>
@@ -1912,6 +2011,9 @@
             Adds an dataset to the graph.
             </summary>
             <param name="dataSet">Dataset to add.</param>
+        </member>
+        <member name="M:Engine.Renderer.UI.Graph.GraphRenderer.OnRendererDelete">
+            <inheritdoc/>
         </member>
         <member name="T:Engine.Renderer.UI.Primitive.QuadRenderer">
             <summary>
@@ -1940,12 +2042,45 @@
         <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.OnRendererCreate">
             <inheritdoc/>
         </member>
+        <member name="M:Engine.Renderer.UI.Primitive.QuadRenderer.OnRendererDelete">
+            <inheritdoc/>
+        </member>
+        <member name="T:Engine.Renderer.UI.RelativeRectangleXAlignment">
+            <summary>
+            Where the Relative Rectangle gets aligned on the X-axis.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.UI.RelativeRectangleXAlignment.Left">
+            <summary>
+            Left alignment.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.UI.RelativeRectangleXAlignment.Right">
+            <summary>
+            Right alignment.
+            </summary>
+        </member>
+        <member name="T:Engine.Renderer.UI.RelativeRectangleYAlignment">
+            <summary>
+            Where the Relative Rectangle gets aligned on the Y-axis.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.UI.RelativeRectangleYAlignment.Top">
+            <summary>
+            Top alignment.
+            </summary>
+        </member>
+        <member name="F:Engine.Renderer.UI.RelativeRectangleYAlignment.Bottom">
+            <summary>
+            Bottom alignment.
+            </summary>
+        </member>
         <member name="T:Engine.Renderer.UI.RelativeRectangle">
             <summary>
             Relative rectangle class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.UI.RelativeRectangle.#ctor(Engine.GameObject.IRectangle,System.Single,System.Single,System.Single,System.Single)">
+        <member name="M:Engine.Renderer.UI.RelativeRectangle.#ctor(Engine.GameObject.IRectangle,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.UI.RelativeRectangleXAlignment,Engine.Renderer.UI.RelativeRectangleYAlignment)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.UI.RelativeRectangle"/> class.
             </summary>
@@ -1954,6 +2089,8 @@
             <param name="minY">Relative miny.</param>
             <param name="sizeX">Relative sizex.</param>
             <param name="sizeY">Relative sizey.</param>
+            <param name="xAlignment">X Alignment of the Rectangle to the parent.</param>
+            <param name="yAlignment">Y Alignment of the Rectangle to the parent.</param>
         </member>
         <member name="P:Engine.Renderer.UI.RelativeRectangle.SizeX">
             <inheritdoc/>
@@ -1993,7 +2130,7 @@
             UI element class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.UI.UiElement.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.Renderer.UI.UiAlignment)">
+        <member name="M:Engine.Renderer.UI.UiElement.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.Renderer.UI.UiAlignment,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:Engine.Renderer.UI.UiElement"/> class.
             </summary>
@@ -2001,6 +2138,7 @@
             <param name="backgroundColor">Background color.</param>
             <param name="font">Font.</param>
             <param name="alignment">Alignment.</param>
+            <param name="fitToViewport">Set if content should fit to viewport.</param>
         </member>
         <member name="P:Engine.Renderer.UI.UiElement.Renderers">
             <summary>
@@ -2053,7 +2191,7 @@
             </summary>
             <param name="renderer">Renderer element.</param>
         </member>
-        <member name="M:Engine.Renderer.UI.UiElement.AddQuad(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,System.Boolean)">
+        <member name="M:Engine.Renderer.UI.UiElement.AddQuad(Engine.GameObject.IRectangle,OpenTK.Mathematics.Color4,System.Boolean)">
             <summary>
             Adds an quad to the ui element.
             </summary>
@@ -2062,7 +2200,7 @@
             <param name="filled">Quad filled.</param>
             <returns>The Quad element.</returns>
         </member>
-        <member name="M:Engine.Renderer.UI.UiElement.AddGraph(System.String,Engine.GameObject.Rectangle,System.Single,System.Single)">
+        <member name="M:Engine.Renderer.UI.UiElement.AddGraph(System.String,Engine.GameObject.IRectangle,System.Single,System.Single)">
             <summary>
             Adds a graph to the ui element.
             </summary>
@@ -2072,7 +2210,7 @@
             <param name="max">Max.</param>
             <returns>Graph renderer object.</returns>
         </member>
-        <member name="M:Engine.Renderer.UI.UiElement.AddText(System.String,OpenTK.Mathematics.Color4,Engine.GameObject.Rectangle,System.Single)">
+        <member name="M:Engine.Renderer.UI.UiElement.AddText(System.String,OpenTK.Mathematics.Color4,Engine.GameObject.IRectangle,System.Single)">
             <summary>
             Add text to ui element.
             </summary>
@@ -2081,6 +2219,112 @@
             <param name="position">Position of text.</param>
             <param name="textScale">Scale of text.</param>
             <returns>Text renderer object.</returns>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.AddSprite(Engine.Renderer.Sprite.ISprite,Engine.GameObject.IRectangle)">
+            <summary>
+            Adds a new sprite to the renderer.
+            </summary>
+            <param name="sprite">Sprite to render.</param>
+            <param name="bounds">Bounds set to.</param>
+            <returns>The renderer.</returns>
+        </member>
+        <member name="M:Engine.Renderer.UI.UiElement.OnRendererDelete">
+            <inheritdoc/>
+        </member>
+        <member name="T:Engine.Scene.DefaultScene">
+            <summary>
+            Default scene class.
+            </summary>
+        </member>
+        <member name="M:Engine.Scene.DefaultScene.OnSceneLoad">
+            <inheritdoc/>
+        </member>
+        <member name="T:Engine.Scene.IScene">
+            <summary>
+            IScene class.
+            </summary>
+        </member>
+        <member name="P:Engine.Scene.IScene.GameObjects">
+            <summary>
+            Gets or sets the scene loaded gameobjects.
+            </summary>
+        </member>
+        <member name="P:Engine.Scene.IScene.Renderers">
+            <summary>
+            Gets or sets the scene loaded renderers.
+            </summary>
+        </member>
+        <member name="P:Engine.Scene.IScene.Colliders">
+            <summary>
+            Gets or sets the colliders.
+            </summary>
+        </member>
+        <member name="M:Engine.Scene.IScene.OnSceneLoad">
+            <summary>
+            Runs when the Scene loads.
+            </summary>
+        </member>
+        <member name="M:Engine.Scene.IScene.OnSceneUnload">
+            <summary>
+            Runs when the Scene unloads.
+            </summary>
+        </member>
+        <member name="T:Engine.Scene.Scene">
+            <summary>
+            Scene class.
+            </summary>
+        </member>
+        <member name="M:Engine.Scene.Scene.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Engine.Scene.Scene"/> class.
+            </summary>
+        </member>
+        <member name="P:Engine.Scene.Scene.Current">
+            <summary>
+            Gets or sets the current Scene.
+            </summary>
+        </member>
+        <member name="P:Engine.Scene.Scene.GameObjects">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Scene.Scene.Renderers">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Scene.Scene.Colliders">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Scene.Scene.OnSceneLoad">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Scene.Scene.OnSceneUnload">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Scene.Scene.AddGameObject(Engine.GameObject.GameObject)">
+            <summary>
+            Add gameObject.
+            </summary>
+            <param name="gameObject">the gO to add.</param>
+        </member>
+        <member name="M:Engine.Scene.Scene.RemoveGameObject(Engine.GameObject.GameObject)">
+            <summary>
+            Removes an GameObject from the World and Calls it OnDestroy() func.
+            Also checks if there are Colliders from it and delets it.
+            </summary>
+            <param name="gameObject">The GameObject to Destroy.</param>
+        </member>
+        <member name="M:Engine.Scene.Scene.AddRenderer(Engine.Renderer.IRenderer,Engine.Renderer.RenderLayer)">
+            <summary>
+            Adds an renderer to the list.
+            </summary>
+            <param name="renderer">The renderer to add.</param>
+            <param name="layer">The render order.</param>
+        </member>
+        <member name="M:Engine.Scene.Scene.RemoveRenderer(Engine.Renderer.IRenderer,Engine.Renderer.RenderLayer)">
+            <summary>
+            Removes an renderer.
+            </summary>
+            <param name="renderer">The renderer to Remove.</param>
+            <param name="layer">Render layer.</param>
         </member>
         <member name="T:Engine.Service.CollisionService">
             <summary>
@@ -2110,6 +2354,12 @@
             <inheritdoc/>
         </member>
         <member name="M:Engine.Service.CollisionService.OnUpdatableCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.CollisionService.SceneChangeCleanup">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.CollisionService.OnRendererDelete">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Service.ICollosionServiceSubscriber">
@@ -2145,11 +2395,21 @@
         <member name="M:Engine.Service.InputService.OnUpdatableCreate">
             <inheritdoc/>
         </member>
+        <member name="M:Engine.Service.InputService.SceneChangeCleanup">
+            <inheritdoc/>
+        </member>
         <member name="M:Engine.Service.InputService.Subscribe(OpenTK.Windowing.GraphicsLibraryFramework.Keys,Engine.Service.InputService.Handler)">
             <summary>
             Subscribe to an keydown event.
             </summary>
             <param name="key">key.</param>
+            <param name="action">action.</param>
+        </member>
+        <member name="M:Engine.Service.InputService.Subscribe(OpenTK.Windowing.GraphicsLibraryFramework.Keys[],Engine.Service.InputService.Handler)">
+            <summary>
+            Subscribe to an keydown event. Accepting multiple keys.
+            </summary>
+            <param name="keys">keys.</param>
             <param name="action">action.</param>
         </member>
         <member name="M:Engine.Service.InputService.Unsubscribe(OpenTK.Windowing.GraphicsLibraryFramework.Keys,Engine.Service.InputService.Handler)">
@@ -2158,6 +2418,16 @@
             </summary>
             <param name="key">key.</param>
             <param name="action">action.</param>
+        </member>
+        <member name="M:Engine.Service.InputService.Unsubscribe(OpenTK.Windowing.GraphicsLibraryFramework.Keys[],Engine.Service.InputService.Handler)">
+            <summary>
+            Unsubscribe from an keydown event. Accepts multiple keys.
+            </summary>
+            <param name="keys">keys.</param>
+            <param name="action">action.</param>
+        </member>
+        <member name="M:Engine.Service.InputService.OnRendererDelete">
+            <inheritdoc/>
         </member>
         <member name="T:Engine.Service.IPhysicsServiceSubscriber">
             <summary>
@@ -2173,6 +2443,11 @@
         <member name="T:Engine.Service.IService">
             <summary>
             IService class.
+            </summary>
+        </member>
+        <member name="M:Engine.Service.IService.SceneChangeCleanup">
+            <summary>
+            Runs on scene change. Clean up Lists and so on.
             </summary>
         </member>
         <member name="T:Engine.Service.ParticleService">
@@ -2208,6 +2483,9 @@
         <member name="M:Engine.Service.ParticleService.OnUpdatableCreate">
             <inheritdoc/>
         </member>
+        <member name="M:Engine.Service.ParticleService.SceneChangeCleanup">
+            <inheritdoc/>
+        </member>
         <member name="M:Engine.Service.ParticleService.Emit(Engine.Renderer.Particle.ParticleEmitter,Engine.GameObject.IRectangle,System.Single)">
             <summary>
             Add an emitter.
@@ -2215,13 +2493,16 @@
             <param name="emitter">The emitter.</param>
             <param name="position">Position.</param>
             <param name="lifetime">The lifetime of the emitter. Set to 0 to disable deletion.</param>
-            <returns>ParticleEmitterData</returns>
+            <returns>ParticleEmitterData.</returns>
         </member>
         <member name="M:Engine.Service.ParticleService.Remove(Engine.Renderer.Particle.ParticleEmitterData)">
             <summary>
             Remove an emitter.
             </summary>
             <param name="data">The data you got from the emit method.</param>
+        </member>
+        <member name="M:Engine.Service.ParticleService.OnRendererDelete">
+            <inheritdoc/>
         </member>
         <member name="T:Engine.Service.PhysicsService">
             <summary>
@@ -2234,6 +2515,9 @@
         <member name="M:Engine.Service.PhysicsService.OnUpdatableCreate">
             <inheritdoc/>
         </member>
+        <member name="M:Engine.Service.PhysicsService.SceneChangeCleanup">
+            <inheritdoc/>
+        </member>
         <member name="M:Engine.Service.PhysicsService.OnUpdatableDestroy">
             <inheritdoc/>
         </member>
@@ -2244,6 +2528,9 @@
             <inheritdoc/>
         </member>
         <member name="M:Engine.Service.PhysicsService.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Service.PhysicsService.OnRendererDelete">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Service.ServiceInfo">
@@ -2296,6 +2583,9 @@
         <member name="M:Engine.Service.TilemapService.OnUpdatableCreate">
             <inheritdoc/>
         </member>
+        <member name="M:Engine.Service.TilemapService.SceneChangeCleanup">
+            <inheritdoc/>
+        </member>
         <member name="M:Engine.Service.TilemapService.AddTilemap(Engine.Renderer.Tile.Tilemap,OpenTK.Mathematics.Vector2i)">
             <summary>
             Add Tilemap to the renderer.
@@ -2308,6 +2598,9 @@
             Sets the optimization point.
             </summary>
             <param name="rectangle">optimization point.</param>
+        </member>
+        <member name="M:Engine.Service.TilemapService.OnRendererDelete">
+            <inheritdoc/>
         </member>
         <member name="M:Engine.Service.TilemapService.Render(OpenTK.Windowing.Common.FrameEventArgs)">
             <inheritdoc/>

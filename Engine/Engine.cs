@@ -10,6 +10,7 @@ namespace Engine
     using global::Engine.GameObject;
     using global::Engine.Renderer;
     using global::Engine.Renderer.Sprite;
+    using global::Engine.Scene;
     using global::Engine.Service;
     using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
@@ -22,14 +23,11 @@ namespace Engine
     {
         static Engine()
         {
-            Engine.GameObjects = new List<GameObject.GameObject>();
-            Engine.Colliders = new List<IRectangle>();
-            Engine.Renderers = new Dictionary<RenderLayer, List<IRenderer>>();
             Engine.Services = new Dictionary<string, IService>();
-
+            Engine.ServiceRenderers = new Dictionary<RenderLayer, List<IRenderer>>();
             foreach (RenderLayer layer in (RenderLayer[])Enum.GetValues(typeof(RenderLayer)))
             {
-                Engine.Renderers.Add(layer, new List<IRenderer>());
+                Engine.ServiceRenderers.Add(layer, new List<IRenderer>());
             }
 
             Engine.AddService(new PhysicsService());
@@ -37,9 +35,16 @@ namespace Engine
         }
 
         /// <summary>
+        /// Scene change handler.
+        /// </summary>
+        /// <param name="fromScene">from scene.</param>
+        /// <param name="toScene">to scene.</param>
+        public delegate void SceneChangeHandler(Scene.Scene fromScene, Scene.Scene toScene);
+
+        /// <summary>
         /// Gets a list of the colliders in the game.
         /// </summary>
-        public static List<IRectangle> Colliders { get; private set; }
+        public static List<IRectangle> Colliders => Scene.Scene.Current.Colliders;
 
         /// <summary>
         /// Gets the GameWindow the Engine runs on.
@@ -52,6 +57,11 @@ namespace Engine
         public static Camera.Camera Camera { get; private set; }
 
         /// <summary>
+        /// Gets or sets Handlers on pause.
+        /// </summary>
+        public static SceneChangeHandler OnSceneChange { get; set; }
+
+        /// <summary>
         /// Start the engine ticks.
         /// </summary>
         /// <param name="window">The GameWindow the engine will be run on.</param>
@@ -59,12 +69,12 @@ namespace Engine
         {
             Engine.GameWindow = window;
             Engine.Camera = new Camera.Camera();
-            Engine.AddRenderer(Engine.Camera);
+            Engine.ServiceRenderers[RenderLayer.GAME].Add(Engine.Camera);
 
             window.UpdateFrame += Engine.Update;
             Engine.GameWindow.RenderFrame += Engine.Render;
             Engine.GameWindow.Resize += Engine.Resize;
-            Engine.AddRenderer(new UiMatrixRenderer(), RenderLayer.UI);
+            Engine.uiMatrixRenderer = new UiMatrixRenderer();
 
             // Services
             Engine.AddService(new TilemapService());
@@ -75,6 +85,30 @@ namespace Engine
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
             GL.Enable(EnableCap.Texture2D);
+        }
+
+        /// <summary>
+        /// Change the Scene.
+        /// </summary>
+        /// <param name="scene">Scene to change to.</param>
+        public static void ChangeScene(Scene.Scene scene)
+        {
+            if (Scene.Scene.Current != null)
+            {
+                Scene.Scene.Current.OnSceneUnload();
+            }
+
+            foreach (IService service in Services.Values)
+            {
+                service.SceneChangeCleanup();
+            }
+
+            OnSceneChange?.Invoke(Scene.Scene.Current, scene);
+
+            Scene.Scene.Current = scene;
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+            Scene.Scene.Current.OnSceneLoad();
         }
     }
 }

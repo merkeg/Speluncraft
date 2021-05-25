@@ -24,13 +24,13 @@ namespace Engine.GameObject
         public float MinY { get; set; }
 
         /// <summary>
-        /// Gets the X-Coordinate of the top right point, of the Rectangle.
+        /// Gets or sets the X-Coordinate of the top right point, of the Rectangle.
         /// </summary>
-        public float MaxX { get; }
+        public float MaxX { get; set; }
 
         /// <summary>
-        /// Gets the X-Coordinate of the top right point, of the Rectangle.
+        /// Gets or sets the X-Coordinate of the top right point, of the Rectangle.
         /// </summary>
-        public float MaxY { get; }
+        public float MaxY { get; set; }
     }
 }

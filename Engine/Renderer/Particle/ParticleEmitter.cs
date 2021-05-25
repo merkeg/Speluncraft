@@ -181,7 +181,7 @@ namespace Engine.Renderer.Particle
         }
 
         /// <summary>
-        /// Clone Object
+        /// Clone Object.
         /// </summary>
         /// <returns>The clone.</returns>
         public object Clone()

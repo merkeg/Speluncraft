@@ -25,24 +25,32 @@ namespace Engine.GameObject
         }
 
         /// <summary>
-        /// Gets the width of the Rectangle.
+        /// Gets or sets the width of the Rectangle.
         /// </summary>
-        public virtual float SizeX { get; }
+        public virtual float SizeX { get; set; }
 
         /// <summary>
-        /// Gets the height of the Rectangle.
+        /// Gets or sets the height of the Rectangle.
         /// </summary>
-        public virtual float SizeY { get; }
+        public virtual float SizeY { get; set; }
 
         /// <summary>
-        /// Gets the X-Coordinate of the top right point.
+        /// Gets or sets the X-Coordinate of the top right point.
         /// </summary>
-        public virtual float MaxX => this.MinX + this.SizeX;
+        public virtual float MaxX
+        {
+            get => this.MinX + this.SizeX;
+            set => this.SizeX = value - this.MinX;
+        }
 
         /// <summary>
-        /// Gets the Y-Coordinate of the top right point.
+        /// Gets or sets the Y-Coordinate of the top right point.
         /// </summary>
-        public virtual float MaxY => this.MinY + this.SizeY;
+        public virtual float MaxY
+        {
+            get => this.MinY + this.SizeY;
+            set => this.SizeY = value - this.MinY;
+        }
 
         /// <summary>
         /// Gets or sets the X-Coordinate of bottom left point.
