@@ -84,13 +84,13 @@ namespace Game.Scenes
 
             this.tilemap.FindObjectsByName("DummyAI").ForEach(obj =>
             {
-                DummyAI enemy = new DummyAI(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10);
+                LeaperReaperEnemy enemy = new LeaperReaperEnemy(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10);
                 Engine.Engine.AddGameObject(enemy);
             });
 
             this.tilemap.FindObjectsByName("EnemyPistol").ForEach(obj =>
             {
-                EnemyPistol enemy = new EnemyPistol(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10);
+                EnemyWithWeapon enemy = new EnemyWithWeapon(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10, new Sniper());
                 Engine.Engine.AddGameObject(enemy);
             });
         }

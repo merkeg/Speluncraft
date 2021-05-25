@@ -74,6 +74,11 @@ namespace Game.Enemy
                 base.OnUpdate(frameTime);
             }
 
+            if (this.GetComponent<Engine.Component.DoDamageWithKnockbackCollisionResponse>() == null)
+            {
+                return;
+            }
+
             if (this.GetComponent<Engine.Component.DoDamageWithKnockbackCollisionResponse>().GetDidDMGthisFrame())
             {
                 this.physics.SetVelocity(0, this.physics.GetVelocity().Y);
