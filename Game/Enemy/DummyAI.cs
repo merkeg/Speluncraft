@@ -25,9 +25,20 @@ namespace Game.Enemy
 
         private GameComponents.AnimationScheduler animationScheduler;
 
-        private ISprite spriteWalking;
-        private ISprite spriteHurt;
-        private ISprite spriteAttack;
+        /// <summary>
+        /// Gets or sets a walking sprite.
+        /// </summary>
+        public ISprite SpriteWalking { get; set; }
+
+        /// <summary>
+        /// Gets or sets a hurt sprite.
+        /// </summary>
+        public ISprite SpriteHurt { get; set; }
+
+        /// <summary>
+        /// Gets or sets an attack sprite.
+        /// </summary>
+        public ISprite SpriteAttack { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DummyAI"/> class.
@@ -168,32 +179,32 @@ namespace Game.Enemy
 
             if (phys.GetVelocity().X < -0.1)
             {
-                this.animationScheduler.AddAnimation(10, 0.0001f, this.spriteWalking, true);
+                this.animationScheduler.AddAnimation(10, 0.0001f, this.SpriteWalking, true);
                 this.Mirrored = true;
             }
 
             if (phys.GetVelocity().X > 0.1)
             {
-                this.animationScheduler.AddAnimation(10, 0.0001f, this.spriteWalking, false);
+                this.animationScheduler.AddAnimation(10, 0.0001f, this.SpriteWalking, false);
                 this.Mirrored = false;
             }
 
             if (this.GetComponent<Engine.Component.HealthPoints>().GetTookDmgThisFrame())
             {
-                this.animationScheduler.AddAnimation(7, 0.3f, this.spriteHurt, this.Mirrored);
+                this.animationScheduler.AddAnimation(7, 0.3f, this.SpriteHurt, this.Mirrored);
             }
 
             if (this.GetComponent<Engine.Component.DoDamageWithKnockbackCollisionResponse>().GetDidDMGthisFrame())
             {
-                this.animationScheduler.AddAnimation(4, 0.3f, this.spriteAttack, this.Mirrored);
+                this.animationScheduler.AddAnimation(4, 0.3f, this.SpriteAttack, this.Mirrored);
             }
         }
 
         private void InitializeSprites()
         {
-            this.spriteAttack = TextureAtlas.Sprites["zombie_attack"];
-            this.spriteHurt = TextureAtlas.Sprites["zombie_hurt"];
-            this.spriteWalking = TextureAtlas.Sprites["zombie_walking"];
+            this.SpriteAttack = TextureAtlas.Sprites["zombie_attack"];
+            this.SpriteHurt = TextureAtlas.Sprites["zombie_hurt"];
+            this.SpriteWalking = TextureAtlas.Sprites["zombie_walking"];
         }
     }
 }

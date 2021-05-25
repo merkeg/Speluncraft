@@ -2,6 +2,8 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
+using Engine.Renderer;
+
 namespace Game.Enemy
 {
     using System;
@@ -15,7 +17,7 @@ namespace Game.Enemy
     public class EnemyWithWeapon : EnemyThatWalksWithTriggerOnSeePlayer
     {
         private Gun.IGun gun;
-        private Sprite shootingSprite = new Sprite("Game.Resources.Floppa.png");
+        private ISprite shootingSprite = TextureAtlas.Sprites["zombie_attack"];
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EnemyWithWeapon"/> class.

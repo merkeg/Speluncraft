@@ -46,6 +46,11 @@ namespace Game.Scenes
             TextureAtlas.Set("zombie_attack", new AnimatedSprite(new Tilesheet("Game.Resources.Sprite.Enemy.zombie_hit.png", 80, 110), Keyframe.RangeX(0, 1, 0, 0.1f)));
             TextureAtlas.Set("zombie_hurt", new AnimatedSprite(new Tilesheet("Game.Resources.Sprite.Enemy.zombie_hurt.png", 80, 110), Keyframe.RangeX(0, 1, 0, 0.1f)));
             TextureAtlas.Set("zombie_walking", new AnimatedSprite(new Tilesheet("Game.Resources.Sprite.Enemy.zombie_walking.png", 80, 110), Keyframe.RangeX(0, 1, 0, 0.1f)));
+            TextureAtlas.Set("leaper_attack", new AnimatedSprite(new Tilesheet("Game.Resources.Sprite.Enemy.leaper_hit.png", 80, 110), Keyframe.RangeX(0, 1, 0, 0.1f)));
+            TextureAtlas.Set("leaper_hurt", new AnimatedSprite(new Tilesheet("Game.Resources.Sprite.Enemy.leaper_hurt.png", 80, 110), Keyframe.RangeX(0, 1, 0, 0.1f)));
+            TextureAtlas.Set("leaper_walking", new AnimatedSprite(new Tilesheet("Game.Resources.Sprite.Enemy.leaper_walking.png", 80, 110), Keyframe.RangeX(0, 1, 0, 0.1f)));
+            TextureAtlas.Set("leaper_jump", new Sprite("Game.Resources.Sprite.Enemy.leaper_jump.png"));
+            TextureAtlas.Set("leaper_slide", new Sprite("Game.Resources.Sprite.Enemy.leaper_slide.png"));
 
             // Animated Sprites
             TextureAtlas.Set("netherPortal", new AnimatedSprite(new Tilesheet("Game.Resources.Animated.nether_portal.png", 32, 32), Keyframe.RangeY(0, 0, 31, 0.03f)));

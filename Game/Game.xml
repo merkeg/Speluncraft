@@ -9,6 +9,21 @@
             Lets the enemy walk from one side of the platform to the other side.
             </summary>
         </member>
+        <member name="P:Game.Enemy.DummyAI.SpriteWalking">
+            <summary>
+            Gets or sets a walking sprite.
+            </summary>
+        </member>
+        <member name="P:Game.Enemy.DummyAI.SpriteHurt">
+            <summary>
+            Gets or sets a hurt sprite.
+            </summary>
+        </member>
+        <member name="P:Game.Enemy.DummyAI.SpriteAttack">
+            <summary>
+            Gets or sets an attack sprite.
+            </summary>
+        </member>
         <member name="M:Game.Enemy.DummyAI.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.Enemy.DummyAI"/> class.
@@ -97,7 +112,7 @@
         </member>
         <member name="M:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer.SawPlayerThisFrame(System.Single)">
             <summary>
-            Do SOmething when we see the Player.
+            Do Something when we see the Player.
             </summary>
             <param name="frameTime">Time pased since last frame.</param>
         </member>

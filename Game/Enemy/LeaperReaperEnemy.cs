@@ -2,6 +2,8 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
+using Engine.Renderer;
+
 namespace Game.Enemy
 {
     using System;
@@ -22,8 +24,8 @@ namespace Game.Enemy
 
         private float leapingBreakSpeedX = 5;
 
-        private Sprite leapingSpirite = new Sprite("Game.Resources.Floppa.png");
-        private Sprite slidingSprite = new Sprite("Game.Resources.enemy.png");
+        private ISprite leapingSpirite = TextureAtlas.Sprites["leaper_jump"];
+        private ISprite slidingSprite = TextureAtlas.Sprites["leaper_slide"];
 
         private Game.GameComponents.AnimationScheduler animationScheduler;
 
@@ -43,6 +45,9 @@ namespace Game.Enemy
         {
             this.physics = this.GetComponent<Engine.Component.Physics>();
             this.animationScheduler = this.GetComponent<Game.GameComponents.AnimationScheduler>();
+            this.SpriteAttack = TextureAtlas.Sprites["leaper_attack"];
+            this.SpriteHurt = TextureAtlas.Sprites["leaper_hurt"];
+            this.SpriteWalking = TextureAtlas.Sprites["leaper_walking"];
         }
 
         /// <inheritdoc/>

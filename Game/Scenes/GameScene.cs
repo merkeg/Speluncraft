@@ -90,7 +90,7 @@ namespace Game.Scenes
 
             this.tilemap.FindObjectsByName("EnemyPistol").ForEach(obj =>
             {
-                EnemyWithWeapon enemy = new EnemyWithWeapon(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10, new Sniper());
+                EnemyWithWeapon enemy = new EnemyWithWeapon(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10, new StoneThrower());
                 Engine.Engine.AddGameObject(enemy);
             });
         }
