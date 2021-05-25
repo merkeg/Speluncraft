@@ -9,6 +9,7 @@ namespace Game.UI
     using System.Text;
     using Engine;
     using Engine.Renderer;
+    using Engine.Renderer.Text;
 
     /// <summary>
     /// Loader Class to initialize the whole UI of the Game. (hopefully).
@@ -23,6 +24,9 @@ namespace Game.UI
         {
             HealthbarPlayer playerhealthbar = new HealthbarPlayer(player);
             Engine.AddRenderer(playerhealthbar, RenderLayer.UI);
+
+            ItemShop itemShop = new ItemShop(font);
+            Engine.AddRenderer(itemShop, RenderLayer.UI);
         }
     }
 }

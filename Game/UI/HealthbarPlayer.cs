@@ -83,6 +83,26 @@ namespace Game.UI
             GL.Vertex2(xOffset, screenY - yOffset);
 
             GL.End();
+
+            /* for later use.
+            GL.BindTexture(TextureTarget.Texture2D, GunType.GunTypeArray[ItemShop.CurrentWeaponIndex].GunSprite.Handle);
+            GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
+            GL.Begin(PrimitiveType.Quads);
+
+            GL.TexCoord2(0, 1);
+            GL.Vertex2(0, 0);
+
+            GL.TexCoord2(1, 1);
+            GL.Vertex2(64, 0);
+
+            GL.TexCoord2(1, 0);
+            GL.Vertex2(64, 64);
+
+            GL.TexCoord2(0, 0);
+            GL.Vertex2(0, 64);
+
+            GL.End();
+            */
         }
 
         /// <summary>
