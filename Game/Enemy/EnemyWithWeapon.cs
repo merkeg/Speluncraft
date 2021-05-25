@@ -45,7 +45,14 @@ namespace Game.Enemy
             base.OnUpdate(frameTime);
             if (this.gun.ShotFired())
             {
-                this.GetComponent<Game.GameComponents.AnimationScheduler>().AddAnimation(2, 0.2f, this.shootingSprite, this.Mirrored);
+                try
+                {
+                    this.GetComponent<Game.GameComponents.AnimationScheduler>().AddAnimation(2, 0.2f, this.shootingSprite, this.Mirrored);
+                }
+                catch (Exception)
+                {
+                    return;
+                }
             }
         }
 
