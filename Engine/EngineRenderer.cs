@@ -85,8 +85,8 @@ namespace Engine
                     Engine.uiMatrixRenderer.Render(args);
                 }
 
-                Engine.ServiceRenderers[layer].ForEach(renderer => renderer.Render(args));
-                Engine.Renderers[layer].ForEach(renderer => renderer.Render(args));
+                Engine.ServiceRenderers[layer].ToList().ForEach(renderer => renderer.Render(args));
+                Engine.Renderers[layer].ToList().ForEach(renderer => renderer.Render(args));
             }
         }
     }

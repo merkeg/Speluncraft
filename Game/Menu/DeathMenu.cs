@@ -28,6 +28,8 @@ namespace Game.Menu
         private RelativeRectangle buttonRespawn;
         private RelativeRectangle buttonMainMenu;
 
+        private bool previousMouseButtonState;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DeathMenu"/> class.
         /// </summary>
@@ -54,6 +56,18 @@ namespace Game.Menu
         /// <inheritdoc/>
         public override void OnRender(FrameEventArgs args)
         {
+            MouseState mouseState = Engine.Engine.GameWindow.MouseState;
+            if (mouseState.IsButtonDown(MouseButton.Button1) && this.previousMouseButtonState)
+            {
+                this.ExecuteSelectedMenu();
+            }
+
+            if (mouseState.PreviousX != mouseState.X)
+            {
+                this.quadRenderer.Bounds = mouseState.Position.X < Engine.Engine.GameWindow.Size.X / 2 ? this.selectedMenuRespawn : this.selectedMenuMainMenu;
+            }
+
+            this.previousMouseButtonState = !mouseState.IsButtonDown(MouseButton.Button1);
         }
 
         /// <inheritdoc/>

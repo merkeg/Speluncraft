@@ -2,6 +2,9 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
+using System;
+using System.Diagnostics;
+
 namespace Game.Menu
 {
     using Engine.GameObject;
@@ -23,6 +26,8 @@ namespace Game.Menu
         private RelativeRectangle selectedMenuResume;
         private RelativeRectangle selectedMenuMainMenu;
         private QuadRenderer quadRenderer;
+
+        private bool previousMouseButtonState;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PauseMenu"/> class.
@@ -46,6 +51,18 @@ namespace Game.Menu
         /// <inheritdoc/>
         public override void OnRender(FrameEventArgs args)
         {
+            MouseState mouseState = Engine.Engine.GameWindow.MouseState;
+            if (mouseState.IsButtonDown(MouseButton.Button1) && this.previousMouseButtonState)
+            {
+                this.ExecuteSelectedMenu();
+            }
+
+            if (mouseState.PreviousY != mouseState.Y)
+            {
+                this.quadRenderer.Bounds = mouseState.Position.Y < this.selectedMenuResume.MaxY ? this.selectedMenuResume : this.selectedMenuMainMenu;
+            }
+
+            this.previousMouseButtonState = !mouseState.IsButtonDown(MouseButton.Button1);
         }
 
         /// <inheritdoc/>

@@ -26,6 +26,8 @@ namespace Game.Menu
         private RelativeRectangle selectedMenuQuit;
         private QuadRenderer quadRenderer;
 
+        private bool previousMouseButtonState;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="StartMenu"/> class.
         /// Constructor.
@@ -51,6 +53,17 @@ namespace Game.Menu
         public override void OnRender(FrameEventArgs args)
         {
             MouseState mouseState = Engine.Engine.GameWindow.MouseState;
+            if (mouseState.IsButtonDown(MouseButton.Button1) && this.previousMouseButtonState)
+            {
+                this.ExecuteSelectedMenu();
+            }
+
+            if (mouseState.Y != mouseState.PreviousY)
+            {
+                this.quadRenderer.Bounds = mouseState.Position.Y > this.selectedMenuQuit.MinY ? this.selectedMenuQuit : this.selectedMenuStart;
+            }
+
+            this.previousMouseButtonState = !mouseState.IsButtonDown(MouseButton.Button1);
         }
 
         /// <inheritdoc/>
