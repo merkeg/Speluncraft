@@ -4,15 +4,9 @@
 
 namespace Game.UI
 {
-    using System.Diagnostics;
-    using System.IO;
-    using System.Reflection;
-    using Engine;
     using Engine.Component;
-    using Engine.GameObject;
     using Engine.Renderer;
     using Engine.Renderer.Sprite;
-    using Game.Gun;
     using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
@@ -35,49 +29,21 @@ namespace Game.UI
         private static int indicatorsXsize = 220;
         private static int indicatorsYsize = 18; // Height of only one indicator (one heart)
 
-        private static HealthbarPlayer instance;
-        private static Game.Player.Player player;
-        private Assembly assembly;
-        private Sprite indicators;
-        private Sprite background;
+        private Player.Player player;
+        private ISprite indicators;
+        private ISprite background;
         private float hTexX0;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HealthbarPlayer"/> class.
         /// </summary>
-        public HealthbarPlayer()
+        /// <param name="player">player.</param>
+        public HealthbarPlayer(Player.Player player)
         {
-            instance = this;
+            this.player = player;
 
-            foreach (IRectangle r in Engine.Colliders)
-            {
-                if (r is Player.Player)
-                {
-                    GameObject g = (GameObject)r;
-                    player = (Player.Player)g;
-                }
-            }
-
-            this.assembly = Assembly.GetExecutingAssembly();
-            using Stream indicatorSpriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.heartsheet_new.png");
-            this.indicators = new Sprite(indicatorSpriteStream, false);
-
-            using Stream backgroundSpriteStream = this.assembly.GetManifestResourceStream("Game.Resources.Sprite.UI.Healthbar.background2.png");
-            this.background = new Sprite(backgroundSpriteStream, false);
-        }
-
-        /// <summary>
-        /// Function so player can retrieve always the same healthbar instance (Singleton).
-        /// </summary>
-        /// <returns>HealtbarPlayer instance.</returns>
-        public static HealthbarPlayer Instance()
-        {
-            if (instance == null)
-            {
-                instance = new HealthbarPlayer();
-            }
-
-            return instance;
+            this.indicators = TextureAtlas.Sprites["healthbar_hearts"];
+            this.background = TextureAtlas.Sprites["healthbar_background"];
         }
 
         /// <summary>
@@ -88,7 +54,7 @@ namespace Game.UI
         {
             this.RenderBackground();
 
-            currentHP = player.GetComponent<HealthPoints>().GetCurrHP();
+            currentHP = this.player.GetComponent<HealthPoints>().GetCurrHP();
             this.hTexX0 = currentHP / 100f;
 
             this.RenderIndicators();
@@ -117,6 +83,26 @@ namespace Game.UI
             GL.Vertex2(xOffset, screenY - yOffset);
 
             GL.End();
+
+            /* for later use.
+            GL.BindTexture(TextureTarget.Texture2D, GunType.GunTypeArray[ItemShop.CurrentWeaponIndex].GunSprite.Handle);
+            GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
+            GL.Begin(PrimitiveType.Quads);
+
+            GL.TexCoord2(0, 1);
+            GL.Vertex2(0, 0);
+
+            GL.TexCoord2(1, 1);
+            GL.Vertex2(64, 0);
+
+            GL.TexCoord2(1, 0);
+            GL.Vertex2(64, 64);
+
+            GL.TexCoord2(0, 0);
+            GL.Vertex2(0, 64);
+
+            GL.End();
+            */
         }
 
         /// <summary>
@@ -224,6 +210,11 @@ namespace Game.UI
         public void OnRendererCreate()
         {
             return;
+        }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
+        {
         }
     }
 }

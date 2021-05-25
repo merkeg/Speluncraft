@@ -7,6 +7,7 @@ namespace Game.Gun.Ammunition
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using Engine.Renderer;
     using Engine.Renderer.Sprite;
 
     /// <summary>
@@ -14,7 +15,7 @@ namespace Game.Gun.Ammunition
     /// </summary>
     public class Grenade : Engine.GameObject.GameObject
     {
-        private static AnimatedSprite explosionSprite = new AnimatedSprite(new Engine.Renderer.Tile.Tilesheet("Game.Resources.Animated.explosion.png", 635, 635), Keyframe.RangeX(0, 8, 0, 0.001f));
+        private static ISprite explosionSprite = TextureAtlas.Sprites["ammunition_grenade"];
 
         private readonly int exRadiusX = 1;
         private readonly int exRadiusY = 1;

@@ -27,7 +27,7 @@ namespace Engine
             Service.ServiceInfo serviceInfo = (Service.ServiceInfo)service.GetType().GetCustomAttributes(typeof(Service.ServiceInfo), false)[0];
             Engine.Services.Add(serviceInfo.Name, service);
             service.OnUpdatableCreate();
-            Engine.AddRenderer(service, serviceInfo.RenderLayer);
+            Engine.ServiceRenderers[serviceInfo.RenderLayer].Add(service);
         }
 
         /// <summary>

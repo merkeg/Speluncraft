@@ -79,7 +79,6 @@ namespace Engine.Renderer.Tile.Parser
                 }
             }
 
-            Console.WriteLine(collisions.Count);
             return collisions;
         }
     }

@@ -7,6 +7,7 @@ namespace Game.Enemy
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using Engine.Renderer;
     using Engine.Renderer.Sprite;
     using OpenTK.Mathematics;
 
@@ -24,9 +25,9 @@ namespace Game.Enemy
 
         private GameComponents.AnimationScheduler animationScheduler;
 
-        private AnimatedSprite spriteWalking;
-        private AnimatedSprite spriteHurt;
-        private AnimatedSprite spriteAttack;
+        private ISprite spriteWalking;
+        private ISprite spriteHurt;
+        private ISprite spriteAttack;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DummyAI"/> class.
@@ -160,6 +161,10 @@ namespace Game.Enemy
         private void UpdateAnimations()
         {
             Engine.Component.Physics phys = this.GetComponent<Engine.Component.Physics>();
+            if (phys == null)
+            {
+                return;
+            }
 
             if (phys.GetVelocity().X < -0.1)
             {
@@ -186,12 +191,9 @@ namespace Game.Enemy
 
         private void InitializeSprites()
         {
-            Engine.Renderer.Tile.Tilesheet attackSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Enemy.zombie_hit.png", 80, 110);
-            this.spriteAttack = new AnimatedSprite(attackSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
-            Engine.Renderer.Tile.Tilesheet hurtSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Enemy.zombie_hurt.png", 80, 110);
-            this.spriteHurt = new AnimatedSprite(hurtSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
-            Engine.Renderer.Tile.Tilesheet walkingSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Enemy.zombie_walking.png", 80, 110);
-            this.spriteWalking = new AnimatedSprite(walkingSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
+            this.spriteAttack = TextureAtlas.Sprites["zombie_attack"];
+            this.spriteHurt = TextureAtlas.Sprites["zombie_hurt"];
+            this.spriteWalking = TextureAtlas.Sprites["zombie_walking"];
         }
     }
 }

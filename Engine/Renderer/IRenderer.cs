@@ -48,5 +48,10 @@ namespace Engine.Renderer
         /// Run when the renderer is added.
         /// </summary>
         public void OnRendererCreate();
+
+        /// <summary>
+        /// Run when the renderer is removed.
+        /// </summary>
+        public void OnRendererDelete();
     }
 }

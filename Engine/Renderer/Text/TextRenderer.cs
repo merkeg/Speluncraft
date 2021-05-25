@@ -142,5 +142,10 @@ namespace Engine.Renderer.Text
         public void OnRendererCreate()
         {
         }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
+        {
+        }
     }
 }

@@ -42,5 +42,10 @@ namespace Engine.Renderer
         {
             return;
         }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
+        {
+        }
     }
 }

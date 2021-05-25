@@ -132,13 +132,19 @@ namespace Engine.Service
         {
         }
 
+        /// <inheritdoc/>
+        public void SceneChangeCleanup()
+        {
+            this.Emitters.Clear();
+        }
+
         /// <summary>
         /// Add an emitter.
         /// </summary>
         /// <param name="emitter">The emitter.</param>
         /// <param name="position">Position.</param>
         /// <param name="lifetime">The lifetime of the emitter. Set to 0 to disable deletion.</param>
-        /// <returns>ParticleEmitterData</returns>
+        /// <returns>ParticleEmitterData.</returns>
         public ParticleEmitterData Emit(ParticleEmitter emitter, IRectangle position, float lifetime)
         {
             ParticleEmitterData data = new ParticleEmitterData(emitter, position, lifetime);
@@ -153,6 +159,11 @@ namespace Engine.Service
         public void Remove(ParticleEmitterData data)
         {
             this.Emitters.Remove(data);
+        }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
+        {
         }
     }
 }

@@ -57,5 +57,10 @@ namespace Engine.Renderer.UI.Primitive
         public void OnRendererCreate()
         {
         }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
+        {
+        }
     }
 }

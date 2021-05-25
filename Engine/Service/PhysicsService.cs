@@ -26,6 +26,11 @@ namespace Engine.Service
         }
 
         /// <inheritdoc/>
+        public void SceneChangeCleanup()
+        {
+        }
+
+        /// <inheritdoc/>
         public void OnUpdatableDestroy()
         {
         }
@@ -54,6 +59,11 @@ namespace Engine.Service
 
         /// <inheritdoc/>
         public void Resize(ResizeEventArgs args)
+        {
+        }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
         {
         }
     }

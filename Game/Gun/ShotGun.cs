@@ -9,6 +9,7 @@ namespace Game.Gun
     using System.Reflection;
     using System.Text;
     using Engine.Component;
+    using Engine.Renderer;
     using Engine.Renderer.Sprite;
     using OpenTK.Mathematics;
 
@@ -42,9 +43,7 @@ namespace Game.Gun
         /// </summary>
         public ShotGun()
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            Engine.Renderer.Tile.Tilesheet animatedBullet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Animated.bullet.png", 32, 32);
-            this.bulletSprite = new AnimatedSprite(animatedBullet, new[] { new Keyframe(0, 0, 0.5f), new Keyframe(0, 1, 0.5f) });
+            this.bulletSprite = TextureAtlas.Sprites["ammunition_bullet"];
             this.randy = new Random();
         }
 
