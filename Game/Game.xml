@@ -9,6 +9,17 @@
             Lets the enemy walk from one side of the platform to the other side.
             </summary>
         </member>
+        <member name="M:Game.Enemy.DummyAI.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.DummyAI"/> class.
+            </summary>
+            <param name="minX">minX.</param>
+            <param name="minY">minY.</param>
+            <param name="sizeX">sizeX.</param>
+            <param name="sizeY">sizeY.</param>
+            <param name="sprite">sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
+        </member>
         <member name="P:Game.Enemy.DummyAI.SpriteWalking">
             <summary>
             Gets or sets a walking sprite.
@@ -23,17 +34,6 @@
             <summary>
             Gets or sets an attack sprite.
             </summary>
-        </member>
-        <member name="M:Game.Enemy.DummyAI.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Game.Enemy.DummyAI"/> class.
-            </summary>
-            <param name="minX">minX.</param>
-            <param name="minY">minY.</param>
-            <param name="sizeX">sizeX.</param>
-            <param name="sizeY">sizeY.</param>
-            <param name="sprite">sprite.</param>
-            <param name="damage">Damage dealt by touching the enemy.</param>
         </member>
         <member name="M:Game.Enemy.DummyAI.GetMoveSpeed">
             <summary>
