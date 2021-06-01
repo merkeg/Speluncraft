@@ -2,13 +2,12 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
-using Engine.Renderer;
-
 namespace Game.Enemy
 {
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using Engine.Renderer;
     using Engine.Renderer.Sprite;
 
     /// <summary>

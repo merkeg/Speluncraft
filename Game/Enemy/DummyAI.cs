@@ -26,21 +26,6 @@ namespace Game.Enemy
         private GameComponents.AnimationScheduler animationScheduler;
 
         /// <summary>
-        /// Gets or sets a walking sprite.
-        /// </summary>
-        public ISprite SpriteWalking { get; set; }
-
-        /// <summary>
-        /// Gets or sets a hurt sprite.
-        /// </summary>
-        public ISprite SpriteHurt { get; set; }
-
-        /// <summary>
-        /// Gets or sets an attack sprite.
-        /// </summary>
-        public ISprite SpriteAttack { get; set; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="DummyAI"/> class.
         /// </summary>
         /// <param name="minX">minX.</param>
@@ -66,6 +51,21 @@ namespace Game.Enemy
             this.animationScheduler = new GameComponents.AnimationScheduler();
             this.AddComponent(this.animationScheduler);
         }
+
+        /// <summary>
+        /// Gets or sets a walking sprite.
+        /// </summary>
+        public ISprite SpriteWalking { get; set; }
+
+        /// <summary>
+        /// Gets or sets a hurt sprite.
+        /// </summary>
+        public ISprite SpriteHurt { get; set; }
+
+        /// <summary>
+        /// Gets or sets an attack sprite.
+        /// </summary>
+        public ISprite SpriteAttack { get; set; }
 
         /// <summary>
         /// Gets the Movespeed.
