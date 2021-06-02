@@ -4,16 +4,16 @@
 
 namespace Game.UI
 {
-    using System.Diagnostics;
+    using System;
     using System.IO;
     using System.Reflection;
     using Engine.GameObject;
     using Engine.Renderer;
-    using Engine.Renderer.Particle;
     using Engine.Renderer.Sprite;
     using Engine.Renderer.Text;
-    using Engine.Renderer.Text.Parser;
+    using Engine.Scene;
     using Engine.Service;
+    using Game.Scenes;
     using OpenTK.Graphics.OpenGL;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
@@ -125,7 +125,6 @@ namespace Game.UI
                 if (windowMousePosition.X > hitbox.X && windowMousePosition.X < hitbox.Z && windowMousePosition.Y > hitbox.Y && windowMousePosition.Y < hitbox.W)
                 {
                     // Debug.WriteLine("You Chose: " + GunType.GunTypeArray[currentWeaponIndex].GunName);
-                    player.ChangeGun(GunType.GunTypeArray[CurrentWeaponIndex].Gun);
                     return;
                 }
 
@@ -138,7 +137,6 @@ namespace Game.UI
         /// <inheritdoc/>
         public void OnRendererCreate()
         {
-            GameManager.UpdatesPaused = true;
             Engine.Engine.GameWindow.MouseMove += this.MouseMove;
             Engine.Engine.GameWindow.MouseDown += this.MouseDown;
 
@@ -183,17 +181,20 @@ namespace Game.UI
         public void HideShop(bool hide)
         {
             // pull gun price from Playerhealth. Only from maxhealth. TODO
-            player.GetComponent<Engine.Component.HealthPoints>().SetHP(player.GetComponent<Engine.Component.HealthPoints>().GetMaxHP() - ((int)GunType.GunTypeArray[CurrentWeaponIndex].GunPrice * 10));
+            Bundle bundle = new Bundle();
+            bundle.Add<int>("playerHealth", (int)(100 - (GunType.GunTypeArray[CurrentWeaponIndex].GunPrice * 10)));
+            Console.WriteLine(GunType.GunTypeArray[CurrentWeaponIndex].Gun);
+            bundle.Add("playerWeapon", GunType.GunTypeArray[CurrentWeaponIndex].Gun);
 
-            shopHeader.Hidden = !hide;
-            weaponDamage.Hidden = !hide;
-            weaponInfo.Hidden = !hide;
-            weaponName.Hidden = !hide;
-            weaponPrice.Hidden = !hide;
-            helpText.Hidden = !hide;
-
-            this.ShopActive = hide;
-            GameManager.UpdatesPaused = false;
+            // shopHeader.Hidden = !hide;
+            // weaponDamage.Hidden = !hide;
+            // weaponInfo.Hidden = !hide;
+            // weaponName.Hidden = !hide;
+            // weaponPrice.Hidden = !hide;
+            // helpText.Hidden = !hide;
+            //
+            // this.ShopActive = hide;
+            Engine.Engine.ChangeScene(new GameScene(), bundle);
         }
 
         /// <inheritdoc/>
@@ -340,7 +341,7 @@ namespace Game.UI
             weaponDamage.Position.MinY = shopOrigin.Y + itemFrameYOffset + itemFrameSize + (100 / (720 - shopWindowBorderIndent) * shopHeight);
             weaponDamage.FontScale = 0.3f / (720 - shopWindowBorderIndent) * shopHeight;
 
-            weaponPrice.Text = "Price: " + GunType.GunTypeArray[CurrentWeaponIndex].GunPrice.ToString() + " / " + (player.GetComponent<Engine.Component.HealthPoints>().GetMaxHP() / 10).ToString() + " Healthpoints";
+            weaponPrice.Text = "Price: " + GunType.GunTypeArray[CurrentWeaponIndex].GunPrice.ToString() + " / " + "10" + " Healthpoints";
             weaponPrice.Position.MinX = shopOrigin.X + itemSpacing - (itemFrameSize / 2);
             weaponPrice.Position.MinY = shopOrigin.Y + itemFrameYOffset + itemFrameSize + (150 / (720 - shopWindowBorderIndent) * shopHeight);
             weaponPrice.FontScale = 0.3f / (720 - shopWindowBorderIndent) * shopHeight;

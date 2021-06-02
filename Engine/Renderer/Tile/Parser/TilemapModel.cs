@@ -19,6 +19,8 @@ namespace Engine.Renderer.Tile.Parser
 
         public int width { get; set; }
 
+        public string backgroundcolor { get; set; }
+
         public IList<TilemapLayerModel> layers { get; set; }
     }
 

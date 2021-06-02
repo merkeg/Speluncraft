@@ -92,7 +92,7 @@ namespace Game.Menu
                 Environment.Exit(0);
             }
 
-            Engine.Engine.ChangeScene(new GameScene());
+            Engine.Engine.ChangeScene(new ShopScene());
         }
     }
 }

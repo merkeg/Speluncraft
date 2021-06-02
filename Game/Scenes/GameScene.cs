@@ -4,14 +4,11 @@
 
 namespace Game.Scenes
 {
-    using System;
+    using Engine.Component;
     using Engine.GameObject;
     using Engine.Renderer;
     using Engine.Renderer.Sprite;
-    using Engine.Renderer.Text;
-    using Engine.Renderer.Text.Parser;
     using Engine.Renderer.Tile;
-    using Engine.Renderer.Tile.Parser;
     using Engine.Renderer.UI;
     using Engine.Scene;
     using Engine.Service;
@@ -47,15 +44,16 @@ namespace Game.Scenes
         private void AddPlayer()
         {
             TilemapLayerObject spawnPos = this.tilemap.FindObjectByName("spawn");
-            Player.Player player = this.Bundle.Get<Player.Player>("player", new Player.Player(0, 0, 1, 1.375f, TextureAtlas.Sprites["adventurer_idle"]));
-            player.MinX = spawnPos.X;
-            player.MinY = -spawnPos.Y + 1;
+            Player.Player player = new Player.Player(spawnPos.X, -spawnPos.Y + 1, 1, 1.375f, TextureAtlas.Sprites["adventurer_idle"]);
+            player.ChangeGun(this.Bundle.Get<IGun>("playerWeapon", new Pistol()));
+            player.GetComponent<HealthPoints>().SetHP(this.Bundle.Get("playerHealth", 100));
 
             player.AddComponent(new CameraTrackingComponent());
             Engine.Engine.AddGameObject(player);
 
             // make sure to initialize UI after the player
-            UILoader.Initialize_UI(player);
+            HealthbarPlayer playerhealthbar = new HealthbarPlayer(player);
+            Engine.Engine.AddRenderer(playerhealthbar, RenderLayer.UI);
 
             DebugRenderer debugRenderer = new DebugRenderer(new Rectangle(5, 5, 300, 325), new Color4(0, 0, 0, 0.3f), TextureAtlas.Fonts["debugFont"], player, UiAlignment.Right);
             debugRenderer.Hidden = true;
@@ -79,7 +77,8 @@ namespace Game.Scenes
                 {
                     Bundle bundle = new Bundle();
                     bundle.Add("level", exitPos.GetProperty("toLevel").value.ToString());
-                    bundle.Add("player", player);
+                    bundle.Add("playerHealth", player.GetComponent<HealthPoints>().GetCurrHP());
+                    bundle.Add("playerWeapon", player.GetGun());
                     Engine.Engine.ChangeScene(new GameScene(), bundle);
                 };
             }

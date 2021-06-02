@@ -11,6 +11,7 @@ namespace Game.Player
     using Engine.GameObject;
     using Engine.Renderer;
     using Engine.Renderer.Sprite;
+    using Game.Gun;
     using Game.Scenes;
     using OpenTK.Windowing.GraphicsLibraryFramework;
 
@@ -151,6 +152,15 @@ namespace Game.Player
             }
 
             this.Mirrored = this.animationScheduler.GetIfMustBeMirrored();
+        }
+
+        /// <summary>
+        /// Returns Gun.
+        /// </summary>
+        /// <returns>IGun.</returns>
+        public IGun GetGun()
+        {
+            return this.gun;
         }
 
         private void Shoot(KeyboardState keyboardState)

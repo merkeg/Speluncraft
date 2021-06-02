@@ -6,9 +6,6 @@ namespace Game.Scenes
 {
     using Engine.GameObject;
     using Engine.Renderer;
-    using Engine.Renderer.Sprite;
-    using Engine.Renderer.Text;
-    using Engine.Renderer.Text.Parser;
     using Engine.Renderer.UI;
     using Engine.Scene;
     using OpenTK.Mathematics;

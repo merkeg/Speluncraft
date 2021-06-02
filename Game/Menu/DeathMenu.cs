@@ -2,6 +2,8 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
+using Game.Scenes;
+
 namespace Game.Menu
 {
     using Engine.GameObject;
@@ -116,7 +118,7 @@ namespace Game.Menu
             }
 
             GameManager.UpdatesPaused = false;
-            Engine.Engine.ChangeScene(GameManager.SceneGame);
+            Engine.Engine.ChangeScene(new ShopScene());
         }
     }
 }
