@@ -62,6 +62,7 @@ namespace Game.Scenes
             TextureAtlas.Set("lavaCut", new AnimatedSprite(new Tilesheet("Game.Resources.Animated.lava_still_cut.png", 32, 32), Keyframe.RangeY(0, 0, 122, 0.03f)));
             TextureAtlas.Set("fire", new AnimatedSprite(new Tilesheet("Game.Resources.Animated.fire.png", 32, 32), Keyframe.RangeY(0, 0, 23, 0.04f)));
             TextureAtlas.Set("heart", new AnimatedSprite(new Tilesheet("Game.Resources.Animated.heart.png", 16, 16), Keyframe.RangeX(0, 23, 0, 0.1f)));
+            TextureAtlas.Set("soul_fire", new AnimatedSprite(new Tilesheet("Game.Resources.Animated.soul_fire.png", 32, 32), Keyframe.RangeY(0, 0, 23, 0.04f)));
 
             // UI
             TextureAtlas.Set("startscreen", new Sprite("Game.Resources.UI.startmenu.png", false));
@@ -86,6 +87,7 @@ namespace Game.Scenes
             sheet.SetCustomSprite(93, TextureAtlas.Sprites["lavaStill"]);
             sheet.SetCustomSprite(94, TextureAtlas.Sprites["lavaCut"]);
             sheet.SetCustomSprite(85, TextureAtlas.Sprites["fire"]);
+            sheet.SetCustomSprite(115, TextureAtlas.Sprites["soul_fire"]);
         }
     }
 }

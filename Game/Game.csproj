@@ -256,6 +256,10 @@
     <EmbeddedResource Include="Resources\Sprite\Enemy\leaper_slide.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Remove="Resources\Animated\soul_fire.png" />
+    <EmbeddedResource Include="Resources\Animated\soul_fire.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
