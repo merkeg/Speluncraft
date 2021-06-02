@@ -274,7 +274,7 @@ namespace Game.Player
             Engine.Component.Physics phys = this.GetComponent<Engine.Component.Physics>();
 
             // Falling
-            if (phys.GetVelocity().Y < 0)
+            if (phys.GetVelocity().Y < -0.5)
             {
                 this.animationScheduler.AddAnimation(40, 0.001f, this.spriteFall, this.Mirrored);
             }

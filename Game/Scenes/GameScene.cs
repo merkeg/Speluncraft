@@ -47,7 +47,10 @@ namespace Game.Scenes
         private void AddPlayer()
         {
             TilemapLayerObject spawnPos = this.tilemap.FindObjectByName("spawn");
-            Player.Player player = new Player.Player(spawnPos.X, -spawnPos.Y + 1, 1, 1.375f, TextureAtlas.Sprites["adventurer_idle"]);
+            Player.Player player = this.Bundle.Get<Player.Player>("player", new Player.Player(0, 0, 1, 1.375f, TextureAtlas.Sprites["adventurer_idle"]));
+            player.MinX = spawnPos.X;
+            player.MinY = -spawnPos.Y + 1;
+
             player.AddComponent(new CameraTrackingComponent());
             Engine.Engine.AddGameObject(player);
 
@@ -70,12 +73,13 @@ namespace Game.Scenes
             TilemapLayerObject exitPos = this.tilemap.FindObjectByName("exit");
             if (exitPos != null)
             {
-                InteractableElement el = new InteractableElement(exitPos.X, -exitPos.Y + 1, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [W] to exit.", Color4.White, Color4.White, 4, false);
+                InteractableElement el = new InteractableElement(exitPos.X, -exitPos.Y + 1, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [W] to exit.", Color4.White, Color4.White, 2, false);
                 Engine.Engine.AddGameObject(el);
                 el.Interact += () =>
                 {
                     Bundle bundle = new Bundle();
-                    bundle.Add("level", "level02");
+                    bundle.Add("level", exitPos.GetProperty("toLevel").value.ToString());
+                    bundle.Add("player", player);
                     Engine.Engine.ChangeScene(new GameScene(), bundle);
                 };
             }
@@ -92,7 +96,7 @@ namespace Game.Scenes
                 Engine.Engine.AddGameObject(heart);
             });
 
-            this.tilemap.FindObjectsByName("DummyAI").ForEach(obj =>
+            this.tilemap.FindObjectsByName("Leaper").ForEach(obj =>
             {
                 LeaperReaperEnemy enemy = new LeaperReaperEnemy(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10);
                 Engine.Engine.AddGameObject(enemy);
