@@ -2,8 +2,6 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
-using Game.Scenes;
-
 namespace Game.Menu
 {
     using Engine.GameObject;
@@ -13,6 +11,7 @@ namespace Game.Menu
     using Engine.Renderer.Text.Parser;
     using Engine.Renderer.UI;
     using Engine.Renderer.UI.Primitive;
+    using Game.Scenes;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
     using OpenTK.Windowing.GraphicsLibraryFramework;

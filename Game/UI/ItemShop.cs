@@ -79,7 +79,16 @@ namespace Game.UI
             }
 
             // TODO replace
-            Engine.Engine.GetService<InputService>().Subscribe(Keys.Enter, () => this.HideShop(!this.ShopActive));
+            Engine.Engine.GetService<InputService>().Subscribe(Keys.Enter, this.HideShop);
+            Engine.Engine.GetService<InputService>().Subscribe(new[] { Keys.Right, Keys.D }, () =>
+            {
+                CurrentWeaponIndex = Math.Abs((CurrentWeaponIndex + 1) % GunType.GunTypeArray.Length);
+            });
+            Engine.Engine.GetService<InputService>().Subscribe(new[] { Keys.Left, Keys.A }, () =>
+            {
+                // CurrentWeaponIndex = Math.Abs((CurrentWeaponIndex - 1) % GunType.GunTypeArray.Length);
+                CurrentWeaponIndex = CurrentWeaponIndex == 0 ? GunType.GunTypeArray.Length - 1 : CurrentWeaponIndex - 1;
+            });
         }
 
         /// <summary>
@@ -178,7 +187,7 @@ namespace Game.UI
         /// sets Text render as visible or not.
         /// </summary>
         /// <param name="hide">contains if text is hidden or not.</param>
-        public void HideShop(bool hide)
+        public void HideShop()
         {
             // pull gun price from Playerhealth. Only from maxhealth. TODO
             Bundle bundle = new Bundle();
@@ -186,14 +195,6 @@ namespace Game.UI
             Console.WriteLine(GunType.GunTypeArray[CurrentWeaponIndex].Gun);
             bundle.Add("playerWeapon", GunType.GunTypeArray[CurrentWeaponIndex].Gun);
 
-            // shopHeader.Hidden = !hide;
-            // weaponDamage.Hidden = !hide;
-            // weaponInfo.Hidden = !hide;
-            // weaponName.Hidden = !hide;
-            // weaponPrice.Hidden = !hide;
-            // helpText.Hidden = !hide;
-            //
-            // this.ShopActive = hide;
             Engine.Engine.ChangeScene(new GameScene(), bundle);
         }
 

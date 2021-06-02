@@ -16,7 +16,7 @@ namespace Game.Scenes
         /// <inheritdoc/>
         public override void OnSceneLoad()
         {
-            ItemShop itemShop = new ItemShop(TextureAtlas.Fonts["defaultFont"]);
+            ItemShop itemShop = new ItemShop(TextureAtlas.Fonts["debugFont"]);
             Engine.Engine.AddRenderer(itemShop, RenderLayer.UI);
         }
     }
