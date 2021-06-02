@@ -24,7 +24,7 @@ namespace Game.Scenes
     /// <summary>
     /// Game scene class.
     /// </summary>
-    public class Level1 : Scene
+    public class GameScene : Scene
     {
         private Tilemap tilemap;
         private Menu.PauseMenu pauseMenu;
@@ -40,7 +40,7 @@ namespace Game.Scenes
 
         private void InitializeRenderers()
         {
-            this.tilemap = TextureAtlas.Tilemaps["level01"];
+            this.tilemap = TextureAtlas.Tilemaps[this.Bundle.Get("level", "level02")];
             Engine.Engine.GetService<TilemapService>().AddTilemap(this.tilemap, Vector2i.Zero);
         }
 
@@ -68,12 +68,17 @@ namespace Game.Scenes
             Engine.Engine.AddGameObject(new InteractableElement(50, -34, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Lava will kill you", Color4.Coral, Color4.Coral, 6, false));
 
             TilemapLayerObject exitPos = this.tilemap.FindObjectByName("exit");
-            InteractableElement el = new InteractableElement(exitPos.X, -exitPos.Y + 1, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [W] to exit.", Color4.White, Color4.White, 4, false);
-            Engine.Engine.AddGameObject(el);
-            el.Interact += () =>
+            if (exitPos != null)
             {
-                Engine.Engine.ChangeScene(new Level2());
-            };
+                InteractableElement el = new InteractableElement(exitPos.X, -exitPos.Y + 1, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [W] to exit.", Color4.White, Color4.White, 4, false);
+                Engine.Engine.AddGameObject(el);
+                el.Interact += () =>
+                {
+                    Bundle bundle = new Bundle();
+                    bundle.Add("level", "level02");
+                    Engine.Engine.ChangeScene(new GameScene(), bundle);
+                };
+            }
         }
 
         private void AddObjects()

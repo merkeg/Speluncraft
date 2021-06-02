@@ -55,6 +55,9 @@ namespace Engine.Scene
         public List<IRectangle> Colliders { get; set; }
 
         /// <inheritdoc/>
+        public Bundle Bundle { get; set; }
+
+        /// <inheritdoc/>
         public abstract void OnSceneLoad();
 
         /// <inheritdoc/>

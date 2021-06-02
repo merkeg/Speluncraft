@@ -21,10 +21,16 @@ namespace Engine.Service
         public void Render(FrameEventArgs args)
         {
             GL.Color3(Color.White);
-            float tileTexCoordX0;
-            float tileTexCoordY0;
-            float tileTexCoordX1;
-            float tileTexCoordY1;
+
+            Vector2[,] texCoords = new Vector2[2, 2];
+
+            for (int x = 0; x < 2; x++)
+            {
+                for (int y = 0; y < 2; y++)
+                {
+                    texCoords[x, y] = new Vector2(0, 0);
+                }
+            }
 
             bool flippedHorizontal;
             bool flippedVertical;
@@ -70,21 +76,41 @@ namespace Engine.Service
                             ISprite sprite = tilemap.Tilesheet.Tiles[tile];
                             GL.Color4(sprite.Color ?? Color4.White);
 
-                            tileTexCoordX0 = sprite.TexX0;
-                            tileTexCoordY0 = sprite.TexY0;
-                            tileTexCoordX1 = sprite.TexX1;
-                            tileTexCoordY1 = sprite.TexY1;
+                            texCoords[0, 0].X = sprite.TexX0;
+                            texCoords[0, 0].Y = sprite.TexY0;
+
+                            texCoords[1, 0].X = sprite.TexX1;
+                            texCoords[1, 0].Y = sprite.TexY0;
+
+                            texCoords[1, 1].X = sprite.TexX1;
+                            texCoords[1, 1].Y = sprite.TexY1;
+
+                            texCoords[0, 1].X = sprite.TexX0;
+                            texCoords[0, 1].Y = sprite.TexY1;
 
                             if (flippedHorizontal)
                             {
-                                tileTexCoordY0 += layer.TileTexSizeY;
-                                tileTexCoordY1 -= layer.TileTexSizeY;
+                                texCoords[0, 0].X += layer.TileTexSizeX;
+                                texCoords[0, 1].X += layer.TileTexSizeX;
+
+                                texCoords[1, 0].X -= layer.TileTexSizeX;
+                                texCoords[1, 1].X -= layer.TileTexSizeX;
                             }
 
                             if (flippedVertical)
                             {
-                                tileTexCoordX0 += layer.TileTexSizeX;
-                                tileTexCoordX1 -= layer.TileTexSizeX;
+                                texCoords[0, 0].Y += layer.TileTexSizeY;
+                                texCoords[1, 0].Y += layer.TileTexSizeY;
+
+                                texCoords[0, 1].Y -= layer.TileTexSizeY;
+                                texCoords[1, 1].Y -= layer.TileTexSizeY;
+                            }
+
+                            if (flippedDiagonal)
+                            {
+                                Vector2 vec11 = texCoords[1, 1];
+                                texCoords[1, 1] = texCoords[0, 0];
+                                texCoords[0, 0] = vec11;
                             }
 
                             if (sprite.Handle != tilemapHandle)
@@ -95,34 +121,18 @@ namespace Engine.Service
                             float overlap = 0.0001f;
 
                             GL.Begin(PrimitiveType.Quads);
-                            if (!flippedDiagonal)
-                            {
-                                GL.TexCoord2(tileTexCoordX0, tileTexCoordY0);
-                                GL.Vertex2(offset.X + x - overlap, offset.Y - y - overlap);
 
-                                GL.TexCoord2(tileTexCoordX1, tileTexCoordY0);
-                                GL.Vertex2(offset.X + x + 1 + overlap, offset.Y - y - overlap);
+                            GL.TexCoord2(texCoords[0, 0]);
+                            GL.Vertex2(offset.X + x - overlap, offset.Y - y - overlap);
 
-                                GL.TexCoord2(tileTexCoordX1, tileTexCoordY1);
-                                GL.Vertex2(offset.X + x + 1 + overlap, offset.Y - y + 1 + overlap);
+                            GL.TexCoord2(texCoords[1, 0]);
+                            GL.Vertex2(offset.X + x + 1 + overlap, offset.Y - y - overlap);
 
-                                GL.TexCoord2(tileTexCoordX0, tileTexCoordY1);
-                                GL.Vertex2(offset.X + x - overlap, offset.Y - y + 1 + overlap);
-                            }
-                            else
-                            {
-                                GL.TexCoord2(tileTexCoordX1, tileTexCoordY1);
-                                GL.Vertex2(offset.X + x - overlap, offset.Y - y - overlap);
+                            GL.TexCoord2(texCoords[1, 1]);
+                            GL.Vertex2(offset.X + x + 1 + overlap, offset.Y - y + 1 + overlap);
 
-                                GL.TexCoord2(tileTexCoordX0, tileTexCoordY1);
-                                GL.Vertex2(offset.X + x - overlap, offset.Y - y + 1 + overlap);
-
-                                GL.TexCoord2(tileTexCoordX0, tileTexCoordY0);
-                                GL.Vertex2(offset.X + x + 1 + overlap, offset.Y - y + 1 + overlap);
-
-                                GL.TexCoord2(tileTexCoordX1, tileTexCoordY0);
-                                GL.Vertex2(offset.X + x + 1 + overlap, offset.Y - y - overlap);
-                            }
+                            GL.TexCoord2(texCoords[0, 1]);
+                            GL.Vertex2(offset.X + x - overlap, offset.Y - y + 1 + overlap);
 
                             GL.End();
                             if (sprite.Handle != tilemapHandle)

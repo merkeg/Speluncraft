@@ -20,7 +20,7 @@ namespace Game
         public GameManager()
         {
             SceneStart = new StartScene();
-            SceneGame = new Level1();
+            SceneGame = new GameScene();
             SceneDeath = new DeathScene();
             Engine.Engine.OnSceneChange += OnSceneChange;
             Engine.Engine.ChangeScene(SceneStart);

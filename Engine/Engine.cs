@@ -91,7 +91,8 @@ namespace Engine
         /// Change the Scene.
         /// </summary>
         /// <param name="scene">Scene to change to.</param>
-        public static void ChangeScene(Scene.Scene scene)
+        /// <param name="bundle">The data you want to give the scene.</param>
+        public static void ChangeScene(Scene.Scene scene, Bundle bundle = null)
         {
             if (Scene.Scene.Current != null)
             {
@@ -102,6 +103,8 @@ namespace Engine
             {
                 service.SceneChangeCleanup();
             }
+
+            scene.Bundle = bundle ?? Bundle.Default;
 
             OnSceneChange?.Invoke(Scene.Scene.Current, scene);
 
