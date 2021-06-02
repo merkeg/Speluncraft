@@ -9,7 +9,6 @@ namespace Engine.Scene
     using System.Linq;
     using global::Engine.GameObject;
     using global::Engine.Renderer;
-    using global::Engine.Renderer.Sprite;
     using OpenTK.Windowing.Common;
 
     /// <summary>
@@ -85,13 +84,6 @@ namespace Engine.Scene
         public void AddGameObject(GameObject gameObject)
         {
             this.GameObjects.Add(gameObject);
-            if (gameObject.Sprite != null)
-            {
-                SpriteRenderer renderer = new SpriteRenderer(gameObject.Sprite, gameObject);
-                gameObject.SpriteRenderer = renderer;
-                this.AddRenderer(renderer);
-            }
-
             gameObject.OnUpdatableCreate();
         }
 
@@ -102,11 +94,6 @@ namespace Engine.Scene
         /// <param name="gameObject">The GameObject to Destroy.</param>
         public void RemoveGameObject(GameObject gameObject)
         {
-            if (gameObject.SpriteRenderer != null)
-            {
-                this.RemoveRenderer(gameObject.SpriteRenderer);
-            }
-
             gameObject.OnUpdatableDestroy();
             this.GameObjects.Remove(gameObject);
             if (this.Colliders.Contains(gameObject))

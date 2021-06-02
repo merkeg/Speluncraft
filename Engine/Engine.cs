@@ -78,6 +78,7 @@ namespace Engine
 
             // Services
             Engine.AddService(new TilemapService());
+            Engine.AddService(new GameObjectRendererService());
             Engine.AddService(new ParticleService());
             Engine.AddService(new InputService());
 

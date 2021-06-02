@@ -1,4 +1,8 @@
-﻿namespace Engine.Scene
+﻿// <copyright file="Bundle.cs" company="RWUwU">
+// Copyright (c) RWUwU. All rights reserved.
+// </copyright>
+
+namespace Engine.Scene
 {
     using System;
     using System.Collections.Generic;

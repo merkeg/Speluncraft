@@ -1,4 +1,4 @@
-﻿// <copyright file="Level1.cs" company="RWUwU">
+﻿// <copyright file="GameScene.cs" company="RWUwU">
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
@@ -40,7 +40,7 @@ namespace Game.Scenes
 
         private void InitializeRenderers()
         {
-            this.tilemap = TextureAtlas.Tilemaps[this.Bundle.Get("level", "level02")];
+            this.tilemap = TextureAtlas.Tilemaps[this.Bundle.Get("level", "level01")];
             Engine.Engine.GetService<TilemapService>().AddTilemap(this.tilemap, Vector2i.Zero);
         }
 

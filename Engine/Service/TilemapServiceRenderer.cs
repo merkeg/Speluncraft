@@ -108,9 +108,9 @@ namespace Engine.Service
 
                             if (flippedDiagonal)
                             {
-                                Vector2 vec11 = texCoords[1, 1];
-                                texCoords[1, 1] = texCoords[0, 0];
-                                texCoords[0, 0] = vec11;
+                                Vector2 vec10 = texCoords[1, 0];
+                                texCoords[1, 0] = texCoords[0, 1];
+                                texCoords[0, 1] = vec10;
                             }
 
                             if (sprite.Handle != tilemapHandle)

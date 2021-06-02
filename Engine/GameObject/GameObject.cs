@@ -1,6 +1,7 @@
 ﻿// <copyright file="GameObject.cs" company="RWUwU">
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
+
 namespace Engine.GameObject
 {
     using System;
@@ -13,11 +14,6 @@ namespace Engine.GameObject
     /// </summary>
     public class GameObject : IRectangle, IUpdatable
     {
-        /// <summary>
-        /// The sprite the GameObject is drawn with.
-        /// </summary>
-        private ISprite sprite;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="GameObject"/> class.
         /// </summary>
@@ -33,8 +29,13 @@ namespace Engine.GameObject
             this.SizeX = sizeX;
             this.SizeY = sizeY;
             this.Components = new List<IComponent>();
-            this.sprite = sprite;
+            this.Sprite = sprite;
         }
+
+        /// <summary>
+        /// Gets or sets the Sprite of the GameObject.
+        /// </summary>
+        public ISprite Sprite { get; set; }
 
         /// <summary>
         /// Gets or sets the width of the GameObject.
@@ -79,31 +80,8 @@ namespace Engine.GameObject
         /// </summary>
         public List<IComponent> Components { get; protected set; }
 
-        /// <summary>
-        /// Gets or sets the Sprite of the GameObject.
-        /// </summary>
-        public ISprite Sprite
-        {
-        get => this.sprite;
-
-        set
-            {
-                if (this.SpriteRenderer != null)
-                {
-                    this.SpriteRenderer.Sprite = value;
-                }
-
-                this.sprite = value;
-            }
-        }
-
         /// <inheritdoc/>
         public bool Mirrored { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Sprite renderer.
-        /// </summary>
-        internal SpriteRenderer SpriteRenderer { get; set; }
 
         /// <summary>
         /// Checks if the other element intersects with this GameObject.
