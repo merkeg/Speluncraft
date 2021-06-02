@@ -260,6 +260,10 @@
     <EmbeddedResource Include="Resources\Animated\soul_fire.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Remove="Resources\Level\level02.json" />
+    <EmbeddedResource Include="Resources\Level\level02.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

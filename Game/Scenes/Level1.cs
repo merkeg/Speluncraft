@@ -1,4 +1,4 @@
-﻿// <copyright file="GameScene.cs" company="RWUwU">
+﻿// <copyright file="Level1.cs" company="RWUwU">
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
@@ -24,7 +24,7 @@ namespace Game.Scenes
     /// <summary>
     /// Game scene class.
     /// </summary>
-    public class GameScene : Scene
+    public class Level1 : Scene
     {
         private Tilemap tilemap;
         private Menu.PauseMenu pauseMenu;
@@ -62,13 +62,18 @@ namespace Game.Scenes
 
             Engine.Engine.GetService<TilemapService>().SetOptimizationPoint(player);
 
-            InteractableElement el = new InteractableElement(96, -30, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [A] and [D] to walk.", Color4.White, Color4.White, 4, false);
-            Engine.Engine.AddGameObject(el);
-            el.Interact += () => Console.WriteLine("W pressed GameScene AddPlayer()");
-
+            Engine.Engine.AddGameObject(new InteractableElement(96, -30, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [A] and [D] to walk.", Color4.White, Color4.White, 4, false));
             Engine.Engine.AddGameObject(new InteractableElement(84, -32, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [Left] and [Right] to shoot.", Color4.White, Color4.White, 6, false));
             Engine.Engine.AddGameObject(new InteractableElement(74, -42, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [Space] to jump.", Color4.White, Color4.White, 6, false));
             Engine.Engine.AddGameObject(new InteractableElement(50, -34, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Lava will kill you", Color4.Coral, Color4.Coral, 6, false));
+
+            TilemapLayerObject exitPos = this.tilemap.FindObjectByName("exit");
+            InteractableElement el = new InteractableElement(exitPos.X, -exitPos.Y + 1, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [W] to exit.", Color4.White, Color4.White, 4, false);
+            Engine.Engine.AddGameObject(el);
+            el.Interact += () =>
+            {
+                Engine.Engine.ChangeScene(new Level2());
+            };
         }
 
         private void AddObjects()
