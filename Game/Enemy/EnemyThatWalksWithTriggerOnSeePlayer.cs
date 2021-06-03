@@ -44,11 +44,13 @@ namespace Game.Enemy
             {
                 this.vision.MinX = this.MinX + this.SizeX;
                 this.vision.MinY = this.MinY + (this.SizeY / 2);
+                this.Mirrored = false;
             }
             else
             {
                 this.vision.MinX = this.MinX - this.visionLength;
                 this.vision.MinY = this.MinY + (this.SizeY / 2);
+                this.Mirrored = true;
             }
 
             bool sawPlayer = false;

@@ -133,6 +133,7 @@ namespace Game.Enemy
             {
                 this.phys.SetVelocity(-this.movementSpeed, 0);
                 this.lookingDirection = Gun.ILookDirection.Left;
+                this.Mirrored = true;
                 return;
             }
 
@@ -140,6 +141,7 @@ namespace Game.Enemy
             {
                 this.phys.SetVelocity(this.movementSpeed, 0);
                 this.lookingDirection = Gun.ILookDirection.Right;
+                this.Mirrored = false;
                 return;
             }
 
@@ -157,6 +159,7 @@ namespace Game.Enemy
                 {
                     this.phys.SetVelocity(this.movementSpeed, 0);
                     this.lookingDirection = Gun.ILookDirection.Right;
+                    this.Mirrored = false;
                     return;
                 }
 
@@ -164,6 +167,7 @@ namespace Game.Enemy
                 {
                     this.phys.SetVelocity(-this.movementSpeed, 0);
                     this.lookingDirection = Gun.ILookDirection.Left;
+                    this.Mirrored = true;
                     return;
                 }
             }
@@ -180,12 +184,14 @@ namespace Game.Enemy
             if (phys.GetVelocity().X < -0.1)
             {
                 this.animationScheduler.AddAnimation(10, 0.0001f, this.SpriteWalking, true);
+                this.lookingDirection = Gun.ILookDirection.Left;
                 this.Mirrored = true;
             }
 
             if (phys.GetVelocity().X > 0.1)
             {
                 this.animationScheduler.AddAnimation(10, 0.0001f, this.SpriteWalking, false);
+                this.lookingDirection = Gun.ILookDirection.Right;
                 this.Mirrored = false;
             }
 
