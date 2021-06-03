@@ -4,7 +4,9 @@
 
 namespace Engine.Renderer.Tile.Parser
 {
+    using System;
     using System.Collections.Generic;
+    using System.Globalization;
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:Elements should be documented", Justification = "Model class")]
     [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.NamingRules", "SA1300:Element should begin with upper-case letter", Justification = "Model class")]
@@ -60,6 +62,11 @@ namespace Engine.Renderer.Tile.Parser
         public string type { get; set; }
 
         public object value { get; set; }
+
+        public T ValueAsType<T>()
+        {
+            return (T)Convert.ChangeType(this.value, typeof(T), CultureInfo.InvariantCulture);
+        }
     }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1600:Elements should be documented", Justification = "Model class")]

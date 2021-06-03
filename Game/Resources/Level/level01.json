@@ -358,6 +358,118 @@
                  "width":0,
                  "x":2656,
                  "y":3392
+                }, 
+                {
+                 "height":0,
+                 "id":24,
+                 "name":"Text",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"color",
+                         "type":"string",
+                         "value":"#fff"
+                        }, 
+                        {
+                         "name":"range",
+                         "type":"float",
+                         "value":3
+                        }, 
+                        {
+                         "name":"text",
+                         "type":"string",
+                         "value":"Press [A] and [D] to walk."
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":3072,
+                 "y":992
+                }, 
+                {
+                 "height":0,
+                 "id":25,
+                 "name":"Text",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"color",
+                         "type":"string",
+                         "value":"#fff"
+                        }, 
+                        {
+                         "name":"range",
+                         "type":"float",
+                         "value":4
+                        }, 
+                        {
+                         "name":"text",
+                         "type":"string",
+                         "value":"Press [Left] and [Right] to shoot."
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2688,
+                 "y":1056
+                }, 
+                {
+                 "height":0,
+                 "id":26,
+                 "name":"Text",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"color",
+                         "type":"string",
+                         "value":"#fff"
+                        }, 
+                        {
+                         "name":"range",
+                         "type":"float",
+                         "value":4
+                        }, 
+                        {
+                         "name":"text",
+                         "type":"string",
+                         "value":"Press [Space] to jump."
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2400,
+                 "y":1312
+                }, 
+                {
+                 "height":0,
+                 "id":27,
+                 "name":"Text",
+                 "point":true,
+                 "properties":[
+                        {
+                         "name":"color",
+                         "type":"string",
+                         "value":"#F17418"
+                        }, 
+                        {
+                         "name":"range",
+                         "type":"float",
+                         "value":4
+                        }, 
+                        {
+                         "name":"text",
+                         "type":"string",
+                         "value":"Lava will kill you."
+                        }],
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1600,
+                 "y":1120
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -420,7 +532,7 @@
          "y":0
         }],
  "nextlayerid":24,
- "nextobjectid":24,
+ "nextobjectid":28,
  "orientation":"orthogonal",
  "properties":[
         {

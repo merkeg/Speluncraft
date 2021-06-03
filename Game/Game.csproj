@@ -264,6 +264,10 @@
     <EmbeddedResource Include="Resources\Level\level02.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Remove="Resources\Level\level03.json" />
+    <EmbeddedResource Include="Resources\Level\level03.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

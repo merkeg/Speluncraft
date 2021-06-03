@@ -4,6 +4,7 @@
 
 namespace Game.Scenes
 {
+    using System;
     using Engine.Component;
     using Engine.GameObject;
     using Engine.Renderer;
@@ -63,11 +64,6 @@ namespace Game.Scenes
 
             Engine.Engine.GetService<TilemapService>().SetOptimizationPoint(player);
 
-            Engine.Engine.AddGameObject(new InteractableElement(96, -30, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [A] and [D] to walk.", Color4.White, Color4.White, 4, false));
-            Engine.Engine.AddGameObject(new InteractableElement(84, -32, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [Left] and [Right] to shoot.", Color4.White, Color4.White, 6, false));
-            Engine.Engine.AddGameObject(new InteractableElement(74, -42, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [Space] to jump.", Color4.White, Color4.White, 6, false));
-            Engine.Engine.AddGameObject(new InteractableElement(50, -34, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Lava will kill you", Color4.Coral, Color4.Coral, 6, false));
-
             TilemapLayerObject exitPos = this.tilemap.FindObjectByName("exit");
             if (exitPos != null)
             {
@@ -105,6 +101,12 @@ namespace Game.Scenes
             {
                 EnemyWithWeapon enemy = new EnemyWithWeapon(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10, new StoneThrower());
                 Engine.Engine.AddGameObject(enemy);
+            });
+
+            this.tilemap.FindObjectsByName("Text").ForEach(obj =>
+            {
+                Color4 color = System.Drawing.ColorTranslator.FromHtml(obj.GetProperty("color").value.ToString());
+                Engine.Engine.AddGameObject(new InteractableElement(obj.X, -obj.Y, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], obj.GetProperty("text").value.ToString(), color, color, obj.GetProperty("range").ValueAsType<float>(), false));
             });
         }
 

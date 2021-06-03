@@ -192,7 +192,6 @@ namespace Game.UI
             // pull gun price from Playerhealth. Only from maxhealth. TODO
             Bundle bundle = new Bundle();
             bundle.Add<int>("playerHealth", (int)(100 - (GunType.GunTypeArray[CurrentWeaponIndex].GunPrice * 10)));
-            Console.WriteLine(GunType.GunTypeArray[CurrentWeaponIndex].Gun);
             bundle.Add("playerWeapon", GunType.GunTypeArray[CurrentWeaponIndex].Gun);
 
             Engine.Engine.ChangeScene(new GameScene(), bundle);
