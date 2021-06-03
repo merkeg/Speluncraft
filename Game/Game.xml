@@ -247,11 +247,6 @@
             Gets the start scene.
             </summary>
         </member>
-        <member name="P:Game.GameManager.SceneGame">
-            <summary>
-            Gets the Game scene.
-            </summary>
-        </member>
         <member name="P:Game.GameManager.SceneDeath">
             <summary>
             Gets the Death scene.
@@ -677,6 +672,12 @@
         <member name="M:Game.Player.Player.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="M:Game.Player.Player.GetGun">
+            <summary>
+            Returns Gun.
+            </summary>
+            <returns>IGun.</returns>
+        </member>
         <member name="T:Game.Program">
             <summary>
             The Main class of the game.
@@ -701,6 +702,14 @@
             </summary>
         </member>
         <member name="M:Game.Scenes.GameScene.OnSceneLoad">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Scenes.ShopScene">
+            <summary>
+            Start shop scene.
+            </summary>
+        </member>
+        <member name="M:Game.Scenes.ShopScene.OnSceneLoad">
             <inheritdoc/>
         </member>
         <member name="T:Game.Scenes.StartScene">
@@ -922,7 +931,7 @@
         <member name="M:Game.UI.ItemShop.OnRendererDelete">
             <inheritdoc/>
         </member>
-        <member name="M:Game.UI.ItemShop.HideShop(System.Boolean)">
+        <member name="M:Game.UI.ItemShop.HideShop">
             <summary>
             sets Text render as visible or not.
             </summary>
@@ -944,17 +953,6 @@
             Render stats as text into shop.
             </summary>
             <param name="args">FrameEventArgs.</param>
-        </member>
-        <member name="T:Game.UI.UILoader">
-            <summary>
-            Loader Class to initialize the whole UI of the Game. (hopefully).
-            </summary>
-        </member>
-        <member name="M:Game.UI.UILoader.Initialize_UI(Game.Player.Player)">
-            <summary>
-            Initializes the UI.
-            </summary>
-            /// <param name="player">player.</param>
         </member>
     </members>
 </doc>
