@@ -78,6 +78,7 @@ namespace Game.Scenes
             TextureAtlas.Set("level01", new Tilemap(TextureAtlas.Tilesheets["defaultTilesheet"], TilemapParser.ParseTilemap("Game.Resources.Level.level01.json")));
             TextureAtlas.Set("level02", new Tilemap(TextureAtlas.Tilesheets["defaultTilesheet"], TilemapParser.ParseTilemap("Game.Resources.Level.level02.json")));
             TextureAtlas.Set("level03", new Tilemap(TextureAtlas.Tilesheets["defaultTilesheet"], TilemapParser.ParseTilemap("Game.Resources.Level.level03.json")));
+            TextureAtlas.Set("level04", new Tilemap(TextureAtlas.Tilesheets["defaultTilesheet"], TilemapParser.ParseTilemap("Game.Resources.Level.level04.json")));
 
             // Sheet Animations
             Tilesheet sheet = TextureAtlas.Tilesheets["defaultTilesheet"];
