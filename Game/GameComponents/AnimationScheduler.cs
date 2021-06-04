@@ -35,9 +35,9 @@ namespace Game.GameComponents
                 this.GameObject.Sprite = this.animationQueue[0].Animation;
                 this.mirrored = this.animationQueue[0].Mirrored;
             }
-            catch (Exception e)
+            catch
             {
-                Console.WriteLine(e);
+                return;
             }
 
             List<AnimationWithTimeAndPrio> toBeRemoved = new List<AnimationWithTimeAndPrio>();
