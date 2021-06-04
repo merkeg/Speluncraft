@@ -52,6 +52,11 @@ namespace Game.Enemy
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
+            if (!Engine.Engine.GameIsRunning)
+            {
+                return;
+            }
+
             // Are we leaping?
             if (Math.Abs(this.GetMoveSpeed()) < Math.Abs(this.physics.GetVelocity().X))
             {
