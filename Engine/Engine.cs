@@ -62,6 +62,11 @@ namespace Engine
         public static SceneChangeHandler OnSceneChange { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether Game is running.
+        /// </summary>
+        public static bool GameIsRunning { get; set; } = true;
+
+        /// <summary>
         /// Start the engine ticks.
         /// </summary>
         /// <param name="window">The GameWindow the engine will be run on.</param>

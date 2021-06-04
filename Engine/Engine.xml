@@ -481,6 +481,11 @@
             Gets or sets Handlers on pause.
             </summary>
         </member>
+        <member name="P:Engine.Engine.GameIsRunning">
+            <summary>
+            Gets or sets a value indicating whether Game is running.
+            </summary>
+        </member>
         <member name="M:Engine.Engine.StartEngine(OpenTK.Windowing.Desktop.GameWindow)">
             <summary>
             Start the engine ticks.

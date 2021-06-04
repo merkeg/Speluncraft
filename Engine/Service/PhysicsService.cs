@@ -38,6 +38,12 @@ namespace Engine.Service
         /// <inheritdoc/>
         public void OnUpdate(float frameTime)
         {
+            if (!Engine.GameIsRunning)
+            {
+                Console.WriteLine("NEEE");
+                return;
+            }
+
             foreach (GameObject.GameObject g in Engine.GameObjects)
             {
                 foreach (Component.Component c in g.GetComponents())
