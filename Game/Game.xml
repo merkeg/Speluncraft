@@ -20,6 +20,27 @@
             <param name="sprite">Enemy Sprite.</param>
             <param name="damage">Damage dealt by touching the enemy.</param>
         </member>
+        <member name="M:Game.Enemy.Boss.Boss.OnUpdatableDestroy">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Enemy.Boss.BossMG">
+            <summary>
+            The Bosses MG that shoots fast.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.Boss.BossMG.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.Boss.BossMG"/> class.
+            </summary>
+            <param name="minX">X-Coordinate of bottom leftPoint.</param>
+            <param name="minY">Y-Coordinate of bottom leftPoint.</param>
+            <param name="sizeX">Size in X axsis.</param>
+            <param name="sizeY">Size in Y axsis.</param>
+            <param name="sprite">The Sprite.</param>
+        </member>
+        <member name="M:Game.Enemy.Boss.BossMG.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Enemy.Boss.BossSniper">
             <summary>
             The Sniper weapon of the Boss.

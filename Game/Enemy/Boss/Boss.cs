@@ -18,6 +18,9 @@ namespace Game.Enemy.Boss
         private BossSniper sniper;
         private ISprite sniperSprite;
 
+        private BossMG mg;
+        private ISprite mgSprite;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Boss"/> class.
         /// </summary>
@@ -34,8 +37,19 @@ namespace Game.Enemy.Boss
             this.SizeY = 4;
 
             this.sniperSprite = TextureAtlas.Sprites["ammunition_bullet"];
-            this.sniper = new BossSniper(this.MinX, this.MinY, this.SizeX, this.SizeY / 2, this.sniperSprite);
+            this.sniper = new BossSniper(this.MinX + this.SizeX + 2, this.MinY + (this.SizeY / 2), 0.5f, 0.3f, this.sniperSprite);
             Engine.Engine.AddGameObject(this.sniper);
+
+            this.mgSprite = TextureAtlas.Sprites["ammunition_bullet"];
+            this.mg = new BossMG(this.MinX + (this.SizeX / 2), this.MinY + this.SizeY, 0.5f, 0.3f, this.sniperSprite);
+            Engine.Engine.AddGameObject(this.mg);
+        }
+
+        /// <inheritdoc/>
+        public override void OnUpdatableDestroy()
+        {
+            Engine.Engine.RemoveGameObject(this.sniper);
+            base.OnUpdatableDestroy();
         }
     }
 }
