@@ -4,6 +4,40 @@
         <name>Game</name>
     </assembly>
     <members>
+        <member name="T:Game.Enemy.Boss.Boss">
+            <summary>
+            The Boss.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.Boss.Boss.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.Boss.Boss"/> class.
+            </summary>
+            <param name="minX">X-Coordinate of bottom leftPoint.</param>
+            <param name="minY">Y-Coordinate of bottom leftPoint.</param>
+            <param name="sizeX">Size in X axsis.</param>
+            <param name="sizeY">Size in Y axsis.</param>
+            <param name="sprite">Enemy Sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
+        </member>
+        <member name="T:Game.Enemy.Boss.BossSniper">
+            <summary>
+            The Sniper weapon of the Boss.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.Boss.BossSniper.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.Boss.BossSniper"/> class.
+            </summary>
+            <param name="minX">X-Coordinate of bottom leftPoint.</param>
+            <param name="minY">Y-Coordinate of bottom leftPoint.</param>
+            <param name="sizeX">Size in X axsis.</param>
+            <param name="sizeY">Size in Y axsis.</param>
+            <param name="sprite">The Sprite.</param>
+        </member>
+        <member name="M:Game.Enemy.Boss.BossSniper.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Enemy.DummyAI">
             <summary>
             Lets the enemy walk from one side of the platform to the other side.
