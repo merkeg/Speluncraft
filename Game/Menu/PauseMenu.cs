@@ -63,6 +63,7 @@ namespace Game.Menu
         /// <inheritdoc/>
         public override void OnRendererCreate()
         {
+            Engine.Engine.GameIsRunning = false;
             Engine.Engine.GetService<Engine.Service.InputService>().Subscribe(new[] { Keys.W, Keys.S, Keys.A, Keys.D, Keys.Down, Keys.Up, Keys.Left, Keys.Right }, this.ButtonChange);
             Engine.Engine.GetService<Engine.Service.InputService>().Subscribe(new[] { Keys.Space, Keys.Enter }, this.ExecuteSelectedMenu);
         }
@@ -70,6 +71,7 @@ namespace Game.Menu
         /// <inheritdoc/>
         public override void OnRendererDelete()
         {
+            Engine.Engine.GameIsRunning = true;
             Engine.Engine.GetService<Engine.Service.InputService>().Unsubscribe(new[] { Keys.W, Keys.S, Keys.A, Keys.D, Keys.Down, Keys.Up, Keys.Left, Keys.Right }, this.ButtonChange);
             Engine.Engine.GetService<Engine.Service.InputService>().Unsubscribe(new[] { Keys.Space, Keys.Enter }, this.ExecuteSelectedMenu);
         }
