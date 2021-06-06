@@ -23,7 +23,7 @@ namespace Game.Enemy.Boss
         private readonly int damageDelayFrames = 1;
 
         private readonly float bulletVelocity = 10;
-        private int dmg = 10;
+        private int dmg = 5;
         private float reloadTime = 2f;
         private float reloadCoolDown = 0;
 
@@ -32,6 +32,8 @@ namespace Game.Enemy.Boss
         private bool secondShot;
 
         private ISprite bulletSprite;
+
+        private Random randy;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BossMG"/> class.
@@ -45,6 +47,7 @@ namespace Game.Enemy.Boss
             : base(minX, minY, sizeX, sizeY, sprite)
         {
             this.bulletSprite = TextureAtlas.Sprites["ammunition_bullet"];
+            this.randy = new Random();
         }
 
         /// <inheritdoc/>
@@ -96,7 +99,10 @@ namespace Game.Enemy.Boss
                 return;
             }
 
-            Vector2 lineToPlayer = new Vector2((player.MinX + (player.SizeX / 2)) - (this.MinX + this.SizeX), (player.MinY + (player.SizeY / 2)) - (this.MinY + (this.SizeY / 2)));
+            float xOffset = (float)this.randy.NextDouble() - 0.5f;
+            xOffset = xOffset * 5;
+
+            Vector2 lineToPlayer = new Vector2((player.MinX + (player.SizeX / 2)) - (this.MinX + this.SizeX), (player.MinY + (player.SizeY / 2)) - (this.MinY + (this.SizeY / 2)) + xOffset);
             lineToPlayer.Normalize();
 
             Gun.Ammunition.Bullet b = new Gun.Ammunition.Bullet(this.dmg, lineToPlayer.X * this.bulletVelocity, lineToPlayer.Y * this.bulletVelocity, this.MinX + this.SizeX + this.bufferDistance, this.MinY + (this.SizeY / 2), this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);

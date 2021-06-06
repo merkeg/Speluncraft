@@ -24,7 +24,7 @@ namespace Game.Enemy.Boss
 
         private readonly float bulletVelocity = 10;
         private int dmg = 10;
-        private float reloadTime = 2f;
+        private float reloadTime = 3f;
         private float reloadCoolDown = 0;
 
         private ISprite bulletSprite;
