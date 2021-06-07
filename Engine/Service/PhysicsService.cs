@@ -40,7 +40,6 @@ namespace Engine.Service
         {
             if (!Engine.GameIsRunning)
             {
-                Console.WriteLine("NEEE");
                 return;
             }
 
