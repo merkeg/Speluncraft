@@ -53,6 +53,11 @@ namespace Game.Enemy.Boss
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
+            if (!Engine.Engine.GameIsRunning)
+            {
+                return;
+            }
+
             base.OnUpdate(frameTime);
 
             if (this.reloadCoolDown <= 0)

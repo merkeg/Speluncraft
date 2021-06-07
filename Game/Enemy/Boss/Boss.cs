@@ -41,14 +41,20 @@ namespace Game.Enemy.Boss
             Engine.Engine.AddGameObject(this.sniper);
 
             this.mgSprite = TextureAtlas.Sprites["ammunition_bullet"];
-            this.mg = new BossMG(this.MinX + (this.SizeX / 2), this.MinY + this.SizeY, 0.5f, 0.3f, this.sniperSprite);
+            this.mg = new BossMG(this.MinX + this.SizeX, this.MinY + this.SizeY, 0.5f, 0.3f, this.sniperSprite);
             Engine.Engine.AddGameObject(this.mg);
+
+            this.GetComponent<Engine.Component.HealthPoints>().SetMaxHP(500);
+            this.GetComponent<Engine.Component.HealthPoints>().SetHP(500);
+
+            this.RemoveComponent(this.GetComponent<Engine.Component.Physics>());
         }
 
         /// <inheritdoc/>
         public override void OnUpdatableDestroy()
         {
             Engine.Engine.RemoveGameObject(this.sniper);
+            Engine.Engine.RemoveGameObject(this.mg);
             base.OnUpdatableDestroy();
         }
     }
