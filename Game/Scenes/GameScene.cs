@@ -38,7 +38,7 @@ namespace Game.Scenes
 
         private void InitializeRenderers()
         {
-            this.tilemap = TextureAtlas.Tilemaps[this.Bundle.Get("level", "level01")];
+            this.tilemap = TextureAtlas.Tilemaps[this.Bundle.Get("level", "level04")];
             Engine.Engine.GetService<TilemapService>().AddTilemap(this.tilemap, Vector2i.Zero);
         }
 
@@ -107,6 +107,12 @@ namespace Game.Scenes
             {
                 Color4 color = System.Drawing.ColorTranslator.FromHtml(obj.GetProperty("color").value.ToString());
                 Engine.Engine.AddGameObject(new InteractableElement(obj.X, -obj.Y, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], obj.GetProperty("text").value.ToString(), color, color, obj.GetProperty("range").ValueAsType<float>(), false));
+            });
+
+            this.tilemap.FindObjectsByName("boss").ForEach(obj =>
+            {
+                Game.Enemy.Boss.Boss enemy = new Game.Enemy.Boss.Boss(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10);
+                Engine.Engine.AddGameObject(enemy);
             });
         }
 
