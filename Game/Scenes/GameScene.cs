@@ -38,7 +38,7 @@ namespace Game.Scenes
 
         private void InitializeRenderers()
         {
-            this.tilemap = TextureAtlas.Tilemaps[this.Bundle.Get("level", "level04")];
+            this.tilemap = TextureAtlas.Tilemaps[this.Bundle.Get("level", "level01")];
             Engine.Engine.GetService<TilemapService>().AddTilemap(this.tilemap, Vector2i.Zero);
         }
 
