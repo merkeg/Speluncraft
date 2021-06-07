@@ -88,6 +88,7 @@ namespace Engine.Service
         {
             this.tilemaps.Add(tilemap, offset);
             this.tilesheets.Add(tilemap.Tilesheet);
+            Engine.BackgroundColor = ColorTranslator.FromHtml(tilemap.TilemapModel.backgroundcolor);
             foreach (TilemapTileLayer layer in tilemap.TileLayers)
             {
                 if (layer.TilemapModel.properties == null)

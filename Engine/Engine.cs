@@ -62,6 +62,11 @@ namespace Engine
         public static SceneChangeHandler OnSceneChange { get; set; }
 
         /// <summary>
+        /// Gets or sets a value indicating whether Game is running.
+        /// </summary>
+        public static bool GameIsRunning { get; set; } = true;
+
+        /// <summary>
         /// Start the engine ticks.
         /// </summary>
         /// <param name="window">The GameWindow the engine will be run on.</param>
@@ -78,6 +83,7 @@ namespace Engine
 
             // Services
             Engine.AddService(new TilemapService());
+            Engine.AddService(new GameObjectRendererService());
             Engine.AddService(new ParticleService());
             Engine.AddService(new InputService());
 
@@ -91,7 +97,8 @@ namespace Engine
         /// Change the Scene.
         /// </summary>
         /// <param name="scene">Scene to change to.</param>
-        public static void ChangeScene(Scene.Scene scene)
+        /// <param name="bundle">The data you want to give the scene.</param>
+        public static void ChangeScene(Scene.Scene scene, Bundle bundle = null)
         {
             if (Scene.Scene.Current != null)
             {
@@ -102,6 +109,8 @@ namespace Engine
             {
                 service.SceneChangeCleanup();
             }
+
+            scene.Bundle = bundle ?? Bundle.Default;
 
             OnSceneChange?.Invoke(Scene.Scene.Current, scene);
 

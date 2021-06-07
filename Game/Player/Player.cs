@@ -11,6 +11,7 @@ namespace Game.Player
     using Engine.GameObject;
     using Engine.Renderer;
     using Engine.Renderer.Sprite;
+    using Game.Gun;
     using Game.Scenes;
     using OpenTK.Windowing.GraphicsLibraryFramework;
 
@@ -153,9 +154,19 @@ namespace Game.Player
             this.Mirrored = this.animationScheduler.GetIfMustBeMirrored();
         }
 
+        /// <summary>
+        /// Returns Gun.
+        /// </summary>
+        /// <returns>IGun.</returns>
+        public IGun GetGun()
+        {
+            return this.gun;
+        }
+
         private void Shoot(KeyboardState keyboardState)
         {
-            if (keyboardState.IsKeyDown(Keys.Left))
+            // if (keyboardState.IsKeyDown(Keys.Left))
+            if (keyboardState.IsKeyPressed(Keys.Left))
             {
                 this.isFaceing = Gun.ILookDirection.Left;
                 this.gun.PullTrigger();
@@ -164,7 +175,7 @@ namespace Game.Player
                     this.Mirrored = true;
                 }
             }
-            else if (keyboardState.IsKeyDown(Keys.Right))
+            else if (keyboardState.IsKeyPressed(Keys.Right))
             {
                 this.isFaceing = Gun.ILookDirection.Right;
                 this.gun.PullTrigger();
@@ -273,7 +284,7 @@ namespace Game.Player
             Engine.Component.Physics phys = this.GetComponent<Engine.Component.Physics>();
 
             // Falling
-            if (phys.GetVelocity().Y < 0)
+            if (phys.GetVelocity().Y < -0.5)
             {
                 this.animationScheduler.AddAnimation(40, 0.001f, this.spriteFall, this.Mirrored);
             }

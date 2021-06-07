@@ -4,6 +4,61 @@
         <name>Game</name>
     </assembly>
     <members>
+        <member name="T:Game.Enemy.Boss.Boss">
+            <summary>
+            The Boss.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.Boss.Boss.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.Boss.Boss"/> class.
+            </summary>
+            <param name="minX">X-Coordinate of bottom leftPoint.</param>
+            <param name="minY">Y-Coordinate of bottom leftPoint.</param>
+            <param name="sizeX">Size in X axsis.</param>
+            <param name="sizeY">Size in Y axsis.</param>
+            <param name="sprite">Enemy Sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
+        </member>
+        <member name="M:Game.Enemy.Boss.Boss.OnUpdatableDestroy">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Enemy.Boss.BossMG">
+            <summary>
+            The Bosses MG that shoots fast.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.Boss.BossMG.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.Boss.BossMG"/> class.
+            </summary>
+            <param name="minX">X-Coordinate of bottom leftPoint.</param>
+            <param name="minY">Y-Coordinate of bottom leftPoint.</param>
+            <param name="sizeX">Size in X axsis.</param>
+            <param name="sizeY">Size in Y axsis.</param>
+            <param name="sprite">The Sprite.</param>
+        </member>
+        <member name="M:Game.Enemy.Boss.BossMG.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Enemy.Boss.BossSniper">
+            <summary>
+            The Sniper weapon of the Boss.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.Boss.BossSniper.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.Boss.BossSniper"/> class.
+            </summary>
+            <param name="minX">X-Coordinate of bottom leftPoint.</param>
+            <param name="minY">Y-Coordinate of bottom leftPoint.</param>
+            <param name="sizeX">Size in X axsis.</param>
+            <param name="sizeY">Size in Y axsis.</param>
+            <param name="sprite">The Sprite.</param>
+        </member>
+        <member name="M:Game.Enemy.Boss.BossSniper.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Enemy.DummyAI">
             <summary>
             Lets the enemy walk from one side of the platform to the other side.
@@ -20,11 +75,38 @@
             <param name="sprite">sprite.</param>
             <param name="damage">Damage dealt by touching the enemy.</param>
         </member>
+        <member name="P:Game.Enemy.DummyAI.SpriteWalking">
+            <summary>
+            Gets or sets a walking sprite.
+            </summary>
+        </member>
+        <member name="P:Game.Enemy.DummyAI.SpriteHurt">
+            <summary>
+            Gets or sets a hurt sprite.
+            </summary>
+        </member>
+        <member name="P:Game.Enemy.DummyAI.SpriteAttack">
+            <summary>
+            Gets or sets an attack sprite.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.DummyAI.GetMoveSpeed">
+            <summary>
+            Gets the Movespeed.
+            </summary>
+            <returns>The Movespeed.</returns>
+        </member>
         <member name="M:Game.Enemy.DummyAI.GetDirection">
             <inheritdoc/>
         </member>
         <member name="M:Game.Enemy.DummyAI.OnUpdate(System.Single)">
             <inheritdoc/>
+        </member>
+        <member name="M:Game.Enemy.DummyAI.EnemyOnUpdate(System.Single)">
+            <summary>
+            Calls the OnUpdate of Enenemy ( without the AI ).
+            </summary>
+            <param name="frameTime">Time passed since last frame.</param>
         </member>
         <member name="T:Game.Enemy.Enemy">
             <summary>
@@ -62,6 +144,76 @@
             <param name="damage">Damage dealt by touching the enemy.</param>
         </member>
         <member name="M:Game.Enemy.EnemyPistol.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer">
+            <summary>
+            Enemy that can do something when he sees the Player. ( Overrider OnSeePlayer ).
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer"/> class.
+            </summary>
+            <param name="minX">minX.</param>
+            <param name="minY">minY.</param>
+            <param name="sizeX">sizeX.</param>
+            <param name="sizeY">sizeY.</param>
+            <param name="sprite">sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
+        </member>
+        <member name="M:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer.SawPlayerThisFrame(System.Single)">
+            <summary>
+            Do Something when we see the Player.
+            </summary>
+            <param name="frameTime">Time pased since last frame.</param>
+        </member>
+        <member name="T:Game.Enemy.EnemyWithWeapon">
+            <summary>
+            An Enemy that throws rocks when he sees the Player.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.EnemyWithWeapon.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32,Game.Gun.IGun)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.EnemyWithWeapon"/> class.
+            </summary>
+            <param name="minX">minX.</param>
+            <param name="minY">minY.</param>
+            <param name="sizeX">sizeX.</param>
+            <param name="sizeY">sizeY.</param>
+            <param name="sprite">sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
+            <param name="gun">The Gun the Enemy uses.</param>
+        </member>
+        <member name="M:Game.Enemy.EnemyWithWeapon.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Enemy.EnemyWithWeapon.SawPlayerThisFrame(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Enemy.LeaperReaperEnemy">
+            <summary>
+            Enemy that jumps at at Player when he sees him.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.LeaperReaperEnemy.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.LeaperReaperEnemy"/> class.
+            </summary>
+            <param name="minX">minX.</param>
+            <param name="minY">minY.</param>
+            <param name="sizeX">sizeX.</param>
+            <param name="sizeY">sizeY.</param>
+            <param name="sprite">sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
+        </member>
+        <member name="M:Game.Enemy.LeaperReaperEnemy.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Enemy.LeaperReaperEnemy.SawPlayerThisFrame(System.Single)">
             <inheritdoc/>
         </member>
         <member name="T:Game.GameComponents.AnimationScheduler">
@@ -150,11 +302,6 @@
             Gets the start scene.
             </summary>
         </member>
-        <member name="P:Game.GameManager.SceneGame">
-            <summary>
-            Gets the Game scene.
-            </summary>
-        </member>
         <member name="P:Game.GameManager.SceneDeath">
             <summary>
             Gets the Death scene.
@@ -211,6 +358,28 @@
             <param name="damageDelayFrames">How many frames to wait, before this bullet will do Damage.</param>
         </member>
         <member name="M:Game.Gun.Ammunition.Grenade.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Gun.Ammunition.Stone">
+            <summary>
+            A Stone, that flys slow and has gravity.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.Ammunition.Stone.#ctor(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.Ammunition.Stone"/> class.
+            </summary>
+            <param name="dmg">How much dmg it will do on impact.</param>
+            <param name="velocityX">How fast it is flying straight.</param>
+            <param name="velocityY">How fast it is flying up.</param>
+            <param name="minX">Where it will spawn on X-Axsis.</param>
+            <param name="minY">Where it will spawn on Y-Axsis.</param>
+            <param name="sizeX">Size X.</param>
+            <param name="sizeY">Size Y.</param>
+            <param name="sprite">Its sprite.</param>
+            <param name="damageDelayFrames">How many frames to wait, before this bullet will do Damage.</param>
+        </member>
+        <member name="M:Game.Gun.Ammunition.Stone.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
         <member name="T:Game.Gun.GrenadeLauncher">
@@ -376,6 +545,30 @@
         <member name="M:Game.Gun.Sniper.ShotFired">
             <inheritdoc/>
         </member>
+        <member name="T:Game.Gun.StoneThrower">
+            <summary>
+            Throw Stones...
+            </summary>
+        </member>
+        <member name="M:Game.Gun.StoneThrower.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.StoneThrower"/> class.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.StoneThrower.GetAsComponent">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.StoneThrower.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.StoneThrower.PullTrigger">
+            <summary>
+            Fires a Bullet, when trigger is pulled and is reloaded.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.StoneThrower.ShotFired">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Gun.CameraTrackingComponent">
             <summary>
             Camera tracking component class.
@@ -534,6 +727,12 @@
         <member name="M:Game.Player.Player.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="M:Game.Player.Player.GetGun">
+            <summary>
+            Returns Gun.
+            </summary>
+            <returns>IGun.</returns>
+        </member>
         <member name="T:Game.Program">
             <summary>
             The Main class of the game.
@@ -558,6 +757,14 @@
             </summary>
         </member>
         <member name="M:Game.Scenes.GameScene.OnSceneLoad">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Scenes.ShopScene">
+            <summary>
+            Start shop scene.
+            </summary>
+        </member>
+        <member name="M:Game.Scenes.ShopScene.OnSceneLoad">
             <inheritdoc/>
         </member>
         <member name="T:Game.Scenes.StartScene">
@@ -779,7 +986,7 @@
         <member name="M:Game.UI.ItemShop.OnRendererDelete">
             <inheritdoc/>
         </member>
-        <member name="M:Game.UI.ItemShop.HideShop(System.Boolean)">
+        <member name="M:Game.UI.ItemShop.HideShop">
             <summary>
             sets Text render as visible or not.
             </summary>
@@ -801,17 +1008,6 @@
             Render stats as text into shop.
             </summary>
             <param name="args">FrameEventArgs.</param>
-        </member>
-        <member name="T:Game.UI.UILoader">
-            <summary>
-            Loader Class to initialize the whole UI of the Game. (hopefully).
-            </summary>
-        </member>
-        <member name="M:Game.UI.UILoader.Initialize_UI(Game.Player.Player)">
-            <summary>
-            Initializes the UI.
-            </summary>
-            /// <param name="player">player.</param>
         </member>
     </members>
 </doc>

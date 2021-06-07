@@ -6,6 +6,7 @@ namespace Engine
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.Linq;
     using global::Engine.Renderer;
     using global::Engine.Service;
@@ -19,6 +20,11 @@ namespace Engine
     public partial class Engine
     {
         private static UiMatrixRenderer uiMatrixRenderer;
+
+        /// <summary>
+        /// Gets or sets a Backgroundcolor.
+        /// </summary>
+        public static Color BackgroundColor { get; set; } = Color.Black;
 
         /// <summary>
         /// Gets the renderers.
@@ -76,6 +82,7 @@ namespace Engine
         private static void Render(FrameEventArgs args)
         {
             Engine.GameWindow.SwapBuffers();
+            GL.ClearColor(BackgroundColor);
             GL.Clear(ClearBufferMask.ColorBufferBit);
 
             foreach (RenderLayer layer in Engine.Renderers.Keys.ToList())

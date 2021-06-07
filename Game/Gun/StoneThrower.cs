@@ -1,4 +1,4 @@
-﻿// <copyright file="GrenadeLauncher.cs" company="RWUwU">
+﻿// <copyright file="StoneThrower.cs" company="RWUwU">
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
@@ -8,39 +8,41 @@ namespace Game.Gun
     using System.Collections.Generic;
     using System.Reflection;
     using System.Text;
-    using Engine.Component;
-    using Engine.Renderer;
     using Engine.Renderer.Sprite;
 
     /// <summary>
-    /// Launches Grenades.
+    /// Throw Stones...
     /// </summary>
-    public class GrenadeLauncher : Engine.Component.Component, IGun
+    public class StoneThrower : Engine.Component.Component, IGun
     {
-        private readonly float bulletLenght = 0.5f;
-        private readonly float bulletHeight = 0.5f;
+        private readonly float stoneLenght = 0.5f;
+        private readonly float stoneHeight = 0.5f;
         private readonly float bufferDistance = 0f;
 
         private readonly int damageDelayFrames = 1;
 
-        private readonly float bulletVelocity = 8;
-        private float reloadTime = 1.25f;
+        private readonly float stoneVelocityX = 8;
+        private readonly float stoneVelocityY = 2;
+        private int dmg = 5;
+        private float reloadTime = 0.5f;
         private float reloadCoolDown = 0;
 
         private bool shotFiredThisFrame;
 
-        private ISprite grenadeSprite;
+        private ISprite stoneSprite;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="GrenadeLauncher"/> class.
+        /// Initializes a new instance of the <see cref="StoneThrower"/> class.
         /// </summary>
-        public GrenadeLauncher()
+        public StoneThrower()
         {
-            this.grenadeSprite = TextureAtlas.Sprites["ammunition_bullet"];
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            Engine.Renderer.Tile.Tilesheet animatedBullet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Animated.bullet.png", 32, 32);
+            this.stoneSprite = new AnimatedSprite(animatedBullet, new[] { new Keyframe(0, 0, 0.5f), new Keyframe(0, 1, 0.5f) });
         }
 
         /// <inheritdoc/>
-        public Component GetAsComponent()
+        public Engine.Component.Component GetAsComponent()
         {
             return this;
         }
@@ -65,14 +67,14 @@ namespace Game.Gun
                     ILookDirection d = (ILookDirection)this.GameObject;
                     if (d.GetDirection() == ILookDirection.Left)
                     {
-                        Ammunition.Grenade g = new Ammunition.Grenade(-this.bulletVelocity, 5, this.GameObject.MinX - this.bulletLenght - this.bufferDistance, this.GameObject.MinY + 0.5f, this.bulletLenght, this.bulletHeight, this.grenadeSprite, this.damageDelayFrames);
-                        Engine.Engine.AddGameObject(g);
+                        Ammunition.Stone b = new Ammunition.Stone(this.dmg, -this.stoneVelocityX, this.stoneVelocityY, this.GameObject.MinX - this.stoneLenght - this.bufferDistance, this.GameObject.MinY + 0.3f, this.stoneLenght, this.stoneHeight, this.stoneSprite, this.damageDelayFrames);
+                        Engine.Engine.AddGameObject(b);
                     }
 
                     if (d.GetDirection() == ILookDirection.Right)
                     {
-                        Ammunition.Grenade g = new Ammunition.Grenade(this.bulletVelocity, 5, this.GameObject.MinX + this.GameObject.SizeX + this.bufferDistance, this.GameObject.MinY + 0.5f, this.bulletLenght, this.bulletHeight, this.grenadeSprite, this.damageDelayFrames);
-                        Engine.Engine.AddGameObject(g);
+                        Ammunition.Stone b = new Ammunition.Stone(this.dmg, this.stoneVelocityX, this.stoneVelocityY, this.GameObject.MinX + this.GameObject.SizeX + this.bufferDistance, this.GameObject.MinY + 0.3f, this.stoneLenght, this.stoneHeight, this.stoneSprite, this.damageDelayFrames);
+                        Engine.Engine.AddGameObject(b);
                     }
                 }
 

@@ -37,7 +37,7 @@ namespace Engine.Component
         /// If we did dmg this frame.
         /// </summary>
         /// <returns>If we have done dmg this frame.</returns>
-        public bool GetDidDmgThisGrame()
+        public bool GetDidDmgThisFrame()
         {
             return this.didDmgThisFrame;
         }

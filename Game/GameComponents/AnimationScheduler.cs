@@ -29,9 +29,16 @@ namespace Game.GameComponents
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
-            this.animationQueue.Sort();
-            this.GameObject.Sprite = this.animationQueue[0].Animation;
-            this.mirrored = this.animationQueue[0].Mirrored;
+            try
+            {
+                this.animationQueue.Sort();
+                this.GameObject.Sprite = this.animationQueue[0].Animation;
+                this.mirrored = this.animationQueue[0].Mirrored;
+            }
+            catch
+            {
+                return;
+            }
 
             List<AnimationWithTimeAndPrio> toBeRemoved = new List<AnimationWithTimeAndPrio>();
 

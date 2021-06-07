@@ -29,6 +29,11 @@ namespace Engine.Scene
         public List<IRectangle> Colliders { get; set; }
 
         /// <summary>
+        /// Gets or sets the bundle.
+        /// </summary>
+        public Bundle Bundle { get; set; }
+
+        /// <summary>
         /// Runs when the Scene loads.
         /// </summary>
         public void OnSceneLoad();

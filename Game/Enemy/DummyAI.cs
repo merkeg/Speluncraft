@@ -25,10 +25,6 @@ namespace Game.Enemy
 
         private GameComponents.AnimationScheduler animationScheduler;
 
-        private ISprite spriteWalking;
-        private ISprite spriteHurt;
-        private ISprite spriteAttack;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="DummyAI"/> class.
         /// </summary>
@@ -56,6 +52,30 @@ namespace Game.Enemy
             this.AddComponent(this.animationScheduler);
         }
 
+        /// <summary>
+        /// Gets or sets a walking sprite.
+        /// </summary>
+        public ISprite SpriteWalking { get; set; }
+
+        /// <summary>
+        /// Gets or sets a hurt sprite.
+        /// </summary>
+        public ISprite SpriteHurt { get; set; }
+
+        /// <summary>
+        /// Gets or sets an attack sprite.
+        /// </summary>
+        public ISprite SpriteAttack { get; set; }
+
+        /// <summary>
+        /// Gets the Movespeed.
+        /// </summary>
+        /// <returns>The Movespeed.</returns>
+        public float GetMoveSpeed()
+        {
+            return this.movementSpeed;
+        }
+
         /// <inheritdoc/>
         public int GetDirection()
         {
@@ -69,6 +89,15 @@ namespace Game.Enemy
             this.UpdateAnimations();
             base.OnUpdate(frameTime);
             this.CheckWall();
+        }
+
+        /// <summary>
+        /// Calls the OnUpdate of Enenemy ( without the AI ).
+        /// </summary>
+        /// <param name="frameTime">Time passed since last frame.</param>
+        public void EnemyOnUpdate(float frameTime)
+        {
+            base.OnUpdate(frameTime);
         }
 
         private void CheckLedge()
@@ -104,6 +133,7 @@ namespace Game.Enemy
             {
                 this.phys.SetVelocity(-this.movementSpeed, 0);
                 this.lookingDirection = Gun.ILookDirection.Left;
+                this.Mirrored = true;
                 return;
             }
 
@@ -111,6 +141,7 @@ namespace Game.Enemy
             {
                 this.phys.SetVelocity(this.movementSpeed, 0);
                 this.lookingDirection = Gun.ILookDirection.Right;
+                this.Mirrored = false;
                 return;
             }
 
@@ -128,6 +159,7 @@ namespace Game.Enemy
                 {
                     this.phys.SetVelocity(this.movementSpeed, 0);
                     this.lookingDirection = Gun.ILookDirection.Right;
+                    this.Mirrored = false;
                     return;
                 }
 
@@ -135,6 +167,7 @@ namespace Game.Enemy
                 {
                     this.phys.SetVelocity(-this.movementSpeed, 0);
                     this.lookingDirection = Gun.ILookDirection.Left;
+                    this.Mirrored = true;
                     return;
                 }
             }
@@ -150,32 +183,34 @@ namespace Game.Enemy
 
             if (phys.GetVelocity().X < -0.1)
             {
-                this.animationScheduler.AddAnimation(10, 0.0001f, this.spriteWalking, true);
+                this.animationScheduler.AddAnimation(10, 0.0001f, this.SpriteWalking, true);
+                this.lookingDirection = Gun.ILookDirection.Left;
                 this.Mirrored = true;
             }
 
             if (phys.GetVelocity().X > 0.1)
             {
-                this.animationScheduler.AddAnimation(10, 0.0001f, this.spriteWalking, false);
+                this.animationScheduler.AddAnimation(10, 0.0001f, this.SpriteWalking, false);
+                this.lookingDirection = Gun.ILookDirection.Right;
                 this.Mirrored = false;
             }
 
             if (this.GetComponent<Engine.Component.HealthPoints>().GetTookDmgThisFrame())
             {
-                this.animationScheduler.AddAnimation(7, 0.3f, this.spriteHurt, this.Mirrored);
+                this.animationScheduler.AddAnimation(7, 0.3f, this.SpriteHurt, this.Mirrored);
             }
 
             if (this.GetComponent<Engine.Component.DoDamageWithKnockbackCollisionResponse>().GetDidDMGthisFrame())
             {
-                this.animationScheduler.AddAnimation(4, 0.3f, this.spriteAttack, this.Mirrored);
+                this.animationScheduler.AddAnimation(4, 0.3f, this.SpriteAttack, this.Mirrored);
             }
         }
 
         private void InitializeSprites()
         {
-            this.spriteAttack = TextureAtlas.Sprites["zombie_attack"];
-            this.spriteHurt = TextureAtlas.Sprites["zombie_hurt"];
-            this.spriteWalking = TextureAtlas.Sprites["zombie_walking"];
+            this.SpriteAttack = TextureAtlas.Sprites["zombie_attack"];
+            this.SpriteHurt = TextureAtlas.Sprites["zombie_hurt"];
+            this.SpriteWalking = TextureAtlas.Sprites["zombie_walking"];
         }
     }
 }

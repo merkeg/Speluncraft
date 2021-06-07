@@ -24,6 +24,7 @@ namespace Engine.Renderer.Tile
         {
             this.TileLayers = new List<TilemapTileLayer>();
             this.ObjectLayers = new List<TilemapObjectLayer>();
+            this.TilemapModel = model;
             this.Tilesheet = tilesheet;
 
             foreach (TilemapLayerModel layer in model.layers)
@@ -43,6 +44,11 @@ namespace Engine.Renderer.Tile
         /// Gets the Layers.
         /// </summary>
         public List<TilemapTileLayer> TileLayers { get; private set; }
+
+        /// <summary>
+        /// Gets the TilemapModel.
+        /// </summary>
+        public TilemapModel TilemapModel { get; private set; }
 
         /// <summary>
         /// Gets the Object layers.

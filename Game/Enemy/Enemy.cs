@@ -46,6 +46,11 @@ namespace Game.Enemy
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
+            if (!Engine.Engine.GameIsRunning)
+            {
+                return;
+            }
+
             base.OnUpdate(frameTime);
             if (this.GetComponent<Engine.Component.HealthPoints>() != null)
             {

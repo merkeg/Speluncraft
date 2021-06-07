@@ -5,13 +5,11 @@
 namespace Game.Scenes
 {
     using System;
+    using Engine.Component;
     using Engine.GameObject;
     using Engine.Renderer;
     using Engine.Renderer.Sprite;
-    using Engine.Renderer.Text;
-    using Engine.Renderer.Text.Parser;
     using Engine.Renderer.Tile;
-    using Engine.Renderer.Tile.Parser;
     using Engine.Renderer.UI;
     using Engine.Scene;
     using Engine.Service;
@@ -40,7 +38,7 @@ namespace Game.Scenes
 
         private void InitializeRenderers()
         {
-            this.tilemap = TextureAtlas.Tilemaps["level01"];
+            this.tilemap = TextureAtlas.Tilemaps[this.Bundle.Get("level", "level04")];
             Engine.Engine.GetService<TilemapService>().AddTilemap(this.tilemap, Vector2i.Zero);
         }
 
@@ -48,11 +46,15 @@ namespace Game.Scenes
         {
             TilemapLayerObject spawnPos = this.tilemap.FindObjectByName("spawn");
             Player.Player player = new Player.Player(spawnPos.X, -spawnPos.Y + 1, 1, 1.375f, TextureAtlas.Sprites["adventurer_idle"]);
+            player.ChangeGun(this.Bundle.Get<IGun>("playerWeapon", new Pistol()));
+            player.GetComponent<HealthPoints>().SetHP(this.Bundle.Get("playerHealth", 100));
+
             player.AddComponent(new CameraTrackingComponent());
             Engine.Engine.AddGameObject(player);
 
             // make sure to initialize UI after the player
-            UILoader.Initialize_UI(player);
+            HealthbarPlayer playerhealthbar = new HealthbarPlayer(player);
+            Engine.Engine.AddRenderer(playerhealthbar, RenderLayer.UI);
 
             DebugRenderer debugRenderer = new DebugRenderer(new Rectangle(5, 5, 300, 325), new Color4(0, 0, 0, 0.3f), TextureAtlas.Fonts["debugFont"], player, UiAlignment.Right);
             debugRenderer.Hidden = true;
@@ -62,13 +64,20 @@ namespace Game.Scenes
 
             Engine.Engine.GetService<TilemapService>().SetOptimizationPoint(player);
 
-            InteractableElement el = new InteractableElement(96, -30, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [A] and [D] to walk.", Color4.White, Color4.White, 4, false);
-            Engine.Engine.AddGameObject(el);
-            el.Interact += () => Console.WriteLine("W pressed GameScene AddPlayer()");
-
-            Engine.Engine.AddGameObject(new InteractableElement(84, -32, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [Left] and [Right] to shoot.", Color4.White, Color4.White, 6, false));
-            Engine.Engine.AddGameObject(new InteractableElement(74, -42, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [Space] to jump.", Color4.White, Color4.White, 6, false));
-            Engine.Engine.AddGameObject(new InteractableElement(50, -34, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Lava will kill you", Color4.Coral, Color4.Coral, 6, false));
+            TilemapLayerObject exitPos = this.tilemap.FindObjectByName("exit");
+            if (exitPos != null)
+            {
+                InteractableElement el = new InteractableElement(exitPos.X, -exitPos.Y + 1, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], "Press [W] to exit.", Color4.White, Color4.White, 2, false);
+                Engine.Engine.AddGameObject(el);
+                el.Interact += () =>
+                {
+                    Bundle bundle = new Bundle();
+                    bundle.Add("level", exitPos.GetProperty("toLevel").value.ToString());
+                    bundle.Add("playerHealth", player.GetComponent<HealthPoints>().GetCurrHP());
+                    bundle.Add("playerWeapon", player.GetGun());
+                    Engine.Engine.ChangeScene(new GameScene(), bundle);
+                };
+            }
         }
 
         private void AddObjects()
@@ -82,15 +91,27 @@ namespace Game.Scenes
                 Engine.Engine.AddGameObject(heart);
             });
 
-            this.tilemap.FindObjectsByName("DummyAI").ForEach(obj =>
+            this.tilemap.FindObjectsByName("Leaper").ForEach(obj =>
             {
-                DummyAI enemy = new DummyAI(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10);
+                LeaperReaperEnemy enemy = new LeaperReaperEnemy(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10);
                 Engine.Engine.AddGameObject(enemy);
             });
 
             this.tilemap.FindObjectsByName("EnemyPistol").ForEach(obj =>
             {
-                EnemyPistol enemy = new EnemyPistol(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10);
+                EnemyWithWeapon enemy = new EnemyWithWeapon(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10, new StoneThrower());
+                Engine.Engine.AddGameObject(enemy);
+            });
+
+            this.tilemap.FindObjectsByName("Text").ForEach(obj =>
+            {
+                Color4 color = System.Drawing.ColorTranslator.FromHtml(obj.GetProperty("color").value.ToString());
+                Engine.Engine.AddGameObject(new InteractableElement(obj.X, -obj.Y, 0.3f, 0.3f, TextureAtlas.Fonts["debugFont"], obj.GetProperty("text").value.ToString(), color, color, obj.GetProperty("range").ValueAsType<float>(), false));
+            });
+
+            this.tilemap.FindObjectsByName("boss").ForEach(obj =>
+            {
+                Game.Enemy.Boss.Boss enemy = new Game.Enemy.Boss.Boss(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10);
                 Engine.Engine.AddGameObject(enemy);
             });
         }

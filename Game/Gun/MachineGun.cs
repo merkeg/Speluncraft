@@ -72,6 +72,7 @@ namespace Game.Gun
                 this.Shoot();
             }
 
+            this.shotFiredThisFrame = false;
             this.reloadCoolDown -= frameTime;
             this.repeatTimeCounter -= frameTime;
         }
@@ -111,13 +112,13 @@ namespace Game.Gun
         {
             if (this.shotDierection == ILookDirection.Left)
             {
-                Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, -this.bulletVelocity, 0, this.GameObject.MinX - this.bulletLenght - this.bufferDistance, this.GameObject.MinY + 0.3f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
+                Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, -this.bulletVelocity, 0, this.GameObject.MinX - this.bulletLenght - this.bufferDistance, this.GameObject.MinY + 0.4f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
                 Engine.Engine.AddGameObject(b);
             }
 
             if (this.shotDierection == ILookDirection.Right)
             {
-                Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, this.bulletVelocity, 0, this.GameObject.MinX + this.GameObject.SizeX + this.bufferDistance, this.GameObject.MinY + 0.3f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
+                Ammunition.Bullet b = new Ammunition.Bullet(this.dmg, this.bulletVelocity, 0, this.GameObject.MinX + this.GameObject.SizeX + this.bufferDistance, this.GameObject.MinY + 0.4f, this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
                 Engine.Engine.AddGameObject(b);
             }
         }
