@@ -6,6 +6,7 @@ namespace Engine.Renderer.UI
 {
     using System.Collections.Generic;
     using global::Engine.GameObject;
+    using global::Engine.Renderer.Sprite;
     using global::Engine.Renderer.Text;
     using global::Engine.Renderer.UI.Graph;
     using global::Engine.Renderer.UI.Primitive;
@@ -34,6 +35,7 @@ namespace Engine.Renderer.UI
     public abstract class UiElement : IRenderer
     {
         private UiAlignment alignment;
+        private bool fitToViewport;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="UiElement"/> class.
@@ -42,13 +44,16 @@ namespace Engine.Renderer.UI
         /// <param name="backgroundColor">Background color.</param>
         /// <param name="font">Font.</param>
         /// <param name="alignment">Alignment.</param>
-        protected UiElement(Rectangle bounds, Color4 backgroundColor, Font font, UiAlignment alignment = UiAlignment.Left)
+        /// <param name="fitToViewport">Set if content should fit to viewport.</param>
+        protected UiElement(Rectangle bounds, Color4 backgroundColor, Font font, UiAlignment alignment = UiAlignment.Left, bool fitToViewport = false)
         {
             this.alignment = alignment;
             this.Renderers = new List<IRenderer>();
             this.Font = font;
             this.BackgroundColor = backgroundColor;
             this.Bounds = bounds;
+            this.Hidden = false;
+            this.fitToViewport = fitToViewport;
             if (alignment == UiAlignment.Left)
             {
                 this.AbsoluteBounds = new Rectangle(0, 0, 1, 1);
@@ -59,13 +64,18 @@ namespace Engine.Renderer.UI
                 this.AbsoluteBounds = new Rectangle(monitor.X - this.Bounds.MinX - this.Bounds.SizeX, this.Bounds.MinY, this.Bounds.SizeX, this.Bounds.SizeY);
             }
 
-            this.AddQuad(new RelativeRectangle(this.AbsoluteBounds, 0, 0, this.Bounds.SizeX, this.Bounds.SizeY), backgroundColor);
+            this.AddQuad(this.AbsoluteBounds, backgroundColor);
         }
 
         /// <summary>
         /// Gets the Renderers.
         /// </summary>
         public List<IRenderer> Renderers { get; private set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether hidden.
+        /// </summary>
+        public bool Hidden { get; set; }
 
         /// <summary>
         /// Gets the absolute bounds.
@@ -90,16 +100,27 @@ namespace Engine.Renderer.UI
         /// <inheritdoc/>
         public void Render(FrameEventArgs args)
         {
+            if (this.Hidden)
+            {
+                return;
+            }
+
             this.OnRender(args);
             this.Renderers.ForEach(renderer => renderer.Render(args));
         }
 
         /// <inheritdoc/>
-        public void Resize(ResizeEventArgs args)
+        public virtual void Resize(ResizeEventArgs args)
         {
             if (this.alignment == UiAlignment.Right)
             {
                 this.AbsoluteBounds.MinX = args.Width - this.Bounds.MinX - this.Bounds.SizeX;
+            }
+
+            if (this.fitToViewport)
+            {
+                this.AbsoluteBounds.MaxX = args.Width;
+                this.AbsoluteBounds.MaxY = args.Height;
             }
         }
 
@@ -128,7 +149,7 @@ namespace Engine.Renderer.UI
         /// <param name="color">Color of the quad.</param>
         /// <param name="filled">Quad filled.</param>
         /// <returns>The Quad element.</returns>
-        public QuadRenderer AddQuad(Rectangle rectangleBounds, Color4 color, bool filled = true)
+        public QuadRenderer AddQuad(IRectangle rectangleBounds, Color4 color, bool filled = true)
         {
             QuadRenderer quadRenderer = new QuadRenderer(rectangleBounds, color, filled);
             this.AddRenderElement(quadRenderer);
@@ -143,7 +164,7 @@ namespace Engine.Renderer.UI
         /// <param name="min">Min.</param>
         /// <param name="max">Max.</param>
         /// <returns>Graph renderer object.</returns>
-        public GraphRenderer AddGraph(string title, Rectangle graphBounds, float min = 0f, float max = 10f)
+        public GraphRenderer AddGraph(string title, IRectangle graphBounds, float min = 0f, float max = 10f)
         {
             GraphRenderer graphRenderer = new GraphRenderer(title, this.Font, graphBounds, min, max);
             this.AddRenderElement(graphRenderer);
@@ -158,11 +179,29 @@ namespace Engine.Renderer.UI
         /// <param name="position">Position of text.</param>
         /// <param name="textScale">Scale of text.</param>
         /// <returns>Text renderer object.</returns>
-        public TextRenderer AddText(string text, Color4 color, Rectangle position, float textScale)
+        public TextRenderer AddText(string text, Color4 color, IRectangle position, float textScale)
         {
             TextRenderer textRenderer = new TextRenderer(text, this.Font, color, position, textScale);
             this.AddRenderElement(textRenderer);
             return textRenderer;
+        }
+
+        /// <summary>
+        /// Adds a new sprite to the renderer.
+        /// </summary>
+        /// <param name="sprite">Sprite to render.</param>
+        /// <param name="bounds">Bounds set to.</param>
+        /// <returns>The renderer.</returns>
+        public SpriteRenderer AddSprite(ISprite sprite, IRectangle bounds)
+        {
+            SpriteRenderer spriteRenderer = new SpriteRenderer(sprite, bounds);
+            this.AddRenderElement(spriteRenderer);
+            return spriteRenderer;
+        }
+
+        /// <inheritdoc/>
+        public virtual void OnRendererDelete()
+        {
         }
     }
 }

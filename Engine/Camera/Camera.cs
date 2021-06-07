@@ -90,6 +90,11 @@ namespace Engine.Camera
             }
         }
 
+        /// <inheritdoc/>
+        public void OnRendererDelete()
+        {
+        }
+
 #pragma warning disable SA1201 // Elements should appear in the correct order
         private Matrix4 cameraMatrix = Matrix4.Identity;
 #pragma warning restore SA1201 // Elements should appear in the correct order

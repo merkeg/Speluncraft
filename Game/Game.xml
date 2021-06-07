@@ -4,6 +4,61 @@
         <name>Game</name>
     </assembly>
     <members>
+        <member name="T:Game.Enemy.Boss.Boss">
+            <summary>
+            The Boss.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.Boss.Boss.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.Boss.Boss"/> class.
+            </summary>
+            <param name="minX">X-Coordinate of bottom leftPoint.</param>
+            <param name="minY">Y-Coordinate of bottom leftPoint.</param>
+            <param name="sizeX">Size in X axsis.</param>
+            <param name="sizeY">Size in Y axsis.</param>
+            <param name="sprite">Enemy Sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
+        </member>
+        <member name="M:Game.Enemy.Boss.Boss.OnUpdatableDestroy">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Enemy.Boss.BossMG">
+            <summary>
+            The Bosses MG that shoots fast.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.Boss.BossMG.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.Boss.BossMG"/> class.
+            </summary>
+            <param name="minX">X-Coordinate of bottom leftPoint.</param>
+            <param name="minY">Y-Coordinate of bottom leftPoint.</param>
+            <param name="sizeX">Size in X axsis.</param>
+            <param name="sizeY">Size in Y axsis.</param>
+            <param name="sprite">The Sprite.</param>
+        </member>
+        <member name="M:Game.Enemy.Boss.BossMG.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Enemy.Boss.BossSniper">
+            <summary>
+            The Sniper weapon of the Boss.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.Boss.BossSniper.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.Boss.BossSniper"/> class.
+            </summary>
+            <param name="minX">X-Coordinate of bottom leftPoint.</param>
+            <param name="minY">Y-Coordinate of bottom leftPoint.</param>
+            <param name="sizeX">Size in X axsis.</param>
+            <param name="sizeY">Size in Y axsis.</param>
+            <param name="sprite">The Sprite.</param>
+        </member>
+        <member name="M:Game.Enemy.Boss.BossSniper.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Enemy.DummyAI">
             <summary>
             Lets the enemy walk from one side of the platform to the other side.
@@ -20,11 +75,38 @@
             <param name="sprite">sprite.</param>
             <param name="damage">Damage dealt by touching the enemy.</param>
         </member>
+        <member name="P:Game.Enemy.DummyAI.SpriteWalking">
+            <summary>
+            Gets or sets a walking sprite.
+            </summary>
+        </member>
+        <member name="P:Game.Enemy.DummyAI.SpriteHurt">
+            <summary>
+            Gets or sets a hurt sprite.
+            </summary>
+        </member>
+        <member name="P:Game.Enemy.DummyAI.SpriteAttack">
+            <summary>
+            Gets or sets an attack sprite.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.DummyAI.GetMoveSpeed">
+            <summary>
+            Gets the Movespeed.
+            </summary>
+            <returns>The Movespeed.</returns>
+        </member>
         <member name="M:Game.Enemy.DummyAI.GetDirection">
             <inheritdoc/>
         </member>
         <member name="M:Game.Enemy.DummyAI.OnUpdate(System.Single)">
             <inheritdoc/>
+        </member>
+        <member name="M:Game.Enemy.DummyAI.EnemyOnUpdate(System.Single)">
+            <summary>
+            Calls the OnUpdate of Enenemy ( without the AI ).
+            </summary>
+            <param name="frameTime">Time passed since last frame.</param>
         </member>
         <member name="T:Game.Enemy.Enemy">
             <summary>
@@ -64,24 +146,264 @@
         <member name="M:Game.Enemy.EnemyPistol.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="T:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer">
+            <summary>
+            Enemy that can do something when he sees the Player. ( Overrider OnSeePlayer ).
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer"/> class.
+            </summary>
+            <param name="minX">minX.</param>
+            <param name="minY">minY.</param>
+            <param name="sizeX">sizeX.</param>
+            <param name="sizeY">sizeY.</param>
+            <param name="sprite">sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
+        </member>
+        <member name="M:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Enemy.EnemyThatWalksWithTriggerOnSeePlayer.SawPlayerThisFrame(System.Single)">
+            <summary>
+            Do Something when we see the Player.
+            </summary>
+            <param name="frameTime">Time pased since last frame.</param>
+        </member>
+        <member name="T:Game.Enemy.EnemyWithWeapon">
+            <summary>
+            An Enemy that throws rocks when he sees the Player.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.EnemyWithWeapon.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32,Game.Gun.IGun)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.EnemyWithWeapon"/> class.
+            </summary>
+            <param name="minX">minX.</param>
+            <param name="minY">minY.</param>
+            <param name="sizeX">sizeX.</param>
+            <param name="sizeY">sizeY.</param>
+            <param name="sprite">sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
+            <param name="gun">The Gun the Enemy uses.</param>
+        </member>
+        <member name="M:Game.Enemy.EnemyWithWeapon.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Enemy.EnemyWithWeapon.SawPlayerThisFrame(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Enemy.LeaperReaperEnemy">
+            <summary>
+            Enemy that jumps at at Player when he sees him.
+            </summary>
+        </member>
+        <member name="M:Game.Enemy.LeaperReaperEnemy.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Enemy.LeaperReaperEnemy"/> class.
+            </summary>
+            <param name="minX">minX.</param>
+            <param name="minY">minY.</param>
+            <param name="sizeX">sizeX.</param>
+            <param name="sizeY">sizeY.</param>
+            <param name="sprite">sprite.</param>
+            <param name="damage">Damage dealt by touching the enemy.</param>
+        </member>
+        <member name="M:Game.Enemy.LeaperReaperEnemy.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Enemy.LeaperReaperEnemy.SawPlayerThisFrame(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.GameComponents.AnimationScheduler">
+            <summary>
+            Used for Schedueling Animations.
+            </summary>
+        </member>
+        <member name="M:Game.GameComponents.AnimationScheduler.GetIfMustBeMirrored">
+            <summary>
+            Get if the Frame must be mirroed or not.
+            </summary>
+            <returns>if the Frame must be mirroed or not.</returns>
+        </member>
+        <member name="M:Game.GameComponents.AnimationScheduler.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.GameComponents.AnimationScheduler.AddAnimation(System.Int32,System.Single,Engine.Renderer.Sprite.ISprite,System.Boolean)">
+            <summary>
+            Add a new Animation.
+            </summary>
+            <param name="prio">The Prio this animation has. ( Lower means better).</param>
+            <param name="time">How long to play this animation.</param>
+            <param name="animation">The Animation to be played.</param>
+            <param name="mirrored">If the Sprite must be mirrored.</param>
+        </member>
+        <member name="T:Game.GameComponents.AnimationWithTimeAndPrio">
+            <summary>
+            Wraper class, that says how long which animation should be played.
+            </summary>
+        </member>
+        <member name="M:Game.GameComponents.AnimationWithTimeAndPrio.#ctor(System.Int32,System.Single,Engine.Renderer.Sprite.ISprite,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.GameComponents.AnimationWithTimeAndPrio"/> class.
+            </summary>
+            <param name="prio">Prio of the animation. (Lower means better).</param>
+            <param name="time">How long to play the animation.</param>
+            <param name="animation">The animation.</param>
+            <param name="mirrored">If the Sprite must be mirrored.</param>
+        </member>
+        <member name="P:Game.GameComponents.AnimationWithTimeAndPrio.Animation">
+            <summary>
+            Gets or sets the Animation.
+            </summary>
+        </member>
+        <member name="P:Game.GameComponents.AnimationWithTimeAndPrio.TimeLeft">
+            <summary>
+            Gets or sets the time Left on this Animation.
+            </summary>
+        </member>
+        <member name="P:Game.GameComponents.AnimationWithTimeAndPrio.Prio">
+            <summary>
+            Gets or sets the Prio of this Animation.
+            </summary>
+        </member>
+        <member name="P:Game.GameComponents.AnimationWithTimeAndPrio.Mirrored">
+            <summary>
+            Gets or sets a value indicating whether the Sprite must be Mirrored.
+            </summary>
+        </member>
+        <member name="M:Game.GameComponents.AnimationWithTimeAndPrio.CompareTo(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.GameManager">
+            <summary>
+            Gameclass.
+            </summary>
+        </member>
+        <member name="M:Game.GameManager.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.GameManager"/> class.
+            </summary>
+        </member>
+        <member name="T:Game.GameManager.PauseHandler">
+            <summary>
+            The handler.
+            </summary>
+            <param name="stateChangeTo">The state it changed to.</param>
+        </member>
+        <member name="P:Game.GameManager.UpdatesPaused">
+            <summary>
+            Gets or sets a value indicating whether a update is called or not.
+            </summary>
+        </member>
+        <member name="P:Game.GameManager.SceneStart">
+            <summary>
+            Gets the start scene.
+            </summary>
+        </member>
+        <member name="P:Game.GameManager.SceneDeath">
+            <summary>
+            Gets the Death scene.
+            </summary>
+        </member>
+        <member name="P:Game.GameManager.OnPauseStateChange">
+            <summary>
+            Gets or sets Handlers on pause.
+            </summary>
+        </member>
+        <member name="M:Game.GameManager.Start">
+            <summary>
+            Starts the game.
+            </summary>
+        </member>
         <member name="T:Game.Gun.Ammunition.Bullet">
             <summary>
             A bullet that flies straight untill it hits something, then does DMG and despwans.
             </summary>
         </member>
-        <member name="M:Game.Gun.Ammunition.Bullet.#ctor(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
+        <member name="M:Game.Gun.Ammunition.Bullet.#ctor(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.Gun.Ammunition.Bullet"/> class.
             </summary>
             <param name="dmg">How much dmg it will do on impact.</param>
-            <param name="velocityX">How fast it is flying.</param>
+            <param name="velocityX">How fast it is flying straight.</param>
+            <param name="velocityY">How fast it is flying up.</param>
             <param name="minX">Where it will spawn on X-Axsis.</param>
             <param name="minY">Where it will spawn on Y-Axsis.</param>
             <param name="sizeX">Size X.</param>
             <param name="sizeY">Size Y.</param>
             <param name="sprite">Its sprite.</param>
+            <param name="damageDelayFrames">How many frames to wait, before this bullet will do Damage.</param>
         </member>
         <member name="M:Game.Gun.Ammunition.Bullet.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Gun.Ammunition.Grenade">
+            <summary>
+            A Grenade that explodes on Impact.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.Ammunition.Grenade.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.Ammunition.Grenade"/> class.
+            </summary>
+            <param name="velocityX">How fast it is flying straight.</param>
+            <param name="velocityY">How fast it is flying up.</param>
+            <param name="minX">Where it will spawn on X-Axsis.</param>
+            <param name="minY">Where it will spawn on Y-Axsis.</param>
+            <param name="sizeX">Size X.</param>
+            <param name="sizeY">Size Y.</param>
+            <param name="sprite">Its sprite.</param>
+            <param name="damageDelayFrames">How many frames to wait, before this bullet will do Damage.</param>
+        </member>
+        <member name="M:Game.Gun.Ammunition.Grenade.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Gun.Ammunition.Stone">
+            <summary>
+            A Stone, that flys slow and has gravity.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.Ammunition.Stone.#ctor(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.Ammunition.Stone"/> class.
+            </summary>
+            <param name="dmg">How much dmg it will do on impact.</param>
+            <param name="velocityX">How fast it is flying straight.</param>
+            <param name="velocityY">How fast it is flying up.</param>
+            <param name="minX">Where it will spawn on X-Axsis.</param>
+            <param name="minY">Where it will spawn on Y-Axsis.</param>
+            <param name="sizeX">Size X.</param>
+            <param name="sizeY">Size Y.</param>
+            <param name="sprite">Its sprite.</param>
+            <param name="damageDelayFrames">How many frames to wait, before this bullet will do Damage.</param>
+        </member>
+        <member name="M:Game.Gun.Ammunition.Stone.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Gun.GrenadeLauncher">
+            <summary>
+            Launches Grenades.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.GrenadeLauncher.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.GrenadeLauncher"/> class.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.GrenadeLauncher.GetAsComponent">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.GrenadeLauncher.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.GrenadeLauncher.PullTrigger">
+            <summary>
+            Fires a Bullet, when trigger is pulled and is reloaded.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.GrenadeLauncher.ShotFired">
             <inheritdoc/>
         </member>
         <member name="T:Game.Gun.IGun">
@@ -99,6 +421,12 @@
             Retunrs the gun as Component.
             </summary>
             <returns>The Gun as a Component.</returns>
+        </member>
+        <member name="M:Game.Gun.IGun.ShotFired">
+            <summary>
+            If a shoot was fired this Frame.
+            </summary>
+            <returns>True if a shoot was fired this Frame.</returns>
         </member>
         <member name="T:Game.Gun.ILookDirection">
             <summary>
@@ -121,6 +449,30 @@
             </summary>
             <returns>-1 for left, 1 for right.</returns>
         </member>
+        <member name="T:Game.Gun.MachineGun">
+            <summary>
+            A Pistol that shoots normal bullets. With Medium DMG and Medium reload time.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.MachineGun.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.MachineGun"/> class.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.MachineGun.GetAsComponent">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.MachineGun.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.MachineGun.PullTrigger">
+            <summary>
+            Fires a Bullet, when trigger is pulled and is reloaded.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.MachineGun.ShotFired">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Gun.Pistol">
             <summary>
             A Pistol that shoots normal bullets. With Medium DMG and Medium reload time.
@@ -142,6 +494,81 @@
             Fires a Bullet, when trigger is pulled and is reloaded.
             </summary>
         </member>
+        <member name="M:Game.Gun.Pistol.ShotFired">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Gun.ShotGun">
+            <summary>
+            A shotgun.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.ShotGun.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.ShotGun"/> class.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.ShotGun.GetAsComponent">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.ShotGun.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.ShotGun.PullTrigger">
+            <summary>
+            Fires a Bullet, when trigger is pulled and is reloaded.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.ShotGun.ShotFired">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Gun.Sniper">
+            <summary>
+            A Sniper with high damage but a long reload time.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.Sniper.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.Sniper"/> class.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.Sniper.GetAsComponent">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.Sniper.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.Sniper.PullTrigger">
+            <summary>
+            Fires a Bullet, when trigger is pulled and is reloaded.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.Sniper.ShotFired">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Gun.StoneThrower">
+            <summary>
+            Throw Stones...
+            </summary>
+        </member>
+        <member name="M:Game.Gun.StoneThrower.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Gun.StoneThrower"/> class.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.StoneThrower.GetAsComponent">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.StoneThrower.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.StoneThrower.PullTrigger">
+            <summary>
+            Fires a Bullet, when trigger is pulled and is reloaded.
+            </summary>
+        </member>
+        <member name="M:Game.Gun.StoneThrower.ShotFired">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Gun.CameraTrackingComponent">
             <summary>
             Camera tracking component class.
@@ -150,14 +577,137 @@
         <member name="M:Game.Gun.CameraTrackingComponent.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
-        <member name="T:Game.Gun.Player">
+        <member name="T:Game.Menu.DeathMenu">
+            <summary>
+            PauseMenu.
+            </summary>
+        </member>
+        <member name="M:Game.Menu.DeathMenu.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.Renderer.UI.UiAlignment,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Menu.DeathMenu"/> class.
+            </summary>
+            <param name="bounds">bounds.</param>
+            <param name="backgroundColor">backgroundColor.</param>
+            <param name="font">font.</param>
+            <param name="alignment">alignment.</param>
+            <param name="fitToViewport">fitToViewport.</param>
+        </member>
+        <member name="M:Game.Menu.DeathMenu.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.DeathMenu.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.DeathMenu.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.DeathMenu.OnRendererDelete">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Menu.PauseMenu">
+            <summary>
+            PauseMenu.
+            </summary>
+        </member>
+        <member name="M:Game.Menu.PauseMenu.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.Renderer.UI.UiAlignment,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Menu.PauseMenu"/> class.
+            </summary>
+            <param name="bounds">bounds.</param>
+            <param name="backgroundColor">backgroundColor.</param>
+            <param name="font">font.</param>
+            <param name="alignment">alignment.</param>
+            <param name="fitToViewport">fitToViewport.</param>
+        </member>
+        <member name="M:Game.Menu.PauseMenu.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.PauseMenu.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.PauseMenu.OnRendererDelete">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Menu.StartMenu">
+            <summary>
+            Contains the Starmenu. Some call it Main Menu.
+            </summary>
+        </member>
+        <member name="M:Game.Menu.StartMenu.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.Renderer.UI.UiAlignment,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Menu.StartMenu"/> class.
+            Constructor.
+            </summary>
+            <param name="bounds">bounds.</param>
+            <param name="backgroundColor">backgroundColor.</param>
+            <param name="font">font.</param>
+            <param name="alignment">alignment.</param>
+            <param name="fitToViewport">Set if fit to viewport.</param>
+        </member>
+        <member name="M:Game.Menu.StartMenu.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.StartMenu.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.StartMenu.OnRendererDelete">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Player.Items.HealthPickUp">
+            <summary>
+            Item that can be picked up and restores hp to the Player.
+            </summary>
+        </member>
+        <member name="M:Game.Player.Items.HealthPickUp.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Player.Items.HealthPickUp"/> class.
+            </summary>
+            <param name="minX">the X-Coordinate of bottom left point, of the GameObject.</param>
+            <param name="minY">the Y-Coordinate of bottom left point, of the GameObject.</param>
+            <param name="sizeX">the width of the GameObject.</param>
+            <param name="sizeY">the height of the GameObject.</param>
+            /// <param name="sprite">The sprite.</param>
+            <param name="heal">The amount this pickup will heal the Player.</param>
+        </member>
+        <member name="M:Game.Player.Items.HealthPickUp.OnPickUp">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Player.Items.Item">
+            <summary>
+            Items that the Player can Pick Up.
+            </summary>
+        </member>
+        <member name="M:Game.Player.Items.Item.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Player.Items.Item"/> class.
+            </summary>
+            <param name="minX">the X-Coordinate of bottom left point, of the GameObject.</param>
+            <param name="minY">the Y-Coordinate of bottom left point, of the GameObject.</param>
+            <param name="sizeX">the width of the GameObject.</param>
+            <param name="sizeY">the height of the GameObject.</param>
+            /// <param name="sprite">The sprite.</param>
+        </member>
+        <member name="M:Game.Player.Items.Item.OnPickUp">
+            <summary>
+            Gets called when Player collids.
+            </summary>
+        </member>
+        <member name="T:Game.Player.Items.PickUp">
+            <summary>
+            PickUp Componet will only work on Items.
+            </summary>
+        </member>
+        <member name="M:Game.Player.Items.PickUp.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Player.Player">
             <summary>
             The thing the Player COntrolls.
             </summary>
         </member>
-        <member name="M:Game.Gun.Player.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
+        <member name="M:Game.Player.Player.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite)">
             <summary>
-            Initializes a new instance of the <see cref="T:Game.Gun.Player"/> class.
+            Initializes a new instance of the <see cref="T:Game.Player.Player"/> class.
             </summary>
             <param name="minX">the X-Coordinate of bottom left point, of the Player.</param>
             <param name="minY">the Y-Coordinate of bottom left point, of the Player.</param>
@@ -165,11 +715,23 @@
             <param name="sizeY">Player height.</param>
             <param name="sprite">Player sprite.</param>
         </member>
-        <member name="M:Game.Gun.Player.GetDirection">
+        <member name="M:Game.Player.Player.ChangeGun(Game.Gun.IGun)">
+            <summary>
+            Change the Gun of the Player ( the old Gun will be deleted ).
+            </summary>
+            <param name="gun">The new Gun.</param>
+        </member>
+        <member name="M:Game.Player.Player.GetDirection">
             <inheritdoc/>
         </member>
-        <member name="M:Game.Gun.Player.OnUpdate(System.Single)">
+        <member name="M:Game.Player.Player.OnUpdate(System.Single)">
             <inheritdoc/>
+        </member>
+        <member name="M:Game.Player.Player.GetGun">
+            <summary>
+            Returns Gun.
+            </summary>
+            <returns>IGun.</returns>
         </member>
         <member name="T:Game.Program">
             <summary>
@@ -179,6 +741,48 @@
         <member name="M:Game.Program.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:Game.Program"/> class.
+            </summary>
+        </member>
+        <member name="T:Game.Scenes.DeathScene">
+            <summary>
+            Start scene class.
+            </summary>
+        </member>
+        <member name="M:Game.Scenes.DeathScene.OnSceneLoad">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Scenes.GameScene">
+            <summary>
+            Game scene class.
+            </summary>
+        </member>
+        <member name="M:Game.Scenes.GameScene.OnSceneLoad">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Scenes.ShopScene">
+            <summary>
+            Start shop scene.
+            </summary>
+        </member>
+        <member name="M:Game.Scenes.ShopScene.OnSceneLoad">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Scenes.StartScene">
+            <summary>
+            Start scene class.
+            </summary>
+        </member>
+        <member name="M:Game.Scenes.StartScene.OnSceneLoad">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Scenes.TextureLoader">
+            <summary>
+            Texture loader class.
+            </summary>
+        </member>
+        <member name="M:Game.Scenes.TextureLoader.LoadTextures">
+            <summary>
+            Load textures.
             </summary>
         </member>
         <member name="T:Game.StresstestComponent">
@@ -195,21 +799,61 @@
         <member name="M:Game.StresstestComponent.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="T:Game.UI.GunType">
+            <summary>
+            Class for GunTypes and their information.
+            </summary>
+        </member>
+        <member name="P:Game.UI.GunType.GunTypeArray">
+            <summary>
+            Gets and sets an Array where every Gun and additional information about it is saved.
+            </summary>
+        </member>
+        <member name="P:Game.UI.GunType.GunName">
+            <summary>
+            Gets Gunname as a String.
+            </summary>
+        </member>
+        <member name="P:Game.UI.GunType.Gun">
+            <summary>
+            Gets reference to gun instance.
+            </summary>
+        </member>
+        <member name="P:Game.UI.GunType.GunSprite">
+            <summary>
+            Gets and sets Sprite for gun.
+            </summary>
+        </member>
+        <member name="P:Game.UI.GunType.GunDMG">
+            <summary>
+            Gets and sets wha damage the gun makes.
+            </summary>
+        </member>
+        <member name="P:Game.UI.GunType.GunPrice">
+            <summary>
+            Gets and sets the price of the gun in hearts.
+            </summary>
+        </member>
+        <member name="P:Game.UI.GunType.GunInfo">
+            <summary>
+            Gets and sets genral info aobut the gun.
+            </summary>
+        </member>
+        <member name="M:Game.UI.GunType.InitGunArray">
+            <summary>
+            Initialize Array of GunTypes. For now it has to be done manually.
+            </summary>
+        </member>
         <member name="T:Game.UI.HealthbarPlayer">
             <summary>
             The HealthbarPlayer class renders the healthbar UI element.
             </summary>
         </member>
-        <member name="M:Game.UI.HealthbarPlayer.#ctor">
+        <member name="M:Game.UI.HealthbarPlayer.#ctor(Game.Player.Player)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.UI.HealthbarPlayer"/> class.
             </summary>
-        </member>
-        <member name="M:Game.UI.HealthbarPlayer.Instance">
-            <summary>
-            Function so player can retrieve always the same healthbar instance (Singleton).
-            </summary>
-            <returns>HealtbarPlayer instance.</returns>
+            <param name="player">player.</param>
         </member>
         <member name="M:Game.UI.HealthbarPlayer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
             <summary>
@@ -238,15 +882,132 @@
             OnCreate function.
             </summary>
         </member>
-        <member name="T:Game.UI.UILoader">
+        <member name="M:Game.UI.HealthbarPlayer.OnRendererDelete">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.UI.InteractableElement">
             <summary>
-            Loader Class to initialize the whole UI of the Game. (hopefully).
+            Element class.
             </summary>
         </member>
-        <member name="M:Game.UI.UILoader.Initialize_UI">
+        <member name="M:Game.UI.InteractableElement.#ctor(System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Text.Font,System.String,OpenTK.Mathematics.Color4,OpenTK.Mathematics.Color4,System.Single,System.Boolean)">
             <summary>
-            Initializes the UI.
+            Initializes a new instance of the <see cref="T:Game.UI.InteractableElement"/> class.
             </summary>
+            <param name="minX">mX.</param>
+            <param name="minY">mY.</param>
+            <param name="sizeX">X.</param>
+            <param name="sizeY">Y.</param>
+            <param name="font">Font.</param>
+            <param name="text">Info text.</param>
+            <param name="colorText">Color of text.</param>
+            <param name="range">The view range.</param>
+            <param name="colorSprite">Color of sprite.</param>
+            <param name="closeOnInteract">Destroy Element on interact.</param>
+        </member>
+        <member name="E:Game.UI.InteractableElement.Interact">
+            <summary>
+            Event handler if interacted with.
+            </summary>
+        </member>
+        <member name="P:Game.UI.InteractableElement.Text">
+            <summary>
+            Gets the text.
+            </summary>
+        </member>
+        <member name="P:Game.UI.InteractableElement.Particle">
+            <summary>
+            Gets the Particle.
+            </summary>
+        </member>
+        <member name="P:Game.UI.InteractableElement.Range">
+            <summary>
+            Gets or sets the view range.
+            </summary>
+        </member>
+        <member name="P:Game.UI.InteractableElement.InRange">
+            <summary>
+            Gets or sets a value indicating whether in range.
+            </summary>
+        </member>
+        <member name="M:Game.UI.InteractableElement.OnUpdatableCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.InteractableElement.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.InteractableElement.Destroy">
+            <summary>
+            Destroy the element.
+            </summary>
+        </member>
+        <member name="T:Game.UI.ItemShop">
+            <summary>
+            Class for Item Shop ingame.
+            </summary>
+        </member>
+        <member name="M:Game.UI.ItemShop.#ctor(Engine.Renderer.Text.Font,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.UI.ItemShop"/> class.
+            </summary>
+            <param name="itemcount">Amount of items in shop.</param>
+            <param name="font_">usable font.</param>
+        </member>
+        <member name="P:Game.UI.ItemShop.CurrentWeaponIndex">
+            <summary>
+            Gets CurrentWeaponIndex.
+            </summary>
+        </member>
+        <member name="P:Game.UI.ItemShop.ShopActive">
+            <summary>
+            Gets or Sets a value indicating whether ItemShop should be rendered or not.
+            </summary>
+        </member>
+        <member name="P:Game.UI.ItemShop.ItemCount">
+            <summary>
+            Gets or Sets avalue indicating whether many Items should be in the Shop.
+            </summary>
+        </member>
+        <member name="M:Game.UI.ItemShop.MouseMove(OpenTK.Windowing.Common.MouseMoveEventArgs)">
+            <summary>
+            Gets called when Mouse is Moved.
+            </summary>
+            <param name="args">MouseMove Args.</param>
+        </member>
+        <member name="M:Game.UI.ItemShop.MouseDown(OpenTK.Windowing.Common.MouseButtonEventArgs)">
+            <summary>
+            Gets Called if some Mousebutton is pressed down.
+            </summary>
+            <param name="args">MouseDown Args.</param>
+        </member>
+        <member name="M:Game.UI.ItemShop.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.ItemShop.OnRendererDelete">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.ItemShop.HideShop">
+            <summary>
+            sets Text render as visible or not.
+            </summary>
+            <param name="hide">contains if text is hidden or not.</param>
+        </member>
+        <member name="M:Game.UI.ItemShop.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.ItemShop.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.ItemShop.RenderItems(OpenTK.Windowing.Common.FrameEventArgs)">
+            <summary>
+            render itemslots onto shopbackground.
+            </summary>
+        </member>
+        <member name="M:Game.UI.ItemShop.RenderItemStats(OpenTK.Windowing.Common.FrameEventArgs)">
+            <summary>
+            Render stats as text into shop.
+            </summary>
+            <param name="args">FrameEventArgs.</param>
         </member>
     </members>
 </doc>

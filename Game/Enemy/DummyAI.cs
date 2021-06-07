@@ -7,6 +7,7 @@ namespace Game.Enemy
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using Engine.Renderer;
     using Engine.Renderer.Sprite;
     using OpenTK.Mathematics;
 
@@ -22,7 +23,7 @@ namespace Game.Enemy
         private Engine.GameObject.GameObject checkLeft;
         private Engine.GameObject.GameObject checkRight;
 
-        private AnimatedSprite spriteWalking;
+        private GameComponents.AnimationScheduler animationScheduler;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DummyAI"/> class.
@@ -38,14 +39,41 @@ namespace Game.Enemy
         {
             this.phys = this.GetComponent<Engine.Component.Physics>();
             this.phys.AddVelocityX(this.movementSpeed);
+
             if (sprite != null)
             {
-                Engine.Renderer.Tile.Tilesheet walkingSheet = new Engine.Renderer.Tile.Tilesheet("Game.Resources.Enemy.zombie_walking.png", 80, 110);
-                this.spriteWalking = new AnimatedSprite(walkingSheet, Keyframe.RangeX(0, 1, 0, 0.1f));
+                this.InitializeSprites();
             }
 
             this.checkLeft = new Engine.GameObject.GameObject(this.MinX - 0.3f, this.MinY - 0.3f, 0.2f, 0.1f, this.Sprite);
             this.checkRight = new Engine.GameObject.GameObject(this.MinX + this.SizeX + 0.1f, this.MinY - 0.3f, 0.2f, 0.1f, this.Sprite);
+
+            this.animationScheduler = new GameComponents.AnimationScheduler();
+            this.AddComponent(this.animationScheduler);
+        }
+
+        /// <summary>
+        /// Gets or sets a walking sprite.
+        /// </summary>
+        public ISprite SpriteWalking { get; set; }
+
+        /// <summary>
+        /// Gets or sets a hurt sprite.
+        /// </summary>
+        public ISprite SpriteHurt { get; set; }
+
+        /// <summary>
+        /// Gets or sets an attack sprite.
+        /// </summary>
+        public ISprite SpriteAttack { get; set; }
+
+        /// <summary>
+        /// Gets the Movespeed.
+        /// </summary>
+        /// <returns>The Movespeed.</returns>
+        public float GetMoveSpeed()
+        {
+            return this.movementSpeed;
         }
 
         /// <inheritdoc/>
@@ -58,9 +86,18 @@ namespace Game.Enemy
         public override void OnUpdate(float frameTime)
         {
             this.CheckLedge();
+            this.UpdateAnimations();
             base.OnUpdate(frameTime);
             this.CheckWall();
-            this.UpdateAnimations();
+        }
+
+        /// <summary>
+        /// Calls the OnUpdate of Enenemy ( without the AI ).
+        /// </summary>
+        /// <param name="frameTime">Time passed since last frame.</param>
+        public void EnemyOnUpdate(float frameTime)
+        {
+            base.OnUpdate(frameTime);
         }
 
         private void CheckLedge()
@@ -96,6 +133,7 @@ namespace Game.Enemy
             {
                 this.phys.SetVelocity(-this.movementSpeed, 0);
                 this.lookingDirection = Gun.ILookDirection.Left;
+                this.Mirrored = true;
                 return;
             }
 
@@ -103,6 +141,7 @@ namespace Game.Enemy
             {
                 this.phys.SetVelocity(this.movementSpeed, 0);
                 this.lookingDirection = Gun.ILookDirection.Right;
+                this.Mirrored = false;
                 return;
             }
 
@@ -120,6 +159,7 @@ namespace Game.Enemy
                 {
                     this.phys.SetVelocity(this.movementSpeed, 0);
                     this.lookingDirection = Gun.ILookDirection.Right;
+                    this.Mirrored = false;
                     return;
                 }
 
@@ -127,6 +167,7 @@ namespace Game.Enemy
                 {
                     this.phys.SetVelocity(-this.movementSpeed, 0);
                     this.lookingDirection = Gun.ILookDirection.Left;
+                    this.Mirrored = true;
                     return;
                 }
             }
@@ -135,18 +176,41 @@ namespace Game.Enemy
         private void UpdateAnimations()
         {
             Engine.Component.Physics phys = this.GetComponent<Engine.Component.Physics>();
+            if (phys == null)
+            {
+                return;
+            }
 
             if (phys.GetVelocity().X < -0.1)
             {
-                this.Sprite = this.spriteWalking;
+                this.animationScheduler.AddAnimation(10, 0.0001f, this.SpriteWalking, true);
+                this.lookingDirection = Gun.ILookDirection.Left;
                 this.Mirrored = true;
             }
 
             if (phys.GetVelocity().X > 0.1)
             {
-                this.Sprite = this.spriteWalking;
+                this.animationScheduler.AddAnimation(10, 0.0001f, this.SpriteWalking, false);
+                this.lookingDirection = Gun.ILookDirection.Right;
                 this.Mirrored = false;
             }
+
+            if (this.GetComponent<Engine.Component.HealthPoints>().GetTookDmgThisFrame())
+            {
+                this.animationScheduler.AddAnimation(7, 0.3f, this.SpriteHurt, this.Mirrored);
+            }
+
+            if (this.GetComponent<Engine.Component.DoDamageWithKnockbackCollisionResponse>().GetDidDMGthisFrame())
+            {
+                this.animationScheduler.AddAnimation(4, 0.3f, this.SpriteAttack, this.Mirrored);
+            }
+        }
+
+        private void InitializeSprites()
+        {
+            this.SpriteAttack = TextureAtlas.Sprites["zombie_attack"];
+            this.SpriteHurt = TextureAtlas.Sprites["zombie_hurt"];
+            this.SpriteWalking = TextureAtlas.Sprites["zombie_walking"];
         }
     }
 }

@@ -20,7 +20,7 @@ namespace GameTest.Enemy
             List<Engine.GameObject.IRectangle> test = Engine.Engine.Colliders;
 
             Game.Enemy.DummyAI ai = new Game.Enemy.DummyAI(0, 1, 1, 1, null, 5);
-            Engine.Engine.ImplementGameObject(ai);
+            Engine.Engine.AddGameObject(ai);
 
             for (int i = 0; i < 100; i++)
             {

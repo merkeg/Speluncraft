@@ -18,6 +18,9 @@ namespace Engine.Renderer.Text
     /// </summary>
     public class TextRenderer : IRenderer
     {
+        private readonly bool worldCoordinates;
+        private Vector2i windowSize;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="TextRenderer"/> class.
         /// </summary>
@@ -26,13 +29,21 @@ namespace Engine.Renderer.Text
         /// <param name="color">The color to render it with.</param>
         /// <param name="position">Position of the text.</param>
         /// <param name="fontScale">Scale of the text.</param>
-        public TextRenderer(string text, Font font, Color4 color, GameObject.Rectangle position, float fontScale = 1.0f)
+        /// <param name="worldCoordinates">Use world coordinates instead of absolute.</param>
+        public TextRenderer(string text, Font font, Color4 color, GameObject.IRectangle position, float fontScale = 1.0f, bool worldCoordinates = false)
         {
             this.Text = text;
             this.Font = font;
             this.Color = color;
             this.Position = position;
             this.FontScale = fontScale;
+            this.worldCoordinates = worldCoordinates;
+            if (Engine.GameWindow != null)
+            {
+                this.windowSize = Engine.GameWindow.Size;
+            }
+
+            this.Hidden = false;
         }
 
         /// <summary>
@@ -53,18 +64,35 @@ namespace Engine.Renderer.Text
         /// <summary>
         /// Gets or sets the position.
         /// </summary>
-        public GameObject.Rectangle Position { get; set; }
+        public GameObject.IRectangle Position { get; set; }
 
         /// <summary>
         /// Gets or sets the font scale.
         /// </summary>
         public float FontScale { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether if hidden.
+        /// </summary>
+        public bool Hidden { get; set; }
+
         /// <inheritdoc/>
         public void Render(FrameEventArgs args)
         {
+            if (this.Hidden)
+            {
+                return;
+            }
+
             double x = this.Position.MinX;
             double y = this.Position.MinY;
+
+            if (this.worldCoordinates)
+            {
+                Vector3 vect = Vector3.TransformPosition(new Vector3((float)x, (float)y, 1), Engine.Camera.CameraMatrix);
+                x = (this.windowSize.X / 2.0f) + (this.windowSize.X / 2.0f * vect.X);
+                y = (this.windowSize.Y / 2.0f) - (this.windowSize.Y / 2.0f * vect.Y);
+            }
 
             GL.BindTexture(TextureTarget.Texture2D, this.Font.FontSheet.Handle);
             GL.Color4(this.Color);
@@ -107,10 +135,16 @@ namespace Engine.Renderer.Text
         /// <inheritdoc/>
         public void Resize(ResizeEventArgs args)
         {
+            this.windowSize = args.Size;
         }
 
         /// <inheritdoc/>
         public void OnRendererCreate()
+        {
+        }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
         {
         }
     }

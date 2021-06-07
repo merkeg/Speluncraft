@@ -17,6 +17,8 @@ namespace Engine.Component
         private float knockbackX;
         private float knockbackY;
 
+        private bool didDmgThisFrame;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="DoDamageWithKnockbackCollisionResponse"/> class.
         /// </summary>
@@ -31,13 +33,25 @@ namespace Engine.Component
             this.knockbackY = knockbackY;
         }
 
+        /// <summary>
+        /// If we did dmg this frame.
+        /// </summary>
+        /// <returns>If we have done dmg this frame.</returns>
+        public bool GetDidDmgThisFrame()
+        {
+            return this.didDmgThisFrame;
+        }
+
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
             base.OnUpdate(frameTime);
 
+            this.didDmgThisFrame = false;
+
             foreach (GameObject.GameObject g in this.GetDidDmgToThose())
             {
+                this.didDmgThisFrame = true;
                 Physics p = g.GetComponent<Physics>();
                 if (p == null)
                 {

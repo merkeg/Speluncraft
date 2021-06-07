@@ -26,6 +26,11 @@ namespace Engine.Service
         }
 
         /// <inheritdoc/>
+        public void SceneChangeCleanup()
+        {
+        }
+
+        /// <inheritdoc/>
         public void OnUpdatableDestroy()
         {
         }
@@ -33,6 +38,11 @@ namespace Engine.Service
         /// <inheritdoc/>
         public void OnUpdate(float frameTime)
         {
+            if (!Engine.GameIsRunning)
+            {
+                return;
+            }
+
             foreach (GameObject.GameObject g in Engine.GameObjects)
             {
                 foreach (Component.Component c in g.GetComponents())
@@ -54,6 +64,11 @@ namespace Engine.Service
 
         /// <inheritdoc/>
         public void Resize(ResizeEventArgs args)
+        {
+        }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
         {
         }
     }

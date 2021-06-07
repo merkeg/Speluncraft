@@ -16,11 +16,11 @@ namespace EngineTest.Component
 
             GameObject takeingDMG = new GameObject(0, 0, 1, 1, null);
             takeingDMG.AddComponent(new Engine.Component.HealthPoints(100, 100));
-            Engine.Engine.ImplementGameObject(takeingDMG);
+            Engine.Engine.AddGameObject(takeingDMG);
             Engine.Engine.Colliders.Add(takeingDMG);
 
             GameObject doingDMG = new GameObject(0, 0, 1, 1, null);
-            Engine.Engine.ImplementGameObject(doingDMG);
+            Engine.Engine.AddGameObject(doingDMG);
             doingDMG.AddComponent(new Engine.Component.DoDamageCollisionResponse(10, 1));
 
             Engine.Engine.GetService<Engine.Service.CollisionService>().OnUpdate(0.1f);
@@ -46,13 +46,13 @@ namespace EngineTest.Component
 
             GameObject takeingDMG = new GameObject(0, 0, 1, 1, null);
             takeingDMG.AddComponent(new Engine.Component.HealthPoints(100, 100));
-            Engine.Engine.ImplementGameObject(takeingDMG);
+            Engine.Engine.AddGameObject(takeingDMG);
             Engine.Engine.Colliders.Add(takeingDMG);
 
             GameObject doingDMG = new GameObject(0, 0, 1, 1, null);
             doingDMG.AddComponent(new Engine.Component.UndoOverlapCollisionResponse());
             doingDMG.AddComponent(new Engine.Component.DoDamageCollisionResponse(10, 1));
-            Engine.Engine.ImplementGameObject(doingDMG);
+            Engine.Engine.AddGameObject(doingDMG);
 
             Engine.Engine.GetService<Engine.Service.CollisionService>().OnUpdate(0.1f);
             doingDMG.OnUpdate(0.1f);
@@ -73,14 +73,14 @@ namespace EngineTest.Component
             takeingDMG.AddComponent(new Engine.Component.HealthPoints(100, 100));
             takeingDMG.AddComponent(new Engine.Component.DoDamageCollisionResponse(10,1));
             takeingDMG.AddComponent(new Engine.Component.UndoOverlapCollisionResponse());
-            Engine.Engine.ImplementGameObject(takeingDMG);
+            Engine.Engine.AddGameObject(takeingDMG);
             Engine.Engine.Colliders.Add(takeingDMG);
 
             GameObject doingDMG = new GameObject(0, 0, 1, 1, null);
             doingDMG.AddComponent(new Engine.Component.UndoOverlapCollisionResponse());
             doingDMG.AddComponent(new Engine.Component.DoDamageCollisionResponse(10, 1));
             doingDMG.AddComponent(new Engine.Component.HealthPoints(100, 100));
-            Engine.Engine.ImplementGameObject(doingDMG);
+            Engine.Engine.AddGameObject(doingDMG);
             Engine.Engine.Colliders.Add(doingDMG);
 
             Engine.Engine.GetService<Engine.Service.CollisionService>().OnUpdate(0.1f);

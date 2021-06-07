@@ -1,10 +1,12 @@
 ﻿// <copyright file="GameObject.cs" company="RWUwU">
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
+
 namespace Engine.GameObject
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using global::Engine.Renderer.Sprite;
 
     /// <summary>
@@ -12,11 +14,6 @@ namespace Engine.GameObject
     /// </summary>
     public class GameObject : IRectangle, IUpdatable
     {
-        /// <summary>
-        /// The sprite the GameObject is drawn with.
-        /// </summary>
-        private ISprite sprite;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="GameObject"/> class.
         /// </summary>
@@ -32,28 +29,41 @@ namespace Engine.GameObject
             this.SizeX = sizeX;
             this.SizeY = sizeY;
             this.Components = new List<IComponent>();
-            this.sprite = sprite;
+            this.Sprite = sprite;
         }
 
         /// <summary>
-        /// Gets the width of the GameObject.
+        /// Gets or sets the Sprite of the GameObject.
         /// </summary>
-        public float SizeX { get; }
+        public ISprite Sprite { get; set; }
 
         /// <summary>
-        /// Gets the hieght of the GameObject.
+        /// Gets or sets the width of the GameObject.
         /// </summary>
-        public float SizeY { get; }
+        public float SizeX { get; set; }
 
         /// <summary>
-        /// Gets the X-Coordinate of the top right point, of the GameObject.
+        /// Gets or sets the height of the GameObject.
         /// </summary>
-        public float MaxX => this.MinX + this.SizeX;
+        public float SizeY { get; set; }
 
         /// <summary>
-        /// Gets the Y-Coordinate of the top right point, of the GameObject.
+        /// Gets or sets the X-Coordinate of the top right point.
         /// </summary>
-        public float MaxY => this.MinY + this.SizeY;
+        public virtual float MaxX
+        {
+            get => this.MinX + this.SizeX;
+            set => this.SizeX = value - this.MinX;
+        }
+
+        /// <summary>
+        /// Gets or sets the Y-Coordinate of the top right point.
+        /// </summary>
+        public virtual float MaxY
+        {
+            get => this.MinY + this.SizeY;
+            set => this.SizeY = value - this.MinY;
+        }
 
         /// <summary>
         /// Gets or sets the X-Coordinate of bottom left point, of the GameObject.
@@ -70,31 +80,8 @@ namespace Engine.GameObject
         /// </summary>
         public List<IComponent> Components { get; protected set; }
 
-        /// <summary>
-        /// Gets or sets the Sprite of the GameObject.
-        /// </summary>
-        public ISprite Sprite
-        {
-        get => this.sprite;
-
-        set
-            {
-                if (this.SpriteRenderer != null)
-                {
-                    this.SpriteRenderer.Sprite = value;
-                }
-
-                this.sprite = value;
-            }
-        }
-
         /// <inheritdoc/>
         public bool Mirrored { get; set; }
-
-        /// <summary>
-        /// Gets or sets the Sprite renderer.
-        /// </summary>
-        internal SpriteRenderer SpriteRenderer { get; set; }
 
         /// <summary>
         /// Checks if the other element intersects with this GameObject.
@@ -177,7 +164,7 @@ namespace Engine.GameObject
         /// <param name="frameTime">Time between the frame.</param>
         public virtual void OnUpdate(float frameTime)
         {
-            this.Components.ForEach(component => component.OnUpdate(frameTime));
+            this.Components.ToList().ForEach(component => component.OnUpdate(frameTime));
         }
 
         /// <summary>
@@ -186,6 +173,7 @@ namespace Engine.GameObject
         public virtual void OnUpdatableDestroy()
         {
             this.Components.ForEach(component => component.OnDestroy());
+            this.Components.Clear();
         }
 
         // OnUpdateCleanUp wird nach dem Update in jeden Frame ausgeführt.

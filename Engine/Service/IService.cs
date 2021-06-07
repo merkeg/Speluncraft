@@ -12,5 +12,9 @@ namespace Engine.Service
     /// </summary>
     public interface IService : IRenderer, IUpdatable
     {
+        /// <summary>
+        /// Runs on scene change. Clean up Lists and so on.
+        /// </summary>
+        public void SceneChangeCleanup();
     }
 }

@@ -34,10 +34,10 @@ namespace Game.Enemy
             this.AddComponent(physics);
             this.AddComponent(new Engine.Component.UndoOverlapCollisionResponse());
 
-            this.AddComponent(new Engine.Component.HealthPoints(100, 100));
+            this.AddComponent(new Engine.Component.HealthPoints(50, 50));
 
             // this.AddComponent(new Engine.Component.DoDamageCollisionResponse(damage, 1));
-            this.AddComponent(new Engine.Component.DoDamageWithKnockbackCollisionResponse(damage, 1, 10, 5));
+            this.AddComponent(new Engine.Component.DoDamageWithKnockbackCollisionResponse(damage, 0.2f, 10, 5));
 
             // HitBox of Enemy needs to be in CollideList.
             Engine.Engine.Colliders.Add(this);
@@ -46,13 +46,19 @@ namespace Game.Enemy
         /// <inheritdoc/>
         public override void OnUpdate(float frameTime)
         {
-            base.OnUpdate(frameTime);
-            if (this.GetComponent<Engine.Component.HealthPoints>().GetIsDeadFlag())
+            if (!Engine.Engine.GameIsRunning)
             {
-                Engine.Engine.RemoveGameObject(this);
+                return;
             }
 
-            // Console.WriteLine("Enemy: " + this.GetComponent<Engine.Component.HealthPoints>().GetCurrHP());
+            base.OnUpdate(frameTime);
+            if (this.GetComponent<Engine.Component.HealthPoints>() != null)
+            {
+                if (this.GetComponent<Engine.Component.HealthPoints>().GetIsDeadFlag())
+                {
+                    Engine.Engine.RemoveGameObject(this);
+                }
+            }
         }
     }
 }

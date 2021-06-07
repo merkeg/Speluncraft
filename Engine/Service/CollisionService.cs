@@ -5,6 +5,7 @@
 namespace Engine.Service
 {
     using System.Collections.Generic;
+    using System.Linq;
     using OpenTK.Windowing.Common;
 
     /// <summary>
@@ -37,18 +38,19 @@ namespace Engine.Service
             foreach (GameObject.GameObject g in Engine.GameObjects)
             {
                 bool hasSubbed = false;
-                foreach (GameObject.IComponent c in g.GetComponents())
+                foreach (GameObject.IComponent c in g.GetComponents().ToList())
                 {
                     if (c is ICollosionServiceSubscriber)
                     {
                         hasSubbed = true;
+                        break;
                     }
                 }
 
                 if (hasSubbed)
                 {
                     List<GameObject.IRectangle> collisionThisGameObjectHas = new List<GameObject.IRectangle>();
-                    foreach (GameObject.IRectangle r in Engine.Colliders)
+                    foreach (GameObject.IRectangle r in Engine.Colliders.ToList())
                     {
                         if (g.Intersects(r))
                         {
@@ -69,11 +71,11 @@ namespace Engine.Service
         public List<GameObject.IRectangle> GetCollosions(GameObject.GameObject gameObject)
         {
             List<GameObject.IRectangle> output;
-            try
+            if (this.collision.ContainsKey(gameObject))
             {
-               output = this.collision[gameObject];
+                output = this.collision[gameObject];
             }
-            catch
+            else
             {
                 output = new List<GameObject.IRectangle>();
             }
@@ -88,6 +90,17 @@ namespace Engine.Service
 
         /// <inheritdoc/>
         public void OnUpdatableCreate()
+        {
+        }
+
+        /// <inheritdoc/>
+        public void SceneChangeCleanup()
+        {
+            this.collision = new Dictionary<GameObject.GameObject, List<GameObject.IRectangle>>();
+        }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
         {
         }
     }

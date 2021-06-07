@@ -52,14 +52,14 @@ namespace Engine.Renderer.Tile
         /// <inheritdoc/>
         public void OnRendererCreate()
         {
-            foreach (TilemapLayer layer in this.Tilemap.Layers)
+            foreach (TilemapTileLayer layer in this.Tilemap.TileLayers)
             {
                 if (layer.TilemapModel.properties == null)
                 {
                     continue;
                 }
 
-                foreach (TilemapLayerPropertiesModel prop in layer.TilemapModel.properties)
+                foreach (CustomPropertyModel prop in layer.TilemapModel.properties)
                 {
                     if (prop.name.Contains("collision"))
                     {
@@ -79,7 +79,7 @@ namespace Engine.Renderer.Tile
         {
             GL.BindTexture(TextureTarget.Texture2D, this.Tilemap.Tilesheet.Handle);
             GL.Color3(Color.White);
-            foreach (TilemapLayer tilemap in this.Tilemap.Layers)
+            foreach (TilemapTileLayer tilemap in this.Tilemap.TileLayers)
             {
                 for (int x = 0; x < tilemap.Width; x++)
                 {
@@ -168,6 +168,11 @@ namespace Engine.Renderer.Tile
         public void Resize(ResizeEventArgs args)
         {
             return;
+        }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
+        {
         }
     }
 }

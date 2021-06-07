@@ -5,6 +5,7 @@
 namespace Engine.Renderer.Tile
 {
     using global::Engine.Renderer.Sprite;
+    using OpenTK.Mathematics;
 
     /// <summary>
     /// TileSprite class.
@@ -52,6 +53,9 @@ namespace Engine.Renderer.Tile
 
         /// <inheritdoc/>
         public float TexY1 { get; }
+
+        /// <inheritdoc/>
+        public Color4? Color { get; set; }
 
         /// <inheritdoc/>
         public void TimeElapsed(float time)

@@ -15,15 +15,17 @@ namespace Engine.Renderer.Particle
         /// <summary>
         /// Initializes a new instance of the <see cref="ParticleEmitterData"/> class.
         /// </summary>
+        /// <param name="emitter">Particle emitter.</param>
         /// <param name="position">Position.</param>
         /// <param name="emitterLifetime">Lifetime of the emitter.</param>
-        public ParticleEmitterData(IRectangle position, float emitterLifetime)
+        public ParticleEmitterData(ParticleEmitter emitter, IRectangle position, float emitterLifetime)
         {
             this.Position = position;
             this.EmitterLifetime = emitterLifetime;
             this.EmitterLived = 0;
             this.EmitterCooldown = 0;
             this.Particles = new List<Particle>();
+            this.Emitter = emitter;
         }
 
         /// <summary>
@@ -50,5 +52,10 @@ namespace Engine.Renderer.Particle
         /// Gets or sets position.
         /// </summary>
         public IRectangle Position { get; set; }
+
+        /// <summary>
+        /// Gets or sets the Data.
+        /// </summary>
+        public ParticleEmitter Emitter { get; set; }
     }
 }

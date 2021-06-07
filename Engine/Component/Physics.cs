@@ -80,6 +80,15 @@ namespace Engine.Component
         }
 
         /// <summary>
+        /// Get the MaxVelocity.
+        /// </summary>
+        /// <returns>The Max Velocity.</returns>
+        public Vector2 GetMaxVelocity()
+        {
+            return this.maxVelocity;
+        }
+
+        /// <summary>
         /// Set if the Object should get Gravity.
         /// </summary>
         /// <param name="isAffectedByGravity">Yes or no.</param>
@@ -124,6 +133,16 @@ namespace Engine.Component
         /// <param name="y">Y Part of the MaxVelocity Vector.</param>
         public void SetMaxVelocity(float x, float y)
         {
+            if (x < 0)
+            {
+                x = -x;
+            }
+
+            if (y < 0)
+            {
+                y = -y;
+            }
+
             this.maxVelocity.X = x;
             this.maxVelocity.Y = y;
         }

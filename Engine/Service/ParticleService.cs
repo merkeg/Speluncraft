@@ -6,6 +6,7 @@ namespace Engine.Service
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using global::Engine.GameObject;
     using global::Engine.Renderer;
     using global::Engine.Renderer.Particle;
@@ -25,19 +26,19 @@ namespace Engine.Service
         /// </summary>
         public ParticleService()
         {
-            this.Emitters = new Dictionary<ParticleEmitter, ParticleEmitterData>();
+            this.Emitters = new List<ParticleEmitterData>();
             this.random = new Random();
         }
 
         /// <summary>
         /// Gets the emitters.
         /// </summary>
-        public Dictionary<ParticleEmitter, ParticleEmitterData> Emitters { get; private set; }
+        public List<ParticleEmitterData> Emitters { get; private set; }
 
         /// <inheritdoc/>
         public void Render(FrameEventArgs args)
         {
-            foreach (ParticleEmitterData particleEmitter in this.Emitters.Values)
+            foreach (ParticleEmitterData particleEmitter in this.Emitters.ToList())
             {
                 foreach (Particle particle in particleEmitter.Particles)
                 {
@@ -84,14 +85,14 @@ namespace Engine.Service
         /// <inheritdoc/>
         public void OnUpdate(float frameTime)
         {
-            foreach (ParticleEmitter particleEmitter in this.Emitters.Keys)
+            foreach (ParticleEmitterData particleEmitterData in this.Emitters.ToList())
             {
-                ParticleEmitterData particleEmitterData = this.Emitters[particleEmitter];
+                ParticleEmitter particleEmitter = particleEmitterData.Emitter;
                 particleEmitterData.EmitterLived += frameTime;
                 particleEmitterData.EmitterCooldown += frameTime;
                 if (particleEmitterData.EmitterLifetime > 0 && particleEmitterData.EmitterLived >= particleEmitterData.EmitterLifetime)
                 {
-                    this.Emitters.Remove(particleEmitter);
+                    this.Emitters.Remove(particleEmitterData);
                     continue;
                 }
 
@@ -131,15 +132,38 @@ namespace Engine.Service
         {
         }
 
+        /// <inheritdoc/>
+        public void SceneChangeCleanup()
+        {
+            this.Emitters.Clear();
+        }
+
         /// <summary>
         /// Add an emitter.
         /// </summary>
         /// <param name="emitter">The emitter.</param>
         /// <param name="position">Position.</param>
         /// <param name="lifetime">The lifetime of the emitter. Set to 0 to disable deletion.</param>
-        public void Emit(ParticleEmitter emitter, IRectangle position, float lifetime)
+        /// <returns>ParticleEmitterData.</returns>
+        public ParticleEmitterData Emit(ParticleEmitter emitter, IRectangle position, float lifetime)
         {
-            this.Emitters.Add(emitter, new ParticleEmitterData(position, lifetime));
+            ParticleEmitterData data = new ParticleEmitterData(emitter, position, lifetime);
+            this.Emitters.Add(data);
+            return data;
+        }
+
+        /// <summary>
+        /// Remove an emitter.
+        /// </summary>
+        /// <param name="data">The data you got from the emit method.</param>
+        public void Remove(ParticleEmitterData data)
+        {
+            this.Emitters.Remove(data);
+        }
+
+        /// <inheritdoc/>
+        public void OnRendererDelete()
+        {
         }
     }
 }
