@@ -114,12 +114,18 @@ namespace Game.Enemy
             {
                 if (this.checkLeft.Intersects(r))
                 {
-                    hasFloorLeft = true;
+                    if (!(r is Player.Player))
+                    {
+                        hasFloorLeft = true;
+                    }
                 }
 
                 if (this.checkRight.Intersects(r))
                 {
-                    hasFloorRight = true;
+                    if (!(r is Player.Player))
+                    {
+                        hasFloorRight = true;
+                    }
                 }
             }
 
