@@ -46,7 +46,13 @@ namespace Game.Enemy
             {
                 try
                 {
-                    this.GetComponent<Game.GameComponents.AnimationScheduler>().AddAnimation(2, 0.2f, this.shootingSprite, this.Mirrored);
+                    Game.GameComponents.AnimationScheduler temp = this.GetComponent<Game.GameComponents.AnimationScheduler>();
+                    if (temp == null)
+                    {
+                        return;
+                    }
+
+                    temp.AddAnimation(2, 0.2f, this.shootingSprite, this.Mirrored);
                 }
                 catch (Exception)
                 {
