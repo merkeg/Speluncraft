@@ -16,6 +16,10 @@ namespace Game.Gun.Ammunition
         private int damageDelay = 0;
         private int dmg;
 
+        private Engine.GameObject.GameObject graphic;
+        private float graphicOffsetX = 2;
+        private float graphicOffsetY = 2;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Stone"/> class.
         /// </summary>
@@ -40,6 +44,10 @@ namespace Game.Gun.Ammunition
             p.SetGravity(-7);
             p.SetGravityMultiplier(2);
             this.AddComponent(p);
+
+            this.graphic = new Engine.GameObject.GameObject(this.MinX - (this.graphicOffsetX / 2), this.MinY - (this.graphicOffsetY / 2), this.SizeX + this.graphicOffsetX, this.SizeY + this.graphicOffsetY, sprite);
+            this.Sprite = null;
+            Engine.Engine.AddGameObject(this.graphic);
         }
 
         /// <inheritdoc/>
@@ -63,7 +71,17 @@ namespace Game.Gun.Ammunition
 
             base.OnUpdate(frameTime);
 
+            this.graphic.MinX = this.MinX - (this.graphicOffsetX / 2);
+            this.graphic.MinY = this.MinY - (this.graphicOffsetY / 2);
+
             this.damageDelay--;
+        }
+
+        /// <inheritdoc/>
+        public override void OnUpdatableDestroy()
+        {
+            Engine.Engine.RemoveGameObject(this.graphic);
+            base.OnUpdatableDestroy();
         }
     }
 }

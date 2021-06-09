@@ -382,6 +382,9 @@
         <member name="M:Game.Gun.Ammunition.Stone.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="M:Game.Gun.Ammunition.Stone.OnUpdatableDestroy">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Gun.GrenadeLauncher">
             <summary>
             Launches Grenades.
