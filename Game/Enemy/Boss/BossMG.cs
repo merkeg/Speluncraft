@@ -110,7 +110,7 @@ namespace Game.Enemy.Boss
             Vector2 lineToPlayer = new Vector2((player.MinX + (player.SizeX / 2)) - (this.MinX + this.SizeX), (player.MinY + (player.SizeY / 2)) - (this.MinY + (this.SizeY / 2)) + xOffset);
             lineToPlayer.Normalize();
 
-            Gun.Ammunition.Bullet b = new Gun.Ammunition.Bullet(this.dmg, lineToPlayer.X * this.bulletVelocity, lineToPlayer.Y * this.bulletVelocity, this.MinX + this.SizeX + this.bufferDistance, this.MinY + (this.SizeY / 2), this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames);
+            Gun.Ammunition.Bullet b = new Gun.Ammunition.Bullet(this.dmg, lineToPlayer.X * this.bulletVelocity, lineToPlayer.Y * this.bulletVelocity, this.MinX + this.SizeX + this.bufferDistance, this.MinY + (this.SizeY / 2), this.bulletLenght, this.bulletHeight, this.bulletSprite, this.damageDelayFrames, 0.15f, 0.15f);
             Engine.Engine.AddGameObject(b);
         }
     }

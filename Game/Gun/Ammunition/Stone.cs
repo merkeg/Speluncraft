@@ -17,8 +17,8 @@ namespace Game.Gun.Ammunition
         private int dmg;
 
         private Engine.GameObject.GameObject graphic;
-        private float graphicOffsetX = 2;
-        private float graphicOffsetY = 2;
+        private float graphicOffsetX = 0.2f;
+        private float graphicOffsetY = 0.2f;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Stone"/> class.
