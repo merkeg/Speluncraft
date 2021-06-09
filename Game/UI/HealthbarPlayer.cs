@@ -21,7 +21,7 @@ namespace Game.UI
 
         private static float xOffset = 50;
         private static float yOffset = 50;
-        private static float weaponHeight = 2.0f; // Changes the weapon scale.
+        private static float weaponHeight = 1.4f; // Changes the weapon scale.
         private static float healthbarHeight = 2.0f; // change float value for healtbar scale.
 
         private static float healthbarHeightValue;
@@ -29,6 +29,10 @@ namespace Game.UI
         private static Vector3 healthbarSpriteAspect = new Vector3(220, 18, 220f / 18f);
         private static Vector3 weaponSpriteAspect = new Vector3(64, 64, 64f / 64f);
         private static Vector2 screenSize;
+
+        private static float reloadTime;
+        private static float reloadTimeLeft;
+        private static float reloadScale;
 
         private Player.Player player;
         private ISprite indicators;
@@ -41,8 +45,9 @@ namespace Game.UI
         public HealthbarPlayer(Player.Player player)
         {
             this.player = player;
-
             this.indicators = TextureAtlas.Sprites["healthbar_hearts"];
+
+            reloadTime = player.GetGun().GetReloadTime();
         }
 
         /// <summary>
@@ -51,19 +56,26 @@ namespace Game.UI
         /// <param name="args">.</param>
         public void Render(FrameEventArgs args)
         {
-            this.RenderWeaponSlot();
-
             currentHP = this.player.GetComponent<HealthPoints>().GetCurrHP();
             this.hTexX0 = currentHP / (float)this.player.GetComponent<HealthPoints>().GetMaxHP();
 
-            this.RenderIndicators();
+            reloadTimeLeft = this.player.GetGun().GetReloadTimeLeft();
+            reloadScale = reloadTimeLeft / reloadTime;
+            if (reloadTimeLeft < 0)
+            {
+                reloadScale = 1;
+            }
+
+            this.RenderIndicators(args);
+            this.RenderWeaponSlot(args);
         }
 
         /// <summary>
         /// function to render current weapon.
         /// renders weapon on the right side and dependent on the healthbar currently.
         /// </summary>
-        public void RenderWeaponSlot()
+        /// /// <param name="args">.</param>
+        public void RenderWeaponSlot(FrameEventArgs args)
         {
             // weapon
             GL.BindTexture(TextureTarget.Texture2D, GunType.GunTypeArray[ItemShop.CurrentWeaponIndex].GunSprite.Handle);
@@ -71,27 +83,40 @@ namespace Game.UI
             GL.Begin(PrimitiveType.Quads);
 
             GL.TexCoord2(0, 0);
-            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * healthbarHeightValue), screenSize.Y - yOffset + (weaponSpriteAspect.Y / 2f) + (healthbarHeightValue / 2f)); // The "(weaponSpriteAspect.Y / 2f) + (healthbarSpriteAspect.Y / 2f)" moves the weapon Ycenterline into the middle of the healthbar
+            GL.Vertex2(xOffset, yOffset + weaponSpriteSizeValue);
 
             GL.TexCoord2(1, 0);
-            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * healthbarHeightValue) + (weaponSpriteAspect.Z * weaponSpriteSizeValue), screenSize.Y - yOffset + (weaponSpriteAspect.Y / 2f) + (healthbarHeightValue / 2f));
+            GL.Vertex2(xOffset + (weaponSpriteAspect.Z * weaponSpriteSizeValue), yOffset + weaponSpriteSizeValue);
 
             GL.TexCoord2(1, 1);
-            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * healthbarHeightValue) + (weaponSpriteAspect.Z * weaponSpriteSizeValue), screenSize.Y - yOffset - weaponSpriteSizeValue + (weaponSpriteAspect.Y / 2f) + (healthbarHeightValue / 2f));
+            GL.Vertex2(xOffset + (weaponSpriteAspect.Z * weaponSpriteSizeValue), yOffset);
 
             GL.TexCoord2(0, 1);
-            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * healthbarHeightValue), screenSize.Y - yOffset - weaponSpriteSizeValue + (weaponSpriteAspect.Y / 2f) + (healthbarHeightValue / 2f));
+            GL.Vertex2(xOffset, yOffset);
 
             GL.End();
 
-            // reload alpha
-            
+            // reload alpha. only shown when weapon is reloading
+            GL.BindTexture(TextureTarget.Texture2D, 0);
+            GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 0.5f));
+            GL.Begin(PrimitiveType.Quads);
+
+            GL.Vertex2(xOffset, yOffset + weaponSpriteSizeValue);
+
+            GL.Vertex2(xOffset + (weaponSpriteAspect.Z * weaponSpriteSizeValue), yOffset + weaponSpriteSizeValue);
+
+            GL.Vertex2(xOffset + (weaponSpriteAspect.Z * weaponSpriteSizeValue), yOffset + (weaponSpriteSizeValue * reloadScale));
+
+            GL.Vertex2(xOffset, yOffset + (weaponSpriteSizeValue * reloadScale));
+
+            GL.End();
         }
 
         /// <summary>
         /// function to render indicators of healthbar.
         /// </summary>
-        public void RenderIndicators() // needs cleanup or shortening for code metrics.
+        /// <param name="args">.</param>
+        public void RenderIndicators(FrameEventArgs args) // needs cleanup or shortening for code metrics.
         {
             // outline
             GL.BindTexture(TextureTarget.Texture2D, this.indicators.Handle);

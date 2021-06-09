@@ -909,16 +909,18 @@
             </summary>
             <param name="args">.</param>
         </member>
-        <member name="M:Game.UI.HealthbarPlayer.RenderWeaponSlot">
+        <member name="M:Game.UI.HealthbarPlayer.RenderWeaponSlot(OpenTK.Windowing.Common.FrameEventArgs)">
             <summary>
             function to render current weapon.
             renders weapon on the right side and dependent on the healthbar currently.
             </summary>
+            /// <param name="args">.</param>
         </member>
-        <member name="M:Game.UI.HealthbarPlayer.RenderIndicators">
+        <member name="M:Game.UI.HealthbarPlayer.RenderIndicators(OpenTK.Windowing.Common.FrameEventArgs)">
             <summary>
             function to render indicators of healthbar.
             </summary>
+            <param name="args">.</param>
         </member>
         <member name="M:Game.UI.HealthbarPlayer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <summary>
