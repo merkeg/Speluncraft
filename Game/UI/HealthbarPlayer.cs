@@ -19,12 +19,15 @@ namespace Game.UI
     {
         private static int currentHP = 0;
 
-        private static float xOffset = 25;
-        private static float yOffset = 25;
-        private static float healthbarHeight = 18 * 2.0f; // only change float value for healtbar scale
+        private static float xOffset = 50;
+        private static float yOffset = 50;
+        private static float weaponHeight = 2.0f; // Changes the weapon scale.
+        private static float healthbarHeight = 2.0f; // change float value for healtbar scale.
 
-        private static float heightValue;
+        private static float healthbarHeightValue;
+        private static float weaponSpriteSizeValue;
         private static Vector3 healthbarSpriteAspect = new Vector3(220, 18, 220f / 18f);
+        private static Vector3 weaponSpriteAspect = new Vector3(64, 64, 64f / 64f);
         private static Vector2 screenSize;
 
         private Player.Player player;
@@ -53,33 +56,36 @@ namespace Game.UI
             currentHP = this.player.GetComponent<HealthPoints>().GetCurrHP();
             this.hTexX0 = currentHP / (float)this.player.GetComponent<HealthPoints>().GetMaxHP();
 
-            Debug.WriteLine(this.hTexX0 + "|" + currentHP);
-
             this.RenderIndicators();
         }
 
         /// <summary>
-        /// function to render healthbar background.
+        /// function to render current weapon.
+        /// renders weapon on the right side and dependent on the healthbar currently.
         /// </summary>
         public void RenderWeaponSlot()
         {
+            // weapon
             GL.BindTexture(TextureTarget.Texture2D, GunType.GunTypeArray[ItemShop.CurrentWeaponIndex].GunSprite.Handle);
             GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
             GL.Begin(PrimitiveType.Quads);
 
-            GL.TexCoord2(0, 1);
-            GL.Vertex2(0, 0);
-
-            GL.TexCoord2(1, 1);
-            GL.Vertex2(64, 0);
+            GL.TexCoord2(0, 0);
+            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * healthbarHeightValue), screenSize.Y - yOffset + (weaponSpriteAspect.Y / 2f) + (healthbarHeightValue / 2f)); // The "(weaponSpriteAspect.Y / 2f) + (healthbarSpriteAspect.Y / 2f)" moves the weapon Ycenterline into the middle of the healthbar
 
             GL.TexCoord2(1, 0);
-            GL.Vertex2(64, 64);
+            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * healthbarHeightValue) + (weaponSpriteAspect.Z * weaponSpriteSizeValue), screenSize.Y - yOffset + (weaponSpriteAspect.Y / 2f) + (healthbarHeightValue / 2f));
 
-            GL.TexCoord2(0, 0);
-            GL.Vertex2(0, 64);
+            GL.TexCoord2(1, 1);
+            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * healthbarHeightValue) + (weaponSpriteAspect.Z * weaponSpriteSizeValue), screenSize.Y - yOffset - weaponSpriteSizeValue + (weaponSpriteAspect.Y / 2f) + (healthbarHeightValue / 2f));
+
+            GL.TexCoord2(0, 1);
+            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * healthbarHeightValue), screenSize.Y - yOffset - weaponSpriteSizeValue + (weaponSpriteAspect.Y / 2f) + (healthbarHeightValue / 2f));
 
             GL.End();
+
+            // reload alpha
+            
         }
 
         /// <summary>
@@ -96,13 +102,13 @@ namespace Game.UI
             GL.Vertex2(xOffset, screenSize.Y - yOffset);
 
             GL.TexCoord2(1, 1f / 20f * 2f);
-            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * heightValue), screenSize.Y - yOffset);
+            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * healthbarHeightValue), screenSize.Y - yOffset);
 
             GL.TexCoord2(1, 1f / 20f);
-            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * heightValue), screenSize.Y - yOffset - heightValue);
+            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * healthbarHeightValue), screenSize.Y - yOffset - healthbarHeightValue);
 
             GL.TexCoord2(0, 1f / 20f);
-            GL.Vertex2(xOffset, screenSize.Y - yOffset - heightValue);
+            GL.Vertex2(xOffset, screenSize.Y - yOffset - healthbarHeightValue);
 
             GL.End();
 
@@ -115,13 +121,13 @@ namespace Game.UI
             GL.Vertex2(xOffset, screenSize.Y - yOffset);
 
             GL.TexCoord2(this.hTexX0, 1f / 20f);
-            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * heightValue * this.hTexX0), screenSize.Y - yOffset);
+            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * healthbarHeightValue * this.hTexX0), screenSize.Y - yOffset);
 
             GL.TexCoord2(this.hTexX0, 0);
-            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * heightValue * this.hTexX0), screenSize.Y - yOffset - heightValue);
+            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * healthbarHeightValue * this.hTexX0), screenSize.Y - yOffset - healthbarHeightValue);
 
             GL.TexCoord2(0, 0);
-            GL.Vertex2(xOffset, screenSize.Y - yOffset - heightValue);
+            GL.Vertex2(xOffset, screenSize.Y - yOffset - healthbarHeightValue);
 
             GL.End();
         }
@@ -135,7 +141,8 @@ namespace Game.UI
             screenSize.X = args.Size.X;
             screenSize.Y = args.Size.Y;
 
-            heightValue = (screenSize.Y / 720) * healthbarHeight;
+            healthbarHeightValue = (screenSize.Y / 720) * healthbarSpriteAspect.Y * healthbarHeight;
+            weaponSpriteSizeValue = (screenSize.Y / 720) * weaponSpriteAspect.Y * weaponHeight;
 
             return;
         }

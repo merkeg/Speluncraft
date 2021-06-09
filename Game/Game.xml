@@ -911,7 +911,8 @@
         </member>
         <member name="M:Game.UI.HealthbarPlayer.RenderWeaponSlot">
             <summary>
-            function to render healthbar background.
+            function to render current weapon.
+            renders weapon on the right side and dependent on the healthbar currently.
             </summary>
         </member>
         <member name="M:Game.UI.HealthbarPlayer.RenderIndicators">
@@ -1038,7 +1039,6 @@
             <summary>
             sets Text render as visible or not.
             </summary>
-            <param name="hide">contains if text is hidden or not.</param>
         </member>
         <member name="M:Game.UI.ItemShop.Render(OpenTK.Windowing.Common.FrameEventArgs)">
             <inheritdoc/>
