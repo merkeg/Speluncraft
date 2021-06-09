@@ -21,7 +21,7 @@ namespace Game.UI
 
         private static float xOffset = 50;
         private static float yOffset = 50;
-        private static float weaponHeight = 2.0f; // Changes the weapon scale.
+        private static float weaponHeight = 2.5f; // Changes the weapon scale.
         private static float healthbarHeight = 2.0f; // Change float value for healtbar scale.
 
         private static float healthbarHeightValue;
@@ -98,7 +98,7 @@ namespace Game.UI
 
             // reload alpha. only shown when weapon is reloading
             GL.BindTexture(TextureTarget.Texture2D, 0);
-            GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 0.5f));
+            GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 0.3f));
             GL.Begin(PrimitiveType.Quads);
 
             GL.Vertex2(screenSize.X - xOffset - weaponSpriteSizeValue, screenSize.Y - yOffset - (weaponSpriteSizeValue * reloadScale));
