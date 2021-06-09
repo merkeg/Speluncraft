@@ -272,6 +272,10 @@
     <EmbeddedResource Include="Resources\Level\level04.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Remove="Resources\UI\congratulaejuns.png" />
+    <EmbeddedResource Include="Resources\UI\congratulaejuns.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

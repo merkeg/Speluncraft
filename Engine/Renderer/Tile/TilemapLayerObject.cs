@@ -4,6 +4,7 @@
 
 namespace Engine.Renderer.Tile
 {
+    using System;
     using System.Linq;
     using global::Engine.Renderer.Tile.Parser;
 
@@ -68,7 +69,14 @@ namespace Engine.Renderer.Tile
         /// <returns>Property or null.</returns>
         public CustomPropertyModel GetProperty(string name)
         {
-            return this.Properties.ToList().Find(prop => prop.name.Equals(name));
+            try
+            {
+                return this.Properties.ToList().Find(prop => prop.name.Equals(name));
+            }
+            catch (ArgumentNullException)
+            {
+                return null;
+            }
         }
     }
 }
