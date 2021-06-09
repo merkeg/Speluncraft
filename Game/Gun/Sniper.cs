@@ -90,5 +90,17 @@ namespace Game.Gun
         {
             return this.shotFiredThisFrame;
         }
+
+        /// <inheritdoc/>
+        public float GetReloadTime()
+        {
+            return this.reloadTime;
+        }
+
+        /// <inheritdoc/>
+        public float GetReloadTimeLeft()
+        {
+            return this.reloadCoolDown;
+        }
     }
 }
