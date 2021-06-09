@@ -24,8 +24,6 @@ namespace Game.Menu
         private RelativeRectangle textGitgud;
         private RelativeRectangle buttonMainMenu;
 
-        private bool previousMouseButtonState;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="EndMenu"/> class.
         /// </summary>
