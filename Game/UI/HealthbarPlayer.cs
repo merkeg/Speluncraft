@@ -21,8 +21,8 @@ namespace Game.UI
 
         private static float xOffset = 50;
         private static float yOffset = 50;
-        private static float weaponHeight = 1.4f; // Changes the weapon scale.
-        private static float healthbarHeight = 2.0f; // change float value for healtbar scale.
+        private static float weaponHeight = 2.0f; // Changes the weapon scale.
+        private static float healthbarHeight = 2.0f; // Change float value for healtbar scale.
 
         private static float healthbarHeightValue;
         private static float weaponSpriteSizeValue;
@@ -63,7 +63,7 @@ namespace Game.UI
             reloadScale = reloadTimeLeft / reloadTime;
             if (reloadTimeLeft < 0)
             {
-                reloadScale = 1;
+                reloadScale = 0;
             }
 
             this.RenderIndicators(args);
@@ -83,16 +83,16 @@ namespace Game.UI
             GL.Begin(PrimitiveType.Quads);
 
             GL.TexCoord2(0, 0);
-            GL.Vertex2(xOffset, yOffset + weaponSpriteSizeValue);
+            GL.Vertex2(screenSize.X - xOffset - weaponSpriteSizeValue, screenSize.Y - yOffset);
 
             GL.TexCoord2(1, 0);
-            GL.Vertex2(xOffset + (weaponSpriteAspect.Z * weaponSpriteSizeValue), yOffset + weaponSpriteSizeValue);
+            GL.Vertex2(screenSize.X - xOffset - weaponSpriteSizeValue + (weaponSpriteAspect.Z * weaponSpriteSizeValue), screenSize.Y - yOffset);
 
             GL.TexCoord2(1, 1);
-            GL.Vertex2(xOffset + (weaponSpriteAspect.Z * weaponSpriteSizeValue), yOffset);
+            GL.Vertex2(screenSize.X - xOffset - weaponSpriteSizeValue + (weaponSpriteAspect.Z * weaponSpriteSizeValue), screenSize.Y - (yOffset + weaponSpriteSizeValue));
 
             GL.TexCoord2(0, 1);
-            GL.Vertex2(xOffset, yOffset);
+            GL.Vertex2(screenSize.X - xOffset - weaponSpriteSizeValue, screenSize.Y - (yOffset + weaponSpriteSizeValue));
 
             GL.End();
 
@@ -101,13 +101,13 @@ namespace Game.UI
             GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 0.5f));
             GL.Begin(PrimitiveType.Quads);
 
-            GL.Vertex2(xOffset, yOffset + weaponSpriteSizeValue);
+            GL.Vertex2(screenSize.X - xOffset - weaponSpriteSizeValue, screenSize.Y - yOffset - (weaponSpriteSizeValue * reloadScale));
 
-            GL.Vertex2(xOffset + (weaponSpriteAspect.Z * weaponSpriteSizeValue), yOffset + weaponSpriteSizeValue);
+            GL.Vertex2(screenSize.X - xOffset - weaponSpriteSizeValue + (weaponSpriteAspect.Z * weaponSpriteSizeValue), screenSize.Y - yOffset - (weaponSpriteSizeValue * reloadScale));
 
-            GL.Vertex2(xOffset + (weaponSpriteAspect.Z * weaponSpriteSizeValue), yOffset + (weaponSpriteSizeValue * reloadScale));
+            GL.Vertex2(screenSize.X - xOffset - weaponSpriteSizeValue + (weaponSpriteAspect.Z * weaponSpriteSizeValue), screenSize.Y - yOffset);
 
-            GL.Vertex2(xOffset, yOffset + (weaponSpriteSizeValue * reloadScale));
+            GL.Vertex2(screenSize.X - xOffset - weaponSpriteSizeValue, screenSize.Y - yOffset);
 
             GL.End();
         }
