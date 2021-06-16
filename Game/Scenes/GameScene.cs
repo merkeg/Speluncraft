@@ -71,6 +71,12 @@ namespace Game.Scenes
                 Engine.Engine.AddGameObject(el);
                 el.Interact += () =>
                 {
+                    if (exitPos.GetProperty("end") != null)
+                    {
+                        Engine.Engine.ChangeScene(new EndScene());
+                        return;
+                    }
+
                     Bundle bundle = new Bundle();
                     bundle.Add("level", exitPos.GetProperty("toLevel").value.ToString());
                     bundle.Add("playerHealth", player.GetComponent<HealthPoints>().GetCurrHP());
