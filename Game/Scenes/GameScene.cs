@@ -56,11 +56,7 @@ namespace Game.Scenes
             HealthbarPlayer playerhealthbar = new HealthbarPlayer(player);
             Engine.Engine.AddRenderer(playerhealthbar, RenderLayer.UI);
 
-            DebugRenderer debugRenderer = new DebugRenderer(new Rectangle(5, 5, 300, 325), new Color4(0, 0, 0, 0.3f), TextureAtlas.Fonts["debugFont"], player, UiAlignment.Right);
-            debugRenderer.Hidden = true;
-            Engine.Engine.AddRenderer(debugRenderer, RenderLayer.UI);
-            Engine.Engine.GetService<InputService>().Subscribe(Keys.F3, () => debugRenderer.Hidden = !debugRenderer.Hidden);
-            Engine.Engine.GetService<InputService>().Subscribe(Keys.Escape, this.DisplayPauseMenu);
+            this.LoadDebugRenderer(player);
 
             Engine.Engine.GetService<TilemapService>().SetOptimizationPoint(player);
 
@@ -84,6 +80,15 @@ namespace Game.Scenes
                     Engine.Engine.ChangeScene(new GameScene(), bundle);
                 };
             }
+        }
+
+        private void LoadDebugRenderer(Player.Player player)
+        {
+            DebugRenderer debugRenderer = new DebugRenderer(new Rectangle(5, 5, 300, 325), new Color4(0, 0, 0, 0.3f), TextureAtlas.Fonts["debugFont"], player, UiAlignment.Right);
+            debugRenderer.Hidden = true;
+            Engine.Engine.AddRenderer(debugRenderer, RenderLayer.UI);
+            Engine.Engine.GetService<InputService>().Subscribe(Keys.F3, () => debugRenderer.Hidden = !debugRenderer.Hidden);
+            Engine.Engine.GetService<InputService>().Subscribe(Keys.Escape, this.DisplayPauseMenu);
         }
 
         private void AddObjects()
