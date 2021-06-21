@@ -5,7 +5,7 @@
      "export":
         {
          "format":"json",
-         "target":"level04.json"
+         "target":"..\/..\/..\/..\/..\/Speluncraft\/Game\/Resources\/Level\/level04.json"
         }
     },
  "height":200,
@@ -83,7 +83,7 @@
                 {
                  "height":0,
                  "id":7,
-                 "name":"boss",
+                 "name":"Leaper",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -283,6 +283,54 @@
                  "width":0,
                  "x":4192,
                  "y":2784
+                }, 
+                {
+                 "height":0,
+                 "id":26,
+                 "name":"Leaper",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2976,
+                 "y":3680
+                }, 
+                {
+                 "height":0,
+                 "id":27,
+                 "name":"Leaper",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2752,
+                 "y":4416
+                }, 
+                {
+                 "height":0,
+                 "id":28,
+                 "name":"Leaper",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":2400,
+                 "y":3968
+                }, 
+                {
+                 "height":0,
+                 "id":29,
+                 "name":"Leaper",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":4160,
+                 "y":4000
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -321,7 +369,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":26,
+ "nextobjectid":30,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.6.0",

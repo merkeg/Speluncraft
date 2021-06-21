@@ -612,6 +612,33 @@
         <member name="M:Game.Menu.DeathMenu.OnRendererDelete">
             <inheritdoc/>
         </member>
+        <member name="T:Game.Menu.EndMenu">
+            <summary>
+            PauseMenu.
+            </summary>
+        </member>
+        <member name="M:Game.Menu.EndMenu.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.Renderer.UI.UiAlignment,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Menu.EndMenu"/> class.
+            </summary>
+            <param name="bounds">bounds.</param>
+            <param name="backgroundColor">backgroundColor.</param>
+            <param name="font">font.</param>
+            <param name="alignment">alignment.</param>
+            <param name="fitToViewport">fitToViewport.</param>
+        </member>
+        <member name="M:Game.Menu.EndMenu.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.EndMenu.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.EndMenu.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.EndMenu.OnRendererDelete">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Menu.PauseMenu">
             <summary>
             PauseMenu.
@@ -757,6 +784,14 @@
             </summary>
         </member>
         <member name="M:Game.Scenes.DeathScene.OnSceneLoad">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Scenes.EndScene">
+            <summary>
+            Start scene class.
+            </summary>
+        </member>
+        <member name="M:Game.Scenes.EndScene.OnSceneLoad">
             <inheritdoc/>
         </member>
         <member name="T:Game.Scenes.GameScene">
