@@ -4,6 +4,7 @@
 
 namespace Game.UI
 {
+    using System.Diagnostics;
     using Engine.Component;
     using Engine.Renderer;
     using Engine.Renderer.Sprite;
@@ -17,21 +18,24 @@ namespace Game.UI
     public class HealthbarPlayer : IRenderer
     {
         private static int currentHP = 0;
-        private static float uiScale = 1.8f;
 
-        private static float xOffset = 25;
-        private static float yOffset = 25;
-        private static int screenX;
-        private static int screenY;
+        private static float xOffset = 50;
+        private static float yOffset = 50;
+        private static float weaponHeight = 2.5f; // Changes the weapon scale.
+        private static float healthbarHeight = 2.0f; // Change float value for healtbar scale.
 
-        private static int backgroundXSize = 300;
-        private static int backgroundYSize = 60;
-        private static int indicatorsXsize = 220;
-        private static int indicatorsYsize = 18; // Height of only one indicator (one heart)
+        private static float healthbarHeightValue;
+        private static float weaponSpriteSizeValue;
+        private static Vector3 healthbarSpriteAspect = new Vector3(220, 18, 220f / 18f);
+        private static Vector3 weaponSpriteAspect = new Vector3(64, 64, 64f / 64f);
+        private static Vector2 screenSize;
+
+        private static float reloadTime;
+        private static float reloadTimeLeft;
+        private static float reloadScale;
 
         private Player.Player player;
         private ISprite indicators;
-        private ISprite background;
         private float hTexX0;
 
         /// <summary>
@@ -41,9 +45,9 @@ namespace Game.UI
         public HealthbarPlayer(Player.Player player)
         {
             this.player = player;
-
             this.indicators = TextureAtlas.Sprites["healthbar_hearts"];
-            this.background = TextureAtlas.Sprites["healthbar_background"];
+
+            reloadTime = player.GetGun().GetReloadTime();
         }
 
         /// <summary>
@@ -52,82 +56,84 @@ namespace Game.UI
         /// <param name="args">.</param>
         public void Render(FrameEventArgs args)
         {
-            this.RenderBackground();
-
             currentHP = this.player.GetComponent<HealthPoints>().GetCurrHP();
-            this.hTexX0 = currentHP / 100f;
+            this.hTexX0 = currentHP / (float)this.player.GetComponent<HealthPoints>().GetMaxHP();
 
-            this.RenderIndicators();
+            reloadTimeLeft = this.player.GetGun().GetReloadTimeLeft();
+            reloadScale = reloadTimeLeft / reloadTime;
+            if (reloadTimeLeft < 0)
+            {
+                reloadScale = 0;
+            }
+
+            this.RenderIndicators(args);
+            this.RenderWeaponSlot(args);
         }
 
         /// <summary>
-        /// function to render healthbar background.
+        /// function to render current weapon.
+        /// renders weapon on the right side and dependent on the healthbar currently.
         /// </summary>
-        public void RenderBackground()
+        /// /// <param name="args">.</param>
+        public void RenderWeaponSlot(FrameEventArgs args)
         {
-            // healthbar background
-            GL.BindTexture(TextureTarget.Texture2D, this.background.Handle);
-            GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
-            GL.Begin(PrimitiveType.Quads);
-
-            GL.TexCoord2(0, 0);
-            GL.Vertex2(xOffset, screenY - yOffset - (backgroundYSize * uiScale));
-
-            GL.TexCoord2(1, 0);
-            GL.Vertex2(backgroundXSize * uiScale, screenY - yOffset - (backgroundYSize * uiScale));
-
-            GL.TexCoord2(1, 1);
-            GL.Vertex2(backgroundXSize * uiScale, screenY - yOffset);
-
-            GL.TexCoord2(0, 1);
-            GL.Vertex2(xOffset, screenY - yOffset);
-
-            GL.End();
-
-            /* for later use.
+            // weapon
             GL.BindTexture(TextureTarget.Texture2D, GunType.GunTypeArray[ItemShop.CurrentWeaponIndex].GunSprite.Handle);
             GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 1.0f));
             GL.Begin(PrimitiveType.Quads);
 
-            GL.TexCoord2(0, 1);
-            GL.Vertex2(0, 0);
-
-            GL.TexCoord2(1, 1);
-            GL.Vertex2(64, 0);
+            GL.TexCoord2(0, 0);
+            GL.Vertex2(screenSize.X - xOffset - weaponSpriteSizeValue, screenSize.Y - yOffset);
 
             GL.TexCoord2(1, 0);
-            GL.Vertex2(64, 64);
+            GL.Vertex2(screenSize.X - xOffset - weaponSpriteSizeValue + (weaponSpriteAspect.Z * weaponSpriteSizeValue), screenSize.Y - yOffset);
 
-            GL.TexCoord2(0, 0);
-            GL.Vertex2(0, 64);
+            GL.TexCoord2(1, 1);
+            GL.Vertex2(screenSize.X - xOffset - weaponSpriteSizeValue + (weaponSpriteAspect.Z * weaponSpriteSizeValue), screenSize.Y - (yOffset + weaponSpriteSizeValue));
+
+            GL.TexCoord2(0, 1);
+            GL.Vertex2(screenSize.X - xOffset - weaponSpriteSizeValue, screenSize.Y - (yOffset + weaponSpriteSizeValue));
 
             GL.End();
-            */
+
+            // reload alpha. only shown when weapon is reloading
+            GL.BindTexture(TextureTarget.Texture2D, 0);
+            GL.Color4(new Color4(1.0f, 1.0f, 1.0f, 0.3f));
+            GL.Begin(PrimitiveType.Quads);
+
+            GL.Vertex2(screenSize.X - xOffset - weaponSpriteSizeValue, screenSize.Y - yOffset - (weaponSpriteSizeValue * reloadScale));
+
+            GL.Vertex2(screenSize.X - xOffset - weaponSpriteSizeValue + (weaponSpriteAspect.Z * weaponSpriteSizeValue), screenSize.Y - yOffset - (weaponSpriteSizeValue * reloadScale));
+
+            GL.Vertex2(screenSize.X - xOffset - weaponSpriteSizeValue + (weaponSpriteAspect.Z * weaponSpriteSizeValue), screenSize.Y - yOffset);
+
+            GL.Vertex2(screenSize.X - xOffset - weaponSpriteSizeValue, screenSize.Y - yOffset);
+
+            GL.End();
         }
 
         /// <summary>
         /// function to render indicators of healthbar.
         /// </summary>
-        public void RenderIndicators() // needs cleanup or shortening for code metrics.
+        /// <param name="args">.</param>
+        public void RenderIndicators(FrameEventArgs args) // needs cleanup or shortening for code metrics.
         {
-            float relpos = 32 * uiScale;
-
             // outline
             GL.BindTexture(TextureTarget.Texture2D, this.indicators.Handle);
             GL.Color4(new Color4(1.0f / 255 * 95, 1.0f / 255 * 84, 1.0f / 255 * 68, 1.0f));
             GL.Begin(PrimitiveType.Quads);
 
-            GL.TexCoord2(0, 1f / 20f);
-            GL.Vertex2(xOffset + 10, screenY - yOffset - (indicatorsYsize * uiScale) - relpos);
-
-            GL.TexCoord2(1, 1f / 20f);
-            GL.Vertex2(xOffset + 10 + (indicatorsXsize * uiScale), screenY - yOffset - (indicatorsYsize * uiScale) - relpos);
+            GL.TexCoord2(0, 1f / 20f * 2f);
+            GL.Vertex2(xOffset, screenSize.Y - yOffset);
 
             GL.TexCoord2(1, 1f / 20f * 2f);
-            GL.Vertex2(xOffset + 10 + (indicatorsXsize * uiScale), screenY - yOffset - relpos);
+            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * healthbarHeightValue), screenSize.Y - yOffset);
 
-            GL.TexCoord2(0, 1f / 20f * 2f);
-            GL.Vertex2(xOffset + 10, screenY - yOffset - relpos);
+            GL.TexCoord2(1, 1f / 20f);
+            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * healthbarHeightValue), screenSize.Y - yOffset - healthbarHeightValue);
+
+            GL.TexCoord2(0, 1f / 20f);
+            GL.Vertex2(xOffset, screenSize.Y - yOffset - healthbarHeightValue);
 
             GL.End();
 
@@ -136,57 +142,17 @@ namespace Game.UI
             GL.Color4(new Color4(1.0f / 255 * 200, 0.0f, 0.0f, 1.0f));
             GL.Begin(PrimitiveType.Quads);
 
-            GL.TexCoord2(0, 0);
-            GL.Vertex2(xOffset + 10, screenY - yOffset - (indicatorsYsize * uiScale) - relpos);
-
-            GL.TexCoord2(this.hTexX0, 0);
-            GL.Vertex2(xOffset + 10 + (indicatorsXsize * this.hTexX0 * uiScale), screenY - yOffset - (indicatorsYsize * uiScale) - relpos);
+            GL.TexCoord2(0, 1f / 20f);
+            GL.Vertex2(xOffset, screenSize.Y - yOffset);
 
             GL.TexCoord2(this.hTexX0, 1f / 20f);
-            GL.Vertex2(xOffset + 10 + (indicatorsXsize * this.hTexX0 * uiScale), screenY - yOffset - relpos);
+            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * healthbarHeightValue * this.hTexX0), screenSize.Y - yOffset);
 
-            GL.TexCoord2(0, 1f / 20f);
-            GL.Vertex2(xOffset + 10, screenY - yOffset - relpos);
+            GL.TexCoord2(this.hTexX0, 0);
+            GL.Vertex2(xOffset + (healthbarSpriteAspect.Z * healthbarHeightValue * this.hTexX0), screenSize.Y - yOffset - healthbarHeightValue);
 
-            GL.End();
-
-            relpos = 15 + (15 * (float)(uiScale * 0.07)); // set offset for next indicatorbar
-
-            // outline
-            GL.BindTexture(TextureTarget.Texture2D, this.indicators.Handle);
-            GL.Color4(new Color4(1.0f / 255 * 95, 1.0f / 255 * 84, 1.0f / 255 * 68, 1.0f));
-            GL.Begin(PrimitiveType.Quads);
-
-            GL.TexCoord2(0, 1f / 20f * 3f);
-            GL.Vertex2(xOffset + 10, screenY - yOffset - (indicatorsYsize * uiScale) - relpos);
-
-            GL.TexCoord2(1, 1f / 20f * 3f);
-            GL.Vertex2(xOffset + 10 + (indicatorsXsize * uiScale), screenY - yOffset - (indicatorsYsize * uiScale) - relpos);
-
-            GL.TexCoord2(1, 1f / 20f * 4f);
-            GL.Vertex2(xOffset + 10 + (indicatorsXsize * uiScale), screenY - yOffset - relpos);
-
-            GL.TexCoord2(0, 1f / 20f * 4f);
-            GL.Vertex2(xOffset + 10, screenY - yOffset - relpos);
-
-            GL.End();
-
-            // inlay
-            GL.BindTexture(TextureTarget.Texture2D, this.indicators.Handle);
-            GL.Color4(new Color4(1.0f / 255 * 104, 1.0f / 255 * 167, 1.0f / 255 * 220, 1.0f));
-            GL.Begin(PrimitiveType.Quads);
-
-            GL.TexCoord2(0, 1f / 20f * 2f);
-            GL.Vertex2(xOffset + 10, screenY - yOffset - (indicatorsYsize * uiScale) - relpos);
-
-            GL.TexCoord2(1, 1f / 20f * 2f);
-            GL.Vertex2(xOffset + 10 + (indicatorsXsize * 1 * uiScale), screenY - yOffset - (indicatorsYsize * uiScale) - relpos);
-
-            GL.TexCoord2(1, 1f / 20f * 3f);
-            GL.Vertex2(xOffset + 10 + (indicatorsXsize * 1 * uiScale), screenY - yOffset - relpos);
-
-            GL.TexCoord2(0, 1f / 20f * 3f);
-            GL.Vertex2(xOffset + 10, screenY - yOffset - relpos);
+            GL.TexCoord2(0, 0);
+            GL.Vertex2(xOffset, screenSize.Y - yOffset - healthbarHeightValue);
 
             GL.End();
         }
@@ -197,9 +163,11 @@ namespace Game.UI
         /// <param name="args">args.</param>
         public void Resize(ResizeEventArgs args)
         {
-            // Debug.WriteLine(args.Size);
-            screenX = args.Size.X;
-            screenY = args.Size.Y;
+            screenSize.X = args.Size.X;
+            screenSize.Y = args.Size.Y;
+
+            healthbarHeightValue = (screenSize.Y / 720) * healthbarSpriteAspect.Y * healthbarHeight;
+            weaponSpriteSizeValue = (screenSize.Y / 720) * weaponSpriteAspect.Y * weaponHeight;
 
             return;
         }

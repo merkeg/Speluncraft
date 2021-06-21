@@ -29,5 +29,17 @@ namespace Game.Gun
         /// </summary>
         /// <returns>True if a shoot was fired this Frame.</returns>
         public bool ShotFired();
+
+        /// <summary>
+        /// Gets How long this Gun need to reload.
+        /// </summary>
+        /// <returns>How long this Gun need to reload.</returns>
+        public float GetReloadTime();
+
+        /// <summary>
+        /// Gets how much time is left before this gun can fiere again.
+        /// </summary>
+        /// <returns>How much time is left before this gun can fiere again ( in Seconds ).</returns>
+        public float GetReloadTimeLeft();
     }
 }
