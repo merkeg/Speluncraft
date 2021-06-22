@@ -11,6 +11,10 @@ We used .NET 3.1 and OpenTK as a low-level binding for OpenGL to create the game
 2. Click on Game.exe
 3. Enjoy
 
+# Trailer
+
+[![Video](https://rwuwu.de/0f240h)](https://zer0.pw/mueIYFM "Trailer")
+
 # Tutorial
 
 ![Screenshot Game](https://rwuwu.de/gNLveI)
