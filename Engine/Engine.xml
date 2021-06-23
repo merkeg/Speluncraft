@@ -744,27 +744,6 @@
         <member name="M:Engine.Renderer.CollisionRenderer.OnRendererDelete">
             <inheritdoc/>
         </member>
-        <member name="T:Engine.Renderer.DebugRenderer">
-            <summary>
-            Debug renderer class.
-            </summary>
-        </member>
-        <member name="M:Engine.Renderer.DebugRenderer.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.GameObject.GameObject,Engine.Renderer.UI.UiAlignment)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Engine.Renderer.DebugRenderer"/> class.
-            </summary>
-            <param name="bounds">Bounds.</param>
-            <param name="backgroundColor">Background color.</param>
-            <param name="font">Font.</param>
-            <param name="gameObject">Gameobject with physics component.</param>
-            <param name="alignment">Alignment.</param>
-        </member>
-        <member name="M:Engine.Renderer.DebugRenderer.OnRendererCreate">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Renderer.DebugRenderer.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
-            <inheritdoc/>
-        </member>
         <member name="T:Engine.Renderer.RenderLayer">
             <summary>
             Rendering layers.
