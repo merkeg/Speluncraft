@@ -2,7 +2,7 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
-namespace Engine.Camera
+namespace Engine.Renderer
 {
     using System;
     using global::Engine.Renderer;

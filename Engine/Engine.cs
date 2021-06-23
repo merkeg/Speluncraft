@@ -54,7 +54,7 @@ namespace Engine
         /// <summary>
         /// Gets the game Camera.
         /// </summary>
-        public static Camera.Camera Camera { get; private set; }
+        public static Camera Camera { get; private set; }
 
         /// <summary>
         /// Gets or sets Handlers on pause.
@@ -73,7 +73,7 @@ namespace Engine
         public static void StartEngine(OpenTK.Windowing.Desktop.GameWindow window)
         {
             Engine.GameWindow = window;
-            Engine.Camera = new Camera.Camera();
+            Engine.Camera = new Camera();
             Engine.ServiceRenderers[RenderLayer.GAME].Add(Engine.Camera);
 
             window.UpdateFrame += Engine.Update;
