@@ -67,8 +67,8 @@ namespace Game.Scenes
             // UI
             TextureAtlas.Set("startscreen", new Sprite("Game.Resources.UI.startmenu.png", false));
             TextureAtlas.Set("gitgudcasul", new Sprite("Game.Resources.UI.gitgud.png", false));
+            TextureAtlas.Set("congratulaejuns", new Sprite("Game.Resources.UI.congratulaejuns.png", false));
             TextureAtlas.Set("healthbar_hearts", new Sprite("Game.Resources.UI.Healthbar.heartsheet_new.png", false));
-            TextureAtlas.Set("healthbar_background", new Sprite("Game.Resources.UI.Healthbar.background.png", false));
 
             // Ammunition
             TextureAtlas.Set("ammunition_grenade", new AnimatedSprite(new Tilesheet("Game.Resources.Animated.explosion.png", 635, 635), Keyframe.RangeX(0, 8, 0, 0.001f)));

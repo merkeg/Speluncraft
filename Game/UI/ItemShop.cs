@@ -186,7 +186,6 @@ namespace Game.UI
         /// <summary>
         /// sets Text render as visible or not.
         /// </summary>
-        /// <param name="hide">contains if text is hidden or not.</param>
         public void HideShop()
         {
             // pull gun price from Playerhealth. Only from maxhealth. TODO

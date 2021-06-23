@@ -322,7 +322,7 @@
             A bullet that flies straight untill it hits something, then does DMG and despwans.
             </summary>
         </member>
-        <member name="M:Game.Gun.Ammunition.Bullet.#ctor(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32)">
+        <member name="M:Game.Gun.Ammunition.Bullet.#ctor(System.Int32,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,Engine.Renderer.Sprite.ISprite,System.Int32,System.Single,System.Single)">
             <summary>
             Initializes a new instance of the <see cref="T:Game.Gun.Ammunition.Bullet"/> class.
             </summary>
@@ -335,8 +335,13 @@
             <param name="sizeY">Size Y.</param>
             <param name="sprite">Its sprite.</param>
             <param name="damageDelayFrames">How many frames to wait, before this bullet will do Damage.</param>
+            <param name="graphicOffsetX">How much bigger the Sprite should be on the X-Axsis.</param>
+            <param name="graphicOffsetY">How much bigger the Sprite should be on the Y-Axsis.</param>
         </member>
         <member name="M:Game.Gun.Ammunition.Bullet.OnUpdate(System.Single)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.Ammunition.Bullet.OnUpdatableDestroy">
             <inheritdoc/>
         </member>
         <member name="T:Game.Gun.Ammunition.Grenade">
@@ -382,6 +387,9 @@
         <member name="M:Game.Gun.Ammunition.Stone.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="M:Game.Gun.Ammunition.Stone.OnUpdatableDestroy">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Gun.GrenadeLauncher">
             <summary>
             Launches Grenades.
@@ -406,6 +414,12 @@
         <member name="M:Game.Gun.GrenadeLauncher.ShotFired">
             <inheritdoc/>
         </member>
+        <member name="M:Game.Gun.GrenadeLauncher.GetReloadTime">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.GrenadeLauncher.GetReloadTimeLeft">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Gun.IGun">
             <summary>
             Interface for Guns, provides pullTrigger() Methode.
@@ -427,6 +441,18 @@
             If a shoot was fired this Frame.
             </summary>
             <returns>True if a shoot was fired this Frame.</returns>
+        </member>
+        <member name="M:Game.Gun.IGun.GetReloadTime">
+            <summary>
+            Gets How long this Gun need to reload.
+            </summary>
+            <returns>How long this Gun need to reload.</returns>
+        </member>
+        <member name="M:Game.Gun.IGun.GetReloadTimeLeft">
+            <summary>
+            Gets how much time is left before this gun can fiere again.
+            </summary>
+            <returns>How much time is left before this gun can fiere again ( in Seconds ).</returns>
         </member>
         <member name="T:Game.Gun.ILookDirection">
             <summary>
@@ -473,6 +499,12 @@
         <member name="M:Game.Gun.MachineGun.ShotFired">
             <inheritdoc/>
         </member>
+        <member name="M:Game.Gun.MachineGun.GetReloadTime">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.MachineGun.GetReloadTimeLeft">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Gun.Pistol">
             <summary>
             A Pistol that shoots normal bullets. With Medium DMG and Medium reload time.
@@ -495,6 +527,12 @@
             </summary>
         </member>
         <member name="M:Game.Gun.Pistol.ShotFired">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.Pistol.GetReloadTime">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.Pistol.GetReloadTimeLeft">
             <inheritdoc/>
         </member>
         <member name="T:Game.Gun.ShotGun">
@@ -521,6 +559,12 @@
         <member name="M:Game.Gun.ShotGun.ShotFired">
             <inheritdoc/>
         </member>
+        <member name="M:Game.Gun.ShotGun.GetReloadTime">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.ShotGun.GetReloadTimeLeft">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Gun.Sniper">
             <summary>
             A Sniper with high damage but a long reload time.
@@ -545,6 +589,12 @@
         <member name="M:Game.Gun.Sniper.ShotFired">
             <inheritdoc/>
         </member>
+        <member name="M:Game.Gun.Sniper.GetReloadTime">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.Sniper.GetReloadTimeLeft">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Gun.StoneThrower">
             <summary>
             Throw Stones...
@@ -567,6 +617,12 @@
             </summary>
         </member>
         <member name="M:Game.Gun.StoneThrower.ShotFired">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.StoneThrower.GetReloadTime">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Gun.StoneThrower.GetReloadTimeLeft">
             <inheritdoc/>
         </member>
         <member name="T:Game.Gun.CameraTrackingComponent">
@@ -602,6 +658,33 @@
             <inheritdoc/>
         </member>
         <member name="M:Game.Menu.DeathMenu.OnRendererDelete">
+            <inheritdoc/>
+        </member>
+        <member name="T:Game.Menu.EndMenu">
+            <summary>
+            PauseMenu.
+            </summary>
+        </member>
+        <member name="M:Game.Menu.EndMenu.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.Renderer.UI.UiAlignment,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.Menu.EndMenu"/> class.
+            </summary>
+            <param name="bounds">bounds.</param>
+            <param name="backgroundColor">backgroundColor.</param>
+            <param name="font">font.</param>
+            <param name="alignment">alignment.</param>
+            <param name="fitToViewport">fitToViewport.</param>
+        </member>
+        <member name="M:Game.Menu.EndMenu.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.EndMenu.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.EndMenu.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.Menu.EndMenu.OnRendererDelete">
             <inheritdoc/>
         </member>
         <member name="T:Game.Menu.PauseMenu">
@@ -751,6 +834,14 @@
         <member name="M:Game.Scenes.DeathScene.OnSceneLoad">
             <inheritdoc/>
         </member>
+        <member name="T:Game.Scenes.EndScene">
+            <summary>
+            Start scene class.
+            </summary>
+        </member>
+        <member name="M:Game.Scenes.EndScene.OnSceneLoad">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.Scenes.GameScene">
             <summary>
             Game scene class.
@@ -861,15 +952,18 @@
             </summary>
             <param name="args">.</param>
         </member>
-        <member name="M:Game.UI.HealthbarPlayer.RenderBackground">
+        <member name="M:Game.UI.HealthbarPlayer.RenderWeaponSlot(OpenTK.Windowing.Common.FrameEventArgs)">
             <summary>
-            function to render healthbar background.
+            function to render current weapon.
+            renders weapon on the right side and dependent on the healthbar currently.
             </summary>
+            /// <param name="args">.</param>
         </member>
-        <member name="M:Game.UI.HealthbarPlayer.RenderIndicators">
+        <member name="M:Game.UI.HealthbarPlayer.RenderIndicators(OpenTK.Windowing.Common.FrameEventArgs)">
             <summary>
             function to render indicators of healthbar.
             </summary>
+            <param name="args">.</param>
         </member>
         <member name="M:Game.UI.HealthbarPlayer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <summary>
@@ -990,7 +1084,6 @@
             <summary>
             sets Text render as visible or not.
             </summary>
-            <param name="hide">contains if text is hidden or not.</param>
         </member>
         <member name="M:Game.UI.ItemShop.Render(OpenTK.Windowing.Common.FrameEventArgs)">
             <inheritdoc/>

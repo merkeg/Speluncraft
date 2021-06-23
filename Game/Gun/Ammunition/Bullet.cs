@@ -16,6 +16,10 @@ namespace Game.Gun.Ammunition
         private int damageDelay = 0;
         private int dmg;
 
+        private Engine.GameObject.GameObject graphic;
+        private float graphicOffsetX = 0;
+        private float graphicOffsetY = 0;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Bullet"/> class.
         /// </summary>
@@ -28,7 +32,9 @@ namespace Game.Gun.Ammunition
         /// <param name="sizeY">Size Y.</param>
         /// <param name="sprite">Its sprite.</param>
         /// <param name="damageDelayFrames">How many frames to wait, before this bullet will do Damage.</param>
-        public Bullet(int dmg, float velocityX, float velocityY, float minX, float minY, float sizeX, float sizeY, Engine.Renderer.Sprite.ISprite sprite, int damageDelayFrames)
+        /// <param name="graphicOffsetX">How much bigger the Sprite should be on the X-Axsis.</param>
+        /// <param name="graphicOffsetY">How much bigger the Sprite should be on the Y-Axsis.</param>
+        public Bullet(int dmg, float velocityX, float velocityY, float minX, float minY, float sizeX, float sizeY, Engine.Renderer.Sprite.ISprite sprite, int damageDelayFrames, float graphicOffsetX = 0, float graphicOffsetY = 0)
             : base(minX, minY, sizeX, sizeY, sprite)
         {
             this.damageDelay = damageDelayFrames;
@@ -38,6 +44,12 @@ namespace Game.Gun.Ammunition
             p.SetMaxVelocity(Math.Abs(velocityX), velocityY);
             p.SetIsAffectedByGravity(false);
             this.AddComponent(p);
+
+            this.graphicOffsetX = graphicOffsetX;
+            this.graphicOffsetY = graphicOffsetY;
+            this.graphic = new Engine.GameObject.GameObject(this.MinX - (this.graphicOffsetX / 2), this.MinY - (this.graphicOffsetY / 2), this.SizeX + this.graphicOffsetX, this.SizeY + this.graphicOffsetY, sprite);
+            this.Sprite = null;
+            Engine.Engine.AddGameObject(this.graphic);
         }
 
         /// <inheritdoc/>
@@ -61,7 +73,17 @@ namespace Game.Gun.Ammunition
 
             base.OnUpdate(frameTime);
 
+            this.graphic.MinX = this.MinX - (this.graphicOffsetX / 2);
+            this.graphic.MinY = this.MinY - (this.graphicOffsetY / 2);
+
             this.damageDelay--;
+        }
+
+        /// <inheritdoc/>
+        public override void OnUpdatableDestroy()
+        {
+            Engine.Engine.RemoveGameObject(this.graphic);
+            base.OnUpdatableDestroy();
         }
     }
 }
