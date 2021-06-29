@@ -2,8 +2,6 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
-using Engine.Renderer.Tile.Parser;
-
 namespace Game.Scenes
 {
     using System;
@@ -12,6 +10,7 @@ namespace Game.Scenes
     using Engine.Renderer;
     using Engine.Renderer.Sprite;
     using Engine.Renderer.Tile;
+    using Engine.Renderer.Tile.Parser;
     using Engine.Renderer.UI;
     using Engine.Scene;
     using Engine.Service;
