@@ -52,9 +52,9 @@ namespace Engine
         public static OpenTK.Windowing.Desktop.GameWindow GameWindow { get; private set; }
 
         /// <summary>
-        /// Gets the game Camera.
+        /// Gets or sets the game Camera.
         /// </summary>
-        public static Camera Camera { get; private set; }
+        public static Camera Camera { get; set; }
 
         /// <summary>
         /// Gets or sets Handlers on pause.

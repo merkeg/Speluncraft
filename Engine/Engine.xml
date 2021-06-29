@@ -47,11 +47,6 @@
             </summary>
             <returns>the parent GameObject.</returns>
         </member>
-        <member name="M:Engine.Component.Component.Dispose">
-            <summary>
-            Yeet this away.
-            </summary>
-        </member>
         <member name="T:Engine.Component.DoDamageCollisionResponse">
             <summary>
             A Kind of Collider, that Checks, if it Intersects with anything in Engine.Colliders. If yes it will deal DMG, if there is an HP Component.
@@ -351,7 +346,7 @@
         </member>
         <member name="P:Engine.Engine.Camera">
             <summary>
-            Gets the game Camera.
+            Gets or sets the game Camera.
             </summary>
         </member>
         <member name="P:Engine.Engine.OnSceneChange">
@@ -725,23 +720,6 @@
             </summary>
         </member>
         <member name="M:Engine.Renderer.Camera.OnRendererDelete">
-            <inheritdoc/>
-        </member>
-        <member name="T:Engine.Renderer.CollisionRenderer">
-            <summary>
-            The collision renderer class.
-            </summary>
-        </member>
-        <member name="M:Engine.Renderer.CollisionRenderer.OnRendererCreate">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Renderer.CollisionRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Renderer.CollisionRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Renderer.CollisionRenderer.OnRendererDelete">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Renderer.RenderLayer">
@@ -2165,7 +2143,7 @@
             Get typed item from bundle.
             </summary>
             <param name="key">The key.</param>
-            <param name="def">Default value.</param>
+            <param name="defaultValue">Default value.</param>
             <typeparam name="T">Type.</typeparam>
             <returns>The value.</returns>
         </member>

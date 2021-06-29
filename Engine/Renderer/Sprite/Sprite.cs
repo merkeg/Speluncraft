@@ -2,6 +2,8 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
+using System.Diagnostics.CodeAnalysis;
+
 namespace Engine.Renderer.Sprite
 {
     using System;
