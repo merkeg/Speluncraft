@@ -10,6 +10,7 @@ namespace Game.Scenes
     using Engine.Renderer;
     using Engine.Renderer.Sprite;
     using Engine.Renderer.Tile;
+    using Engine.Renderer.Tile.Parser;
     using Engine.Renderer.UI;
     using Engine.Scene;
     using Engine.Service;
@@ -124,6 +125,22 @@ namespace Game.Scenes
             {
                 Game.Enemy.Boss.Boss enemy = new Game.Enemy.Boss.Boss(obj.X, -obj.Y + 1, 1, 1.375f, enemySprite, 10);
                 Engine.Engine.AddGameObject(enemy);
+            });
+
+            this.tilemap.ObjectLayers.ForEach(objectLayer =>
+            {
+                objectLayer.FindObjectsByName("damage").ForEach(obj =>
+                {
+                    CustomPropertyModel prop = obj.GetProperty("damage");
+                    if (prop == null)
+                    {
+                        return;
+                    }
+
+                    GameObject gO = new GameObject(obj.X, 0 - obj.Y - obj.Height + 1, obj.Width, obj.Height, null);
+                    gO.AddComponent(new DoDamageCollisionResponse((int)(long)prop.value, 1));
+                    Engine.Engine.AddGameObject(gO);
+                });
             });
         }
 

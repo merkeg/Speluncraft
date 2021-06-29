@@ -890,6 +890,27 @@
         <member name="M:Game.StresstestComponent.OnUpdate(System.Single)">
             <inheritdoc/>
         </member>
+        <member name="T:Game.UI.DebugRenderer">
+            <summary>
+            Debug renderer class.
+            </summary>
+        </member>
+        <member name="M:Game.UI.DebugRenderer.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.GameObject.GameObject,Engine.Renderer.UI.UiAlignment)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Game.UI.DebugRenderer"/> class.
+            </summary>
+            <param name="bounds">Bounds.</param>
+            <param name="backgroundColor">Background color.</param>
+            <param name="font">Font.</param>
+            <param name="gameObject">Gameobject with physics component.</param>
+            <param name="alignment">Alignment.</param>
+        </member>
+        <member name="M:Game.UI.DebugRenderer.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="M:Game.UI.DebugRenderer.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
         <member name="T:Game.UI.GunType">
             <summary>
             Class for GunTypes and their information.

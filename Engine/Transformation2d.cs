@@ -2,7 +2,7 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
-namespace Engine.Camera
+namespace Engine
 {
     using OpenTK.Mathematics;
 
