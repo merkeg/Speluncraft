@@ -80,22 +80,22 @@ namespace Engine.Renderer.UI
         /// <summary>
         /// Gets the absolute bounds.
         /// </summary>
-        protected Rectangle AbsoluteBounds { get; }
+        public Rectangle AbsoluteBounds { get; }
 
         /// <summary>
         /// Gets or sets Bounds.
         /// </summary>
-        protected Rectangle Bounds { get; set; }
+        public Rectangle Bounds { get; set; }
 
         /// <summary>
         /// Gets or sets Font.
         /// </summary>
-        protected Font Font { get; set; }
+        public Font Font { get; set; }
 
         /// <summary>
         /// Gets or sets background color.
         /// </summary>
-        protected Color4 BackgroundColor { get; set; }
+        public Color4 BackgroundColor { get; set; }
 
         /// <inheritdoc/>
         public void Render(FrameEventArgs args)

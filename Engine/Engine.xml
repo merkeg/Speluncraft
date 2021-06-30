@@ -4,128 +4,6 @@
         <name>Engine</name>
     </assembly>
     <members>
-        <member name="T:Engine.Camera.Camera">
-            <summary>
-            Camera class.
-            </summary>
-        </member>
-        <member name="P:Engine.Camera.Camera.CameraMatrix">
-            <summary>
-            Gets the camera matrix.
-            </summary>
-        </member>
-        <member name="P:Engine.Camera.Camera.InvViewportMatrix">
-            <summary>
-            Gets the viewport matrix.
-            </summary>
-        </member>
-        <member name="M:Engine.Camera.Camera.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Camera.Camera.Render(OpenTK.Windowing.Common.FrameEventArgs)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Camera.Camera.OnRendererCreate">
-            <inheritdoc/>
-        </member>
-        <member name="P:Engine.Camera.Camera.Center">
-            <summary>
-            Gets or sets the camera center.
-            </summary>
-        </member>
-        <member name="P:Engine.Camera.Camera.Rotation">
-            <summary>
-            Gets or sets the camera rotation.
-            </summary>
-        </member>
-        <member name="P:Engine.Camera.Camera.Scale">
-            <summary>
-            Gets or sets the camera scale.
-            </summary>
-        </member>
-        <member name="M:Engine.Camera.Camera.OnRendererDelete">
-            <inheritdoc/>
-        </member>
-        <member name="T:Engine.Camera.Transformation2d">
-            <summary>
-            Helper class for calculating transformations.
-            </summary>
-        </member>
-        <member name="M:Engine.Camera.Transformation2d.Combine(OpenTK.Mathematics.Matrix4,OpenTK.Mathematics.Matrix4)">
-            <summary>
-            Calculates the combined transformation by first applying the applyToCoordinatesFirst and afterwards the applyToCoordinatesSecond to input points.
-            </summary>
-            <param name="applyToCoordinatesFirst">A transformation.</param>
-            <param name="applyToCoordinatesSecond">A second transformation.</param>
-            <returns>Matrix.</returns>
-        </member>
-        <member name="M:Engine.Camera.Transformation2d.Combine(OpenTK.Mathematics.Matrix4[])">
-            <summary>
-            Calculates the combined transformation by applying each transformation to input points.
-            </summary>
-            <param name="transformations">an array of transformations.</param>
-            <returns>A Matrix.</returns>
-        </member>
-        <member name="M:Engine.Camera.Transformation2d.Rotation(System.Single)">
-            <summary>
-            Creates a 2d rotation transformation.
-            </summary>
-            <param name="angleRadiant">the angle to rotate in radiants.</param>
-            <returns>Matrix.</returns>
-        </member>
-        <member name="M:Engine.Camera.Transformation2d.Scale(System.Single,System.Single)">
-            <summary>
-            Create a 2d scale transformation.
-            </summary>
-            <param name="sx">x-scale factor.</param>
-            <param name="sy">y-scale factor.</param>
-            <returns>Matrix.</returns>
-        </member>
-        <member name="M:Engine.Camera.Transformation2d.Scale(OpenTK.Mathematics.Vector2)">
-            <summary>
-            Create a 2d scale transformation.
-            </summary>
-            <param name="scale">the scale factors.</param>
-            <returns>Matrix.</returns>
-        </member>
-        <member name="M:Engine.Camera.Transformation2d.Scale(System.Single)">
-            <summary>
-            Create a 2d scale transformation.
-            </summary>
-            <param name="uniformScaleFactor">scale factor for x and y axis.</param>
-            <returns>Matrix.</returns>
-        </member>
-        <member name="M:Engine.Camera.Transformation2d.Translate(System.Single,System.Single)">
-            <summary>
-            Creates a 2d translation transform.
-            </summary>
-            <param name="tx">the translation factor in x-direction.</param>
-            <param name="ty">the translation factor in y-direction.</param>
-            <returns>Matrix.</returns>
-        </member>
-        <member name="M:Engine.Camera.Transformation2d.Translate(OpenTK.Mathematics.Vector2)">
-            <summary>
-            Creates a 2d translation transform.
-            </summary>
-            <param name="translation">The translation vector.</param>
-            <returns>Matrix.</returns>
-        </member>
-        <member name="M:Engine.Camera.Transformation2d.Transform(OpenTK.Mathematics.Vector2,OpenTK.Mathematics.Matrix4)">
-            <summary>
-            Transform the given input location vector by the given transformation.
-            </summary>
-            <param name="input">input vector to transform.</param>
-            <param name="transformation">the transformation to apply.</param>
-            <returns>Matrix.</returns>
-        </member>
-        <member name="M:Engine.Camera.Transformation2d.TransformDirection(OpenTK.Mathematics.Vector2,OpenTK.Mathematics.Matrix4)">
-            <summary>
-            Transform the given input direction vector by the given transformation.
-            </summary>
-            <param name="input">input vector to transform.</param>
-            <param name="transformation">the transformation to apply.</param>
-            <returns>Matrix.</returns>
-        </member>
         <member name="T:Engine.Component.CollisionResponse">
             <summary>
             Interface that Components must implemen, in order to get info about with what they collid.
@@ -168,11 +46,6 @@
             Gets the GameObject.
             </summary>
             <returns>the parent GameObject.</returns>
-        </member>
-        <member name="M:Engine.Component.Component.Dispose">
-            <summary>
-            Yeet this away.
-            </summary>
         </member>
         <member name="T:Engine.Component.DoDamageCollisionResponse">
             <summary>
@@ -473,7 +346,7 @@
         </member>
         <member name="P:Engine.Engine.Camera">
             <summary>
-            Gets the game Camera.
+            Gets or sets the game Camera.
             </summary>
         </member>
         <member name="P:Engine.Engine.OnSceneChange">
@@ -807,42 +680,46 @@
         <member name="P:Engine.GameObject.Rectangle.Mirrored">
             <inheritdoc/>
         </member>
-        <member name="T:Engine.Renderer.CollisionRenderer">
+        <member name="T:Engine.Renderer.Camera">
             <summary>
-            The collision renderer class.
+            Camera class.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.CollisionRenderer.OnRendererCreate">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Renderer.CollisionRenderer.Render(OpenTK.Windowing.Common.FrameEventArgs)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Renderer.CollisionRenderer.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
-            <inheritdoc/>
-        </member>
-        <member name="M:Engine.Renderer.CollisionRenderer.OnRendererDelete">
-            <inheritdoc/>
-        </member>
-        <member name="T:Engine.Renderer.DebugRenderer">
+        <member name="P:Engine.Renderer.Camera.CameraMatrix">
             <summary>
-            Debug renderer class.
+            Gets the camera matrix.
             </summary>
         </member>
-        <member name="M:Engine.Renderer.DebugRenderer.#ctor(Engine.GameObject.Rectangle,OpenTK.Mathematics.Color4,Engine.Renderer.Text.Font,Engine.GameObject.GameObject,Engine.Renderer.UI.UiAlignment)">
+        <member name="P:Engine.Renderer.Camera.InvViewportMatrix">
             <summary>
-            Initializes a new instance of the <see cref="T:Engine.Renderer.DebugRenderer"/> class.
+            Gets the viewport matrix.
             </summary>
-            <param name="bounds">Bounds.</param>
-            <param name="backgroundColor">Background color.</param>
-            <param name="font">Font.</param>
-            <param name="gameObject">Gameobject with physics component.</param>
-            <param name="alignment">Alignment.</param>
         </member>
-        <member name="M:Engine.Renderer.DebugRenderer.OnRendererCreate">
+        <member name="M:Engine.Renderer.Camera.Resize(OpenTK.Windowing.Common.ResizeEventArgs)">
             <inheritdoc/>
         </member>
-        <member name="M:Engine.Renderer.DebugRenderer.OnRender(OpenTK.Windowing.Common.FrameEventArgs)">
+        <member name="M:Engine.Renderer.Camera.Render(OpenTK.Windowing.Common.FrameEventArgs)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Engine.Renderer.Camera.OnRendererCreate">
+            <inheritdoc/>
+        </member>
+        <member name="P:Engine.Renderer.Camera.Center">
+            <summary>
+            Gets or sets the camera center.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Camera.Rotation">
+            <summary>
+            Gets or sets the camera rotation.
+            </summary>
+        </member>
+        <member name="P:Engine.Renderer.Camera.Scale">
+            <summary>
+            Gets or sets the camera scale.
+            </summary>
+        </member>
+        <member name="M:Engine.Renderer.Camera.OnRendererDelete">
             <inheritdoc/>
         </member>
         <member name="T:Engine.Renderer.RenderLayer">
@@ -2266,7 +2143,7 @@
             Get typed item from bundle.
             </summary>
             <param name="key">The key.</param>
-            <param name="def">Default value.</param>
+            <param name="defaultValue">Default value.</param>
             <typeparam name="T">Type.</typeparam>
             <returns>The value.</returns>
         </member>
@@ -2690,6 +2567,86 @@
         </member>
         <member name="M:Engine.Service.TilemapService.Render(OpenTK.Windowing.Common.FrameEventArgs)">
             <inheritdoc/>
+        </member>
+        <member name="T:Engine.Transformation2d">
+            <summary>
+            Helper class for calculating transformations.
+            </summary>
+        </member>
+        <member name="M:Engine.Transformation2d.Combine(OpenTK.Mathematics.Matrix4,OpenTK.Mathematics.Matrix4)">
+            <summary>
+            Calculates the combined transformation by first applying the applyToCoordinatesFirst and afterwards the applyToCoordinatesSecond to input points.
+            </summary>
+            <param name="applyToCoordinatesFirst">A transformation.</param>
+            <param name="applyToCoordinatesSecond">A second transformation.</param>
+            <returns>Matrix.</returns>
+        </member>
+        <member name="M:Engine.Transformation2d.Combine(OpenTK.Mathematics.Matrix4[])">
+            <summary>
+            Calculates the combined transformation by applying each transformation to input points.
+            </summary>
+            <param name="transformations">an array of transformations.</param>
+            <returns>A Matrix.</returns>
+        </member>
+        <member name="M:Engine.Transformation2d.Rotation(System.Single)">
+            <summary>
+            Creates a 2d rotation transformation.
+            </summary>
+            <param name="angleRadiant">the angle to rotate in radiants.</param>
+            <returns>Matrix.</returns>
+        </member>
+        <member name="M:Engine.Transformation2d.Scale(System.Single,System.Single)">
+            <summary>
+            Create a 2d scale transformation.
+            </summary>
+            <param name="sx">x-scale factor.</param>
+            <param name="sy">y-scale factor.</param>
+            <returns>Matrix.</returns>
+        </member>
+        <member name="M:Engine.Transformation2d.Scale(OpenTK.Mathematics.Vector2)">
+            <summary>
+            Create a 2d scale transformation.
+            </summary>
+            <param name="scale">the scale factors.</param>
+            <returns>Matrix.</returns>
+        </member>
+        <member name="M:Engine.Transformation2d.Scale(System.Single)">
+            <summary>
+            Create a 2d scale transformation.
+            </summary>
+            <param name="uniformScaleFactor">scale factor for x and y axis.</param>
+            <returns>Matrix.</returns>
+        </member>
+        <member name="M:Engine.Transformation2d.Translate(System.Single,System.Single)">
+            <summary>
+            Creates a 2d translation transform.
+            </summary>
+            <param name="tx">the translation factor in x-direction.</param>
+            <param name="ty">the translation factor in y-direction.</param>
+            <returns>Matrix.</returns>
+        </member>
+        <member name="M:Engine.Transformation2d.Translate(OpenTK.Mathematics.Vector2)">
+            <summary>
+            Creates a 2d translation transform.
+            </summary>
+            <param name="translation">The translation vector.</param>
+            <returns>Matrix.</returns>
+        </member>
+        <member name="M:Engine.Transformation2d.Transform(OpenTK.Mathematics.Vector2,OpenTK.Mathematics.Matrix4)">
+            <summary>
+            Transform the given input location vector by the given transformation.
+            </summary>
+            <param name="input">input vector to transform.</param>
+            <param name="transformation">the transformation to apply.</param>
+            <returns>Matrix.</returns>
+        </member>
+        <member name="M:Engine.Transformation2d.TransformDirection(OpenTK.Mathematics.Vector2,OpenTK.Mathematics.Matrix4)">
+            <summary>
+            Transform the given input direction vector by the given transformation.
+            </summary>
+            <param name="input">input vector to transform.</param>
+            <param name="transformation">the transformation to apply.</param>
+            <returns>Matrix.</returns>
         </member>
     </members>
 </doc>

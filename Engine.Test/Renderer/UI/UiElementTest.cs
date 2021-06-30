@@ -33,5 +33,16 @@ namespace EngineTest.Renderer.UI
             uiElement.AddQuad(new Rectangle(0, 0, 1, 1), Color4.Aqua);
             Assert.IsTrue(uiElement.Renderers.Count == 2, "Should be 2.");
         }
+
+        [TestMethod]
+        public void TestParams()
+        {
+            UiElementStud uiElement = new UiElementStud(new Rectangle(0, 0, 1, 1), Color4.Aqua);
+            Assert.IsTrue(uiElement.Bounds.SizeX == 1);
+            
+            Assert.IsTrue(uiElement.BackgroundColor == Color4.Aqua);
+            
+            Assert.IsFalse(uiElement.Hidden);
+        }
     }
 }

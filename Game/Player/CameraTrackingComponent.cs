@@ -4,7 +4,6 @@
 
 namespace Game.Gun
 {
-    using Engine.Camera;
     using Engine.Component;
 
     /// <summary>

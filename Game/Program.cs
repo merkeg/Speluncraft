@@ -4,7 +4,7 @@
 
 namespace Game
 {
-    using Engine.Camera;
+    using Engine.Renderer;
     using OpenTK.Mathematics;
     using OpenTK.Windowing.Common;
     using OpenTK.Windowing.Desktop;

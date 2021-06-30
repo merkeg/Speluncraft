@@ -2,7 +2,7 @@
 // Copyright (c) RWUwU. All rights reserved.
 // </copyright>
 
-namespace Engine.Renderer
+namespace Game.UI
 {
     using System;
     using System.Diagnostics;
@@ -69,7 +69,7 @@ namespace Engine.Renderer
         /// <inheritdoc/>
         public override void OnRender(FrameEventArgs args)
         {
-            this.engineInfoText.Text = $"GO: {Engine.GameObjects.Count} - COL: {Engine.Colliders.Count}";
+            this.engineInfoText.Text = $"GO: {Engine.Engine.GameObjects.Count} - COL: {Engine.Engine.Colliders.Count}";
             this.frameInfoText.Text = $"mem: {GC.GetTotalMemory(false) / 1000 / 1000,-3}MB - time: {MathHelper.Round(args.Time * 1000, 2)}ms";
             this.playerInfoText.Text = $"velX: {MathHelper.Round(this.physics.GetVelocity().X, 2),-6} velY: {MathHelper.Round(this.physics.GetVelocity().Y, 2),-6}";
 

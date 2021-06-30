@@ -28,7 +28,6 @@ namespace Engine.Service
         private const uint BitFlippedDiagonal = 0x20000000;
 
         private Dictionary<Tilemap, Vector2i> tilemaps;
-        private Dictionary<Tilemap, List<GameObject>> gameObjects;
         private List<Tilesheet> tilesheets;
 
         private IRectangle optimizationPoint;
@@ -40,7 +39,6 @@ namespace Engine.Service
         public TilemapService()
         {
             this.tilemaps = new Dictionary<Tilemap, Vector2i>();
-            this.gameObjects = new Dictionary<Tilemap, List<GameObject>>();
             this.tilesheets = new List<Tilesheet>();
             this.renderRange = 15;
         }
@@ -75,7 +73,6 @@ namespace Engine.Service
         {
             this.tilemaps.Clear();
             this.tilesheets.Clear();
-            this.gameObjects.Clear();
             this.optimizationPoint = null;
         }
 
@@ -109,25 +106,6 @@ namespace Engine.Service
                     }
                 }
             }
-
-            List<GameObject> damageObjects = new List<GameObject>();
-            tilemap.ObjectLayers.ForEach(objectLayer =>
-            {
-                objectLayer.FindObjectsByName("damage").ForEach(obj =>
-                {
-                    CustomPropertyModel prop = obj.GetProperty("damage");
-                    if (prop == null)
-                    {
-                        return;
-                    }
-
-                    GameObject gO = new GameObject(obj.X, offset.Y - obj.Y - obj.Height + 1, obj.Width, obj.Height, null);
-                    gO.AddComponent(new DoDamageCollisionResponse((int)(long)prop.value, 1));
-                    damageObjects.Add(gO);
-                    Engine.AddGameObject(gO);
-                });
-            });
-            this.gameObjects.Add(tilemap, damageObjects);
         }
 
         /// <summary>

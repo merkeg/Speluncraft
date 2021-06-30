@@ -32,17 +32,17 @@ namespace Engine.Scene
         /// Get typed item from bundle.
         /// </summary>
         /// <param name="key">The key.</param>
-        /// <param name="def">Default value.</param>
+        /// <param name="defaultValue">Default value.</param>
         /// <typeparam name="T">Type.</typeparam>
         /// <returns>The value.</returns>
-        public T Get<T>(string key, T def)
+        public T Get<T>(string key, T defaultValue)
         {
             if (this.ContainsKey(key))
             {
                 return (T)this[key];
             }
 
-            return def;
+            return defaultValue;
         }
     }
 }

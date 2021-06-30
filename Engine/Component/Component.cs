@@ -9,7 +9,7 @@ namespace Engine.Component
     /// <summary>
     /// The base class for components in GameObjects.
     /// </summary>
-    public abstract class Component : IDisposable, GameObject.IComponent
+    public abstract class Component : GameObject.IComponent
     {
         /// <summary>
         /// Gets the GameObject the component is in.
@@ -52,14 +52,6 @@ namespace Engine.Component
         public GameObject.GameObject GetGameObject()
         {
             return this.GameObject;
-        }
-
-        /// <summary>
-        /// Yeet this away.
-        /// </summary>
-        public void Dispose()
-        {
-            GC.SuppressFinalize(this);
         }
     }
 }

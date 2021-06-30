@@ -42,5 +42,19 @@
             component = go1.GetComponent<Physics>();
             Assert.IsNull(component, "Component should be null");
         }
+
+        [TestMethod]
+        public void TestGameObjectRect()
+        {
+            GameObject go1 = new GameObject(0, 0, 5, 5, null);
+            go1.MaxX = 2;
+            go1.MaxY = 2;
+            
+            Assert.IsTrue(go1.SizeX == 2);
+            Assert.IsTrue(go1.SizeY == 2);
+
+            go1.Mirrored = true;
+            Assert.IsTrue(go1.Mirrored == true);
+        }
     }
 }
